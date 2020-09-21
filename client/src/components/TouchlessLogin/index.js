@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef, useContext } from 'react'
 import QRCode from "react-qr-code";
 import { Form, Button, Container, Row, Col, Modal } from "react-bootstrap";
 import AvailableTimes from "../AvailableTimes";
-import API from "../../utils/API";
-import EmployeeDirectory from "../EmployeeDirectory/EmpDirModal";
-import VisitorConfirm from "../VisitorConfirm";
+// import API from "../../utils/API";
+// import EmployeeDirectory from "../EmployeeDirectory/EmpDirModal";
+// import VisitorConfirm from "../VisitorConfirm";
 import { v4 as uuidv4 } from 'uuid';
 
-import EmployeeContext from "../../utils/employeeContext";
+// import EmployeeContext from "../../utils/employeeContext";
 
 function TouchlessLogin(props) {
     const [appointments, setAppointments] = useState([]);
@@ -25,12 +25,12 @@ function TouchlessLogin(props) {
 
     const [formObject, setFormObject] = useState({})
 
-    const { employee } = useContext(EmployeeContext);
+    // const { employee } = useContext(EmployeeContext);
 
     // Load all appointments and store them with setAppointments
     useEffect(() => {
         setFormObject({ ...formObject, uuid_id: props.uuid_id })
-        console.log('TouchlessLogin: ', employee)
+        // console.log('TouchlessLogin: ', employee)
 
     }, [])
 
@@ -44,12 +44,12 @@ function TouchlessLogin(props) {
         if (name === 'date') {
             setavailableTimesList([])
             setShowSpinner(true)
-            API.getAvailableTimes(value)
-                .then(res => {
-                    setavailableTimesList(res.data)
-                    setShowSpinner(false)
-                })
-                .catch(err => console.log(err));
+            // API.getAvailableTimes(value)
+            //     .then(res => {
+            //         setavailableTimesList(res.data)
+            //         setShowSpinner(false)
+            //     })
+            //     .catch(err => console.log(err));
             // setavailableTimesList(['1:00pm', '1:15pm'])
         }
         if (name === 'time') {
@@ -63,23 +63,23 @@ function TouchlessLogin(props) {
     // Loads all appointments and sets them to appointments
     function loadAppointments() {
         console.log('loadAppointments')
-        API.getAppointments()
-            .then(res => {
-                setAppointments(res.data)
-                const baseurl = window.location.href
-                console.log('baseurl: ', baseurl)
-                if (baseurl.includes('lobbylogin')) {
-                    setShowConfirm(true)
-                    // setTimeout(() => {
-                    //     setShowConfirm(false);
-                    //     props.LLsetShow(false);
-                    //     props.setUuid_id(uuidv4())
-                    // }, 6000);
-                } else {
-                    window.location.replace(`${window.origin}/visitorconfirm/${props.uuid_id}`);
-                }
-            })
-            .catch(err => console.log(err));
+        // API.getAppointments()
+        //     .then(res => {
+        //         setAppointments(res.data)
+        //         const baseurl = window.location.href
+        //         console.log('baseurl: ', baseurl)
+        //         if (baseurl.includes('lobbylogin')) {
+        //             setShowConfirm(true)
+        //             // setTimeout(() => {
+        //             //     setShowConfirm(false);
+        //             //     props.LLsetShow(false);
+        //             //     props.setUuid_id(uuidv4())
+        //             // }, 6000);
+        //         } else {
+        //             window.location.replace(`${window.origin}/visitorconfirm/${props.uuid_id}`);
+        //         }
+        //     })
+        //     .catch(err => console.log(err));
     };
 
     // When the form is submitted, use the API.saveAppointment method to save the appointment data
@@ -91,23 +91,23 @@ function TouchlessLogin(props) {
 
         // if (formObject.email && formObject.date && formObject.time) {
         console.log('API.saveAppointments')
-        API.saveAppointments({
-            uuid_id: formObject.uuid_id,
-            email: formObject.email,
-            employee: formObject.employee,
-            datetime: new Date(formObject.date + ' ' + formObject.time),
-        })
-            .then(res => loadAppointments())
-            .then(() => {
-                setFormObject({
-                email: '',
-                employee: '',
-                datetime: ""
-            })
+        // API.saveAppointments({
+        //     uuid_id: formObject.uuid_id,
+        //     email: formObject.email,
+        //     employee: formObject.employee,
+        //     datetime: new Date(formObject.date + ' ' + formObject.time),
+        // })
+        //     .then(res => loadAppointments())
+        //     .then(() => {
+        //         setFormObject({
+        //         email: '',
+        //         employee: '',
+        //         datetime: ""
+        //     })
             
         
-        })
-            .catch(err => console.log(err));
+        // })
+        //     .catch(err => console.log(err));
         // }
 
 
@@ -120,7 +120,7 @@ function TouchlessLogin(props) {
             <Container>
                 <Row>
                     <Col>
-                        {/* <h1>UUID:{`${props.uuid_id}`}</h1> */}
+                        <h1>UUID:{`${props.uuid_id}`}</h1>
                         <Form>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Email address</Form.Label>
@@ -171,7 +171,7 @@ function TouchlessLogin(props) {
                         <Modal.Title>Your appointment has been submitted.</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <VisitorConfirm uuid_id={props.uuid_id} />
+                        {/* <VisitorConfirm uuid_id={props.uuid_id} /> */}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleConfirmClose}>
@@ -179,7 +179,7 @@ function TouchlessLogin(props) {
                         </Button>
                     </Modal.Footer>
                 </Modal>
-                <EmployeeDirectory show={showEmployeeDirectory} setShow={setShowEmployeeDirectory} />
+                {/* <EmployeeDirectory show={showEmployeeDirectory} setShow={setShowEmployeeDirectory} /> */}
             </Container>
         </>
     )
