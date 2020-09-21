@@ -1,25 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import NoMatch from "./components/pages/NoMatch";
+// import logo from './logo.svg';
+// import './App.css';
+import axios from 'axios';
 
 function App() {
+
+  const [authenticated, setAuthenticated] = useState(false);
+
+  const authenticate = () => {
+    setAuthenticated(true)
+  }
+
+  const deAuthenticate = () => {
+    setAuthenticated(false)
+  }
+
+  const logout = () => {
+    axios.get('/api/users/logout')
+      .then(function (data) {
+        this.deAuthenticate();
+        window.location.reload();
+      }.bind(this)).catch(function (err) {
+        console.log(err);
+      });
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        {/* <Nav /> */}
+        <Switch>
+        <Route exact path="/login" render={props => 
+            <Login
+              {...props}
+              authenticate={authenticate}
+              deAuthenticate={deAuthenticate}
+              authenticated={authenticated}
+              logout={logout}
+            />}
+          />
+          <Route exact path="/signup" render={props => 
+            <Signup
+              {...props}
+              authenticate={authenticate}
+              deAuthenticate={deAuthenticate}
+              authenticated={authenticated}
+              logout={logout}
+            />} 
+          />
+          <Route>
+            <NoMatch />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
