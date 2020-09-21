@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const booksController = require("../../controllers/booksController");
 
+var authCheck = require("../../config/middleware/authCheck");
 // Matches with "/api/books"
 router.route("/")
-  .get(booksController.findAll)
+  .get(authCheck, booksController.findAll)
   .post(booksController.create);
 
 // Matches with "/api/books/:id"

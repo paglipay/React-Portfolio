@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import NavTabs from "./components/NavTabs";
 import Login from "./components/Login";
+import LobbyLogin from "./components/LobbyLogin";
 import Signup from "./components/Signup";
 import NoMatch from "./components/pages/NoMatch";
 // import logo from './logo.svg';
@@ -33,7 +34,8 @@ function App() {
   return (
     <Router>
       <div>
-        {/* <Nav /> */}
+        {/* <Nav /> */}        
+        <NavTabs authenticated={ authenticated } logout={logout}/>
         <Switch>
         <Route exact path="/login" render={props => 
             <Login
@@ -53,6 +55,9 @@ function App() {
               logout={logout}
             />} 
           />
+          <Route exact path="/lobbylogin">
+            <LobbyLogin />
+          </Route>
           <Route>
             <NoMatch />
           </Route>
