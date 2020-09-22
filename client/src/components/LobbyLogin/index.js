@@ -182,17 +182,26 @@ function LobbyLogin() {
                         <Employees />
                     </LLCard>
                 </Col>
-
-                <Todo />
-                <h1>yourID: {yourID}</h1>
-                {/* <h1>yourID{state}</h1> */}
-
-                <LLModal show={showVideoChat} setShow={setShowVideoChat}>
-                    {UserVideo}
-                </LLModal>
             </Row>
             <Row>
-                <TodoList />
+                <Col>
+                    <LLCard>
+                        <Todo />
+                        <h1>yourID: {yourID}</h1>
+                        {/* <h1>yourID{state}</h1> */}
+
+                        <LLModal show={showVideoChat} setShow={setShowVideoChat}>
+                            {UserVideo}
+                        </LLModal>
+                    </LLCard>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <LLCard>
+                        <TodoList />
+                    </LLCard>
+                </Col>
             </Row>
             <Row >
                 <Col>

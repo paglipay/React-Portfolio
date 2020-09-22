@@ -16,7 +16,7 @@ function EmployeesContainer ({ employeeData, fetchEmployees }) {
       <div>
         {employeeData &&
           employeeData.employees &&
-          employeeData.employees.map(user => <p>{user.name.first}</p>)}
+          employeeData.employees.map(user => <p>{user.name.title} {user.name.first} {user.name.last}</p>)}
       </div>
     </div>
   )

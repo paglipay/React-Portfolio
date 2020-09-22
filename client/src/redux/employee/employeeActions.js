@@ -9,7 +9,7 @@ export const fetchEmployees = () => {
   return (dispatch) => {
     dispatch(fetchEmployeesRequest())
     axios
-      .get('https://randomuser.me/api/?results=10&nat=us')
+      .get('/api/employees')
       .then(response => {
         // response.data is the users
         const employees = response.data.results

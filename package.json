@@ -9,6 +9,9 @@
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
+    "seedApt": "node scripts/seedDBappointment.js",
+    "seedEmp": "node scripts/seedDBemployees.js",
+    "seedEmpRan": "node scripts/seedDBemployeesFromRandom.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
@@ -26,6 +29,7 @@
     "express": "^4.16.3",
     "express-session": "^1.17.1",
     "if-env": "^1.0.4",
+    "moment": "^2.29.0",
     "mongoose": "^5.3.16",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
