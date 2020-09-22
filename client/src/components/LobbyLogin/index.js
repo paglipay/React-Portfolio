@@ -6,8 +6,12 @@ import NoAppointment from './components/no_appointment'
 import GoTouchless from './components/go_touchless'
 import io from "socket.io-client";
 import { v4 as uuidv4 } from 'uuid';
+import Peer from "simple-peer";
+import { useVideoChatContext } from "../../utils/GlobalState";
 
 function LobbyLogin() {
+    const [state, dispatch] = useVideoChatContext();
+
     const [yourID, setYourID] = useState("");
     const [users, setUsers] = useState({});
     const [stream, setStream] = useState();
@@ -45,6 +49,63 @@ function LobbyLogin() {
         })
     }, []);
 
+    function callPeer(id) {
+        const peer = new Peer({
+            initiator: true,
+            trickle: false,
+            config: {
+
+                iceServers: [
+                    {
+                        urls: "stun:numb.viagenie.ca",
+                        username: "sultan1640@gmail.com",
+                        credential: "98376683"
+                    },
+                    {
+                        urls: "turn:numb.viagenie.ca",
+                        username: "sultan1640@gmail.com",
+                        credential: "98376683"
+                    }
+                ]
+            },
+            stream: stream,
+        });
+
+        peer.on("signal", data => {
+            socket.current.emit("callUser", { userToCall: id, signalData: data, from: yourID })
+        })
+
+        peer.on("stream", stream => {
+            if (partnerVideo.current) {
+                partnerVideo.current.srcObject = stream;
+            }
+        });
+
+        socket.current.on("callAccepted", signal => {
+            setCallAccepted(true);
+            peer.signal(signal);
+        })
+
+    }
+
+    function acceptCall() {
+        setCallAccepted(true);
+        const peer = new Peer({
+            initiator: false,
+            trickle: false,
+            stream: stream,
+        });
+        peer.on("signal", data => {
+            socket.current.emit("acceptCall", { signal: data, to: caller })
+        })
+
+        peer.on("stream", stream => {
+            partnerVideo.current.srcObject = stream;
+        });
+
+        peer.signal(callerSignal);
+    }
+
     return (
         <Container>
             <style type="text/css">
@@ -68,7 +129,38 @@ function LobbyLogin() {
         `}
             </style>
             <Row>
-                <h1>{yourID}</h1>
+                {/* <h1>{yourID}</h1> */}
+                {/* <h1>yourID{state}</h1> */}
+            </Row>
+            <Row>
+                <div>
+                    <h4>My Todo List:</h4>
+                    <ul className="list-group">
+                        {state.map((item, index) => (
+                            <li className="list-group-item col-12" key={item.id}>
+                                <button
+                                    className="btn btn-warning mr-4"
+                                    onClick={() => dispatch({ type: "prioritize", index })}
+                                >
+                                    Prioritize
+                                </button>
+                                <button
+                                    className="btn btn-warning mr-4"
+                                    onClick={() => dispatch({ type: "call", index })}
+                                >
+                                    Call
+                                </button>
+                                <button
+                                    className="btn btn-danger mr-4"
+                                    onClick={() => dispatch({ type: "remove", index })}
+                                >
+                                    X Remove
+                                </button>
+                                {index}:<span className={item.priority ? "font-weight-bold" : ""}> {item.name}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </Row>
             <Row >
                 <Col>

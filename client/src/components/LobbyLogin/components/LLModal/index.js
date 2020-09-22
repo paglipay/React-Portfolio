@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal, Button, Tab, Col, Row, Nav, Container, Form, Card } from 'react-bootstrap';
 import TouchlessLogin from "../../../TouchlessLogin";
+import VideoChat from "../../../ReactVideoChat/App";
 
 function index({ show, uuid_id, setUuid_id, setShow }) {    
     const handleClose = () => setShow(false);
@@ -36,7 +37,7 @@ function index({ show, uuid_id, setUuid_id, setShow }) {
                                         <TouchlessLogin uuid_id={uuid_id} setUuid_id={setUuid_id} LLsetShow={setShow}/>
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="second">
-                                    {/* <VideoChat /> */}
+                                    <VideoChat />
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="third">
                                         Welcome, you have an appoitment with ... Please take you picture and have the security escort you in

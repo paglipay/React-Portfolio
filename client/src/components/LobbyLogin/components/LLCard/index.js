@@ -4,7 +4,7 @@ import { Card, Button } from 'react-bootstrap';
 
 function LLCard(props) {
     return (
-        <Card style={{ width: '18rem' }}>
+        <Card style={{ paddingTop: '15px', height: '100%' }}>
             <Card.Img variant="top" src="holder.js/100px180" />
             <Card.Body>
                 <Card.Title>Card Title</Card.Title>

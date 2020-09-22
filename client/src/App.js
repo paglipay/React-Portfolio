@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import LobbyLogin from "./components/LobbyLogin";
 import Signup from "./components/Signup";
 import NoMatch from "./components/pages/NoMatch";
+import { VideoChatProvider } from "./utils/GlobalState";
 // import logo from './logo.svg';
 // import './App.css';
 import axios from 'axios';
@@ -34,10 +35,10 @@ function App() {
   return (
     <Router>
       <div>
-        {/* <Nav /> */}        
-        <NavTabs authenticated={ authenticated } logout={logout}/>
+        {/* <Nav /> */}
+        <NavTabs authenticated={authenticated} logout={logout} />
         <Switch>
-        <Route exact path="/login" render={props => 
+          <Route exact path="/login" render={props =>
             <Login
               {...props}
               authenticate={authenticate}
@@ -46,17 +47,19 @@ function App() {
               logout={logout}
             />}
           />
-          <Route exact path="/signup" render={props => 
+          <Route exact path="/signup" render={props =>
             <Signup
               {...props}
               authenticate={authenticate}
               deAuthenticate={deAuthenticate}
               authenticated={authenticated}
               logout={logout}
-            />} 
+            />}
           />
           <Route exact path="/lobbylogin">
-            <LobbyLogin />
+            <VideoChatProvider >
+              <LobbyLogin />
+            </VideoChatProvider>
           </Route>
           <Route>
             <NoMatch />
