@@ -17,6 +17,7 @@ import TodoList from './components/TodoList'
 // import customHook from "./utils/customHook";
 import Users from "../Users/UsersContainer";
 import Employees from "../EmployeeDirectory/EmployeesContainer";
+import Appointments from "../EmployeeAppointments/AppointmentsContainer";
 
 function LobbyLogin() {
     const [state, dispatch] = useVideoChatContext();
@@ -180,6 +181,11 @@ function LobbyLogin() {
                 <Col>
                     <LLCard>
                         <Employees />
+                    </LLCard>
+                </Col>
+                <Col>
+                    <LLCard>
+                        <Appointments />
                     </LLCard>
                 </Col>
             </Row>

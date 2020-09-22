@@ -1,32 +1,32 @@
 import {
-  FETCH_USERS_REQUEST,
-  FETCH_USERS_SUCCESS,
-  FETCH_USERS_FAILURE
+  FETCH_APPOINTMENTS_REQUEST,
+  FETCH_APPOINTMENTS_SUCCESS,
+  FETCH_APPOINTMENTS_FAILURE
 } from './appointmentTypes'
 
 const initialState = {
   loading: false,
-  users: [],
+  appointments: [],
   error: ''
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_USERS_REQUEST:
+    case FETCH_APPOINTMENTS_REQUEST:
       return {
         ...state,
         loading: true
       }
-    case FETCH_USERS_SUCCESS:
+    case FETCH_APPOINTMENTS_SUCCESS:
       return {
         loading: false,
-        users: action.payload,
+        appointments: action.payload,
         error: ''
       }
-    case FETCH_USERS_FAILURE:
+    case FETCH_APPOINTMENTS_FAILURE:
       return {
         loading: false,
-        users: [],
+        appointments: [],
         error: action.payload
       }
     default: return state

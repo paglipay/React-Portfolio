@@ -2,3 +2,4 @@
 // export { buyIceCream } from './iceCream/iceCreamActions'
 export { fetchUsers } from './user/userActions'
 export { fetchEmployees } from './employee/employeeActions'
+export { fetchAppointments } from './appointment/appointmentActions'

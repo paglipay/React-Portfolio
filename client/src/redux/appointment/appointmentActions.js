@@ -1,43 +1,43 @@
 import axios from 'axios'
 import {
-  FETCH_USERS_REQUEST,
-  FETCH_USERS_SUCCESS,
-  FETCH_USERS_FAILURE
+  FETCH_APPOINTMENTS_REQUEST,
+  FETCH_APPOINTMENTS_SUCCESS,
+  FETCH_APPOINTMENTS_FAILURE
 } from './appointmentTypes'
 
-export const fetchUsers = () => {
+export const fetchAppointments = () => {
   return (dispatch) => {
-    dispatch(fetchUsersRequest())
+    dispatch(fetchAppointmentsRequest())
     axios
-      .get('https://jsonplaceholder.typicode.com/users')
+      .get('/api/appointments')
       .then(response => {
         // response.data is the users
-        const users = response.data
-        dispatch(fetchUsersSuccess(users))
+        const appointments = response.data.results
+        dispatch(fetchAppointmentsSuccess(appointments))
       })
       .catch(error => {
         // error.message is the error message
-        dispatch(fetchUsersFailure(error.message))
+        dispatch(fetchAppointmentsFailure(error.message))
       })
   }
 }
 
-export const fetchUsersRequest = () => {
+export const fetchAppointmentsRequest = () => {
   return {
-    type: FETCH_USERS_REQUEST
+    type: FETCH_APPOINTMENTS_REQUEST
   }
 }
 
-export const fetchUsersSuccess = users => {
+export const fetchAppointmentsSuccess = appointments => {
   return {
-    type: FETCH_USERS_SUCCESS,
-    payload: users
+    type: FETCH_APPOINTMENTS_SUCCESS,
+    payload: appointments
   }
 }
 
-export const fetchUsersFailure = error => {
+export const fetchAppointmentsFailure = error => {
   return {
-    type: FETCH_USERS_FAILURE,
+    type: FETCH_APPOINTMENTS_FAILURE,
     payload: error
   }
 }
