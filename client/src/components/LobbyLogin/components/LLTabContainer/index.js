@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Modal, Button, Tab, Col, Row, Nav, Container, Form, Card } from 'react-bootstrap';
 import TouchlessLogin from "../../../TouchlessLogin";
 import VideoChat from "../../../ReactVideoChat/App";
+import Users from "../../../Users/UsersContainer";
 import UserContext from "../../../../utils/userContext";
 
 function LLTabContainer({ uuid_id, setUuid_id }) {
@@ -44,7 +45,7 @@ function LLTabContainer({ uuid_id, setUuid_id }) {
                                 </button>
                             </Tab.Pane>
                             <Tab.Pane eventKey="third">
-                                Welcome, you have an appoitment with ... Please take you picture and have the security escort you in
+                                <Users/>
                         </Tab.Pane>
                             <Tab.Pane eventKey="fourth">
                                 Ad Space Here!!!

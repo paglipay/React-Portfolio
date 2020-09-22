@@ -15,6 +15,8 @@ import LLModal from './components/LLModal'
 import Todo from '../Todo/App'
 import TodoList from './components/TodoList'
 // import customHook from "./utils/customHook";
+import Users from "../Users/UsersContainer";
+import Employees from "../EmployeeDirectory/EmployeesContainer";
 
 function LobbyLogin() {
     const [state, dispatch] = useVideoChatContext();
@@ -170,6 +172,17 @@ function LobbyLogin() {
         `}
             </style>
             <Row>
+                <Col>
+                    <LLCard>
+                        <Users />
+                    </LLCard>
+                </Col>
+                <Col>
+                    <LLCard>
+                        <Employees />
+                    </LLCard>
+                </Col>
+
                 <Todo />
                 <h1>yourID: {yourID}</h1>
                 {/* <h1>yourID{state}</h1> */}

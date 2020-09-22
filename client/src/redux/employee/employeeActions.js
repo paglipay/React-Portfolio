@@ -1,43 +1,43 @@
 import axios from 'axios'
 import {
-  FETCH_USERS_REQUEST,
-  FETCH_USERS_SUCCESS,
-  FETCH_USERS_FAILURE
-} from './userTypes'
+  FETCH_EMPLOYEES_REQUEST,
+  FETCH_EMPLOYEES_SUCCESS,
+  FETCH_EMPLOYEES_FAILURE
+} from './employeeTypes'
 
-export const fetchUsers = () => {
+export const fetchEmployees = () => {
   return (dispatch) => {
-    dispatch(fetchUsersRequest())
+    dispatch(fetchEmployeesRequest())
     axios
-      .get('https://jsonplaceholder.typicode.com/users')
+      .get('https://randomuser.me/api/?results=10&nat=us')
       .then(response => {
         // response.data is the users
-        const users = response.data
-        dispatch(fetchUsersSuccess(users))
+        const employees = response.data.results
+        dispatch(fetchEmployeesSuccess(employees))
       })
       .catch(error => {
         // error.message is the error message
-        dispatch(fetchUsersFailure(error.message))
+        dispatch(fetchEmployeesFailure(error.message))
       })
   }
 }
 
-export const fetchUsersRequest = () => {
+export const fetchEmployeesRequest = () => {
   return {
-    type: FETCH_USERS_REQUEST
+    type: FETCH_EMPLOYEES_REQUEST
   }
 }
 
-export const fetchUsersSuccess = users => {
+export const fetchEmployeesSuccess = users => {
   return {
-    type: FETCH_USERS_SUCCESS,
+    type: FETCH_EMPLOYEES_SUCCESS,
     payload: users
   }
 }
 
-export const fetchUsersFailure = error => {
+export const fetchEmployeesFailure = error => {
   return {
-    type: FETCH_USERS_FAILURE,
+    type: FETCH_EMPLOYEES_FAILURE,
     payload: error
   }
 }
