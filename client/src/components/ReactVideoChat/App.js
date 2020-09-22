@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import './App.css';
 // import io from "socket.io-client";
 import styled from "styled-components";
 import { useVideoChatContext } from "../../utils/GlobalState";
+import UserContext from "../../utils/userContext";
 
 const Container = styled.div`
   // height: 100vh;
@@ -23,6 +24,8 @@ const Video = styled.video`
 `;
 
 function App() {
+
+  const { yourID, users, stream, UserVideo } = useContext(UserContext);
 
   // let UserVideo;
   // if (stream) {
@@ -59,11 +62,14 @@ function App() {
     });
     inputRef.current.value = "";
   }
+
+  
   return (
     <Container>
       <Row>
-        {/* {UserVideo}
-        {PartnerVideo} */}
+        {/* {UserVideo} */}
+        {/* {PartnerVideo} */}
+        <h1>yourID: {yourID}</h1>
       </Row>
       <Row>
         <h1>VideoChat</h1>

@@ -8,11 +8,16 @@ import io from "socket.io-client";
 import { v4 as uuidv4 } from 'uuid';
 import Peer from "simple-peer";
 import { useVideoChatContext } from "../../utils/GlobalState";
+import UserContext from "../../utils/userContext";
+import VideoChat from "../ReactVideoChat/App";
+import styled from "styled-components";
+import LLModal from './components/LLModal'
 
 function LobbyLogin() {
     const [state, dispatch] = useVideoChatContext();
 
-    const [yourID, setYourID] = useState("");
+    const [showVideoChat, setShowVideoChat] = useState(false);
+    const [yourID, setYourID] = useState("1234");
     const [users, setUsers] = useState({});
     const [stream, setStream] = useState();
     const [receivingCall, setReceivingCall] = useState(false);
@@ -28,18 +33,19 @@ function LobbyLogin() {
 
     useEffect(() => {
         socket.current = io.connect("/");
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
-            setStream(stream);
-            if (userVideo.current) {
-                userVideo.current.srcObject = stream;
-            }
-        })
+        // navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+        //     setStream(stream);
+        //     if (userVideo.current) {
+        //         userVideo.current.srcObject = stream;
+        //     }
+        // })
 
         socket.current.on("yourID", (id) => {
             setYourID(id);
         })
         socket.current.on("allUsers", (users) => {
             setUsers(users);
+            console.log(users)
         })
 
         socket.current.on("hey", (data) => {
@@ -48,6 +54,18 @@ function LobbyLogin() {
             setCallerSignal(data.signal);
         })
     }, []);
+
+    
+
+  function handleBtnClick(event) {
+    setShowVideoChat(true)    
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+        setStream(stream);
+        if (userVideo.current) {
+            userVideo.current.srcObject = stream;
+        }
+    })
+  }
 
     function callPeer(id) {
         const peer = new Peer({
@@ -106,6 +124,25 @@ function LobbyLogin() {
         peer.signal(callerSignal);
     }
 
+    function handleUserBtnClick(event) {
+        // Get the title of the clicked button
+        console.log('handleUserBtnClick')
+    }
+
+
+    const Video = styled.video`
+            border: 1px solid blue;
+            width: 50%;
+            height: 50%;
+            `;
+
+    let UserVideo;
+    if (stream) {
+        UserVideo = (
+            <Video playsInline muted ref={userVideo} autoPlay />
+        );
+    }
+
     return (
         <Container>
             <style type="text/css">
@@ -129,9 +166,25 @@ function LobbyLogin() {
         `}
             </style>
             <Row>
-                {/* <h1>{yourID}</h1> */}
+                <h1>yourID: {yourID}</h1>
                 {/* <h1>yourID{state}</h1> */}
+
+                <LLModal show={showVideoChat} setShow={setShowVideoChat}>
+                    {UserVideo}
+                </LLModal>
             </Row>
+            {/* <Row>
+                <div>
+                    <h4>My Todo List:</h4>
+                    <ul className="list-group">
+                        {users.map((item, index) => (
+                            <li className="list-group-item col-12" key={index}>
+                                {index}:<span className={item.priority ? "font-weight-bold" : ""}> {item.name}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </Row> */}
             <Row>
                 <div>
                     <h4>My Todo List:</h4>
@@ -170,7 +223,9 @@ function LobbyLogin() {
                 </Col>
                 <Col>
                     < LLCard >
-                        <NoAppointment uuid_id={uuid_id} />
+                        <UserContext.Provider value={{ yourID, users, stream, UserVideo, handleBtnClick }}>
+                            <NoAppointment uuid_id={uuid_id} setUuid_id={setUuid_id} />
+                        </UserContext.Provider>
                     </ LLCard >
                 </Col>
                 <Col>

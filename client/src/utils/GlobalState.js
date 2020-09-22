@@ -5,19 +5,22 @@ const { Provider } = VideoChatContext;
 
 function reducer(state, action) {
   switch (action.type) {
-      case "add":
-        console.log(state, action)
-        return [
-          ...state,
-          {
-            id: state.length * Math.random(),
-            name: action.name
-          }
-        ];
+    case "add":
+      console.log(state, action)
+      return [
+        ...state,
+        {
+          id: state.length * Math.random(),
+          name: action.name
+        }
+      ];
     case "remove":
       return state.filter((_, index) => {
         return index !== action.index;
       });
+    case "ping":
+      console.log(state, action)
+      return state
     case "call":
       console.log(state.filter((_, index) => {
         return index === action.index;
