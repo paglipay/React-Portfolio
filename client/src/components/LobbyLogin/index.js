@@ -12,6 +12,9 @@ import UserContext from "../../utils/userContext";
 import VideoChat from "../ReactVideoChat/App";
 import styled from "styled-components";
 import LLModal from './components/LLModal'
+import Todo from '../Todo/App'
+import TodoList from './components/TodoList'
+// import customHook from "./utils/customHook";
 
 function LobbyLogin() {
     const [state, dispatch] = useVideoChatContext();
@@ -30,6 +33,7 @@ function LobbyLogin() {
     const socket = useRef();
     const [uuid_id, setUuid_id] = useState(uuidv4())
 
+    // const debouncedSearchTerm = customHook(search);
 
     useEffect(() => {
         socket.current = io.connect("/");
@@ -55,17 +59,17 @@ function LobbyLogin() {
         })
     }, []);
 
-    
 
-  function handleBtnClick(event) {
-    setShowVideoChat(true)    
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
-        setStream(stream);
-        if (userVideo.current) {
-            userVideo.current.srcObject = stream;
-        }
-    })
-  }
+
+    function handleBtnClick(event) {
+        setShowVideoChat(true)
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+            setStream(stream);
+            if (userVideo.current) {
+                userVideo.current.srcObject = stream;
+            }
+        })
+    }
 
     function callPeer(id) {
         const peer = new Peer({
@@ -166,6 +170,7 @@ function LobbyLogin() {
         `}
             </style>
             <Row>
+                <Todo />
                 <h1>yourID: {yourID}</h1>
                 {/* <h1>yourID{state}</h1> */}
 
@@ -173,47 +178,8 @@ function LobbyLogin() {
                     {UserVideo}
                 </LLModal>
             </Row>
-            {/* <Row>
-                <div>
-                    <h4>My Todo List:</h4>
-                    <ul className="list-group">
-                        {users.map((item, index) => (
-                            <li className="list-group-item col-12" key={index}>
-                                {index}:<span className={item.priority ? "font-weight-bold" : ""}> {item.name}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </Row> */}
             <Row>
-                <div>
-                    <h4>My Todo List:</h4>
-                    <ul className="list-group">
-                        {state.map((item, index) => (
-                            <li className="list-group-item col-12" key={item.id}>
-                                <button
-                                    className="btn btn-warning mr-4"
-                                    onClick={() => dispatch({ type: "prioritize", index })}
-                                >
-                                    Prioritize
-                                </button>
-                                <button
-                                    className="btn btn-warning mr-4"
-                                    onClick={() => dispatch({ type: "call", index })}
-                                >
-                                    Call
-                                </button>
-                                <button
-                                    className="btn btn-danger mr-4"
-                                    onClick={() => dispatch({ type: "remove", index })}
-                                >
-                                    X Remove
-                                </button>
-                                {index}:<span className={item.priority ? "font-weight-bold" : ""}> {item.name}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                <TodoList />
             </Row>
             <Row >
                 <Col>

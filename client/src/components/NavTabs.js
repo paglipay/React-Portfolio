@@ -27,6 +27,7 @@ function NavTabs({ authenticated, logout }) {
                         <NavDropdown.Item href="/employeedirectory">Directory</NavDropdown.Item>
                         <NavDropdown.Item href="/videochat">Video Chat</NavDropdown.Item>
                         <NavDropdown.Item href="/chat">Chat</NavDropdown.Item>
+                        <NavDropdown.Item href="/users">Users</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <Form inline>
