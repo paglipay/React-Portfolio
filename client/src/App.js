@@ -12,6 +12,7 @@ import { VideoChatProvider } from "./utils/GlobalState";
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import axios from 'axios';
+import Todos from './components/Todos/components/TodoList';
 
 function App() {
 
@@ -65,10 +66,8 @@ function App() {
                 <LobbyLogin />
               </VideoChatProvider>
             </Route>
-            <Route exact path="/users">
-              
-                <Users />
-              
+            <Route exact path="/todos">              
+                <Todos />              
             </Route>
             <Route>
               <NoMatch />

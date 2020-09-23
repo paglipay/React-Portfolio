@@ -16,7 +16,7 @@ import Todo from '../Todo/App'
 import TodoList from './components/TodoList'
 // import customHook from "./utils/customHook";
 import Users from "../Users/UsersContainer";
-import Employees from "../EmployeeDirectory/EmployeesContainer";
+import Employees from "../EmployeeDirectory/containers";
 import Appointments from "../EmployeeAppointments/AppointmentsContainer";
 
 function LobbyLogin() {

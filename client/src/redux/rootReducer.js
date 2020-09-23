@@ -4,13 +4,15 @@ import { combineReducers } from 'redux'
 import userReducer from './user/userReducer'
 import employeeReducer from './employee/employeeReducer'
 import appointmentReducer from './appointment/appointmentReducer'
+import todoReducer from './todo/reducers'
 
 const rootReducer = combineReducers({
   // cake: cakeReducer,
   // iceCream: iceCreamReducer,
   user: userReducer,
   employee: employeeReducer,
-  appointment: appointmentReducer
+  appointment: appointmentReducer,
+  todo: todoReducer
 })
 
 export default rootReducer
