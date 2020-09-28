@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import NavTabs from "./components/NavTabs";
 import Login from "./components/Login";
 import LobbyLogin from "./components/LobbyLogin";
@@ -13,7 +13,10 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import axios from 'axios';
 import Todos from './components/Todos/components/TodoList';
-
+import EmployeeDirectory from './components/EmployeeDirectory/components/Main'
+import Home from "./components/pages/Home";
+import Devices from "./components/Devices";
+import PrivateRoute from "./components/PrivateRoute";
 function App() {
 
   const [authenticated, setAuthenticated] = useState(false);
@@ -27,11 +30,11 @@ function App() {
   }
 
   const logout = () => {
-    axios.get('/api/users/logout')
+    axios.get('/api/users/logout/1')
       .then(function (data) {
-        this.deAuthenticate();
+        deAuthenticate();
         window.location.reload();
-      }.bind(this)).catch(function (err) {
+      }).catch(function (err) {
         console.log(err);
       });
   }
@@ -43,6 +46,10 @@ function App() {
           {/* <Nav /> */}
           <NavTabs authenticated={authenticated} logout={logout} />
           <Switch>
+          <Route exact path={["/", "/home"]}>
+            <Home />
+          </Route>
+            <PrivateRoute exact path={["/devices"]} authenticated={authenticated} component={Devices} />
             <Route exact path="/login" render={props =>
               <Login
                 {...props}
@@ -66,8 +73,11 @@ function App() {
                 <LobbyLogin />
               </VideoChatProvider>
             </Route>
-            <Route exact path="/todos">              
-                <Todos />              
+            <Route exact path="/todos">
+              <Todos />
+            </Route>
+            <Route exact path="/employeedirectory">
+              <EmployeeDirectory />
             </Route>
             <Route>
               <NoMatch />

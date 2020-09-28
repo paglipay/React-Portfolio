@@ -18,9 +18,10 @@ router
     .post(usersController.signUpUser)
 
 router.route("/login")
-    .post(passport.authenticate("local"), usersController.loginUser)
+// .post(passport.authenticate("local"), usersController.loginUser)
+.post(passport.authenticate("local"), usersController.loginUser)
 
-router.route("/logout")
+router.route("/logout/:id")
     .get(usersController.signOutUser)
 
 module.exports = router;

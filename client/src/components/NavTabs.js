@@ -18,6 +18,10 @@ function NavTabs({ authenticated, logout }) {
                     {/* <Nav.Link href="/about">About</Nav.Link>
           <Nav.Link href="/blog">Blog</Nav.Link> */}
                     <Nav.Link href="/lobbylogin">LobbyLogin</Nav.Link>
+                    <Nav.Link  as={Link} to="/">Home</Nav.Link>                    
+                    {authenticated ? (
+                        <Nav.Link  as={Link} to="/devices">Devices</Nav.Link>
+                    ) : null }
                     <NavDropdown title="Components" id="collasible-nav-dropdown">
                         <NavDropdown.Item href="/admin">Admin</NavDropdown.Item>
                         <NavDropdown.Item href="/modalpage">Application</NavDropdown.Item>
@@ -31,9 +35,15 @@ function NavTabs({ authenticated, logout }) {
                     </NavDropdown>
                 </Nav>
                 <Form inline>
-
                     {authenticated ? (
-                        <a href="#" onClick={logout} ><div className="page-scroll nav-left-text" data-toggle="modal"><p>LOGOUT</p></div></a>
+                        <Button onClick={logout} >LOGOUT</Button>
+                    ) : (
+                        <Link to={`/login`} ><Button>Login</Button></Link>
+                        )}
+                </Form>
+                <Form inline>
+                    {authenticated ? (
+                        <Button onClick={logout} >LOGOUT</Button>
                     ) : (
                             <Login />
                         )}
