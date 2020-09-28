@@ -12,26 +12,26 @@ function NavTabs({ authenticated, logout }) {
     return (
         <>
             <Navbar bg="dark" variant="dark" className="mb-sm-3">
-                <Navbar.Brand href="/">LL</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/">LL</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    {/* <Nav.Link href="/about">About</Nav.Link>
-          <Nav.Link href="/blog">Blog</Nav.Link> */}
-                    <Nav.Link href="/lobbylogin">LobbyLogin</Nav.Link>
+                    <Nav.Link as={Link} to="/">Home</Nav.Link>
+                    {/* <Nav.Link as={Link} to="/about">About</Nav.Link>
+          <Nav.Link as={Link} to="/blog">Blog</Nav.Link> */}
+                    <Nav.Link as={Link} to="/lobbylogin">LobbyLogin</Nav.Link>
                     <Nav.Link  as={Link} to="/">Home</Nav.Link>                    
                     {authenticated ? (
                         <Nav.Link  as={Link} to="/devices">Devices</Nav.Link>
                     ) : null }
                     <NavDropdown title="Components" id="collasible-nav-dropdown">
-                        <NavDropdown.Item href="/admin">Admin</NavDropdown.Item>
-                        <NavDropdown.Item href="/modalpage">Application</NavDropdown.Item>
-                        <NavDropdown.Item href="/booksearch">Book Search</NavDropdown.Item>
-                        <NavDropdown.Item href="/todo">Todo</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/admin">Admin</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/modalpage">Application</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/booksearch">Book Search</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/todo">Todo</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="/employeedirectory">Directory</NavDropdown.Item>
-                        <NavDropdown.Item href="/videochat">Video Chat</NavDropdown.Item>
-                        <NavDropdown.Item href="/chat">Chat</NavDropdown.Item>
-                        <NavDropdown.Item href="/users">Users</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/employeedirectory">Directory</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/videochat">Video Chat</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/chat">Chat</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/users">Users</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <Form inline>
