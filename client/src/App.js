@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import NavTabs from "./components/NavTabs";
 import Login from "./components/Login";
+import LobbyLogin from "./components/LobbyLogin";
+import Users from "./components/Users/UsersContainer";
 import Signup from "./components/Signup";
 import NoMatch from "./components/pages/NoMatch";
+import { VideoChatProvider } from "./utils/GlobalState";
 // import logo from './logo.svg';
 // import './App.css';
+import { Provider } from 'react-redux'
+import store from './redux/store'
 import axios from 'axios';
+import Todos from './components/Todos/components/TodoList';
 
 function App() {
 
@@ -31,34 +37,45 @@ function App() {
   }
 
   return (
-    <Router>
-      <div>
-        {/* <Nav /> */}
-        <Switch>
-        <Route exact path="/login" render={props => 
-            <Login
-              {...props}
-              authenticate={authenticate}
-              deAuthenticate={deAuthenticate}
-              authenticated={authenticated}
-              logout={logout}
-            />}
-          />
-          <Route exact path="/signup" render={props => 
-            <Signup
-              {...props}
-              authenticate={authenticate}
-              deAuthenticate={deAuthenticate}
-              authenticated={authenticated}
-              logout={logout}
-            />} 
-          />
-          <Route>
-            <NoMatch />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <div>
+          {/* <Nav /> */}
+          <NavTabs authenticated={authenticated} logout={logout} />
+          <Switch>
+            <Route exact path="/login" render={props =>
+              <Login
+                {...props}
+                authenticate={authenticate}
+                deAuthenticate={deAuthenticate}
+                authenticated={authenticated}
+                logout={logout}
+              />}
+            />
+            <Route exact path="/signup" render={props =>
+              <Signup
+                {...props}
+                authenticate={authenticate}
+                deAuthenticate={deAuthenticate}
+                authenticated={authenticated}
+                logout={logout}
+              />}
+            />
+            <Route exact path="/lobbylogin">
+              <VideoChatProvider >
+                <LobbyLogin />
+              </VideoChatProvider>
+            </Route>
+            <Route exact path="/todos">              
+                <Todos />              
+            </Route>
+            <Route>
+              <NoMatch />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
