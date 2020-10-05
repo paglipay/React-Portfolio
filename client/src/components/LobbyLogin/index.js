@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Peer from "simple-peer";
 import { useVideoChatContext } from "../../utils/GlobalState";
 import UserContext from "../../utils/userContext";
-import VideoChat from "../ReactVideoChat/App";
+import VideoChat from "../ReactVideoChat";
 import styled from "styled-components";
 import LLModal from './components/LLModal'
 import Todo from '../Todo/App'
@@ -72,7 +72,7 @@ function LobbyLogin() {
 
 
     function handleBtnClick(event) {
-        // setShowVideoChat(true)
+        setShowVideoChat(true)
         // navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
         //     setStream(stream);
         //     if (userVideo.current) {
@@ -206,9 +206,11 @@ function LobbyLogin() {
             <Row>
                 <Col>
                     <LLCard>
+                    <Button className="mb-2" onClick={handleBtnClick}>Call Modal</Button>
                         <Users />
                         <Row>
                             <div>
+                                <h1>SocketIO Users</h1>
                                 {users &&
                                     users.map(user => <p>{user.name}</p>)}
                             </div>
@@ -251,7 +253,7 @@ function LobbyLogin() {
                         {/* <h1>yourID{state}</h1> */}
 
                         <LLModal show={showVideoChat} setShow={setShowVideoChat}>
-                            {UserVideo}
+                            <VideoChat users={users} UserVideo={UserVideo} PartnerVideo={PartnerVideo} incomingCall={incomingCall} yourID={yourID} callPeer={callPeer} />
                         </LLModal>
                     </LLCard>
                 </Col>

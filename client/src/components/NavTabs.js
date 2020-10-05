@@ -11,8 +11,6 @@ function NavTabs({ authenticated, logout }) {
 
     return (
         <>
-
-
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand as={Link} to="/">LL</Navbar.Brand>
                 <Nav className="mr-auto">
