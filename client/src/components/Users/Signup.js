@@ -2,10 +2,6 @@ import React from 'react'
 import { Card, Form, Button, Container, Row, Col } from 'react-bootstrap';
 function Signup() {
 
-
-
-
-
     return (
         <Container className="mt-sm-5">
             <Row>

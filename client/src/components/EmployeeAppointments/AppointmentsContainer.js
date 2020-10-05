@@ -16,7 +16,7 @@ function AppointmentsContainer ({ appointmentData, fetchAppointments }) {
       <div>
         {appointmentData &&
           appointmentData.appointments &&
-          appointmentData.appointments.map(appointment => <p>{appointment.name}</p>)}
+          appointmentData.appointments.map(appointment => <p>{appointment.name} {appointment.email}</p>)}
       </div>
     </div>
   )
