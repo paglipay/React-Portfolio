@@ -11,9 +11,11 @@ function NavTabs({ authenticated, logout }) {
 
     return (
         <>
+
+
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand as={Link} to="/">LL</Navbar.Brand>
-                <Nav>
+                <Nav className="mr-auto">
                     {/* <Nav.Link as={Link} to="/about">About</Nav.Link>
                     <Nav.Link as={Link} to="/blog">Blog</Nav.Link> */}
                     <Nav.Link as={Link} to="/lobbylogin">LobbyLogin</Nav.Link>
@@ -50,6 +52,7 @@ function NavTabs({ authenticated, logout }) {
                         )}
                 </Form>
             </Navbar>
+
         </>
     );
 }
