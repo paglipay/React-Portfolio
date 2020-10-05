@@ -11,20 +11,21 @@ function NavTabs({ authenticated, logout }) {
 
     return (
         <>
-            <Navbar bg="dark" variant="dark" className="mb-sm-3">
+            <Navbar bg="dark" variant="dark">
                 <Navbar.Brand as={Link} to="/">LL</Navbar.Brand>
-                <Nav className="mr-auto">
-                    <Nav.Link as={Link} to="/">Home</Nav.Link>
+                <Nav>
                     {/* <Nav.Link as={Link} to="/about">About</Nav.Link>
-          <Nav.Link as={Link} to="/blog">Blog</Nav.Link> */}
+                    <Nav.Link as={Link} to="/blog">Blog</Nav.Link> */}
                     <Nav.Link as={Link} to="/lobbylogin">LobbyLogin</Nav.Link>
-                    <Nav.Link  as={Link} to="/">Home</Nav.Link>                    
                     {authenticated ? (
-                        <Nav.Link  as={Link} to="/devices">Devices</Nav.Link>
-                    ) : null }
+                        <>
+                            <Nav.Link as={Link} to="/devices">Devices</Nav.Link>
+
+                        </>
+                    ) : null}
                     <NavDropdown title="Components" id="collasible-nav-dropdown">
                         <NavDropdown.Item as={Link} to="/admin">Admin</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/modalpage">Application</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/employeeappointments">Appointments</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/booksearch">Book Search</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/todo">Todo</NavDropdown.Item>
                         <NavDropdown.Divider />
@@ -36,9 +37,9 @@ function NavTabs({ authenticated, logout }) {
                 </Nav>
                 <Form inline>
                     {authenticated ? (
-                        <Button onClick={logout} >LOGOUT</Button>
+                        <Button onClick={logout} >Logout</Button>
                     ) : (
-                        <Link to={`/login`} ><Button>Login</Button></Link>
+                            <Link to={`/login`} ><Button>Login</Button></Link>
                         )}
                 </Form>
                 <Form inline>

@@ -17,6 +17,8 @@ import EmployeeDirectory from './components/EmployeeDirectory/components/Main'
 import Home from "./components/pages/Home";
 import Devices from "./components/Devices";
 import PrivateRoute from "./components/PrivateRoute";
+import TouchlessLogin from "./components/TouchlessLogin/TouchlessLoginUrl";
+import EmployeeAppointments from './components/EmployeeAppointments/AppointmentsContainer';
 function App() {
 
   const [authenticated, setAuthenticated] = useState(false);
@@ -48,7 +50,8 @@ function App() {
           <Switch>
           <Route exact path={["/", "/home"]}>
             <Home />
-          </Route>
+          </Route>          
+            <Route exact path="/touchlesslogin/:id" component={TouchlessLogin} />
             <PrivateRoute exact path={["/devices"]} authenticated={authenticated} component={Devices} />
             <Route exact path="/login" render={props =>
               <Login
@@ -75,6 +78,9 @@ function App() {
             </Route>
             <Route exact path="/todos">
               <Todos />
+            </Route>
+            <Route exact path="/employeeappointments">
+              <EmployeeAppointments />
             </Route>
             <Route exact path="/employeedirectory">
               <EmployeeDirectory />

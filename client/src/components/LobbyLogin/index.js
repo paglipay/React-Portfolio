@@ -18,7 +18,7 @@ import TodoList from './components/TodoList'
 import Users from "../Users/UsersContainer";
 import Employees from "../EmployeeDirectory/containers";
 import Appointments from "../EmployeeAppointments/AppointmentsContainer";
-import Todos from '../Todos/components/TodoList';
+// import Todos from '../Todos/components/TodoList';
 
 const Video = styled.video`
   border: 1px solid blue;
@@ -47,12 +47,12 @@ function LobbyLogin() {
 
     useEffect(() => {
         socket.current = io.connect("/");
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
-            setStream(stream);
-            if (userVideo.current) {
-                userVideo.current.srcObject = stream;
-            }
-        })
+        // navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+        //     setStream(stream);
+        //     if (userVideo.current) {
+        //         userVideo.current.srcObject = stream;
+        //     }
+        // })
 
         socket.current.on("yourID", (id) => {
             setYourID(id);
@@ -206,7 +206,7 @@ function LobbyLogin() {
             <Row>
                 <Col>
                     <LLCard>
-                        {/* <Users /> */}
+                        <Users />
                         <Row>
                             <div>
                                 {users &&
@@ -246,7 +246,7 @@ function LobbyLogin() {
             <Row>
                 <Col>
                     <LLCard>
-                        <Todos />
+                        {/* <Todos /> */}
                         <h1>yourID: {yourID}</h1>
                         {/* <h1>yourID{state}</h1> */}
 
