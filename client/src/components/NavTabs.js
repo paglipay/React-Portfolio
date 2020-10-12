@@ -42,13 +42,13 @@ function NavTabs({ authenticated, logout }) {
                             <Link to={`/login`} ><Button>Login</Button></Link>
                         )}
                 </Form>
-                <Form inline>
+                {/* <Form inline>
                     {authenticated ? (
                         <Button onClick={logout} >LOGOUT</Button>
                     ) : (
                             <Login />
                         )}
-                </Form>
+                </Form> */}
             </Navbar>
 
         </>

@@ -51,7 +51,10 @@ function App() {
           <Route exact path={["/", "/home"]}>
             <Home />
           </Route>          
-            <Route exact path="/touchlesslogin/:id" component={TouchlessLogin} />
+            <Route exact path="/touchlesslogin/:id" component={TouchlessLogin} />       
+
+            <Route exact path={["/devices"]} authenticated={authenticated} component={Devices} />
+
             <PrivateRoute exact path={["/devices"]} authenticated={authenticated} component={Devices} />
             <Route exact path="/login" render={props =>
               <Login
