@@ -73,12 +73,12 @@ function LobbyLogin() {
 
     function handleBtnClick(event) {
         setShowVideoChat(true)
-        // navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
-        //     setStream(stream);
-        //     if (userVideo.current) {
-        //         userVideo.current.srcObject = stream;
-        //     }
-        // })
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+            setStream(stream);
+            if (userVideo.current) {
+                userVideo.current.srcObject = stream;
+            }
+        })
     }
 
 
