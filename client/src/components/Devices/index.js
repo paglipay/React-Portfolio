@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef, PureComponent } from 'react'
 import { Container, Row, Col, Form, FormControl, Button, NavDropdown, Nav, Navbar, Modal, Tabs, Tab } from 'react-bootstrap'
 import CardWrapper from '../Wrappers/CardWrapper'
+import DevicesTable from './Devices'
 import ReactDiffViewer from 'react-diff-viewer';
 import { v4 as uuidv4 } from 'uuid';
 import TextareaAutosize from 'react-textarea-autosize';
+
 const oldCode = `
 ip access-list extended voip_wc_out_20200109
  remark Required for HSRP hello packets
@@ -147,20 +149,22 @@ function Devices() {
                         }
                     `}
                 </style>
-
+                <Row>
+                    <DevicesTable inv={[ { 'id': 1, 'upc': 123 }, {'id': 2, 'upc': <Button>Press123</Button> }]}/>
+                </Row>
                 <Row>
                     <Col xs lg="6">
                         <h2>Configuration 1</h2>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Enter Configuration1 in Textarea</Form.Label>
-                            <Form.Control ref={textAreaEl1} as="textarea" rows="3" onChange={(e) => { setTextArea(e.target.value) }}  style={{ height: 200 }}/>
+                            <Form.Control ref={textAreaEl1} as="textarea" rows="3" onChange={(e) => { setTextArea(e.target.value) }} style={{ height: 200 }} />
                         </Form.Group>
                     </Col>
                     <Col xs lg="6">
                         <h2>Configuration 2</h2>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Enter Configuration2 in Textarea</Form.Label>
-                            <Form.Control ref={textAreaEl2} as="textarea" rows="3" onChange={(e) => { setTextArea2(e.target.value) }}  style={{ height: 200 }}/>
+                            <Form.Control ref={textAreaEl2} as="textarea" rows="3" onChange={(e) => { setTextArea2(e.target.value) }} style={{ height: 200 }} />
                         </Form.Group>
                     </Col>
                 </Row>
@@ -187,7 +191,7 @@ function Devices() {
                                     }
                                     }
                                     defaultActiveKey="profile">
-                                    {deviceCompares && deviceCompares.map(dc => <Tab eventKey={dc.id} title={dc.id}>
+                                    {deviceCompares && deviceCompares.map(dc => <Tab key={dc.id} eventKey={dc.id} title={dc.id}>
                                         <CardWrapper title={<><h3>{dc.id}</h3><br /><Button className="btn-danger">Delete</Button></>}>
                                             <ReactDiffViewer oldValue={dc.config1.config} newValue={dc.config2.config} splitView={true} />
                                         </CardWrapper>

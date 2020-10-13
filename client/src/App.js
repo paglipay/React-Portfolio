@@ -19,6 +19,7 @@ import Devices from "./components/Devices";
 import PrivateRoute from "./components/PrivateRoute";
 import TouchlessLogin from "./components/TouchlessLogin/TouchlessLoginUrl";
 import EmployeeAppointments from './components/EmployeeAppointments/AppointmentsContainer';
+import InventoryView from './components/Devices/Devices';
 function App() {
 
   const [authenticated, setAuthenticated] = useState(false);
@@ -54,6 +55,8 @@ function App() {
             <Route exact path="/touchlesslogin/:id" component={TouchlessLogin} />       
 
             <Route exact path={["/devices"]} authenticated={authenticated} component={Devices} />
+
+            <Route exact path={["/inventoryview"]} authenticated={authenticated} component={InventoryView} />
 
             <PrivateRoute exact path={["/devices"]} authenticated={authenticated} component={Devices} />
             <Route exact path="/login" render={props =>
