@@ -9,11 +9,11 @@ function InventoryView({ inv=[{ 'id': 'id', 'upc': 'upc' }, { 'id': 1, 'upc': 12
         return (!inv) ? null : (
           <tbody>            
           {inv.map((item) => {                                // changed here
-            console.log('item: ', item);
+            // console.log('item: ', item);
             return (
               <tr key={item.id}>
                 {Object.entries(item).map((field) => {        // changed here
-                  console.log('field: ', field);
+                  // console.log('field: ', field);
                   return <td key={field[1]}><pre>{field[1]}</pre></td>
                 })}
               </tr>

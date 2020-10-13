@@ -33,6 +33,8 @@ function NavTabs({ authenticated, logout }) {
                         <NavDropdown.Item as={Link} to="/videochat">Video Chat</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/chat">Chat</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/users">Users</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/devices">Devices</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/inventoryview">InventoryView</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <Form inline>

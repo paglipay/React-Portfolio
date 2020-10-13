@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, PureComponent } from 'react'
 import { Container, Row, Col, Form, FormControl, Button, NavDropdown, Nav, Navbar, Modal, Tabs, Tab } from 'react-bootstrap'
 import CardWrapper from '../Wrappers/CardWrapper'
 import DevicesTable from './Devices'
-import helpers from './helpers'
 import ReactDiffViewer from 'react-diff-viewer';
 import { v4 as uuidv4 } from 'uuid';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -112,7 +111,6 @@ function Devices() {
     useEffect(() => {
         console.log('useEffect textArea:')
         setTimeout(() => saveThis(), 1000)
-        helpers.cisco_get()
     }, []);
 
     useEffect(() => {
@@ -152,7 +150,7 @@ function Devices() {
                     `}
                 </style>
                 <Row>
-                    <DevicesTable inv={[ { 'id': 1, 'upc': 123 }, {'id': 2, 'upc': <Button>Press</Button> }]}/>
+                    <DevicesTable inv={[ { 'id': 1, 'upc': 123 }, {'id': 2, 'upc': <Button>Press123</Button> }]}/>
                 </Row>
                 <Row>
                     <Col xs lg="6">

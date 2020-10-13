@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Tabs, Tab } from 'react-bootstrap'
+import React, { useState, useEffect, useRef } from 'react'
+import { Tabs, Tab, Form, Container, Row, Col, Button } from 'react-bootstrap'
 import helpers from './helpers'
 import InventoryView from '../InventoryView/InventoryView'
 
@@ -7,7 +7,7 @@ const oldCode = `spanning-tree mode rapid-pvst
 spanning-tree extend system-id
 spanning-tree vlan 2-3,7-8,10,419,434,458,485,677-687,726,735 priority 24576
 spanning-tree vlan 740,877 priority 24576
-!
+!s
 vlan internal allocation policy ascending
 !
 vlan 2
@@ -59,34 +59,56 @@ interface GigabitEthernet1/0/3
 function Devices() {
 
     const [inventoryList, setInventoryList] = useState()
-    const [config, setConfig] = useState(oldCode)
+    const [configTextAreaVal, setConfigTextAreaVal] = useState(oldCode)
     const [ciscoKey, setCiscoKey] = useState('interface')
     const [ciscoKeys, setCiscoKeys] = useState(['interface', 'vlan'])
-    const [key, setKey] = useState('interface');
 
-    useEffect(() => {
-        const configObj = helpers.cisco_parse(oldCode)
-        const out_inv = helpers.cisco_get(ciscoKey, configObj)
+    const ciscoConfigTextArea = useRef(null);
+
+    const process = (config_var) => {
+        const configObj = helpers.cisco_parse(config_var)
+        let out_inv
+        out_inv = helpers.cisco_get(ciscoKey, configObj)
         let x
         let out = []
-        for (x in out_inv.interface) {
-            out.push({ id: x, config: out_inv.interface[x].config })
+        for (x in helpers.cisco_get(ciscoKey, configObj)[ciscoKey]) {
+            out.push({ id: x, config: out_inv[ciscoKey][x].config })
         }
         setInventoryList(out)
-    }, []);
+    }
+
+    // useEffect(() => {  
+    //     // process(config)
+    // }, []);
+
+    useEffect(() => {
+        process(configTextAreaVal)
+    }, [configTextAreaVal]);
 
     return (
-        <>
-            
-            <Tabs
-                id="controlled-tab-example"                
-                defaultActiveKey="profile">
-                {ciscoKeys && ciscoKeys.map(ck => <Tab key={ck} eventKey={ck} title={ck}>
-                    <InventoryView inv={inventoryList} />
-                </Tab>
-                )}
-            </Tabs>
-        </>
+        <Container fluid>
+            <Row>
+                <Col>
+                    <h2>Configuration 1</h2>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Enter Configuration1 in Textarea</Form.Label>
+                        <Form.Control as="textarea" ref={ciscoConfigTextArea} onChange={(e) => { setConfigTextAreaVal(e.target.value) }} rows="3" style={{ height: 200 }} />
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Tabs
+                        id="controlled-tab-example"
+                        defaultActiveKey="profile">
+                        {ciscoKeys && ciscoKeys.map(ck => <Tab key={ck} eventKey={ck} title={ck}>
+                            <InventoryView inv={inventoryList} />
+                        </Tab>
+                        )}
+                    </Tabs>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 
