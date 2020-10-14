@@ -13,10 +13,10 @@ function InventoryView({ inv = [{ 'id': 'id', 'upc': 'upc' }, { 'id': 1, 'upc': 
           // console.log('item: ', item);
           return (
             <>
-              <tr><th></th><th></th><th><Button size="sm">Edit</Button> <Button size="sm" className="btn-danger">Reset</Button></th></tr>
+              {/* <tr><th></th><th></th><th><Button size="sm">Edit</Button> <Button size="sm" className="btn-danger">Reset</Button></th></tr> */}
               <tr key={item.id}>
                 <td>
-                  <Button size="sm">Send to 1</Button><br /><br /><Button size="sm">Send to 2</Button>
+                  {/* <Button size="sm">Send to 1</Button><br /><br /><Button size="sm">Send to 2</Button> */}
                 </td>
                 {Object.entries(item).map((field) => {        // changed here
                   // console.log('field: ', field);

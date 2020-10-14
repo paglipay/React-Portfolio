@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Tabs, Tab, Form, Container, Row, Col, Button } from 'react-bootstrap'
+import { Tabs, Tab, Form, Container, Row, Col, Nav } from 'react-bootstrap'
 import helpers from './helpers'
 import InventoryView from '../InventoryView/InventoryView'
 
@@ -12,7 +12,7 @@ function Devices() {
     const ciscoConfigTextArea = useRef(null);
 
     function sortByKey(array, key) {
-        return array.sort(function(a, b) {
+        return array.sort(function (a, b) {
             var x = a[key]; var y = b[key];
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
@@ -24,7 +24,7 @@ function Devices() {
         let x
         let t_objs = {}
         ciscoKeys.forEach(e => {
-            out_inv = helpers.cisco_get(e, configObj)            
+            out_inv = helpers.cisco_get(e, configObj)
             let out = []
             for (x in helpers.cisco_get(e, configObj)[e]) {
                 out.push({ id: x, config: out_inv[e][x].config })
@@ -57,14 +57,35 @@ function Devices() {
             </Row>
             <Row>
                 <Col>
-                    <Tabs
+                    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+                        <Row>
+                            <Col sm={2}>
+                                <Nav variant="pills" className="flex-column">
+                                    {ciscoKeys && ciscoKeys.map(ck => <Nav.Item>
+                                        <Nav.Link eventKey={ck}>{ck}</Nav.Link>
+                                    </Nav.Item>
+                                    )}
+                                </Nav>
+                            </Col>
+                            <Col sm={10}>
+                                <Tab.Content>
+                                    {ciscoKeys && ciscoKeys.map(ck => <Tab.Pane key={ck} eventKey={ck} title={ck}>
+                                        <InventoryView inv={inventoryLists[ck]} />
+                                    </Tab.Pane>
+                                    )}
+                                </Tab.Content>
+                            </Col>
+                        </Row>
+                    </Tab.Container>
+                    {/* <Tabs
                         id="controlled-tab-example"
                         defaultActiveKey="profile">
                         {ciscoKeys && ciscoKeys.map(ck => <Tab key={ck} eventKey={ck} title={ck}>
                             <InventoryView inv={inventoryLists[ck]} />
                         </Tab>
                         )}
-                    </Tabs>
+                    </Tabs> */}
+
                 </Col>
             </Row>
         </Container>
