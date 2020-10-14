@@ -20,6 +20,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import TouchlessLogin from "./components/TouchlessLogin/TouchlessLoginUrl";
 import EmployeeAppointments from './components/EmployeeAppointments/AppointmentsContainer';
 import InventoryView from './components/Devices/Devices';
+import CompareConfigs from './components/Devices/CompareConfigs';
+
 function App() {
 
   const [authenticated, setAuthenticated] = useState(false);
@@ -43,20 +45,22 @@ function App() {
   }
 
   return (
+
     <Provider store={store}>
       <Router>
         <div>
           {/* <Nav /> */}
           <NavTabs authenticated={authenticated} logout={logout} />
           <Switch>
-          <Route exact path={["/", "/home"]}>
-            <Home />
-          </Route>          
-            <Route exact path="/touchlesslogin/:id" component={TouchlessLogin} />       
+            <Route exact path={["/", "/home"]}>
+              <Home />
+            </Route>
+            <Route exact path="/touchlesslogin/:id" component={TouchlessLogin} />
 
             <Route exact path={["/devices"]} authenticated={authenticated} component={Devices} />
 
             <Route exact path={["/inventoryview"]} authenticated={authenticated} component={InventoryView} />
+            <Route exact path={["/compareconfigs"]} authenticated={authenticated} component={CompareConfigs} />
 
             <PrivateRoute exact path={["/devices"]} authenticated={authenticated} component={Devices} />
             <Route exact path="/login" render={props =>
@@ -98,6 +102,7 @@ function App() {
         </div>
       </Router>
     </Provider>
+
   );
 }
 
