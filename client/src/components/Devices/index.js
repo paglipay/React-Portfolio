@@ -34,7 +34,6 @@ function Devices() {
                         </Tabs>
                     </Col>
                 </Row>
-
             </Container>
         </div>
     )
