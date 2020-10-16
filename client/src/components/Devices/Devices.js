@@ -7,7 +7,23 @@ function Devices() {
     const [inventoryLists, setInventoryLists] = useState({})
     const [configTextAreaVal, setConfigTextAreaVal] = useState('')
     const [ciscoKey, setCiscoKey] = useState('interface')
-    const [ciscoKeys, setCiscoKeys] = useState(['interface', 'vlan', 'spanning-tree', 'ip access-list extended', 'line vty', 'ntp', 'snmp-server location', 'snmp-server contact', 'snmp-server'])
+    const [ciscoKeys, setCiscoKeys] = useState([
+        'hostname', 
+        'interface', 
+        'ip access-list extended',
+        'access-list', 
+        'vlan', 
+        'spanning-tree', 
+        'switch', 
+        'router ospf', 
+        'router bgp', 
+        'line', 
+        'ntp', 
+        'snmp-server location', 
+        'snmp-server contact', 
+        // 'snmp-server', 
+        'ip default-gateway'
+    ])
 
     const ciscoConfigTextArea = useRef(null);
 
@@ -27,7 +43,10 @@ function Devices() {
             out_inv = helpers.cisco_get(e, configObj)
             let out = []
             for (x in helpers.cisco_get(e, configObj)[e]) {
-                out.push({ id: x, config: out_inv[e][x].config })
+                out.push({ 
+                    id: x, 
+                    config: out_inv[e][x].config
+                })
             }
             out = sortByKey(out, 'id')
             t_objs[e] = out
