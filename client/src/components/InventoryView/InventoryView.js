@@ -20,8 +20,8 @@ function parseConfig(config) {
     console.log(e, ValidateIPaddress(e) && e !== '' && cache.includes(e, 0) === false)
     if (ValidateIPaddress(e) && e !== '' && cache.includes(e, 0) === false ) {
       // console.log(e)
-      output = output.replaceAll(` ${e} `, ` <a href="#">${e}</a> `)  
-      output = output.replaceAll(` ${e}\n`, ` <a href="#">${e}</a>\n`)      
+      output = output.replaceAll(` ${e} `, ` <a href="#" title="Access your profile here">${e}</a> `)  
+      output = output.replaceAll(` ${e}\n`, ` <a href="#" title="Access your profile here">${e}</a>\n`)      
       cache.push(e)
     }
   })

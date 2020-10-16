@@ -1,26 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Tabs, Tab, Form, Container, Row, Col, Nav } from 'react-bootstrap'
+import { Tabs, Tab, Form, Container, Row, Col, Nav, Button } from 'react-bootstrap'
 import helpers from './helpers'
 import InventoryView from '../InventoryView/InventoryView'
+import { v4 as uuidv4 } from 'uuid';
+
+
 
 function Devices() {
     const [inventoryLists, setInventoryLists] = useState({})
     const [configTextAreaVal, setConfigTextAreaVal] = useState('')
+    const [configs, setConfigs] = useState([{ id: uuidv4(), config: 'oldConfig' }])
     const [ciscoKey, setCiscoKey] = useState('interface')
     const [ciscoKeys, setCiscoKeys] = useState([
-        'hostname', 
-        'interface', 
+        'hostname',
+        'interface',
         'ip access-list extended',
-        'access-list', 
-        'vlan', 
-        'spanning-tree', 
-        'switch', 
-        'router ospf', 
-        'router bgp', 
-        'line', 
-        'ntp', 
-        'snmp-server location', 
-        'snmp-server contact', 
+        'access-list',
+        'vlan',
+        'spanning-tree',
+        'switch',
+        'router ospf',
+        'router bgp',
+        'line',
+        'ntp',
+        'snmp-server location',
+        'snmp-server contact',
         // 'snmp-server', 
         'ip default-gateway'
     ])
@@ -43,8 +47,8 @@ function Devices() {
             out_inv = helpers.cisco_get(e, configObj)
             let out = []
             for (x in helpers.cisco_get(e, configObj)[e]) {
-                out.push({ 
-                    id: x, 
+                out.push({
+                    id: x,
                     config: out_inv[e][x].config
                 })
             }
@@ -55,9 +59,11 @@ function Devices() {
 
     }
 
-    // useEffect(() => {  
-    //     // process(config)
-    // }, []);
+    useEffect(() => {
+        setConfigTextAreaVal(configs[0].config)
+        ciscoConfigTextArea.current.value = configTextAreaVal
+        process(configTextAreaVal)
+    }, []);
 
     useEffect(() => {
         process(configTextAreaVal)
@@ -68,9 +74,10 @@ function Devices() {
             <Row>
                 <Col>
                     <h2>Paste Cisco Configuration Here</h2>
+                    <Button>Save</Button>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Enter Configuration1 in Textarea</Form.Label>
-                        <Form.Control as="textarea" ref={ciscoConfigTextArea} onChange={(e) => { setConfigTextAreaVal(e.target.value) }} rows="3" style={{ height: 200 }} />
+                        <Form.Control as="textarea" ref={ciscoConfigTextArea} onChange={(e) => { setConfigTextAreaVal(e.target.value) }} rows="3" style={{ height: 200 }} value={configTextAreaVal}/>
                     </Form.Group>
                 </Col>
             </Row>
