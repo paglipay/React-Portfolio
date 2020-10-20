@@ -26,18 +26,23 @@ function Home() {
       padding-top: 15px;
       padding-bottom: 15px;
     }
+    .jumbotron {      
+      margin-bottom: 0px;
+    }
     `}
       </style>
       <Jumbotron style={{ backgroundImage: `url('https://source.unsplash.com/1600x300/?design')`, backgroundSize: 'cover', height: 500 }}>
-        <h1>Hello, world!</h1>
+        <div style={{ backgroundColor: 'rgba(255,255,255,0.5)', padding:'100px', margin:'0px 0px' }}>
+          <h1>Paul Aglipay</h1>
 
-        If you need someone to create a cool website for you and or business, you have come to the right page.
+          If you need someone to create a cool website for you and or business, you have come to the right page. I specialize in the MERN stack development. MongoDB, ExpressJS, React, NodeJS.
 
-        <p>
-          <Button variant="flat" size="xxl">Learn more</Button>
-        </p>
+          <p>
+            <Button variant="flat" size="xxl">Learn more</Button>
+          </p>
+        </div>
       </Jumbotron>
-      <section style= {{backgroundColor: '#f4f4f4', height: 500}} class="section section-icons grey lighten-4 center">
+      <section style={{ backgroundColor: '#f4f4f4', height: 500 }} class="section section-icons grey lighten-4 center">
         <Container style={{ height: '100%' }}>
           <Row style={{ height: '100%' }}>
             <Col>
@@ -48,7 +53,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>We've got what you need!</Card.Title>
                   <Card.Text>
-                  Knowlegable in HTML, Javascript, CSS, Nodejs, Sequelize, and much much more!!!
+                    Knowlegable in HTML, Javascript, CSS, Nodejs, Sequelize, and much much more!!!
                 </Card.Text>
                   <Button variant="flat">Get Started!</Button>
                 </Card.Body>
@@ -73,7 +78,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>Let's Get In Touch!</Card.Title>
                   <Card.Text>
-                  Ready to start your next project with me? Give me a call or send me an email and I will get back to you as soon as possible!
+                    Ready to start your next project with me? Give me a call or send me an email and I will get back to you as soon as possible!
                 </Card.Text>
                   <Button variant="flat">Go somewhere</Button>
                 </Card.Body>
@@ -154,7 +159,7 @@ function Home() {
 
         </Container>
       </section>
-      <section  style= {{backgroundColor: '#f4f4f4'}}>
+      <section style={{ backgroundColor: '#f4f4f4' }}>
         <Container>
 
           <Row>

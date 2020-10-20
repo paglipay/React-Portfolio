@@ -19,6 +19,7 @@ import Users from "../Users/UsersContainer";
 import Employees from "../EmployeeDirectory/containers";
 import Appointments from "../EmployeeAppointments/AppointmentsContainer";
 // import Todos from '../Todos/components/TodoList';
+import Configs from '../Devices/containers'
 
 const Video = styled.video`
   border: 1px solid blue;
@@ -262,6 +263,11 @@ function LobbyLogin() {
                 <Col>
                     <LLCard>
                         <TodoList />
+                    </LLCard>
+                </Col>
+                <Col>
+                    <LLCard>
+                        <Configs />
                     </LLCard>
                 </Col>
             </Row>

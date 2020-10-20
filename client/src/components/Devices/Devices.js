@@ -3,10 +3,14 @@ import { Tabs, Tab, Form, Container, Row, Col, Nav, Button } from 'react-bootstr
 import helpers from './helpers'
 import InventoryView from '../InventoryView/InventoryView'
 import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux';
+// import { addTodoRequest } from '../../redux/ciscoConfig/thunks';
+
+import { addConfigRequest } from '../../redux/ciscoConfig/actions';
 
 
 
-function Devices() {
+function Devices({ xconfigs, onCreatePressed }) {
     const [inventoryLists, setInventoryLists] = useState({})
     const [configTextAreaVal, setConfigTextAreaVal] = useState('')
     const [configs, setConfigs] = useState([{ id: uuidv4(), config: 'oldConfig' }])
@@ -69,15 +73,20 @@ function Devices() {
         process(configTextAreaVal)
     }, [configTextAreaVal]);
 
+    const handleClick = () => {
+        console.log('click')
+        onCreatePressed(configTextAreaVal);
+    }
+
     return (
         <Container fluid>
             <Row>
                 <Col>
                     <h2>Paste Cisco Configuration Here</h2>
-                    <Button>Save</Button>
+                    <Button onClick={handleClick} >Save</Button>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Enter Configuration1 in Textarea</Form.Label>
-                        <Form.Control as="textarea" ref={ciscoConfigTextArea} onChange={(e) => { setConfigTextAreaVal(e.target.value) }} rows="3" style={{ height: 200 }} value={configTextAreaVal}/>
+                        <Form.Control as="textarea" ref={ciscoConfigTextArea} onChange={(e) => { setConfigTextAreaVal(e.target.value) }} rows="3" style={{ height: 200 }} value={configTextAreaVal} />
                     </Form.Group>
                 </Col>
             </Row>
@@ -118,4 +127,13 @@ function Devices() {
     )
 }
 
-export default Devices
+const mapStateToProps = state => ({
+    xconfigs: state.configs,
+});
+
+const mapDispatchToProps = dispatch => ({
+    onCreatePressed: text => dispatch(addConfigRequest(text)),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Devices)
