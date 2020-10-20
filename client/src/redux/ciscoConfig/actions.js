@@ -7,14 +7,17 @@ import {
 
 export const addConfigRequest = (data) => {
   return (dispatch) => {
-    dispatch(fetchConfigsRequest())
+    // dispatch(fetchConfigsRequest())
     console.log('addConfigRequest: ', data)
     axios
-      .post('/api/configs', data)
+      .post('/api/configs', {
+        name: 'TEST',
+        config: data
+      })
       .then(response => {
         // response.data is the users
         const configs = response.data.results
-        // dispatch(fetchConfigsSuccess(configs))
+        dispatch(fetchConfigsSuccess(true))
         dispatch(createConfig(configs));
       })
       .catch(error => {
