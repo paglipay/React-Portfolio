@@ -8,9 +8,7 @@ import { connect } from 'react-redux';
 
 import { addConfigRequest } from '../../redux/ciscoConfig/actions';
 
-
-
-function Devices({ xconfigs, onCreatePressed }) {
+function Devices({ configData, onCreatePressed }) {
     const [inventoryLists, setInventoryLists] = useState({})
     const [configTextAreaVal, setConfigTextAreaVal] = useState('')
     const [configs, setConfigs] = useState([{ id: uuidv4(), config: 'oldConfig' }])
@@ -19,18 +17,18 @@ function Devices({ xconfigs, onCreatePressed }) {
         'hostname',
         'interface',
         'ip access-list extended',
-        'access-list',
+        // 'access-list',
         'vlan',
-        'spanning-tree',
-        'switch',
-        'router ospf',
-        'router bgp',
-        'line',
-        'ntp',
-        'snmp-server location',
-        'snmp-server contact',
-        // 'snmp-server', 
-        'ip default-gateway'
+        // 'spanning-tree',
+        // 'switch',
+        // 'router ospf',
+        // 'router bgp',
+        // 'line',
+        // 'ntp',
+        // 'snmp-server location',
+        // 'snmp-server contact',
+        // // 'snmp-server', 
+        // 'ip default-gateway'
     ])
 
     const ciscoConfigTextArea = useRef(null);
@@ -64,11 +62,19 @@ function Devices({ xconfigs, onCreatePressed }) {
 
     }
 
+    // useEffect(() => {
+
+    //     ciscoConfigTextArea.current.value = configTextAreaVal
+    //     process(configTextAreaVal)
+    // }, []);
     useEffect(() => {
-        setConfigTextAreaVal(configs[0].config)
-        ciscoConfigTextArea.current.value = configTextAreaVal
-        process(configTextAreaVal)
-    }, []);
+
+        console.log('configData.activeConfig.config: ', configData.activeConfig)
+        if (configData.activeConfig && configData.activeConfig.config) {
+            setConfigTextAreaVal(configData.activeConfig.config)
+        }
+
+    }, [configData]);
 
     useEffect(() => {
         process(configTextAreaVal)
@@ -76,12 +82,12 @@ function Devices({ xconfigs, onCreatePressed }) {
 
     const handleClick = () => {
         console.log('click')
-        
+        setConfigTextAreaVal('')
         onCreatePressed({
             name: 'TEST',
-            config: configTextAreaVal,
-            data: inventoryLists
-          });
+            data: inventoryLists,
+            config: configTextAreaVal
+        });
     }
 
     return (
@@ -102,7 +108,7 @@ function Devices({ xconfigs, onCreatePressed }) {
                         <Row>
                             <Col sm={2}>
                                 <Nav variant="pills" className="flex-column">
-                                    {ciscoKeys && ciscoKeys.map(ck => <Nav.Item>
+                                    {ciscoKeys && ciscoKeys.map(ck => <Nav.Item key={ck}>
                                         <Nav.Link eventKey={ck}>{ck}</Nav.Link>
                                     </Nav.Item>
                                     )}
@@ -133,12 +139,15 @@ function Devices({ xconfigs, onCreatePressed }) {
     )
 }
 
-const mapStateToProps = state => ({
-    xconfigs: state.configs,
-});
+const mapStateToProps = state => {
+    return {
+        configData: state.config
+    }
+}
 
 const mapDispatchToProps = dispatch => ({
     onCreatePressed: text => dispatch(addConfigRequest(text)),
+    // onCompletedPressed: id => dispatch(markTodoAsCompletedRequest(id)),
 });
 
 

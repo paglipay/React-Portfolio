@@ -42,7 +42,7 @@ function InventoryView({ inv }) {
           return (
             <>
               {/* <tr><th></th><th></th><th><Button size="sm">Edit</Button> <Button size="sm" className="btn-danger">Reset</Button></th></tr> */}
-              <tr key={item.id}>
+              <tr key={item.id + Math.floor(Math.random() * 1000)}>
                 <td>
                   <Button size="sm" key={item.id + "1"}>Send to 1</Button><br /><br /><Button key={item.id + "2"} size="sm" >Send to 2</Button>
                 </td>

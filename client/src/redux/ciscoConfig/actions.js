@@ -3,7 +3,7 @@ import {
   FETCH_CONFIGS_REQUEST,
   FETCH_CONFIGS_SUCCESS,
   FETCH_CONFIGS_FAILURE,
-  CREATE_CONFIG
+  MARK_CONFIG_AS_ACTIVE
 } from './configTypes'
 
 export const addConfigRequest = (data) => {
@@ -16,7 +16,7 @@ export const addConfigRequest = (data) => {
         // response.data is the users
         const configs = response.data
         console.log('response.data.results: ', configs)
-        dispatch(fetchConfigsSuccess(configs))
+        // dispatch(fetchConfigsSuccess(configs))
         // dispatch(createConfig(configs));
       })
       .catch(error => {
@@ -63,7 +63,7 @@ export const fetchConfigsFailure = error => {
   }
 }
 
-export const createConfig = config => ({
-    type: CREATE_CONFIG,
-    payload: { config },
+export const markConfigAsActiveRequest = configId => ({
+    type: MARK_CONFIG_AS_ACTIVE,
+    payload: { configId },
 });

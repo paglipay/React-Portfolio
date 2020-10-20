@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Container, Row, Col, Button, Table } from 'react-bootstrap';
 
-export default function ConfigsTable({ configData, fetchConfigs }) {
+export default function ConfigsTable({ configData, fetchConfigs, onActivatePressed }) {
   useEffect(() => {
     fetchConfigs()
   }, [])
@@ -30,7 +30,7 @@ export default function ConfigsTable({ configData, fetchConfigs }) {
             <tbody>
               {configData &&
                 configData.configs &&
-                configData.configs.map(user => <tr><td><Button>Open</Button></td><td><pre>{user._id} {user.name} </pre></td></tr>)}
+                configData.configs.map(user => <tr key={user._id}><td><Button onClick={() => onActivatePressed(user._id)}>Open</Button></td><td><pre>{user._id} {user.name} </pre></td></tr>)}
             </tbody>
           </Table>
         </>

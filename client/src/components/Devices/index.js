@@ -3,13 +3,14 @@ import { Container, Row, Col, Form, FormControl, Button, NavDropdown, Nav, Navba
 import CardWrapper from '../Wrappers/CardWrapper'
 import DevicesTable from './Devices'
 import CompareConfigs from './CompareConfigs'
-import Configs from '../Devices/containers'
+import Configs from '../Devices/containers/ConfigsTable'
 
 function Devices() {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
 
     return (
         <div>
