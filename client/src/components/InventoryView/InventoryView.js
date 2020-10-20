@@ -32,7 +32,6 @@ function InventoryView({ inv }) {
 
   const getTableBodyAsReactElement = () => {
     // let inv = [{ 'id': 'id', 'upc': 'upc' }, { 'id': 1, 'upc': 123 }, {'id': 2, 'upc': <Button>Press</Button> }];
-    console.log('inv: ', inv);
 
     return (!inv) ? null : (
       <tbody>
@@ -42,7 +41,7 @@ function InventoryView({ inv }) {
           return (
             <>
               {/* <tr><th></th><th></th><th><Button size="sm">Edit</Button> <Button size="sm" className="btn-danger">Reset</Button></th></tr> */}
-              <tr key={item.id + Math.floor(Math.random() * 1000)}>
+              <tr key={item.id + Math.floor(Math.random() * 10000)}>
                 <td>
                   <Button size="sm" key={item.id + "1"}>Send to 1</Button><br /><br /><Button key={item.id + "2"} size="sm" >Send to 2</Button>
                 </td>

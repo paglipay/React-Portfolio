@@ -31,6 +31,8 @@ function Devices({ configData, onCreatePressed }) {
         // 'ip default-gateway'
     ])
 
+    const [configName, seConfigName] = useState('QWE')
+
     const ciscoConfigTextArea = useRef(null);
 
     function sortByKey(array, key) {
@@ -57,8 +59,12 @@ function Devices({ configData, onCreatePressed }) {
             out = sortByKey(out, 'id')
             t_objs[e] = out
         })
-        console.log('t_objs: ', t_objs)
         setInventoryLists(t_objs)
+
+        if (t_objs && t_objs.hostname && t_objs.hostname[0] && t_objs.hostname[0].config) {
+            seConfigName(t_objs.hostname[0].config)
+        }
+        
 
     }
 
@@ -83,8 +89,10 @@ function Devices({ configData, onCreatePressed }) {
     const handleClick = () => {
         console.log('click')
         setConfigTextAreaVal('')
+
+
         onCreatePressed({
-            name: 'TEST',
+            name: configName,
             data: inventoryLists,
             config: configTextAreaVal
         });
@@ -95,11 +103,11 @@ function Devices({ configData, onCreatePressed }) {
             <Row>
                 <Col>
                     <h2>Paste Cisco Configuration Here</h2>
-                    <Button onClick={handleClick} >Save</Button>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Enter Configuration1 in Textarea</Form.Label>
                         <Form.Control as="textarea" ref={ciscoConfigTextArea} onChange={(e) => { setConfigTextAreaVal(e.target.value) }} rows="3" style={{ height: 200 }} value={configTextAreaVal} />
                     </Form.Group>
+                    <Button onClick={handleClick} >Save</Button>
                 </Col>
             </Row>
             <Row>

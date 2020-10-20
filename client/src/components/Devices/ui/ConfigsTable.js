@@ -30,7 +30,7 @@ export default function ConfigsTable({ configData, fetchConfigs, onActivatePress
             <tbody>
               {configData &&
                 configData.configs &&
-                configData.configs.map(user => <tr key={user._id}><td><Button onClick={() => onActivatePressed(user._id)}>Open</Button></td><td><pre>{user._id} {user.name} </pre></td></tr>)}
+                configData.configs.map(config => <tr key={config._id}><td><Button onClick={() => onActivatePressed(config._id)}>Open</Button></td><td><pre>{config.name} </pre></td></tr>)}
             </tbody>
           </Table>
         </>
