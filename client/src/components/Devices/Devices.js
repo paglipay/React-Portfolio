@@ -59,6 +59,7 @@ function Devices({ xconfigs, onCreatePressed }) {
             out = sortByKey(out, 'id')
             t_objs[e] = out
         })
+        console.log('t_objs: ', t_objs)
         setInventoryLists(t_objs)
 
     }
@@ -75,7 +76,12 @@ function Devices({ xconfigs, onCreatePressed }) {
 
     const handleClick = () => {
         console.log('click')
-        onCreatePressed(configTextAreaVal);
+        
+        onCreatePressed({
+            name: 'TEST',
+            config: configTextAreaVal,
+            data: inventoryLists
+          });
     }
 
     return (

@@ -11,10 +11,7 @@ export const addConfigRequest = (data) => {
     // dispatch(fetchConfigsRequest())
     console.log('addConfigRequest: ', data)
     axios
-      .post('/api/configs', {
-        name: 'TEST',
-        config: data
-      })
+      .post('/api/configs', data)
       .then(response => {
         // response.data is the users
         const configs = response.data
