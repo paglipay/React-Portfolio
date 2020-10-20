@@ -14,7 +14,7 @@ export default function ConfigsList ({ configData, fetchConfigs }) {
       <div>
         {configData &&
           configData.configs &&
-          configData.configs.map(user => <p>{user.name.title} {user.name.first} {user.name.last}</p>)}
+          configData.configs.map(user => <p><pre>{user._id} {user.name} </pre></p>)}
       </div>
     </div>
   )

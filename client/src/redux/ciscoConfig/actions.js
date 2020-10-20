@@ -2,7 +2,8 @@ import axios from 'axios'
 import {
   FETCH_CONFIGS_REQUEST,
   FETCH_CONFIGS_SUCCESS,
-  FETCH_CONFIGS_FAILURE
+  FETCH_CONFIGS_FAILURE,
+  CREATE_CONFIG
 } from './configTypes'
 
 export const addConfigRequest = (data) => {
@@ -16,9 +17,10 @@ export const addConfigRequest = (data) => {
       })
       .then(response => {
         // response.data is the users
-        const configs = response.data.results
-        dispatch(fetchConfigsSuccess(true))
-        dispatch(createConfig(configs));
+        const configs = response.data
+        console.log('response.data.results: ', configs)
+        dispatch(fetchConfigsSuccess(configs))
+        // dispatch(createConfig(configs));
       })
       .catch(error => {
         // error.message is the error message
@@ -34,7 +36,7 @@ export const fetchConfigs = () => {
       .get('/api/configs')
       .then(response => {
         // response.data is the users
-        const configs = response.data.results
+        const configs = response.data
         dispatch(fetchConfigsSuccess(configs))
       })
       .catch(error => {
@@ -64,7 +66,6 @@ export const fetchConfigsFailure = error => {
   }
 }
 
-export const CREATE_CONFIG = 'CREATE_CONFIG';
 export const createConfig = config => ({
     type: CREATE_CONFIG,
     payload: { config },

@@ -267,6 +267,7 @@ function LobbyLogin() {
                 </Col>
                 <Col>
                     <LLCard>
+                        <h1>Configs</h1>
                         <Configs />
                     </LLCard>
                 </Col>

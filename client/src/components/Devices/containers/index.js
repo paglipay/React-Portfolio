@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchConfigs } from '../../../redux'
-import ConfigsList from '../ui/'
+import ConfigsList from '../ui/ConfigsTable'
 
 
 const mapStateToProps = state => {
