@@ -3,3 +3,4 @@
 export { fetchUsers } from './user/userActions'
 export { fetchEmployees } from './employee/employeeActions'
 export { fetchAppointments } from './appointment/appointmentActions'
+export { fetchConfigs, removeConfigRequest, markConfigAsActiveRequest } from './ciscoConfig/actions'

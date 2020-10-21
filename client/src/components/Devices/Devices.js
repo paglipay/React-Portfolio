@@ -1,29 +1,78 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Tabs, Tab, Form, Container, Row, Col, Nav } from 'react-bootstrap'
+import { Tabs, Tab, Form, Container, Row, Col, Nav, Button } from 'react-bootstrap'
 import helpers from './helpers'
 import InventoryView from '../InventoryView/InventoryView'
+import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux';
+// import { addTodoRequest } from '../../redux/ciscoConfig/thunks';
 
-function Devices() {
+import { addConfigRequest } from '../../redux/ciscoConfig/actions';
+
+function Devices({ configData, onCreatePressed }) {
     const [inventoryLists, setInventoryLists] = useState({})
     const [configTextAreaVal, setConfigTextAreaVal] = useState('')
+    const [configs, setConfigs] = useState([{ id: uuidv4(), config: 'oldConfig' }])
     const [ciscoKey, setCiscoKey] = useState('interface')
     const [ciscoKeys, setCiscoKeys] = useState([
-        'hostname', 
-        'interface', 
+        'hostname',
+        'interface',
         'ip access-list extended',
-        'access-list', 
-        'vlan', 
-        'spanning-tree', 
-        'switch', 
-        'router ospf', 
-        'router bgp', 
-        'line', 
-        'ntp', 
-        'snmp-server location', 
-        'snmp-server contact', 
+        'access-list',
+        'vlan',
+        'spanning-tree',
+        'switch',
+        'router ospf',
+        'router bgp',
+        'line',
+        'ntp',
+        'snmp-server location',
+        'snmp-server contact',
         // 'snmp-server', 
         'ip default-gateway'
     ])
+    const [breakItUp, setBreakItUp] = useState([
+        {
+            key: 'interface',
+            list: [
+                "interface",
+                "description",
+                "ip address",
+                "ip access-group",
+                "standby",
+                "switchport access vlan",
+                "switchport voice vlan",
+                "switchport",
+                "ip ospf",
+                "ipv6 address",
+                "ipv6 ospf",
+                "ipv6 traffic-filter",
+                "cdp",
+                "lldp",
+                "ip helper-address",
+                "shutdown",
+                "port-security",
+                "spanning-tree",
+                "dhcp snooping",
+                "arp inspection",
+                "vrf forwarding",
+                "service-policy"
+            ]
+        },
+        {
+            key: 'class-map',
+            list: [
+                "match access-group name"
+            ]
+        },
+        {
+            key: 'crypto',
+            list: [
+                "match ip address"
+            ]
+        }
+    ])
+
+    const [configName, seConfigName] = useState('QWE')
 
     const ciscoConfigTextArea = useRef(null);
 
@@ -42,26 +91,71 @@ function Devices() {
         ciscoKeys.forEach(e => {
             out_inv = helpers.cisco_get(e, configObj)
             let out = []
+
             for (x in helpers.cisco_get(e, configObj)[e]) {
-                out.push({ 
-                    id: x, 
+                let configObj = {
+                    id: x,
                     config: out_inv[e][x].config
-                })
+                }
+                // let c_res = ''
+                // let l_res = []
+                // const configList = out_inv[e][x].config.split('\n')
+                // console.log(configList)
+                // configList.forEach(l => {
+                //     const properties_list = breakItUp.find(b => b.key === e).list
+                //     console.log(e, ':', properties_list)
+                //     properties_list.forEach(p => {
+                //         if (l.includes(p)) {
+                //             c_res += l + '\n'
+                //             l_res.push(l)
+                //         }
+                //         configObj[p] = c_res
+                //     })
+                // })
+
+                out.push(configObj)
             }
             out = sortByKey(out, 'id')
             t_objs[e] = out
         })
         setInventoryLists(t_objs)
 
+        if (t_objs && t_objs.hostname && t_objs.hostname[0] && t_objs.hostname[0].config) {
+            seConfigName(t_objs.hostname[0].config)
+        }
+
+
     }
 
-    // useEffect(() => {  
-    //     // process(config)
+    // useEffect(() => {
+
+    //     ciscoConfigTextArea.current.value = configTextAreaVal
+    //     process(configTextAreaVal)
     // }, []);
+    useEffect(() => {
+
+        console.log('configData.activeConfig.config: ', configData.activeConfig)
+        if (configData.activeConfig && configData.activeConfig.config) {
+            setConfigTextAreaVal(configData.activeConfig.config)
+        }
+
+    }, [configData]);
 
     useEffect(() => {
         process(configTextAreaVal)
     }, [configTextAreaVal]);
+
+    const handleClick = () => {
+        console.log('click')
+        setConfigTextAreaVal('')
+
+
+        onCreatePressed({
+            name: configName,
+            data: inventoryLists,
+            config: configTextAreaVal
+        });
+    }
 
     return (
         <Container fluid>
@@ -70,8 +164,9 @@ function Devices() {
                     <h2>Paste Cisco Configuration Here</h2>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Enter Configuration1 in Textarea</Form.Label>
-                        <Form.Control as="textarea" ref={ciscoConfigTextArea} onChange={(e) => { setConfigTextAreaVal(e.target.value) }} rows="3" style={{ height: 200 }} />
+                        <Form.Control as="textarea" ref={ciscoConfigTextArea} onChange={(e) => { setConfigTextAreaVal(e.target.value) }} rows="3" style={{ height: 200 }} value={configTextAreaVal} />
                     </Form.Group>
+                    <Button onClick={handleClick} >Save</Button>
                 </Col>
             </Row>
             <Row>
@@ -80,7 +175,7 @@ function Devices() {
                         <Row>
                             <Col sm={2}>
                                 <Nav variant="pills" className="flex-column">
-                                    {ciscoKeys && ciscoKeys.map(ck => <Nav.Item>
+                                    {ciscoKeys && ciscoKeys.map(ck => <Nav.Item key={ck}>
                                         <Nav.Link eventKey={ck}>{ck}</Nav.Link>
                                     </Nav.Item>
                                     )}
@@ -111,4 +206,16 @@ function Devices() {
     )
 }
 
-export default Devices
+const mapStateToProps = state => {
+    return {
+        configData: state.config
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    onCreatePressed: text => dispatch(addConfigRequest(text)),
+    // onCompletedPressed: id => dispatch(markTodoAsCompletedRequest(id)),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Devices)

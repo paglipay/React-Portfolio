@@ -36,6 +36,21 @@ const helpers = {
                 let v = obj_items[p]
                 let v_line = v.split('\n')
                 out_dic[str_config][p] = { "id": p, "config": v, "_list": v_line }
+
+                // let c_res = ''
+                // let l_res = []
+                // const configList = out_inv[e][x].config.split('\n')
+                // console.log(configList)
+                // configList.forEach(l => {
+                //     const properties_list = breakItUp.find(b => b.key === e).list
+                //     console.log(e, ':', properties_list)
+                //     properties_list.forEach(p => {
+                //         if (p in l){
+                //             c_res += l + '\n'
+                //             l_res.push(l)
+                //         }
+                //     })
+                // })
             }
         }
         return out_dic
