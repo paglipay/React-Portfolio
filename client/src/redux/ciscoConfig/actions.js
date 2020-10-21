@@ -3,7 +3,8 @@ import {
   FETCH_CONFIGS_REQUEST,
   FETCH_CONFIGS_SUCCESS,
   FETCH_CONFIGS_FAILURE,
-  MARK_CONFIG_AS_ACTIVE
+  MARK_CONFIG_AS_ACTIVE,
+  REMOVE_CONFIG
 } from './configTypes'
 
 export const addConfigRequest = (data) => {
@@ -25,6 +26,27 @@ export const addConfigRequest = (data) => {
       })
   }
 }
+//removeConfigRequest
+export const removeConfigRequest = (data) => {
+  return (dispatch) => {
+    // dispatch(fetchConfigsRequest())
+    console.log('removeConfigRequest: ', data)
+    axios
+      .delete(`/api/configs/${data}`)
+      .then(response => {
+        // response.data is the users
+        const configs = response.data
+        console.log('response.data.results: ', configs)
+        dispatch(removeConfig(configs));
+      })
+      .catch(error => {
+        // error.message is the error message
+        dispatch(fetchConfigsFailure(error.message))
+      })
+  }
+}
+
+
 
 export const fetchConfigs = () => {
   return (dispatch) => {
@@ -66,4 +88,9 @@ export const fetchConfigsFailure = error => {
 export const markConfigAsActiveRequest = configId => ({
     type: MARK_CONFIG_AS_ACTIVE,
     payload: { configId },
+});
+
+export const removeConfig = config => ({
+    type: REMOVE_CONFIG,
+    payload: { config },
 });

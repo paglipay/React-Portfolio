@@ -17,18 +17,59 @@ function Devices({ configData, onCreatePressed }) {
         'hostname',
         'interface',
         'ip access-list extended',
-        // 'access-list',
+        'access-list',
         'vlan',
-        // 'spanning-tree',
-        // 'switch',
-        // 'router ospf',
-        // 'router bgp',
-        // 'line',
-        // 'ntp',
-        // 'snmp-server location',
-        // 'snmp-server contact',
-        // // 'snmp-server', 
-        // 'ip default-gateway'
+        'spanning-tree',
+        'switch',
+        'router ospf',
+        'router bgp',
+        'line',
+        'ntp',
+        'snmp-server location',
+        'snmp-server contact',
+        // 'snmp-server', 
+        'ip default-gateway'
+    ])
+    const [breakItUp, setBreakItUp] = useState([
+        {
+            key: 'interface',
+            list: [
+                "interface",
+                "description",
+                "ip address",
+                "ip access-group",
+                "standby",
+                "switchport access vlan",
+                "switchport voice vlan",
+                "switchport",
+                "ip ospf",
+                "ipv6 address",
+                "ipv6 ospf",
+                "ipv6 traffic-filter",
+                "cdp",
+                "lldp",
+                "ip helper-address",
+                "shutdown",
+                "port-security",
+                "spanning-tree",
+                "dhcp snooping",
+                "arp inspection",
+                "vrf forwarding",
+                "service-policy"
+            ]
+        },
+        {
+            key: 'class-map',
+            list: [
+                "match access-group name"
+            ]
+        },
+        {
+            key: 'crypto',
+            list: [
+                "match ip address"
+            ]
+        }
     ])
 
     const [configName, seConfigName] = useState('QWE')
@@ -50,11 +91,29 @@ function Devices({ configData, onCreatePressed }) {
         ciscoKeys.forEach(e => {
             out_inv = helpers.cisco_get(e, configObj)
             let out = []
+
             for (x in helpers.cisco_get(e, configObj)[e]) {
-                out.push({
+                let configObj = {
                     id: x,
                     config: out_inv[e][x].config
-                })
+                }
+                // let c_res = ''
+                // let l_res = []
+                // const configList = out_inv[e][x].config.split('\n')
+                // console.log(configList)
+                // configList.forEach(l => {
+                //     const properties_list = breakItUp.find(b => b.key === e).list
+                //     console.log(e, ':', properties_list)
+                //     properties_list.forEach(p => {
+                //         if (l.includes(p)) {
+                //             c_res += l + '\n'
+                //             l_res.push(l)
+                //         }
+                //         configObj[p] = c_res
+                //     })
+                // })
+
+                out.push(configObj)
             }
             out = sortByKey(out, 'id')
             t_objs[e] = out
@@ -64,7 +123,7 @@ function Devices({ configData, onCreatePressed }) {
         if (t_objs && t_objs.hostname && t_objs.hostname[0] && t_objs.hostname[0].config) {
             seConfigName(t_objs.hostname[0].config)
         }
-        
+
 
     }
 

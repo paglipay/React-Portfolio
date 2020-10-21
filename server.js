@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
 const authCheck = require('./config/middleware/attachAuthenticationStatus');
 
 app.use(logger('dev'));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '500kb'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 

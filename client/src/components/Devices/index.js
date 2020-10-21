@@ -16,15 +16,12 @@ function Devices() {
         <div>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Configuration Collections</Modal.Title>
                 </Modal.Header>
                 <Modal.Body><Configs /></Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -42,11 +39,12 @@ function Devices() {
                 </style>
                 <Row>
                     <Col>
-                        <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                        <Button variant="primary" onClick={() => setShow(true)}>
+                            Load
+                        </Button>
+                        <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
                             <Tab eventKey="home" title="Cisco Configuration Parser">
-                                <Button variant="primary" onClick={() => setShow(true)}>
-                                    Load
-                                </Button>
+
                                 <DevicesTable inv={[{ 'id': 1, 'upc': 123 }, { 'id': 2, 'upc': <Button>Press123</Button> }]} />
                             </Tab>
                             <Tab eventKey="profile" title="Configuration Compare">

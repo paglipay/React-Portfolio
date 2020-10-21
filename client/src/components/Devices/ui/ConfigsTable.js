@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
-import { Container, Row, Col, Button, Table } from 'react-bootstrap';
-
-export default function ConfigsTable({ configData, fetchConfigs, onActivatePressed }) {
+import { Spinner, Row, Col, Button, Table } from 'react-bootstrap';
+import { XCircle, Folder2Open } from 'react-bootstrap-icons';
+export default function ConfigsTable({ configData, fetchConfigs, onRemovePressed, onActivatePressed }) {
   useEffect(() => {
     fetchConfigs()
   }, [])
   return configData.loading ? (
-    <h2>Loading</h2>
+    <Spinner animation="border" role="status">
+      <span className="sr-only">Loading...</span>
+    </Spinner>
   ) : configData.error ? (
     <h2>{configData.error}</h2>
   ) : (
@@ -22,7 +24,7 @@ export default function ConfigsTable({ configData, fetchConfigs, onActivatePress
                 className="form-control mr-sm-2"
                 type="search"
                 placeholder="name"
-                aria-label="Search"                
+                aria-label="Search"
               />
             </div>
           </div>
@@ -30,7 +32,14 @@ export default function ConfigsTable({ configData, fetchConfigs, onActivatePress
             <tbody>
               {configData &&
                 configData.configs &&
-                configData.configs.map(config => <tr key={config._id}><td><Button onClick={() => onActivatePressed(config._id)}>Open</Button></td><td><pre>{config.name} </pre></td></tr>)}
+                configData.configs.map(config => <tr key={config._id}>
+                  <td>
+                    <Button onClick={() => onActivatePressed(config._id)}><Folder2Open/></Button>
+                    &nbsp;
+                    <Button className="btn-danger" onClick={() => onRemovePressed(config._id)}><XCircle/></Button>
+                    
+                  </td>
+                  <td><pre>{config.name} </pre></td></tr>)}
             </tbody>
           </Table>
         </>

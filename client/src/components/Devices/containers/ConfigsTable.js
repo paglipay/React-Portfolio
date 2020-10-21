@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchConfigs, markConfigAsActiveRequest } from '../../../redux'
+import { fetchConfigs, removeConfigRequest, markConfigAsActiveRequest } from '../../../redux'
 import ConfigsList from '../ui/ConfigsTable'
 
 
@@ -12,7 +12,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchConfigs: () => dispatch(fetchConfigs()),    
+    fetchConfigs: () => dispatch(fetchConfigs()),
+    onRemovePressed: id => dispatch(removeConfigRequest(id)), 
     onActivatePressed: id => dispatch(markConfigAsActiveRequest(id)),
   }
 }

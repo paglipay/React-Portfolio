@@ -2,7 +2,8 @@ import {
   FETCH_CONFIGS_REQUEST,
   FETCH_CONFIGS_SUCCESS,
   FETCH_CONFIGS_FAILURE,
-  MARK_CONFIG_AS_ACTIVE
+  MARK_CONFIG_AS_ACTIVE,
+  REMOVE_CONFIG
 } from './configTypes'
 
 const initialState = {
@@ -33,16 +34,27 @@ const reducer = (state = initialState, action) => {
         configs: [],
         error: action.payload
       }
-      
+
     case MARK_CONFIG_AS_ACTIVE: {
       const { configId } = action.payload;
       console.log('action.payload: ', action.payload)
       return {
         ...state,
-        activeConfig: state.configs.find(config => config._id === configId )
+        activeConfig: state.configs.find(config => config._id === configId)
       };
 
       // return state
+    }
+
+    case REMOVE_CONFIG: {
+      const { config: configObj } = action.payload;
+      console.log('configObj: ', configObj)
+      const out = state.configs.filter(config => config._id !== configObj._id)
+      console.log('out: ', out)
+      return {
+        ...state,
+        configs: out,
+      };
     }
     // case CREATE_CONFIG:
     //   return {
