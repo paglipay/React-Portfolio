@@ -1,5 +1,5 @@
 import React from "react";
-import { Jumbotron, Button, Card, Container, Row, Col } from 'react-bootstrap';
+import { Jumbotron, Button, Card, Container, Row, Col, Tabs, Tab } from 'react-bootstrap';
 import { ArrowRight } from 'react-bootstrap-icons';
 // import { MDBIcon } from "mdbreact";
 // import BasicTable from '../../components/MDB/BasicTable/BasicTable'
@@ -32,11 +32,10 @@ function Home() {
     `}
       </style>
       <Jumbotron style={{ backgroundImage: `url('https://source.unsplash.com/1600x300/?design')`, backgroundSize: 'cover', height: 500 }}>
-        <div style={{ backgroundColor: 'rgba(255,255,255,0.5)', padding:'100px', margin:'0px 0px' }}>
-          <h1>Paul Aglipay</h1>
-
-          If you need someone to create a cool website for you and or business, you have come to the right page. I specialize in the MERN stack development. MongoDB, ExpressJS, React, NodeJS.
-
+        <div style={{ backgroundColor: 'rgba(255,255,255,0.5)', padding: '100px', margin: '0px 0px' }}>
+          <h1>Welcome to Paul Aglipay's Portfolio Site!</h1>
+          Skilled Software Developer with experience in Network / Systems Engineering. Experienced Programmer Analyst / Network Engineer with a demonstrated history of working in the higher education industry. Proficient in Full-Stack development particularly in the MERN stack.
+          <br /><br />
           <p>
             <Button variant="flat" size="xxl">Learn more</Button>
           </p>
@@ -91,18 +90,10 @@ function Home() {
         <Container>
           <Row>
             <Col>
-              <h1>Home Page</h1>
-
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque velit, lobortis ut magna
-              varius, blandit rhoncus sem. Morbi lacinia nisi ac dui fermentum, sed luctus urna tincidunt.
-              Etiam ut feugiat ex. Cras non risus mi. Curabitur mattis rutrum ipsum, ut aliquet urna
-              imperdiet ac. Sed nec nulla aliquam, bibendum odio eget, vestibulum tortor. Cras rutrum
-              ligula in tincidunt commodo. Morbi sit amet mollis orci, in tristique ex. Donec nec ornare
-              elit. Donec blandit est sed risus feugiat porttitor. Vestibulum molestie hendrerit massa non
-              consequat. Vestibulum vitae lorem tortor. In elementum ultricies tempus. Interdum et
-              malesuada fames ac ante ipsum primis in faucibus.
-
-          </Col>
+              <h1>Featured Project</h1>
+              <p>Cisco Configuration Parser - Skilled Software Developer with experience in Network / Systems Engineering. Experienced Programmer Analyst / Network Engineer with a demonstrated history of working in the higher education industry. Proficient in Full-Stack development particularly in the MERN stack. </p>
+              <Button variant="flat">Learn more</Button>
+            </Col>
             <Col>
               <h1>Home Page</h1>
 
@@ -128,49 +119,50 @@ function Home() {
       </section>
       <section class="section section-icons grey lighten-4 center">
         <Container>
-
           <Row>
             <Col>
               {/* <FeaturesPage /> */}
             </Col>
           </Row>
-
         </Container>
       </section>
-      <section>
+      {/* <section>
         <Container>
-
           <Row>
             <Col>
               <Todo />
             </Col>
           </Row>
-
         </Container>
-      </section>
+      </section> */}
       <section>
         <Container>
-
           <Row>
             <Col>
               {/* <Datatable /> */}
             </Col>
           </Row>
-
         </Container>
       </section>
-      <section style={{ backgroundColor: '#f4f4f4' }}>
-        <Container>
+      <section>
 
-          <Row>
+        <Container>
+            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+              <Tab eventKey="home" title="Home">
+                
+          <br />
+              <Row>
             <Col xs={12} md={4}>
               <Card style={{ paddingTop: '15px' }}>
                 {/* <MDBIcon style={{ textAlign: 'center' }} icon="camera-retro" size="5x" /> */}
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
+                  <Card.Title>UCLA Campus Backbone</Card.Title>
                   <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                    Network Engineer / Programmer Analyst III
+                  <br />
+                  UCLA Campus Backbone - Los Angeles, CA October
+                  <br />
+                  2016 to Present
                 </Card.Text>
                   <Button variant="primary">Go somewhere</Button>
                 </Card.Body>
@@ -179,6 +171,157 @@ function Home() {
             <Col xs={12} md={8}>
               <Card style={{ paddingTop: '15px', height: '100%' }}>
                 <Card.Body>
+                  <Card.Title>Work Experience</Card.Title>
+
+Building Router upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Building Router site audits
+and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+existing Cisco 3750X to Cisco 9500
+Edge Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Edge Switches site audits
+and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+existing Cisco WS-C3750-24P, WS-C3560-24PS, WS-C3750V2-24PS- edge device Upgrade to 9300
+Acatel Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Acatel Switches site audits
+and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+existing OS6400, OS6850, - mns devices Upgrade to Cisco 3850
+Updated Access for all network gear to ssh - Update and Change all VTY access control lists to allow ssh and disallow
+telnet. Audited / Software Upgraded and completed configurations on capable device models.
+Oversaw active projects to ensure progress towards successful completion; provide timely updates to Manager -
+Provide timely updates to Senior Manager on IPv4 to IPv6 traffic percentages – ongoing Submit monthly report to
+manager
+Migration to MNS – Performed a complete audit of switches and their locations and participate in meetings towards
+the migration path to MNS.
+Network Monitoring Tools Handover – Perform scheduled maintenance tasks and configuration updates, to internal
+monitoring and configuration backup systems of network infrastructure devices.
+Tools include: RANCID / GitLab / Hound, Naemon / Nagios, Netdisco, telalert, and, other various in-house developed
+web application
+Slingware Informacast Implementation for Anderson School - Informacast is a proprietary Voice over IP network
+protocol for live audio paging. Work with Network Engineering as they test in the lab environment, and track / plan for
+production implementation at the Anderson School campus location.
+Qualys Access ACL Audit and Implementation - Work with Network Security and Network Services to gather campus
+device interface ACL configurations requirements. Validate implementation and compliance of requirements to
+campus network infrastructure.
+                  {/* <BasicTable /> */}
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+              </Tab>
+              <Tab eventKey="profile" title="Profile">
+                profile
+              </Tab>
+              <Tab eventKey="contact" title="Contact" disabled>
+                contact
+              </Tab>
+            </Tabs>
+        </Container>
+      </section>
+      <section style={{ backgroundColor: '#f4f4f4' }}>
+        <Container>
+          <Row>
+            <Col xs={12} md={4}>
+              <Card style={{ paddingTop: '15px' }}>
+                {/* <MDBIcon style={{ textAlign: 'center' }} icon="camera-retro" size="5x" /> */}
+                <Card.Body>
+                  <Card.Title>UCLA Campus Backbone</Card.Title>
+                  <Card.Text>
+                    Network Engineer / Programmer Analyst III
+                  <br />
+                  UCLA Campus Backbone - Los Angeles, CA October
+                  <br />
+                  2016 to Present
+                </Card.Text>
+                  <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col xs={12} md={8}>
+              <Card style={{ paddingTop: '15px', height: '100%' }}>
+                <Card.Body>
+                  <Card.Title>Work Experience</Card.Title>
+
+Building Router upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Building Router site audits
+and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+existing Cisco 3750X to Cisco 9500
+Edge Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Edge Switches site audits
+and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+existing Cisco WS-C3750-24P, WS-C3560-24PS, WS-C3750V2-24PS- edge device Upgrade to 9300
+Acatel Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Acatel Switches site audits
+and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+existing OS6400, OS6850, - mns devices Upgrade to Cisco 3850
+Updated Access for all network gear to ssh - Update and Change all VTY access control lists to allow ssh and disallow
+telnet. Audited / Software Upgraded and completed configurations on capable device models.
+Oversaw active projects to ensure progress towards successful completion; provide timely updates to Manager -
+Provide timely updates to Senior Manager on IPv4 to IPv6 traffic percentages – ongoing Submit monthly report to
+manager
+Migration to MNS – Performed a complete audit of switches and their locations and participate in meetings towards
+the migration path to MNS.
+Network Monitoring Tools Handover – Perform scheduled maintenance tasks and configuration updates, to internal
+monitoring and configuration backup systems of network infrastructure devices.
+Tools include: RANCID / GitLab / Hound, Naemon / Nagios, Netdisco, telalert, and, other various in-house developed
+web application
+Slingware Informacast Implementation for Anderson School - Informacast is a proprietary Voice over IP network
+protocol for live audio paging. Work with Network Engineering as they test in the lab environment, and track / plan for
+production implementation at the Anderson School campus location.
+Qualys Access ACL Audit and Implementation - Work with Network Security and Network Services to gather campus
+device interface ACL configurations requirements. Validate implementation and compliance of requirements to
+campus network infrastructure.
+                  {/* <BasicTable /> */}
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
+      <section>
+        <Container>
+          <Row>
+            <Col xs={12} md={4}>
+              <Card style={{ paddingTop: '15px' }}>
+                {/* <MDBIcon style={{ textAlign: 'center' }} icon="camera-retro" size="5x" /> */}
+                <Card.Body>
+                  <Card.Title>UCLA Campus Backbone</Card.Title>
+                  <Card.Text>
+                    Network Engineer / Programmer Analyst III
+                  <br />
+                  UCLA Campus Backbone - Los Angeles, CA October
+                  <br />
+                  2016 to Present
+                </Card.Text>
+                  <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col xs={12} md={8}>
+              <Card style={{ paddingTop: '15px', height: '100%' }}>
+                <Card.Body>
+                  <Card.Title>Work Experience</Card.Title>
+
+Building Router upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Building Router site audits
+and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+existing Cisco 3750X to Cisco 9500
+Edge Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Edge Switches site audits
+and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+existing Cisco WS-C3750-24P, WS-C3560-24PS, WS-C3750V2-24PS- edge device Upgrade to 9300
+Acatel Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Acatel Switches site audits
+and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+existing OS6400, OS6850, - mns devices Upgrade to Cisco 3850
+Updated Access for all network gear to ssh - Update and Change all VTY access control lists to allow ssh and disallow
+telnet. Audited / Software Upgraded and completed configurations on capable device models.
+Oversaw active projects to ensure progress towards successful completion; provide timely updates to Manager -
+Provide timely updates to Senior Manager on IPv4 to IPv6 traffic percentages – ongoing Submit monthly report to
+manager
+Migration to MNS – Performed a complete audit of switches and their locations and participate in meetings towards
+the migration path to MNS.
+Network Monitoring Tools Handover – Perform scheduled maintenance tasks and configuration updates, to internal
+monitoring and configuration backup systems of network infrastructure devices.
+Tools include: RANCID / GitLab / Hound, Naemon / Nagios, Netdisco, telalert, and, other various in-house developed
+web application
+Slingware Informacast Implementation for Anderson School - Informacast is a proprietary Voice over IP network
+protocol for live audio paging. Work with Network Engineering as they test in the lab environment, and track / plan for
+production implementation at the Anderson School campus location.
+Qualys Access ACL Audit and Implementation - Work with Network Security and Network Services to gather campus
+device interface ACL configurations requirements. Validate implementation and compliance of requirements to
+campus network infrastructure.
                   {/* <BasicTable /> */}
                 </Card.Body>
               </Card>
