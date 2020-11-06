@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Spinner, Row, Col, Button, Table } from 'react-bootstrap';
+import { Spinner, Row, Col, Button, Table, InputGroup, FormControl } from 'react-bootstrap';
 import { XCircle, Folder2Open } from 'react-bootstrap-icons';
 export default function ConfigsTable({ configData, fetchConfigs, onRemovePressed, onActivatePressed }) {
   useEffect(() => {
@@ -34,10 +34,14 @@ export default function ConfigsTable({ configData, fetchConfigs, onRemovePressed
                 configData.configs &&
                 configData.configs.map(config => <tr key={config._id}>
                   <td>
-                    <Button onClick={() => onActivatePressed(config._id)}><Folder2Open/></Button>
-                    &nbsp;
-                    <Button className="btn-danger" onClick={() => onRemovePressed(config._id)}><XCircle/></Button>
-                    
+                    <InputGroup className="mb-3">
+                      <InputGroup.Prepend>
+                        <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                        <Button onClick={() => onActivatePressed(config._id)}><Folder2Open /></Button>                  
+                        <Button className="btn-danger" onClick={() => onRemovePressed(config._id)}><XCircle /></Button>
+                      </InputGroup.Prepend>
+                      {/* <FormControl aria-label="Text input with checkbox" /> */}
+                    </InputGroup>
                   </td>
                   <td><pre>{config.name} </pre></td></tr>)}
             </tbody>

@@ -1,4 +1,5 @@
 import axios from 'axios'
+// import https from 'https'
 import {
   FETCH_CONFIGS_REQUEST,
   FETCH_CONFIGS_SUCCESS,
@@ -19,6 +20,22 @@ export const addConfigRequest = (data) => {
         console.log('response.data.results: ', configs)
         // dispatch(fetchConfigsSuccess(configs))
         // dispatch(createConfig(configs));
+
+        // const httpsAgent = new https.Agent({ rejectUnauthorized: false });
+        // axios
+        //   .post('https://192.168.2.236:5000/posts/new', data, { httpsAgent })
+        //   .then(response => {
+        //     // response.data is the users
+        //     const configs = response.data
+        //     console.log('response.data.results: ', configs)
+        //     // dispatch(fetchConfigsSuccess(configs))
+        //     // dispatch(createConfig(configs));
+        //   })
+        //   .catch(error => {
+        //     // error.message is the error message
+        //     dispatch(fetchConfigsFailure(error.message))
+        //   })
+
       })
       .catch(error => {
         // error.message is the error message
@@ -86,11 +103,11 @@ export const fetchConfigsFailure = error => {
 }
 
 export const markConfigAsActiveRequest = configId => ({
-    type: MARK_CONFIG_AS_ACTIVE,
-    payload: { configId },
+  type: MARK_CONFIG_AS_ACTIVE,
+  payload: { configId },
 });
 
 export const removeConfig = config => ({
-    type: REMOVE_CONFIG,
-    payload: { config },
+  type: REMOVE_CONFIG,
+  payload: { config },
 });

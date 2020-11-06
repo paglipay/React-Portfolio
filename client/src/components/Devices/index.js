@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, PureComponent } from 'react'
-import { Container, Row, Col, Form, FormControl, Button, NavDropdown, Nav, Navbar, Modal, Tabs, Tab } from 'react-bootstrap'
+import { Container, Row, Col, Form, FormControl, Button, NavDropdown, Nav, DropdownButton, Dropdown, Modal, Tabs, Tab } from 'react-bootstrap'
 import CardWrapper from '../Wrappers/CardWrapper'
 import DevicesTable from './Devices'
 import CompareConfigs from './CompareConfigs'
@@ -20,8 +20,21 @@ function Devices() {
                 </Modal.Header>
                 <Modal.Body><Configs /></Modal.Body>
                 <Modal.Footer>
+                    <DropdownButton
+                        // as={InputGroup.Append}
+                        variant="outline-secondary"
+                        title="Dropdown"
+                        id="input-group-dropdown-2"
+                    >
+                        <Dropdown.Item href="#">Action</Dropdown.Item>
+                        <Dropdown.Item href="#">Another action</Dropdown.Item>
+                        <Dropdown.Item href="#">Something else here</Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item href="#">Separated link</Dropdown.Item>
+                    </DropdownButton>
+                    <Button variant="primary">Save Collection As</Button>
                     <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        Cancel
                     </Button>
                 </Modal.Footer>
             </Modal>
