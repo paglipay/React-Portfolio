@@ -97,22 +97,34 @@ function Devices({ configData, onCreatePressed }) {
                     id: x,
                     config: out_inv[e][x].config
                 }
-                // let c_res = ''
-                // let l_res = []
-                // const configList = out_inv[e][x].config.split('\n')
-                // console.log(configList)
-                // configList.forEach(l => {
-                //     const properties_list = breakItUp.find(b => b.key === e).list
-                //     console.log(e, ':', properties_list)
-                //     properties_list.forEach(p => {
-                //         if (l.includes(p)) {
-                //             c_res += l + '\n'
-                //             l_res.push(l)
-                //         }
-                //         configObj[p] = c_res
-                //     })
-                // })
 
+                let configList = out_inv[e][x].config.split('\n')
+                console.log(configList)
+
+
+                let properties_list = []
+                // let properties_list = breakItUp.find(b => b.key === e).list
+                if (breakItUp.find(b => b.key === e) !== undefined) {
+                    properties_list = breakItUp.find(b => b.key === e).list
+                }
+                console.log(e, ':', properties_list)
+                if (Array.isArray(properties_list)) {
+                    properties_list.forEach(p => {
+                        
+                        let c_res = ''
+                        let l_res = []
+                        
+                        configList.forEach(l => {
+                            if (l.includes(p)) {
+                                c_res += l + '\n'
+                                l_res.push(l)
+                            }
+                        })
+                        configObj[p] = c_res
+                        // console.log(p, ':---->', c_res)
+                        console.log(p, ':---->', c_res)
+                    })
+                }
                 out.push(configObj)
             }
             out = sortByKey(out, 'id')
