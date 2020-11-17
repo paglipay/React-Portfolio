@@ -1,4 +1,7 @@
 const helpers = {
+    sanitize: function (f) { 
+        return 'sanitize'
+    },
     cisco_parse: function (f) {
         let obj_name, obj_prop
         let output_list = []
