@@ -69,7 +69,11 @@ function Interfaces({ configData }) {
                 if (filters[k] === '') { return true }
                 let fk = f[k]
                 let filtersk = filters[k]
-                typeof filtersk !== 'undefined' && typeof fk !== 'undefined' ? fk.includes(filtersk) : false
+                if (typeof filtersk !== 'undefined' && typeof fk !== 'undefined') {
+                    return fk.includes(filtersk)
+                }else{
+                    return false
+                }
             })
         }
         setConfigs(output)
