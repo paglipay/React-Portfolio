@@ -6,9 +6,11 @@ export default function ConfigsTable({ configData, fetchConfigs, onRemovePressed
     fetchConfigs()
   }, [])
   return configData.loading ? (
-    <Spinner animation="border" role="status">
-      <span className="sr-only">Loading...</span>
-    </Spinner>
+    <div style={{ "textAlign": "center" }}>
+      <Spinner animation="border" role="status" size="lg">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    </div>
   ) : configData.error ? (
     <h2>{configData.error}</h2>
   ) : (
@@ -37,7 +39,7 @@ export default function ConfigsTable({ configData, fetchConfigs, onRemovePressed
                     <InputGroup className="mb-3">
                       <InputGroup.Prepend>
                         <InputGroup.Checkbox aria-label="Checkbox for following text input" />
-                        <Button onClick={() => onActivatePressed(config._id)}><Folder2Open /></Button>                  
+                        <Button onClick={() => onActivatePressed(config._id)}><Folder2Open /></Button>
                         <Button className="btn-danger" onClick={() => onRemovePressed(config._id)}><XCircle /></Button>
                       </InputGroup.Prepend>
                       {/* <FormControl aria-label="Text input with checkbox" /> */}

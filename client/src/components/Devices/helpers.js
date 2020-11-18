@@ -6,13 +6,13 @@ const helpers = {
         let obj_name, obj_prop
         let output_list = []
         let obj_dic = {}
-        const break_it_up = { interface: '' }
+        // const break_it_up = { interface: '' }
         try {
             f.split("\n").forEach(l => {
                 if (l[0] !== ' ' && l !== '') {
                     obj_name = l.trim()
                     obj_prop = obj_name
-                    if (obj_name != '') {
+                    if (obj_name !== '') {
                         output_list.push(obj_name)
                     }
                 }
@@ -29,7 +29,7 @@ const helpers = {
             console.log('pass')
         }
     },
-    cisco_get: function (str_config, obj_items = [{ id: 1, name: '1', id: 2, name: '2' }]) {
+    cisco_get: function (str_config, obj_items = []) {
         let out_dic = {}
         out_dic[str_config] = {}
         let p
