@@ -63,14 +63,13 @@ function Interfaces({ configData }) {
                 output.push(output_dic)
             })
         })
-
         for (let k in filters) {
-            // console.log(k + ' is ' + filters[k])
+            console.log(k + ' is ' + filters[k])
             output = output.filter(f => {
                 if (filters[k] === '') { return true }
                 let fk = f[k]
                 let filtersk = filters[k]
-                return fk.includes(filtersk)
+                typeof filtersk !== 'undefined' && typeof fk !== 'undefined' ? fk.includes(filtersk) : false
             })
         }
         setConfigs(output)
