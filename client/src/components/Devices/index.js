@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, FormControl, Button, NavDropdown, Nav, Dropd
 import CardWrapper from '../Wrappers/CardWrapper'
 import DevicesTable from './Devices'
 import Interfaces from './Interfaces'
+import EACLs from './EACLs'
 import CompareConfigs from './CompareConfigs'
 import Configs from '../Devices/containers/ConfigsTable'
 
@@ -67,7 +68,21 @@ function Devices() {
                                 <Interfaces />
                             </Tab>
                             <Tab key="interfaceACL" eventKey="interfaceACL" title="Interface Access Control">
-                                <Interfaces />
+                                
+                            <Row>
+                                        <Col>
+                                            <Interfaces />
+                                        </Col>
+                                        <Col>
+                                            <Interfaces />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <EACLs />
+                                        </Col>
+                                    </Row>
+                                
                             </Tab>
                         </Tabs>
                     </Col>
