@@ -40,7 +40,7 @@ function Interfaces({ configData }) {
             // console.log(e)
             e.data.interface.forEach(i => {
                 // console.log(i)
-                let output_dic = { "id": e.name.replace('hostname ', '') + ":" + i.id, "config": i.config }
+                let output_dic = { "id": e.name.replace('hostname ', '') + ":" + i.id, "config": i.config.split('\n')[0] + '...' }
                 breakItUp.forEach(p => {
                     output_dic[p] = i[p]
                 })
@@ -100,7 +100,7 @@ function Interfaces({ configData }) {
                                 <Form.Group controlId="exampleForm.ControlSelect1">
                                     <Form.Label>Example select</Form.Label>
                                     <Form.Control as="select">
-                                        {breakItUp.map((item, i) => {                                // changed here
+                                        {breakItUp.map((item, i) => {
                                             // console.log('item: ', item);
                                             return <option key={i}>{item}</option>
                                         })}
@@ -109,7 +109,7 @@ function Interfaces({ configData }) {
                                 <Form.Group controlId="exampleForm.ControlSelect2">
                                     <Form.Label>Example multiple select</Form.Label>
                                     <Form.Control as="select" multiple>
-                                        {breakItUp.map((item, i) => {                                // changed here
+                                        {breakItUp.map((item, i) => {
                                             // console.log('item: ', item);
                                             return <option key={i}>{item}</option>
                                         })}

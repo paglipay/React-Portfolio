@@ -35,7 +35,6 @@ function InventoryView({ inv, hd_inv, handleSearchChange }) {
         // let inv = [{ 'id': 'id', 'upc': 'upc' }, { 'id': 1, 'upc': 123 }, {'id': 2, 'upc': <Button>Press</Button> }];
         return (!inv) ? null : (
             <>
-                {/* <div style={{ overflow: 'auto', height: '600px' }}> */}
                 <thead>
                     <tr><th>controls</th><th>
                         <div className="searchbox">
@@ -75,8 +74,7 @@ function InventoryView({ inv, hd_inv, handleSearchChange }) {
                                 </div>
                             </div>
                         </th>
-                        {hd_inv.map((item, i) => {                                // changed here
-                            // console.log('item: ', item);
+                        {hd_inv.map((item, i) => {
                             return (
                                 <th key={i}>
                                     <div className="searchbox">
@@ -102,28 +100,31 @@ function InventoryView({ inv, hd_inv, handleSearchChange }) {
                         })}
                     </tr>
                 </thead>
-                <tbody>                    
+                <tbody>
                     {
-                    inv.map((item, index) => {                                // changed here
-                        // console.log('item: ', item);
-                        return (
-                            <>
-                                {/* <tr><th></th><th></th><th><Button size="sm">Edit</Button> <Button size="sm" className="btn-danger">Reset</Button></th></tr> */}
-                                <tr>
-                                    <td>
-                                        {/* <Button size="sm" key={item.id + "1"}>Send to 1</Button><br /><br /><Button key={item.id + "2"} size="sm" >Send to 2</Button> */}
-                                    </td>
-                                    {Object.entries(item).map((field, i) => {        // changed here
-                                        // console.log('field: ', field);
-                                        // return <td key={field[1]}><pre><a style={{ textDecoration: "underline" }} onMouseEnter={() => console.log('IN')} onMouseLeave={() => console.log('out')}>{field[1]}</a></pre></td>
-                                        return <td key={index + '-' + i}><pre onClick={(e) => { e.target.innerHTML = parseConfig(e.target.innerHTML) }}>{field[1]}</pre></td>
-                                    })}
-                                </tr>
-                            </>
-                        );
-                    })}
+                        inv.map((item, index) => {
+                            return (
+                                <>
+                                    <tr>
+                                        <td>
+                                            {/* <Button size="sm" key={item.id + "1"}>Send to 1</Button><br /><br /><Button key={item.id + "2"} size="sm" >Send to 2</Button> */}
+                                        </td>
+                                        <td>
+                                                <pre onClick={(e) => { e.target.innerHTML = parseConfig(e.target.innerHTML) }}>{item['id']}</pre>
+                                        </td>
+                                        <td>
+                                                <pre onClick={(e) => { e.target.innerHTML = parseConfig(e.target.innerHTML) }}>{item['config']}</pre>
+                                        </td>
+                                        {hd_inv.map((field, i) => {
+                                            return (<td key={index + '-' + i}>
+                                                <pre onClick={(e) => { e.target.innerHTML = parseConfig(e.target.innerHTML) }}>{item[field]}</pre>
+                                            </td>)
+                                        })}
+                                    </tr>
+                                </>
+                            );
+                        })}
                 </tbody>
-                {/* </div> */}
             </>
         );
     }

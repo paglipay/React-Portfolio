@@ -66,6 +66,9 @@ function Devices() {
                             <Tab key="interfaces" eventKey="interfaces" title="Interfaces">
                                 <Interfaces />
                             </Tab>
+                            <Tab key="interfaceACL" eventKey="interfaceACL" title="Interface Access Control">
+                                <Interfaces />
+                            </Tab>
                         </Tabs>
                     </Col>
                 </Row>

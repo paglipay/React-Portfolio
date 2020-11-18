@@ -4,6 +4,8 @@ import helpers from './helpers'
 import InventoryView from '../InventoryView/InventoryView'
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
+import * as utils from 'ipv4-calculator/dist/utils'
+
 // import { addTodoRequest } from '../../redux/ciscoConfig/thunks';
 
 import { addConfigRequest } from '../../redux/ciscoConfig/actions';
@@ -125,7 +127,15 @@ function Devices({ configData, onCreatePressed }) {
                                 c_res += l + '\n'
                                 l_res.push(l)
                             }
-                        })
+                        })                        
+                        if (p === 'ip address' && c_res.includes('no ip address') === false && c_res !== ''){
+                            let net_id = c_res.replace(' ip address ', '')
+                            net_id = net_id.replace(' ip address ', '')
+                            const net = net_id.split(' ')[0]
+                            const mask = utils.binaryStringToMask(utils.ipToBinaryString(net_id.split(' ')[1]))
+                            console.log('network_id', ':---->', net, mask, `${net}/${mask}`)
+                            configObj['network_id'] = `${net}/${mask}`
+                        }
                         configObj[p] = c_res
                         console.log(p, ':---->', c_res)
                     })
