@@ -59,14 +59,23 @@ function Devices({ configData, onCreatePressed }) {
             ]
         },
         {
+            key: 'vlan',
+            list: [
+                "vlan",
+                "name"
+            ]
+        },
+        {
             key: 'class-map',
             list: [
+                "class-map",
                 "match access-group name"
             ]
         },
         {
             key: 'crypto',
             list: [
+                "crypto",
                 "match ip address"
             ]
         }
@@ -101,7 +110,6 @@ function Devices({ configData, onCreatePressed }) {
                 let configList = out_inv[e][x].config.split('\n')
                 console.log(configList)
 
-
                 let properties_list = []
                 // let properties_list = breakItUp.find(b => b.key === e).list
                 if (breakItUp.find(b => b.key === e) !== undefined) {
@@ -109,11 +117,9 @@ function Devices({ configData, onCreatePressed }) {
                 }
                 console.log(e, ':', properties_list)
                 if (Array.isArray(properties_list)) {
-                    properties_list.forEach(p => {
-                        
+                    properties_list.forEach(p => {                        
                         let c_res = ''
-                        let l_res = []
-                        
+                        let l_res = []                        
                         configList.forEach(l => {
                             if (l.includes(p)) {
                                 c_res += l + '\n'
@@ -121,7 +127,6 @@ function Devices({ configData, onCreatePressed }) {
                             }
                         })
                         configObj[p] = c_res
-                        // console.log(p, ':---->', c_res)
                         console.log(p, ':---->', c_res)
                     })
                 }
@@ -134,23 +139,20 @@ function Devices({ configData, onCreatePressed }) {
 
         if (t_objs && t_objs.hostname && t_objs.hostname[0] && t_objs.hostname[0].config) {
             seConfigName(t_objs.hostname[0].config)
+            console.log('t_objs: ', t_objs)
         }
 
 
     }
-
     // useEffect(() => {
-
     //     ciscoConfigTextArea.current.value = configTextAreaVal
     //     process(configTextAreaVal)
     // }, []);
     useEffect(() => {
-
         console.log('configData.activeConfig.config: ', configData.activeConfig)
         if (configData.activeConfig && configData.activeConfig.config) {
             setConfigTextAreaVal(configData.activeConfig.config)
         }
-
     }, [configData]);
 
     useEffect(() => {
@@ -160,8 +162,6 @@ function Devices({ configData, onCreatePressed }) {
     const handleClick = () => {
         console.log('click')
         setConfigTextAreaVal('')
-
-
         onCreatePressed({
             name: configName,
             data: inventoryLists,
@@ -228,6 +228,5 @@ const mapDispatchToProps = dispatch => ({
     onCreatePressed: text => dispatch(addConfigRequest(text)),
     // onCompletedPressed: id => dispatch(markTodoAsCompletedRequest(id)),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Devices)

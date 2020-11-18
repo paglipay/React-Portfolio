@@ -57,9 +57,9 @@ const DataArea = () => {
         // numerically
         else if (heading === "name") {
           return b[heading].first.localeCompare(a[heading].first);
-        }else if (heading === "dob") {
+        } else if (heading === "dob") {
           return b[heading].age - a[heading].age;
-        }  else {
+        } else {
           return b[heading].localeCompare(a[heading]);
         }
       }
@@ -82,9 +82,9 @@ const DataArea = () => {
     const filteredList = developerState.users.filter(item => {
       let values = item.name.first.toLowerCase() + " " + item.name.last.toLowerCase();
       console.log(filter, values)
-    if(values.indexOf(filter.toLowerCase()) !== -1){
-      return item
-    };
+      if (values.indexOf(filter.toLowerCase()) !== -1) {
+        return item
+      };
     });
 
     setDeveloperState({ ...developerState, filteredUsers: filteredList });
