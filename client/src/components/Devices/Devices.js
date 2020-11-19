@@ -119,22 +119,26 @@ function Devices({ configData, onCreatePressed }) {
                 }
                 console.log(e, ':', properties_list)
                 if (Array.isArray(properties_list)) {
-                    properties_list.forEach(p => {                        
+                    properties_list.forEach(p => {
                         let c_res = ''
-                        let l_res = []                        
+                        let l_res = []
                         configList.forEach(l => {
                             if (l.includes(p)) {
                                 c_res += l + '\n'
                                 l_res.push(l)
                             }
-                        })                        
-                        if (p === 'ip address' && c_res.includes('no ip address') === false && c_res !== ''){
-                            let net_id = c_res.replace(' ip address ', '')
-                            net_id = net_id.replace(' ip address ', '')
-                            const net = net_id.split(' ')[0]
-                            const mask = utils.binaryStringToMask(utils.ipToBinaryString(net_id.split(' ')[1]))
-                            console.log('network_id', ':---->', net, mask, `${net}/${mask}`)
-                            configObj['network_id'] = `${net}/${mask}`
+                        })
+                        if (p === 'ip address') {
+                            if (c_res.includes('no ip address') === false && c_res !== '') {
+                                let net_id = c_res.replace(' ip address ', '')
+                                net_id = net_id.replace(' ip address ', '')
+                                const net = net_id.split(' ')[0]
+                                const mask = utils.binaryStringToMask(utils.ipToBinaryString(net_id.split(' ')[1]))
+                                console.log('network_id', ':---->', net, mask, `${net}/${mask}`)
+                                configObj['network_id'] = `${net}/${mask}`
+                            } else {
+                                configObj['network_id'] = 'N/A'
+                            }
                         }
                         configObj[p] = c_res
                         console.log(p, ':---->', c_res)

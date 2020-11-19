@@ -7,6 +7,9 @@ const helpers = {
         return 'ExtendedAclObj: ' + f
     },
     compare_acl_entry: function (net1, net2, entry) { 
+        let source = ''
+        let dest = ''
+
         if(net1 === net2){
             return true
         }

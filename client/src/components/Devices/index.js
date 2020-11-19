@@ -6,13 +6,34 @@ import Interfaces from './Interfaces'
 import EACLs from './EACLs'
 import CompareConfigs from './CompareConfigs'
 import Configs from '../Devices/containers/ConfigsTable'
+import axios from 'axios';
 
 function Devices() {
     const [show, setShow] = useState(false);
+    const [state, setState] = useState({
+        selectedFile: null
+    });
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const onChangeHandler = event => {
+        console.log(event.target.files[0])
+        setState({
+            selectedFile: event.target.files[0],
+            loaded: 0,
+        })
+    }
+
+    const onClickHandler = () => {
+        const data = new FormData()
+        data.append('file', state.selectedFile)
+        axios.post("/upload", data, { 
+           // receive two    parameter endpoint url ,form data
+       }).then(res => { // then print response status
+        console.log(res.statusText)
+     })
+    }
 
     return (
         <>
@@ -20,7 +41,17 @@ function Devices() {
                 <Modal.Header closeButton>
                     <Modal.Title>Configuration Collections</Modal.Title>
                 </Modal.Header>
-                <Modal.Body><Configs /></Modal.Body>
+                <Modal.Body>
+                    <form method="post" action="#" id="#">
+                        <div className="form-group files">
+                            <label>Upload Your File(s) </label>
+                            <input type="file" className="form-control" multiple="" onChange={onChangeHandler} />
+                        </div>
+                        <button type="button" className="btn btn-success btn-block" onClick={onClickHandler}>Upload</button>
+                    </form>
+                    <br />
+                    <Configs />
+                </Modal.Body>
                 <Modal.Footer>
                     <DropdownButton
                         // as={InputGroup.Append}
@@ -68,21 +99,21 @@ function Devices() {
                                 <Interfaces />
                             </Tab>
                             <Tab key="interfaceACL" eventKey="interfaceACL" title="Interface Access Control">
-                                
-                            <Row>
-                                        <Col>
-                                            <Interfaces />
-                                        </Col>
-                                        <Col>
-                                            <Interfaces />
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            <EACLs />
-                                        </Col>
-                                    </Row>
-                                
+
+                                <Row>
+                                    <Col>
+                                        <Interfaces />
+                                    </Col>
+                                    <Col>
+                                        <Interfaces />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <EACLs />
+                                    </Col>
+                                </Row>
+
                             </Tab>
                         </Tabs>
                     </Col>
