@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, PureComponent } from 'react'
-import { Container, Row, Col, Form, FormControl, Button, NavDropdown, Nav, DropdownButton, Dropdown, Modal, Tabs, Tab } from 'react-bootstrap'
+import { Container, Row, Col, Form, FormControl, Button, NavDropdown, Nav, NavItem, DropdownButton, Dropdown, Modal, Tabs, Tab } from 'react-bootstrap'
 import CardWrapper from '../Wrappers/CardWrapper'
 import DevicesTable from './Devices'
 import Interfaces from './Interfaces'
@@ -11,7 +11,8 @@ import axios from 'axios';
 function Devices() {
     const [show, setShow] = useState(false);
     const [state, setState] = useState({
-        selectedFile: null
+        selectedFile: null,
+        isVisible: false
     });
 
     const handleClose = () => setShow(false);
@@ -25,18 +26,20 @@ function Devices() {
         })
     }
 
+    // Google 'React text file upload' https://programmingwithmosh.com/javascript/react-file-upload-proper-server-side-nodejs-easy/
     const onClickHandler = () => {
         const data = new FormData()
         data.append('file', state.selectedFile)
-        axios.post("/upload", data, { 
-           // receive two    parameter endpoint url ,form data
-       }).then(res => { // then print response status
-        console.log(res.statusText)
-     })
+        axios.post("/upload", data, {
+            // receive two    parameter endpoint url ,form data
+        }).then(res => { // then print response status
+            console.log(res.statusText)
+        })
     }
 
     return (
         <>
+ 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Configuration Collections</Modal.Title>
