@@ -1,37 +1,26 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Table } from 'react-bootstrap'
-import { v4 as uuidv4 } from 'uuid';
+import CiscoHelpers from '../CiscoHelpers'
+import { Button } from 'react-bootstrap'
 
-function ValidateIPaddress(ipaddress) {
-    if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {
-        // if (/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.test(ipaddress)) {
-        return (true)
+function EACLs() {
+
+    const [configs1, setConfigs1] = useState([1, 2, 3, 4])
+    const [configs2, setConfigs2] = useState([1, 2, 3, 4])
+
+
+    useEffect(() => {
+        console.log('EACLs')
+        console.log(CiscoHelpers.ExtendedAclObj('hi'))
+        console.log(CiscoHelpers.compare_acl_entry('192.168.0.0/24', '192.168.0.0/24', 'permit 192.168.0.0 0.0.0.255 192.168.0.0 0.0.0.255'))
+    }, []);
+
+    const onClickHandle = e => {
+        console.log('onClickHandle')
+        console.log(CiscoHelpers.compare_acl_entry('192.168.0.0/24', '192.168.0.0/24', 'permit 192.168.0.0 0.0.0.255 192.168.0.0 0.0.0.255'))
     }
-    // alert("You have entered an invalid IP address!")
-    return (false)
-}
 
-function parseConfig(config) {
-    // console.log(config)
-    let cache = []
-    let output = config
-    const arryConfig = config.split(' ')
-    arryConfig.forEach(e => {
-        e = e.trim()
-        console.log(e, ValidateIPaddress(e) && e !== '' && cache.includes(e, 0) === false)
-        if (ValidateIPaddress(e) && e !== '' && cache.includes(e, 0) === false) {
-            // console.log(e)
-            output = output.replaceAll(` ${e} `, ` <a href="#" title="Access your profile here">${e}</a> `)
-            output = output.replaceAll(` ${e}\n`, ` <a href="#" title="Access your profile here">${e}</a>\n`)
-            cache.push(e)
-        }
-    })
-    return output
-}
-
-function InventoryView({ inv, hd_inv, handleSearchChange }) {
-
-    const getTableBodyAsReactElement = () => {
+    const getTableBodyAsReactElement = (hd_inv, inv) => {
         // let inv = [{ 'id': 'id', 'upc': 'upc' }, { 'id': 1, 'upc': 123 }, {'id': 2, 'upc': <Button>Press</Button> }];
         return (!inv) ? null : (
             <>
@@ -50,7 +39,6 @@ function InventoryView({ inv, hd_inv, handleSearchChange }) {
                                     name="id"
                                     placeholder="ID"
                                     aria-label="Search"
-                                    onChange={handleSearchChange}
                                 />
                             </div>
                         </div>
@@ -69,7 +57,6 @@ function InventoryView({ inv, hd_inv, handleSearchChange }) {
                                         name="config"
                                         placeholder="config"
                                         aria-label="Search"
-                                        onChange={handleSearchChange}
                                     />
                                 </div>
                             </div>
@@ -90,7 +77,6 @@ function InventoryView({ inv, hd_inv, handleSearchChange }) {
                                                 name={item}
                                                 placeholder={item}
                                                 aria-label="Search"
-                                                onChange={handleSearchChange}
                                             />
                                         </div>
                                     </div>
@@ -110,14 +96,14 @@ function InventoryView({ inv, hd_inv, handleSearchChange }) {
                                             {/* <Button size="sm" key={item.id + "1"}>Send to 1</Button><br /><br /><Button key={item.id + "2"} size="sm" >Send to 2</Button> */}
                                         </td>
                                         <td>
-                                                <pre onClick={(e) => { e.target.innerHTML = parseConfig(e.target.innerHTML) }}>{item['id']}</pre>
+                                            <pre >{item['id']}</pre>
                                         </td>
                                         <td>
-                                                <pre onClick={(e) => { e.target.innerHTML = parseConfig(e.target.innerHTML) }}>{item['config']}</pre>
+                                            <pre >{item['config']}</pre>
                                         </td>
                                         {hd_inv.map((field, i) => {
-                                            return (<td key={index + '-' + i}>
-                                                <pre onClick={(e) => { e.target.innerHTML = parseConfig(e.target.innerHTML) }}>{item[field]}</pre>
+                                            return (<td key={index + '-EACLs-' + i}>
+                                                <pre >{item[field]}</pre>
                                             </td>)
                                         })}
                                     </tr>
@@ -131,11 +117,14 @@ function InventoryView({ inv, hd_inv, handleSearchChange }) {
 
     return (
         <>
+            <h1>EACLs</h1>
+            <Button onClick={onClickHandle}>GO!</Button>
             <Table striped bordered hover responsive>
-                {getTableBodyAsReactElement()}
+                {getTableBodyAsReactElement(configs1, configs1)}
             </Table>
         </>
     )
+
 }
 
-export default InventoryView
+export default EACLs

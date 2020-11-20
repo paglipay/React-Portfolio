@@ -1,7 +1,14 @@
-class ExtendedAccessList {
-    constructor(name, year) {
+import * as utils from 'ipv4-calculator/dist/utils'
+
+export default class ExtendedAccessList {
+    constructor(name) {
         this.name = name;
         this.remarks = [];
+        console.log('ExtendedAccessList')
+    }
+
+    process(){
+        console.log('process')
     }
 
     // function parse_acl(self, list){

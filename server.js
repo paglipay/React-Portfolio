@@ -12,6 +12,18 @@ const app = express();
 
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+    cb(null, 'public')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' +file.originalname )
+  }
+})
+
+const upload = multer({ storage: storage }).single('file')
 
 // Enable CORS from client-side
 app.use(function (req, res, next) {
@@ -37,6 +49,17 @@ app.use(passport.session());
 app.use(authCheck);
 
 const PORT = process.env.PORT || 3001;
+
+app.post('/upload',function(req, res) {     
+    upload(req, res, function (err) {
+           if (err instanceof multer.MulterError) {
+               return res.status(500).json(err)
+           } else if (err) {
+               return res.status(500).json(err)
+           }
+      return res.status(200).send(req.file)
+    })
+});
 
 // Define middleware here
 // app.use(express.urlencoded({ extended: true }));
