@@ -19,8 +19,7 @@ import Devices from "./components/Devices";
 import PrivateRoute from "./components/PrivateRoute";
 import TouchlessLogin from "./components/TouchlessLogin/TouchlessLoginUrl";
 import EmployeeAppointments from './components/EmployeeAppointments/AppointmentsContainer';
-import InventoryView from './components/Devices/Devices';
-import CompareConfigs from './components/Devices/CompareConfigs';
+import DTree from './components/DTree';
 
 function App() {
 
@@ -59,8 +58,7 @@ function App() {
 
             <Route exact path={["/devices"]} authenticated={authenticated} component={Devices} />
 
-            <Route exact path={["/inventoryview"]} authenticated={authenticated} component={InventoryView} />
-            <Route exact path={["/compareconfigs"]} authenticated={authenticated} component={CompareConfigs} />
+            <Route exact path={["/dtree"]} component={DTree} />
 
             <PrivateRoute exact path={["/devices"]} authenticated={authenticated} component={Devices} />
             <Route exact path="/login" render={props =>
