@@ -6,4 +6,3 @@ export default {
         console.log('getDtree')
         return axios.get("/api/dtree/start");
     },
-}
