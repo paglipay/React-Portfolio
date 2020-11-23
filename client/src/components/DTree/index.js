@@ -5,26 +5,48 @@ import axios from "axios";
 
 function DTree() {
 
-    const [dtree, setDtree] = useState()
+    const [dtreeobjs, setDtreeobjs] = useState({ '0': { "ParamikoObj": ['HELLO'] } })
     const [dtrees, setDtrees] = useState([])
 
     useEffect(() => {
-        // loadDtree()
         sendDtree(0)
-        sendDtree(1)
-        sendDtree(2)
-        sendDtree(3)
-        sendDtree(4)
-        sendDtree(5)
+        // loadDtree(0)
+        // sendDtree(1)
+        // sendDtree(2)
+        // sendDtree(3)
+        // sendDtree(4)
+        // sendDtree(5)
+        // // sendDtree(6)
+        // sendDtree(7)
+
     }, [])
 
-    const loadDtree = () => {
+    let myVar = {};
+    const showLoop = (id) => {
+        myVar[id] = setInterval(() => loadDtree(id), 1000)
+    }
+
+    useEffect(() => {
+        console.log('dtreeobjs: ' + dtreeobjs['0']['ParamikoObj'])
+        // setDtrees(dtrees => [...dtrees, res.data.ParamikoObj])
+    }, [dtreeobjs])
+
+    const loadDtree = (id) => {
         console.log('loadDtree')
-        axios.get("/api/dtree/start")
+        axios.get("/api/dtree/start/" + id)
             .then(res => {
-                console.log(res.data)
-                // setDtree(res.data.ParamikoObj)
-                setDtrees(dtrees => [...dtrees, res.data.ParamikoObj])
+                // console.log(res.data)
+                // setDtreeobjs(dtreeobjs => [...dtreeobjs, res.data.ParamikoObj])
+                // setDtreeobjs(dtreeobjs => {
+                //     return {
+                //         ...dtreeobjs,
+                //         [id]: res.data.ParamikoObj
+                //     }
+                // })
+                // setDtrees(dtrees => [...dtrees, res.data.ParamikoObj])
+                setDtrees([res.data.ParamikoObj])
+
+
             })
             .catch(err => console.log(err));
         // API.getAppointments()
@@ -34,12 +56,14 @@ function DTree() {
 
     const sendDtree = (id) => {
         console.log('sendDtree')
-        const d = { "key": "TEST" }
+        showLoop(id)
+        const d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo (PASSCODE): '] }
         axios.post("/api/dtree/start/" + id, d)
             .then(res => {
                 console.log(res.data)
-                // setDtree([res.data.ParamikoObj])
-                setDtrees(dtrees => [...dtrees, res.data.ParamikoObj])
+                // setDtrees(dtrees => [...dtrees, res.data.ParamikoObj])
+                setDtrees([res.data.ParamikoObj])
+                clearInterval(myVar[id]);
             })
             .catch(err => console.log(err));
     };
@@ -47,23 +71,16 @@ function DTree() {
 
     return (
         <>
+            <h1>{dtreeobjs['0']['ParamikoObj']}</h1>
             <Row>
                 {dtrees.length > 0 ?
                     dtrees.map(dtree =>
                         <Col>
-                            <div>
+                            <pre>
                                 <h1>DTree</h1>
-                                {dtree ? dtree.map(d => <pre>{d}</pre>) : <h1>Loading...</h1>}
-                            </div>
+                    {dtree ? dtree.map((d, i) => d ? <>{d}</> : <h2>LoadingHere too...</h2>) : <h1>Loading...</h1>}
+                            </pre>
                         </Col>) : (<>
-                            <Col><div style={{ "textAlign": "center" }}><h1>Loading...</h1>
-                                <Spinner animation="border" role="status" size="lg">
-                                    <span className="sr-only">Loading...</span>
-                                </Spinner></div></Col>
-                            <Col><div style={{ "textAlign": "center" }}><h1>Loading...</h1>
-                                <Spinner animation="border" role="status" size="lg">
-                                    <span className="sr-only">Loading...</span>
-                                </Spinner></div></Col>
                             <Col><div style={{ "textAlign": "center" }}><h1>Loading...</h1>
                                 <Spinner animation="border" role="status" size="lg">
                                     <span className="sr-only">Loading...</span>
