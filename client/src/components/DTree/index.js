@@ -12,6 +12,7 @@ function DTreeForm() {
     }, [])
 
     const getTasks = (num) => {
+        clearTasks()
         setTasks(tasks => [...tasks, { "id": num, "output": num }])
     }
 
