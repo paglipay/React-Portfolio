@@ -5,27 +5,23 @@ import axios from "axios";
 
 function DTree2({ id }) {
 
-    const [dtreeobjs, setDtreeobjs] = useState({ '0': { "ParamikoObj": ['HELLO'] } })
-    const [dtrees, setDtrees] = useState([{ "id": "0", "output": ['BYE'] }])
+    const [dtree, setDtree] = useState({ "id": "0", "output": ['BYE'] })
 
     useEffect(() => {
         sendDtree(id)
     }, [])
 
-    let myVar = {};
+    let myVar;
     const showLoop = (id) => {
-        myVar[id] = setInterval(() => loadDtree(id), 1000)
+        myVar = setInterval(() => loadDtree(id), 1000)
     }
-
-    useEffect(() => {
-    }, [dtreeobjs])
 
     const loadDtree = (id) => {
         console.log('loadDtree')
         axios.get("/api/dtree/start/" + id)
             .then(res => {
                 // console.log(res.data)
-                setDtrees([{ "id": id, "output": res.data.ParamikoObj }])
+                setDtree({ "id": id, "output": res.data.ParamikoObj })
             })
             .catch(err => console.log(err));
     };
@@ -37,8 +33,8 @@ function DTree2({ id }) {
         axios.post("/api/dtree/start/" + id, d)
             .then(res => {
                 // console.log(res.data)
-                setDtrees([{ "id": id, "output": res.data.ParamikoObj }])
-                clearInterval(myVar[id]);
+                setDtree({ "id": id, "output": res.data.ParamikoObj })
+                clearInterval(myVar);
             })
             .catch(err => console.log(err));
     };
@@ -46,21 +42,13 @@ function DTree2({ id }) {
 
     return (
         <>
-            <h1>{dtreeobjs['0']['ParamikoObj']}</h1>
             <Row>
-                {dtrees.length > 0 ?
-                    dtrees.map(dtree =>
-                        <Col>
-                            <pre>
-                                <h1>DTree</h1>
-                                {dtree ? dtree['output'].map((d, i) => d ? <>{d}</> : <h2>LoadingHere too...</h2>) : <h1>Loading...</h1>}
-                            </pre>
-                        </Col>) : (<>
-                            <Col><div style={{ "textAlign": "center" }}><h1>Loading...</h1>
-                                <Spinner animation="border" role="status" size="lg">
-                                    <span className="sr-only">Loading...</span>
-                                </Spinner></div></Col>
-                        </>)}
+                <Col>
+                    <pre>
+                        <h1>DTree</h1>
+                        {dtree ? dtree['output'].map((d, i) => d ? <>{d}</> : <h2>LoadingHere too...</h2>) : <h1>Loading...</h1>}
+                    </pre>
+                </Col>
             </Row>
         </>
     )
