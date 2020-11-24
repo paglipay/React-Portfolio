@@ -11,18 +11,19 @@ function DTreeForm() {
 
     }, [])
 
-    const getTasks = (id) => {
-        setTasks(tasks => [...tasks, id])
+    const getTasks = (num) => {
+
+        setTasks(tasks => [...tasks, { "id": num, "output": num }])
     }
 
     return (
         <>
-        <Button onClick={() => getTasks(0)}>Get</Button>
-        <Button onClick={() => getTasks(1)}>Get</Button>
-        <Button onClick={() => getTasks(2)}>Get</Button>
-        <Button onClick={() => getTasks(3)}>Get</Button>
+            <Button onClick={() => getTasks(0)}>Get</Button>
+            <Button onClick={() => getTasks(1)}>Get</Button>
+            <Button onClick={() => getTasks(2)}>Get</Button>
+            <Button onClick={() => getTasks(3)}>Get</Button>
             <Row>
-                {tasks && tasks.map(d => <DTree2 key={d} id={d} />)}
+                {tasks && tasks.map(d => <DTree2 key={d.output} id={d.output} />)}
             </Row>
         </>
     )

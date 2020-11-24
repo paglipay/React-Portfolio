@@ -8,8 +8,8 @@ function DTree2({ id }) {
     const [dtree, setDtree] = useState({ "id": "0", "output": ['LOADING...'], isProcessing: false })
 
     useEffect(() => {
-        // sendDtree(id)
-        loadDtree(id)
+        sendDtree(id)
+        // loadDtree(id)
     }, [])
 
     let myVar;
