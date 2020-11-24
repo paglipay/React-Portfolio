@@ -22,7 +22,14 @@ function DTree2({ id }) {
         axios.get("/api/dtree/start/" + id)
             .then(res => {
                 // console.log(res.data)
-                setDtree({ "id": id, "output": res.data.ParamikoObj })
+                let output = [
+                    <div style={{ "textAlign": "left" }}><h1>Loading...</h1>
+                        <Spinner animation="border" role="status" size="lg">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner></div>
+                ]
+                output.push.apply(output, res.data.ParamikoObj)
+                setDtree({ "id": id, "output": output })
             })
             .catch(err => console.log(err));
     };

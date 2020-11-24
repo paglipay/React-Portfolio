@@ -12,12 +12,16 @@ function DTreeForm() {
     }, [])
 
     const getTasks = (num) => {
-
         setTasks(tasks => [...tasks, { "id": num, "output": num }])
+    }
+
+    const clearTasks = () => {
+        setTasks([])
     }
 
     return (
         <>
+            <Button onClick={() => clearTasks()}>Clear</Button>
             <Button onClick={() => getTasks(0)}>Get</Button>
             <Button onClick={() => getTasks(1)}>Get</Button>
             <Button onClick={() => getTasks(2)}>Get</Button>
