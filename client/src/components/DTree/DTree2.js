@@ -45,7 +45,7 @@ function DTree2({ id }) {
         <>
             <pre>
                 <h1>DTree</h1>
-                {dtree ? dtree['output'].map((d, i) => d ? <>{d}</> : <h2>LoadingHere too...</h2>) : <h1>Loading...</h1>}
+                {dtree['output'] ? dtree['output'].map((d, i) => d ? <>{d}</> : <h2>LoadingHere too...</h2>) : <h1>Loading...</h1>}
             </pre>
         </>
     )

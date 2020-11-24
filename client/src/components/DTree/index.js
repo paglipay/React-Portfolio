@@ -22,6 +22,10 @@ function DTreeForm() {
             <Button onClick={() => getTasks(1)}>Get</Button>
             <Button onClick={() => getTasks(2)}>Get</Button>
             <Button onClick={() => getTasks(3)}>Get</Button>
+            <Button onClick={() => getTasks(4)}>Get</Button>
+            <Button onClick={() => getTasks(5)}>Get</Button>
+            <Button onClick={() => getTasks(6)}>Get</Button>
+            <Button onClick={() => getTasks(7)}>Get</Button>
             <Row>
                 {tasks && tasks.map(d => <DTree2 key={d.output} id={d.output} />)}
             </Row>
