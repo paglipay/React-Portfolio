@@ -11,6 +11,16 @@ function DTreeForm() {
 
     }, [])
 
+    const goTasks = () => {
+        clearTasks()
+        setTasks([
+            { "id": 2, "output": 2 },
+            { "id": 3, "output": 3 },
+            { "id": 0, "output": 0 },
+            { "id": 1, "output": 1 }
+        ])
+    }
+
     const getTasks = (num) => {
         clearTasks()
         setTasks(tasks => [...tasks, { "id": num, "output": num }])
@@ -22,6 +32,7 @@ function DTreeForm() {
 
     return (
         <>
+            <Button onClick={() => goTasks()}>Go</Button>
             <Button onClick={() => clearTasks()}>Clear</Button>
             <Button onClick={() => getTasks(0)}>Get</Button>
             <Button onClick={() => getTasks(1)}>Get</Button>
