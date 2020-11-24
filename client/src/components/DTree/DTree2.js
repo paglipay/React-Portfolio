@@ -5,10 +5,11 @@ import axios from "axios";
 
 function DTree2({ id }) {
 
-    const [dtree, setDtree] = useState({ "id": "0", "output": ['BYE'] })
+    const [dtree, setDtree] = useState({ "id": "0", "output": ['LOADING...'], isProcessing: false })
 
     useEffect(() => {
-        sendDtree(id)
+        // sendDtree(id)
+        loadDtree(id)
     }, [])
 
     let myVar;
@@ -42,14 +43,10 @@ function DTree2({ id }) {
 
     return (
         <>
-            <Row>
-                <Col>
-                    <pre>
-                        <h1>DTree</h1>
-                        {dtree ? dtree['output'].map((d, i) => d ? <>{d}</> : <h2>LoadingHere too...</h2>) : <h1>Loading...</h1>}
-                    </pre>
-                </Col>
-            </Row>
+            <pre>
+                <h1>DTree</h1>
+                {dtree ? dtree['output'].map((d, i) => d ? <>{d}</> : <h2>LoadingHere too...</h2>) : <h1>Loading...</h1>}
+            </pre>
         </>
     )
 }
