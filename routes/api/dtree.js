@@ -6,4 +6,7 @@ router.route("/start/:id")
     .get(dtreeController.show)
     .post(dtreeController.start)
 
+router.route("/send/:id")
+    .post(dtreeController.send)
+
 module.exports = router;

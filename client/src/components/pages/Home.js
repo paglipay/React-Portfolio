@@ -172,7 +172,7 @@ function Home() {
               <Card style={{ paddingTop: '15px', height: '100%' }}>
                 <Card.Body>
                   <Card.Title>Work Experience</Card.Title>
-
+<pre>
 Building Router upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Building Router site audits
 and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
 existing Cisco 3750X to Cisco 9500
@@ -199,6 +199,7 @@ production implementation at the Anderson School campus location.
 Qualys Access ACL Audit and Implementation - Work with Network Security and Network Services to gather campus
 device interface ACL configurations requirements. Validate implementation and compliance of requirements to
 campus network infrastructure.
+</pre>
                   {/* <BasicTable /> */}
                 </Card.Body>
               </Card>
@@ -237,7 +238,7 @@ campus network infrastructure.
               <Card style={{ paddingTop: '15px', height: '100%' }}>
                 <Card.Body>
                   <Card.Title>Work Experience</Card.Title>
-
+<pre>
 Building Router upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Building Router site audits
 and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
 existing Cisco 3750X to Cisco 9500
@@ -264,6 +265,7 @@ production implementation at the Anderson School campus location.
 Qualys Access ACL Audit and Implementation - Work with Network Security and Network Services to gather campus
 device interface ACL configurations requirements. Validate implementation and compliance of requirements to
 campus network infrastructure.
+</pre>
                   {/* <BasicTable /> */}
                 </Card.Body>
               </Card>
@@ -295,9 +297,11 @@ campus network infrastructure.
               <Card style={{ paddingTop: '15px', height: '100%' }}>
                 <Card.Body>
                   <Card.Title>Work Experience</Card.Title>
-
+<pre>
 Building Router upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Building Router site audits
+
 and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+
 existing Cisco 3750X to Cisco 9500
 Edge Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Edge Switches site audits
 and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
@@ -322,6 +326,7 @@ production implementation at the Anderson School campus location.
 Qualys Access ACL Audit and Implementation - Work with Network Security and Network Services to gather campus
 device interface ACL configurations requirements. Validate implementation and compliance of requirements to
 campus network infrastructure.
+</pre>
                   {/* <BasicTable /> */}
                 </Card.Body>
               </Card>
