@@ -114,10 +114,10 @@ function DTreeForm() {
                                             <Form.Control as="textarea" ref={ciscoConfigTextArea} onChange={(e) => { setConfigTextAreaVal(e.target.value) }} rows="3" style={{ height: 200 }} value={configTextAreaVal} />
                                         </Form.Group>
 
-                                        <Button onClick={() => startPost(9, {
-                                            "./json/excel/excel_dev_list.txt": "c2960kauf-a-1",
+                                        {/* <Button onClick={() => startPost(9, {
+                                            "./json/excel/excel_dev_list.txt": "br00f2n.luskin.ucla.net",
                                             // "./CustomObj/CiscoObj/_accept_list.txt": configTextAreaVal,
-                                            "C:/Users/Paul Aglipay/Desktop/New folder/c2960kauf-a-1.txt": configTextAreaVal,
+                                            // "C:/Users/Paul Aglipay/Desktop/New folder/br00f2n.luskin.ucla.net.txt": configTextAreaVal,
                                             "jobs": [
                                                 {
                                                     "import": "Key"
@@ -136,9 +136,9 @@ function DTreeForm() {
                                                     ]
                                                 },
                                             ]
-                                        })}>Start 9 with POST</Button>
+                                        })}>Start 9 with POST</Button> */}
 
-                                        {/* <Button onClick={() => {
+                                        <Button onClick={() => {
                                             configTextAreaVal.split('\n').forEach(d => {
                                                 // console.log('d: ', d)
                                                 startPost(9, {
@@ -149,7 +149,7 @@ function DTreeForm() {
                                             }
                                             )
 
-                                        }}>Start 9 with POST</Button> */}
+                                        }}>Start 9 with POST</Button>
                                     </ListGroup.Item>
                                 </ListGroup>
                             </LLCard>
