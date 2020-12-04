@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Container, Row, Col, ListGroup, Accordion, Card, Button, ButtonGroup, Badge, Spinner } from 'react-bootstrap'
+import React, { useState, useEffect, useRef } from 'react'
+import { Container, Row, Col, ListGroup, Accordion, Card, Button, ButtonGroup, Badge, Form } from 'react-bootstrap'
 import axios from "axios";
 import DTree2 from './DTree2'
 import LLCard from '../LobbyLogin/components/LLCard'
@@ -8,10 +8,12 @@ import { XCircle, Folder2Open } from 'react-bootstrap-icons';
 
 function DTreeForm() {
     const [tasks, setTasks] = useState([])
+    const [configTextAreaVal, setConfigTextAreaVal] = useState('')
+    const ciscoConfigTextArea = useRef(null);
 
     useEffect(() => {
-
-    }, [])
+        console.log('configTextAreaVal: ', configTextAreaVal)
+    }, [configTextAreaVal])
 
     const goTasks = () => {
         clearTasks()
@@ -35,10 +37,20 @@ function DTreeForm() {
         setTasks([])
     }
 
-    const sendPost = (id, d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'] , "Code": [''] }) => {
+    const sendPost = (id, d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'], "Code": [''] }) => {
         console.log('sendPost')
         // const d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'] }
         axios.post("/api/dtree/send/" + id, d)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => console.log(err));
+    }
+
+    const startPost = (id, d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'], "Code": [''] }) => {
+        console.log('startPost')
+        // const d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'] }
+        axios.post("/api/dtree/start/" + id, d)
             .then(res => {
                 console.log(res.data)
             })
@@ -95,9 +107,49 @@ function DTreeForm() {
                                         <Button onClick={() => getTasks(7)}>Get</Button>
                                         <Button onClick={() => sendPost(7)}>Send</Button>
                                         <Button onClick={() => getTasks(8)}>Get</Button>
-                                        {/* <Button onClick={() => sendPost(8, {"Code": ['093730']})}>Send</Button> */}
                                         <Button onClick={() => sendPost(8)}>Send</Button>
                                         <Button onClick={() => getTasks(9)}>Start 9</Button>
+                                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                                            <Form.Label>Enter Configuration1 in Textarea</Form.Label>
+                                            <Form.Control as="textarea" ref={ciscoConfigTextArea} onChange={(e) => { setConfigTextAreaVal(e.target.value) }} rows="3" style={{ height: 200 }} value={configTextAreaVal} />
+                                        </Form.Group>
+
+                                        <Button onClick={() => startPost(9, {
+                                            "./json/excel/excel_dev_list.txt": "c2960kauf-a-1",
+                                            // "./CustomObj/CiscoObj/_accept_list.txt": configTextAreaVal,
+                                            "C:/Users/Paul Aglipay/Desktop/New folder/c2960kauf-a-1.txt": configTextAreaVal,
+                                            "jobs": [
+                                                {
+                                                    "import": "Key"
+                                                },
+                                                {
+                                                    "True": [
+                                                        {
+                                                            "True": "./CustomObj/CiscoObj/create_cisco_json_test.json"
+                                                        },
+                                                        {
+                                                            "True": "./CustomObj/CiscoObj/cisco_json_test_dev_list.json"
+                                                        },
+                                                        {
+                                                            "False": "./CustomObj/CiscoObj/process_cisco_conf.json"
+                                                        }
+                                                    ]
+                                                },
+                                            ]
+                                        })}>Start 9 with POST</Button>
+
+                                        {/* <Button onClick={() => {
+                                            configTextAreaVal.split('\n').forEach(d => {
+                                                // console.log('d: ', d)
+                                                startPost(9, {
+                                                    "./json/excel/excel_dev_list.txt": d,
+                                                    // "./CustomObj/CiscoObj/_accept_list.txt": configTextAreaVal,
+                                                    // "C:/Users/Paul Aglipay/Desktop/New folder/br00f2n.luskin.ucla.net.txt": configTextAreaVal,
+                                                })
+                                            }
+                                            )
+
+                                        }}>Start 9 with POST</Button> */}
                                     </ListGroup.Item>
                                 </ListGroup>
                             </LLCard>

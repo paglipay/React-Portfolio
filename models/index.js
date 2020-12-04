@@ -3,5 +3,7 @@ module.exports = {
   Config: require("./config"),
   Appointment: require("./appointment"),
   Employee: require("./employee"),
-  User: require("./User")
+  User: require("./User"),
+  Mop: require("./mop"),
+  Job: require("./job")
 };
