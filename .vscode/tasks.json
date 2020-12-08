@@ -4,9 +4,9 @@
       {
         "label": "Launch App",
         "type": "shell",
-        "command": "git add . && git commit -m \"daily\" && git pull origin master && npm install && npm start",
+        "command": "git add . && git commit -m \"daily\" && git pull origin master && npm install && npm audit fix && npm start",
         "windows": {
-          "command": "git add . && git commit -m \"daily\" && git pull origin master && npm install && npm start"
+          "command": "git add . && git commit -m \"daily\" && git pull origin master && npm install && npm audit fix && npm start"
         },
         "problemMatcher": [],
         "runOptions": {
