@@ -15,6 +15,7 @@ import axios from 'axios';
 import Todos from './components/Todos/components/TodoList';
 import EmployeeDirectory from './components/EmployeeDirectory/components/Main'
 import Home from "./components/pages/Home";
+import Contact from "./components/pages/Contact";
 import Devices from "./components/Devices";
 import PrivateRoute from "./components/PrivateRoute";
 import TouchlessLogin from "./components/TouchlessLogin/TouchlessLoginUrl";
@@ -53,6 +54,9 @@ function App() {
           <Switch>
             <Route exact path={["/", "/home"]}>
               <Home />
+            </Route>
+            <Route exact path={["/", "/contact"]}>
+              <Contact />
             </Route>
             <Route exact path="/touchlesslogin/:id" component={TouchlessLogin} />
 

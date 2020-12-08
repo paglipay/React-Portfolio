@@ -19,7 +19,7 @@ function NavTabs({ authenticated, logout }) {
                     <Nav.Link as={Link} to="/">Home</Nav.Link>
                     <Nav.Link as={Link} to="/">Resume</Nav.Link>
                     <Nav.Link as={Link} to="/">Blog</Nav.Link>
-                    <Nav.Link as={Link} to="/">Contact</Nav.Link>
+                    <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
                     {/* <Nav.Link as={Link} to="/lobbylogin">LobbyLogin</Nav.Link> */}
                     {authenticated ? (
                         <>

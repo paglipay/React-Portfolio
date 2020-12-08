@@ -41,11 +41,10 @@ function Home() {
           </p>
         </div>
       </Jumbotron>
-      <section style={{ backgroundColor: '#f4f4f4', height: 500 }} class="section section-icons grey lighten-4 center">
+      <section style={{ backgroundColor: '#f4f4f4' }} class="section section-icons grey lighten-4 center">
         <Container style={{ height: '100%' }}>
           <Row style={{ height: '100%' }}>
             <Col>
-
               <Card style={{ paddingTop: '15px', height: '100%' }}>
                 {/* <MDBIcon style={{ textAlign: 'center' }} fab icon="amazon" size="5x" /> */}
 
@@ -54,8 +53,10 @@ function Home() {
                   <Card.Text>
                     Knowlegable in HTML, Javascript, CSS, Nodejs, Sequelize, and much much more!!!
                 </Card.Text>
-                  <Button variant="flat">Get Started!</Button>
                 </Card.Body>
+                <Card.Footer>
+                  <Button variant="flat">Get Started!</Button>
+                </Card.Footer>
               </Card>
             </Col>
             <Col>
@@ -67,8 +68,10 @@ function Home() {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                 </Card.Text>
-                  <Button variant="flat">Go somewhere</Button>
                 </Card.Body>
+                <Card.Footer>
+                  <Button variant="flat">Get Started!</Button>
+                </Card.Footer>
               </Card>
             </Col>
             <Col>
@@ -79,8 +82,10 @@ function Home() {
                   <Card.Text>
                     Ready to start your next project with me? Give me a call or send me an email and I will get back to you as soon as possible!
                 </Card.Text>
-                  <Button variant="flat">Go somewhere</Button>
                 </Card.Body>
+                <Card.Footer>
+                  <Button variant="flat">Get Started!</Button>
+                </Card.Footer>
               </Card>
             </Col>
           </Row>
@@ -147,72 +152,72 @@ function Home() {
       <section>
 
         <Container>
-            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-              <Tab eventKey="home" title="Home">
-                
-          <br />
+          <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+            <Tab eventKey="home" title="Home">
+
+              <br />
               <Row>
-            <Col xs={12} md={4}>
-              <Card style={{ paddingTop: '15px' }}>
-                {/* <MDBIcon style={{ textAlign: 'center' }} icon="camera-retro" size="5x" /> */}
-                <Card.Body>
-                  <Card.Title>UCLA Campus Backbone</Card.Title>
-                  <Card.Text>
-                    Network Engineer / Programmer Analyst III
+                <Col xs={12} md={4}>
+                  <Card style={{ paddingTop: '15px' }}>
+                    {/* <MDBIcon style={{ textAlign: 'center' }} icon="camera-retro" size="5x" /> */}
+                    <Card.Body>
+                      <Card.Title>UCLA Campus Backbone</Card.Title>
+                      <Card.Text>
+                        Network Engineer / Programmer Analyst III
                   <br />
                   UCLA Campus Backbone - Los Angeles, CA October
                   <br />
                   2016 to Present
                 </Card.Text>
-                  <Button variant="primary">Go somewhere</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col xs={12} md={8}>
-              <Card style={{ paddingTop: '15px', height: '100%' }}>
-                <Card.Body>
-                  <Card.Title>Work Experience</Card.Title>
-<pre>
-Building Router upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Building Router site audits
-and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
-existing Cisco 3750X to Cisco 9500
-Edge Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Edge Switches site audits
-and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
-existing Cisco WS-C3750-24P, WS-C3560-24PS, WS-C3750V2-24PS- edge device Upgrade to 9300
-Acatel Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Acatel Switches site audits
-and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
-existing OS6400, OS6850, - mns devices Upgrade to Cisco 3850
-Updated Access for all network gear to ssh - Update and Change all VTY access control lists to allow ssh and disallow
-telnet. Audited / Software Upgraded and completed configurations on capable device models.
-Oversaw active projects to ensure progress towards successful completion; provide timely updates to Manager -
-Provide timely updates to Senior Manager on IPv4 to IPv6 traffic percentages – ongoing Submit monthly report to
-manager
-Migration to MNS – Performed a complete audit of switches and their locations and participate in meetings towards
-the migration path to MNS.
-Network Monitoring Tools Handover – Perform scheduled maintenance tasks and configuration updates, to internal
-monitoring and configuration backup systems of network infrastructure devices.
-Tools include: RANCID / GitLab / Hound, Naemon / Nagios, Netdisco, telalert, and, other various in-house developed
-web application
-Slingware Informacast Implementation for Anderson School - Informacast is a proprietary Voice over IP network
-protocol for live audio paging. Work with Network Engineering as they test in the lab environment, and track / plan for
-production implementation at the Anderson School campus location.
-Qualys Access ACL Audit and Implementation - Work with Network Security and Network Services to gather campus
-device interface ACL configurations requirements. Validate implementation and compliance of requirements to
-campus network infrastructure.
+                      <Button variant="primary">Go somewhere</Button>
+                    </Card.Body>
+                  </Card>
+                </Col>
+                <Col xs={12} md={8}>
+                  <Card style={{ paddingTop: '15px', height: '100%' }}>
+                    <Card.Body>
+                      <Card.Title>Work Experience</Card.Title>
+                      <pre>
+                        Building Router upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Building Router site audits
+                        and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+                        existing Cisco 3750X to Cisco 9500
+                        Edge Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Edge Switches site audits
+                        and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+                        existing Cisco WS-C3750-24P, WS-C3560-24PS, WS-C3750V2-24PS- edge device Upgrade to 9300
+                        Acatel Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Acatel Switches site audits
+                        and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+                        existing OS6400, OS6850, - mns devices Upgrade to Cisco 3850
+                        Updated Access for all network gear to ssh - Update and Change all VTY access control lists to allow ssh and disallow
+                        telnet. Audited / Software Upgraded and completed configurations on capable device models.
+                        Oversaw active projects to ensure progress towards successful completion; provide timely updates to Manager -
+                        Provide timely updates to Senior Manager on IPv4 to IPv6 traffic percentages – ongoing Submit monthly report to
+                        manager
+                        Migration to MNS – Performed a complete audit of switches and their locations and participate in meetings towards
+                        the migration path to MNS.
+                        Network Monitoring Tools Handover – Perform scheduled maintenance tasks and configuration updates, to internal
+                        monitoring and configuration backup systems of network infrastructure devices.
+                        Tools include: RANCID / GitLab / Hound, Naemon / Nagios, Netdisco, telalert, and, other various in-house developed
+                        web application
+                        Slingware Informacast Implementation for Anderson School - Informacast is a proprietary Voice over IP network
+                        protocol for live audio paging. Work with Network Engineering as they test in the lab environment, and track / plan for
+                        production implementation at the Anderson School campus location.
+                        Qualys Access ACL Audit and Implementation - Work with Network Security and Network Services to gather campus
+                        device interface ACL configurations requirements. Validate implementation and compliance of requirements to
+                        campus network infrastructure.
 </pre>
-                  {/* <BasicTable /> */}
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+                      {/* <BasicTable /> */}
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+            </Tab>
+            <Tab eventKey="profile" title="Profile">
+              profile
               </Tab>
-              <Tab eventKey="profile" title="Profile">
-                profile
+            <Tab eventKey="contact" title="Contact" disabled>
+              contact
               </Tab>
-              <Tab eventKey="contact" title="Contact" disabled>
-                contact
-              </Tab>
-            </Tabs>
+          </Tabs>
         </Container>
       </section>
       <section style={{ backgroundColor: '#f4f4f4' }}>
@@ -238,33 +243,33 @@ campus network infrastructure.
               <Card style={{ paddingTop: '15px', height: '100%' }}>
                 <Card.Body>
                   <Card.Title>Work Experience</Card.Title>
-<pre>
-Building Router upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Building Router site audits
-and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
-existing Cisco 3750X to Cisco 9500
-Edge Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Edge Switches site audits
-and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
-existing Cisco WS-C3750-24P, WS-C3560-24PS, WS-C3750V2-24PS- edge device Upgrade to 9300
-Acatel Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Acatel Switches site audits
-and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
-existing OS6400, OS6850, - mns devices Upgrade to Cisco 3850
-Updated Access for all network gear to ssh - Update and Change all VTY access control lists to allow ssh and disallow
-telnet. Audited / Software Upgraded and completed configurations on capable device models.
-Oversaw active projects to ensure progress towards successful completion; provide timely updates to Manager -
-Provide timely updates to Senior Manager on IPv4 to IPv6 traffic percentages – ongoing Submit monthly report to
-manager
-Migration to MNS – Performed a complete audit of switches and their locations and participate in meetings towards
-the migration path to MNS.
-Network Monitoring Tools Handover – Perform scheduled maintenance tasks and configuration updates, to internal
-monitoring and configuration backup systems of network infrastructure devices.
-Tools include: RANCID / GitLab / Hound, Naemon / Nagios, Netdisco, telalert, and, other various in-house developed
-web application
-Slingware Informacast Implementation for Anderson School - Informacast is a proprietary Voice over IP network
-protocol for live audio paging. Work with Network Engineering as they test in the lab environment, and track / plan for
-production implementation at the Anderson School campus location.
-Qualys Access ACL Audit and Implementation - Work with Network Security and Network Services to gather campus
-device interface ACL configurations requirements. Validate implementation and compliance of requirements to
-campus network infrastructure.
+                  <pre>
+                    Building Router upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Building Router site audits
+                    and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+                    existing Cisco 3750X to Cisco 9500
+                    Edge Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Edge Switches site audits
+                    and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+                    existing Cisco WS-C3750-24P, WS-C3560-24PS, WS-C3750V2-24PS- edge device Upgrade to 9300
+                    Acatel Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Acatel Switches site audits
+                    and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+                    existing OS6400, OS6850, - mns devices Upgrade to Cisco 3850
+                    Updated Access for all network gear to ssh - Update and Change all VTY access control lists to allow ssh and disallow
+                    telnet. Audited / Software Upgraded and completed configurations on capable device models.
+                    Oversaw active projects to ensure progress towards successful completion; provide timely updates to Manager -
+                    Provide timely updates to Senior Manager on IPv4 to IPv6 traffic percentages – ongoing Submit monthly report to
+                    manager
+                    Migration to MNS – Performed a complete audit of switches and their locations and participate in meetings towards
+                    the migration path to MNS.
+                    Network Monitoring Tools Handover – Perform scheduled maintenance tasks and configuration updates, to internal
+                    monitoring and configuration backup systems of network infrastructure devices.
+                    Tools include: RANCID / GitLab / Hound, Naemon / Nagios, Netdisco, telalert, and, other various in-house developed
+                    web application
+                    Slingware Informacast Implementation for Anderson School - Informacast is a proprietary Voice over IP network
+                    protocol for live audio paging. Work with Network Engineering as they test in the lab environment, and track / plan for
+                    production implementation at the Anderson School campus location.
+                    Qualys Access ACL Audit and Implementation - Work with Network Security and Network Services to gather campus
+                    device interface ACL configurations requirements. Validate implementation and compliance of requirements to
+                    campus network infrastructure.
 </pre>
                   {/* <BasicTable /> */}
                 </Card.Body>
@@ -297,35 +302,35 @@ campus network infrastructure.
               <Card style={{ paddingTop: '15px', height: '100%' }}>
                 <Card.Body>
                   <Card.Title>Work Experience</Card.Title>
-<pre>
-Building Router upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Building Router site audits
+                  <pre>
+                    Building Router upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Building Router site audits
 
-and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+                    and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
 
-existing Cisco 3750X to Cisco 9500
-Edge Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Edge Switches site audits
-and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
-existing Cisco WS-C3750-24P, WS-C3560-24PS, WS-C3750V2-24PS- edge device Upgrade to 9300
-Acatel Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Acatel Switches site audits
-and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
-existing OS6400, OS6850, - mns devices Upgrade to Cisco 3850
-Updated Access for all network gear to ssh - Update and Change all VTY access control lists to allow ssh and disallow
-telnet. Audited / Software Upgraded and completed configurations on capable device models.
-Oversaw active projects to ensure progress towards successful completion; provide timely updates to Manager -
-Provide timely updates to Senior Manager on IPv4 to IPv6 traffic percentages – ongoing Submit monthly report to
-manager
-Migration to MNS – Performed a complete audit of switches and their locations and participate in meetings towards
-the migration path to MNS.
-Network Monitoring Tools Handover – Perform scheduled maintenance tasks and configuration updates, to internal
-monitoring and configuration backup systems of network infrastructure devices.
-Tools include: RANCID / GitLab / Hound, Naemon / Nagios, Netdisco, telalert, and, other various in-house developed
-web application
-Slingware Informacast Implementation for Anderson School - Informacast is a proprietary Voice over IP network
-protocol for live audio paging. Work with Network Engineering as they test in the lab environment, and track / plan for
-production implementation at the Anderson School campus location.
-Qualys Access ACL Audit and Implementation - Work with Network Security and Network Services to gather campus
-device interface ACL configurations requirements. Validate implementation and compliance of requirements to
-campus network infrastructure.
+                    existing Cisco 3750X to Cisco 9500
+                    Edge Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Edge Switches site audits
+                    and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+                    existing Cisco WS-C3750-24P, WS-C3560-24PS, WS-C3750V2-24PS- edge device Upgrade to 9300
+                    Acatel Switch upgrade lifecycle replacement – Scheduled, coordinated and, assisted with Acatel Switches site audits
+                    and IOS updates. Assisted in the installation as required. Manage and implement a project plan for upgrade of
+                    existing OS6400, OS6850, - mns devices Upgrade to Cisco 3850
+                    Updated Access for all network gear to ssh - Update and Change all VTY access control lists to allow ssh and disallow
+                    telnet. Audited / Software Upgraded and completed configurations on capable device models.
+                    Oversaw active projects to ensure progress towards successful completion; provide timely updates to Manager -
+                    Provide timely updates to Senior Manager on IPv4 to IPv6 traffic percentages – ongoing Submit monthly report to
+                    manager
+                    Migration to MNS – Performed a complete audit of switches and their locations and participate in meetings towards
+                    the migration path to MNS.
+                    Network Monitoring Tools Handover – Perform scheduled maintenance tasks and configuration updates, to internal
+                    monitoring and configuration backup systems of network infrastructure devices.
+                    Tools include: RANCID / GitLab / Hound, Naemon / Nagios, Netdisco, telalert, and, other various in-house developed
+                    web application
+                    Slingware Informacast Implementation for Anderson School - Informacast is a proprietary Voice over IP network
+                    protocol for live audio paging. Work with Network Engineering as they test in the lab environment, and track / plan for
+                    production implementation at the Anderson School campus location.
+                    Qualys Access ACL Audit and Implementation - Work with Network Security and Network Services to gather campus
+                    device interface ACL configurations requirements. Validate implementation and compliance of requirements to
+                    campus network infrastructure.
 </pre>
                   {/* <BasicTable /> */}
                 </Card.Body>
