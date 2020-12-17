@@ -132,12 +132,32 @@ function DTreeForm() {
                                                             "True": "./CustomObj/CiscoObj/cisco_json_test_dev_list.json"
                                                         },
                                                         {
-                                                            "False": "./CustomObj/CiscoObj/process_cisco_conf.json"
+                                                            "False": "./CustomObj/CiscoObj/process_cisco_acls.json"
                                                         }
                                                     ]
                                                 },
                                             ]
                                         })}>Start 9 with POST</Button>
+                                        <Button onClick={() => startPost(9, {
+                                            // "./json/excel/excel_dev_list.txt": "br00f2n.luskin.ucla.net",
+                                            // "./json/excel/excel_dev_list.txt": configTextAreaVal,
+                                            // "./CustomObj/CiscoObj/_accept_list.txt": configTextAreaVal,
+                                            // "C:/Users/Paul Aglipay/Desktop/New folder/br00f2n.luskin.ucla.net.txt": configTextAreaVal,
+                                            "jobs": [
+                                                {
+                                                    "import": "ExtendedAccessListObj"
+                                                },
+                                                {
+                                                    "True": "ExtendedAccessListObj"
+                                                },
+                                                {
+                                                    "open": {
+                                                        "src_net": "149.142.0.0/16",
+                                                        "dest_net": "149.142.33.0/24"
+                                                    }
+                                                }
+                                            ]
+                                        })}>Start 9 with POST2</Button>
 
                                         {/* <Button onClick={() => {
                                             configTextAreaVal.split('\n').forEach(d => {

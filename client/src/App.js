@@ -21,6 +21,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import TouchlessLogin from "./components/TouchlessLogin/TouchlessLoginUrl";
 import EmployeeAppointments from './components/EmployeeAppointments/AppointmentsContainer';
 import DTree from './components/DTree';
+import DynamicForm from './components/DTree/DynamicForm';
 
 function App() {
 
@@ -91,8 +92,8 @@ function App() {
             <Route exact path="/todos">
               <Todos />
             </Route>
-            <Route exact path="/employeeappointments">
-              <EmployeeAppointments />
+            <Route exact path="/dynamicform">
+              <DynamicForm />
             </Route>
             <Route exact path="/employeedirectory">
               <EmployeeDirectory />
