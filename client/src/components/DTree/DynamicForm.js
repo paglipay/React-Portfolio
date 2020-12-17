@@ -1,9 +1,44 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, ListGroup, Accordion, Card, Button, ButtonGroup, Badge, Form } from 'react-bootstrap'
 import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
 
 function DynamicForm() {
-    const [sessionId, setSessionId] = useState('9');
+    const [sessionId, setSessionId] = useState(uuidv4());
+    const [defaultSubmits, setDefaultSubmits] = useState([
+        {
+            // "./json/excel/excel_dev_list.txt": "br00f2n.luskin.ucla.net",
+            "./json/excel/excel_dev_list.txt": 'br01f2.carnesalecommons.ucla.net',
+            // "./CustomObj/CiscoObj/_accept_list.txt": configTextAreaVal,
+            // "C:/Users/Paul Aglipay/Desktop/New folder/br00f2n.luskin.ucla.net.txt": configTextAreaVal,
+            "jobs": [
+                {
+                    "import": "Key"
+                },
+                {
+                    "True": [
+                        {
+                            "True": "./CustomObj/CiscoObj/create_cisco_json_test.json"
+                        },
+                        {
+                            "True": "./CustomObj/CiscoObj/cisco_json_test_dev_list.json"
+                        },
+                        {
+                            "False": "./CustomObj/CiscoObj/process_cisco_acls.json"
+                        }
+                    ]
+                },
+            ]
+        },
+        {
+            "jobs": [
+                {
+                    "import": "Key"
+                },
+                "./CustomObj/CiscoObj/process_cisco_acls.json",
+            ]
+        }
+    ])
     const [submitData, setSubmitData] = useState({
         // "./json/excel/excel_dev_list.txt": "br00f2n.luskin.ucla.net",
         "./json/excel/excel_dev_list.txt": 'br01f2.carnesalecommons.ucla.net',
@@ -80,6 +115,7 @@ function DynamicForm() {
     return (
         <Container>
             <Row>
+                <h1>UUID:{sessionId}</h1>
                 <Form>
                     {formItems && formItems.map((d, i) =>
                         (<React.Fragment key={`frag-${d.id}`}>
@@ -92,6 +128,7 @@ function DynamicForm() {
                     )}
 
                     <Button onClick={() => startPost(sessionId, submitData)}>Start 9 with POST</Button>
+                    <Button onClick={() => startPost(sessionId, defaultSubmits[1])}>Update 9 with POST</Button>
                 </Form>
             </Row>
         </Container>
