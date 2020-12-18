@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Container, Row, Col, ListGroup, Accordion, Card, Button, ButtonGroup, Badge, Form } from 'react-bootstrap'
 import axios from "axios";
 import DTree2 from './DTree2'
+import DynamicForm from './DynamicForm'
 import LLCard from '../LobbyLogin/components/LLCard'
 import { XCircle, Folder2Open } from 'react-bootstrap-icons';
 // import API from "../../utils/API";
@@ -10,6 +11,15 @@ function DTreeForm() {
     const [tasks, setTasks] = useState([])
     const [configTextAreaVal, setConfigTextAreaVal] = useState('')
     const ciscoConfigTextArea = useRef(null);
+    const [colSizes, setColSizes] = useState([12, 4, 4, 4, 4, 4])
+
+    const toggleSizes = n => {
+        setColSizes(colSizes.map((num, i) => i === n ? (num === 12 ? 4 : 12) : num))
+    }
+
+    useEffect(() => {
+        console.log('colSizes: ', colSizes)
+    }, [colSizes])
 
     useEffect(() => {
         console.log('configTextAreaVal: ', configTextAreaVal)
@@ -101,7 +111,7 @@ function DTreeForm() {
                                         <Button onClick={() => getTasks(1)}>Get</Button>
                                         <Button onClick={() => getTasks(2)}>Get</Button>
                                         <Button onClick={() => getTasks(3)}>Get</Button>
-                                        <Button onClick={() => getTasks(4)}>Get</Button>
+                                        <Button onClick={() => getTasks('./my_packages/ParamikoObj/31.json')}>Get4</Button>
                                         <Button onClick={() => getTasks(5)}>Get</Button>
                                         <Button onClick={() => getTasks(6)}>Get</Button>
                                         <Button onClick={() => getTasks(7)}>Get</Button>
@@ -317,6 +327,15 @@ function DTreeForm() {
                                 3
                                 <Badge variant="success" style={{ float: 'right' }}>Success</Badge></LLCard></Col>
                         </Row> */}
+                        <Row className="mt-3">
+                            {[0, 1, 2, 3, 4, 5].map(e => (
+                                <Col lg={colSizes[e]} className="mb-3">
+                                    <DynamicForm toggleS={toggleSizes} setSize={e} />
+                                </Col>
+                            )
+                            )
+                            }
+                        </Row>
                         <Row className="mt-3">
                             <Col lg="12">
                                 <LLCard title="Status">
