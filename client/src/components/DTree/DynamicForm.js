@@ -84,30 +84,33 @@ function DynamicForm({
             ]
         }
     ])
-    const [submitData, setSubmitData] = useState({
-        // "./json/excel/excel_dev_list.txt": "br00f2n.luskin.ucla.net",
-        "./json/excel/excel_dev_list.txt": 'br01f2.carnesalecommons.ucla.net',
-        // "./CustomObj/CiscoObj/_accept_list.txt": configTextAreaVal,
-        // "C:/Users/Paul Aglipay/Desktop/New folder/br00f2n.luskin.ucla.net.txt": configTextAreaVal,
-        "jobs": [
-            {
-                "import": "Key"
-            },
-            {
-                "True": [
-                    {
-                        "True": "./CustomObj/CiscoObj/create_cisco_json_test.json"
-                    },
-                    {
-                        "True": "./CustomObj/CiscoObj/cisco_json_test_dev_list.json"
-                    },
-                    {
-                        "False": "./CustomObj/CiscoObj/process_cisco_acls.json"
-                    }
-                ]
-            },
-        ]
-    });
+    // const [submitData, setSubmitData] = useState({
+    //     // "./json/excel/excel_dev_list.txt": "br00f2n.luskin.ucla.net",
+    //     "./json/excel/excel_dev_list.txt": 'br01f2.carnesalecommons.ucla.net',
+    //     // "./CustomObj/CiscoObj/_accept_list.txt": configTextAreaVal,
+    //     // "C:/Users/Paul Aglipay/Desktop/New folder/br00f2n.luskin.ucla.net.txt": configTextAreaVal,
+    //     "jobs": [
+    //         {
+    //             "import": "Key"
+    //         },
+    //         {
+    //             "True": [
+    //                 {
+    //                     "True": "./CustomObj/CiscoObj/create_cisco_json_test.json"
+    //                 },
+    //                 {
+    //                     "True": "./CustomObj/CiscoObj/cisco_json_test_dev_list.json"
+    //                 },
+    //                 {
+    //                     "False": "./CustomObj/CiscoObj/process_cisco_acls.json"
+    //                 }
+    //             ]
+    //         },
+    //     ]
+    // });
+
+    const [submitData, setSubmitData] = useState({});
+
     // const [formItemsCollection, setFormItemsCollection] = useState(formItemsCollection)
     const [formItems, setFormItems] = useState([
         // { "id": "./json/excel/excel_dev_list.txt", "value": "" },
@@ -144,7 +147,10 @@ function DynamicForm({
             .catch(err => console.log(err));
     };
 
-    const startPost = (id, d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'], "Code": [''] }) => {
+    const startPost = (id, jobs = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'], "Code": [''] }) => {
+
+        const d = {...submitData, jobs}
+
         console.log('startPost')
         showLoop(id)
         setFormItems()
@@ -225,7 +231,10 @@ function DynamicForm({
                                         <Form.Group key={`fg-${d.id}`} controlId={`${d.id}`}>
                                             <Button
                                                 style={{ float: 'right' }}
-                                                onClick={() => startPost(sessionId, d.action)} size="lg">Next</Button>
+                                                onClick={() => startPost(sessionId, d.action.jobs)} size="lg">Next</Button>
+                                            {/* <Button
+                                                style={{ float: 'right' }}
+                                                onClick={() => startPost(sessionId, submitData)} size="lg">Next</Button> */}
                                             {/* <hr /> */}
                                         </Form.Group>
                                     </React.Fragment>)
@@ -262,9 +271,9 @@ function DynamicForm({
 
             </Card.Body>
             <Card.Footer className="text-muted">
-                {/* <Button onClick={() => startPost(sessionId, submitData)}>Start 9 with POST</Button>
+                <Button onClick={() => startPost(sessionId, submitData)}>Start 9 with POST</Button>
                 <Button onClick={() => startPost(sessionId, defaultSubmits[1])}>Update 9 with POST</Button>
-                <Button style={{ float: 'right' }} onClick={() => setCards(cards.filter(c => c.id !== id))}>Close</Button> */}
+                <Button style={{ float: 'right' }} onClick={() => setCards(cards.filter(c => c.id !== id))}>Close</Button>
                 {id}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}
             </Card.Footer>
         </Card>

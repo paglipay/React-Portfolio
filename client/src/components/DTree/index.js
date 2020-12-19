@@ -41,7 +41,22 @@ function DTreeForm() {
                 {
                     "id": 2, "value": "Step 1 - Process 192.168.2.82", "type": "button", "action": {
                         "jobs": [
-                            "./my_packages/ParamikoObj/2.json",
+                            {
+                                "import": "Key"
+                            },
+                            {
+                                "True": [
+                                    {
+                                        "True": "./CustomObj/CiscoObj/create_cisco_json_test.json"
+                                    },
+                                    {
+                                        "True": "./CustomObj/CiscoObj/cisco_json_test_dev_list.json"
+                                    },
+                                    {
+                                        "False": "./CustomObj/CiscoObj/process_cisco_acls.json"
+                                    }
+                                ]
+                            },
                         ]
                     }
                 },
