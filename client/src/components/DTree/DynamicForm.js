@@ -214,7 +214,7 @@ function DynamicForm({
                             return (<React.Fragment key={`frag-${d.id}`}>
                                 {/* <h5>{d.id}</h5> */}
                                 <Form.Group key={`fg-${d.id}`} controlId={`${d.id}`}>
-                                    <Button style={{ float: 'middle' }} onClick={() => startPost(sessionId, d.action)} size="lg">Next</Button>
+                                    <Button style={{ float: 'right' }} onClick={() => startPost(sessionId, d.action)} size="lg">Next</Button>
                                 </Form.Group>
                             </React.Fragment>)
                         }
@@ -245,11 +245,11 @@ function DynamicForm({
                     </Spinner></>}
                 </Form>
             </Card.Body>
-            <Card.Footer className="text-muted">
+            {/* <Card.Footer className="text-muted">
                 <Button onClick={() => startPost(sessionId, submitData)}>Start 9 with POST</Button>
                 <Button onClick={() => startPost(sessionId, defaultSubmits[1])}>Update 9 with POST</Button>
                 <Button style={{ float: 'right' }} onClick={() => setCards(cards.filter(c => c.id !== id))}>Close</Button>
-            </Card.Footer>
+            </Card.Footer> */}
         </Card>
 
     )
