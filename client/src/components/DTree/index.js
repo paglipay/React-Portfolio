@@ -6,6 +6,7 @@ import DynamicForm from './DynamicForm'
 import LLCard from '../LobbyLogin/components/LLCard'
 import { XCircle, Folder2Open } from 'react-bootstrap-icons';
 // import API from "../../utils/API";
+import { v4 as uuidv4 } from 'uuid';
 
 function DTreeForm() {
     const [tasks, setTasks] = useState([])
@@ -92,11 +93,13 @@ function DTreeForm() {
                                     <ListGroup.Item as="li">
                                         Add a new Card
                                         <Button style={{ float: 'right' }} onClick={() => {
+                                            const c_name = uuidv4()
                                             setCards([...cards, {
-                                                id: cards.length,
-                                                title: cards.length,
-                                                header: cards.length,
-                                                body: cards.length + " Some quick example text to build on the card title and make up the bulk of the card's content.",
+                                                id: c_name,
+                                                c_id: cards.length,
+                                                title: c_name,
+                                                header: c_name,
+                                                body: c_name + " Some quick example text to build on the card title and make up the bulk of the card's content.",
                                                 formItemsCollection: [
                                                     {
                                                         id: 0,
@@ -445,13 +448,14 @@ function DTreeForm() {
                         </Row> */}
                         <Row className="mt-3">
                             {cards.map(e => (
-                                <Col lg={colSizes[e.id]} className="mb-3">
+                                <Col lg={colSizes[e.c_id]} className="mb-3">
                                     <DynamicForm
                                         cards={cards}
                                         setCards={setCards}
+                                        c_id={e.c_id}
                                         id={e.id}
                                         toggleS={toggleSizes}
-                                        setSize={e.id}
+                                        setSize={e.c_id}
                                         title={e.title}
                                         header={e.header}
                                         body={e.body}
