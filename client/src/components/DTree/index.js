@@ -451,8 +451,8 @@ function DTreeForm() {
                                 <Badge variant="success" style={{ float: 'right' }}>Success</Badge></LLCard></Col>
                         </Row> */}
                         <Row className="mt-3">
-                            {cards.map(e => (
-                                <Col lg={colSizes[cards.length]} className="mb-3">
+                            {cards.map((e, i) => (
+                                <Col lg={colSizes[i]} className="mb-3">
                                     <DynamicForm
                                         key={e.id}
                                         cards={cards}
