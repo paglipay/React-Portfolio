@@ -19,22 +19,27 @@ function DTreeForm() {
         {
             id: 0,
             items: [
-                { "id": "Begin Demo?", "value": "Would you like a demo", "type": "message" },
+                { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Would you like a demo", "type": "message" },
                 {
                     "id": 1, "value": "Begin Demo", "type": "button", "action": {
                         "jobs": [
                             "./my_packages/ParamikoObj/1.json",
                         ]
                     }
-                }, ,
+                },
             ]
         },
         {
             id: 1,
             items: [
+                {
+                    "id": "Begin Demo?", "name": "Step 1 - Process 192.168.2.82",
+                    "value": <pre>{'pwd\nls -ls\nexit'}</pre>,
+                    "type": "message"
+                },
                 { "id": "./json/excel/excel_dev_list.txt", "value": "", "type": "textarea" },
                 {
-                    "id": 2, "value": "", "type": "button", "action": {
+                    "id": 2, "value": "Step 1 - Process 192.168.2.82", "type": "button", "action": {
                         "jobs": [
                             "./my_packages/ParamikoObj/2.json",
                         ]
@@ -45,11 +50,12 @@ function DTreeForm() {
         {
             id: 2,
             items: [
+                { "id": "Begin Demo?", "name": "Step 2 - Process 192.168.2.83", "value": "Step 2 - Process 192.168.2.83", "type": "message" },
                 { "id": "Host", "value": "", "type": "text" },
                 { "id": "Username", "value": "", "type": "text" },
                 { "id": "PASSCODE", "value": "", "type": "password" },
                 {
-                    "id": 3, "value": "", "type": "button", "action": {
+                    "id": 3, "value": "Step 2 - Process 192.168.2.83", "type": "button", "action": {
                         "jobs": [
                             "./my_packages/ParamikoObj/3.json",
                         ]
@@ -60,9 +66,10 @@ function DTreeForm() {
         {
             id: 3,
             items: [
+                { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Step 3 - Process 192.168.2.32", "type": "message" },
                 { "id": "PASSCODE", "value": "", "type": "text" },
                 {
-                    "id": 4, "value": "", "type": "button", "action": {
+                    "id": 4, "value": "Step 3 - Process 192.168.2.32", "type": "button", "action": {
                         "jobs": [
                             "./my_packages/ParamikoObj/32.json",
                         ]
@@ -73,7 +80,7 @@ function DTreeForm() {
         {
             id: 4,
             items: [
-                { "id": "Done", "value": "", "type": "message" },
+                { "id": "Done", "name": "Done", "value": "This is completed. Would you like to email yourself the results?", "type": "message" },
                 { "id": "Email Results", "value": "", "type": "text" },
             ]
         }
@@ -83,8 +90,24 @@ function DTreeForm() {
 
     const pictureCats = ['datacenter', 'facebook', 'python', 'beaches', 'city', 'nature', 'travel', 'calm', 'javascript']
     const toggleSizes = n => {
-        setColSizes(colSizes.map((num, i) => i === n ? (num === 12 ? 4 : 12) : num))
+        setColSizes(colSizes.map((num, i) => i === n ? (num === 8 ? 4 : 8) : num))
     }
+
+    useEffect(() => {
+        let t_arry = []
+        for (let i = 0; i < 1; i++) {
+            const c_name = uuidv4()
+            t_arry.push({
+                id: c_name,
+                src: `https://source.unsplash.com/1600x900/?${pictureCats[i]}`,
+                title: 'Test Ubuntu Servers',
+                header: 'Featured Project',
+                body: c_name + " Some quick example text to build on the card title and make up the bulk of the card's content.",
+                formItemsCollection: formItemsCollection
+            })
+        }
+        setCards(t_arry)
+    }, [])
 
     useEffect(() => {
         console.log('colSizes: ', colSizes)
@@ -163,9 +186,9 @@ function DTreeForm() {
                                             setCards([...cards, {
                                                 id: c_name,
                                                 src: `https://source.unsplash.com/1600x900/?${pictureCats[cards.length]}`,
-                                                title: c_name,
+                                                title: 'Test Connection to Ubuntu Servers',
                                                 header: 'Title Here',
-                                                body: c_name + " Some quick example text to build on the card title and make up the bulk of the card's content.",
+                                                body: " Some quick example text to build on the card title and make up the bulk of the card's content.",
                                                 formItemsCollection: formItemsCollection
                                             }])
                                         }}>Add</Button>
@@ -177,19 +200,19 @@ function DTreeForm() {
                                         Cisco Network Administration
                                         <Button style={{ float: 'right' }} onClick={() => {
                                             let t_arry = []
-                                            for (let i = 0;i<10;i++){
+                                            for (let i = 0; i < 10; i++) {
                                                 const c_name = uuidv4()
                                                 t_arry.push({
                                                     id: c_name,
                                                     src: `https://source.unsplash.com/1600x900/?${pictureCats[i]}`,
-                                                    title: c_name,
+                                                    title: 'Test Connection to Ubuntu Servers',
                                                     header: 'Featured Project',
-                                                    body: c_name + " Some quick example text to build on the card title and make up the bulk of the card's content.",
+                                                    body: "I have a collection of ubuntu servers online that this script will connect to and test it's accessability. Please follow the step by step process provided, and see the results. Results will be shown above, located where the picture currently is on this card. Once complete, you will have the option to email the results to an email you provide.",
                                                     formItemsCollection: formItemsCollection
                                                 })
                                             }
                                             setCards(t_arry)
-                                            
+
                                         }}>Launch Demo</Button>
                                     </ListGroup.Item>
                                     <ListGroup.Item as="li">
@@ -322,148 +345,8 @@ function DTreeForm() {
                                 </ListGroup>
                             </LLCard>
                         </Row>
-                        {/* <Row>
-                            <LLCard>
-                                <Accordion defaultActiveKey="0">
-                                    <Card>
-                                        <Card.Header>
-                                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                                Click me!
-                                            </Accordion.Toggle>
-                                        </Card.Header>
-                                        <Accordion.Collapse eventKey="0">
-                                            <Card.Body>
-                                                <Accordion defaultActiveKey="0">
-                                                    <Card>
-                                                        <Card.Header>
-                                                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                                                Click me!
-                                                            </Accordion.Toggle>
-                                                        </Card.Header>
-                                                        <Accordion.Collapse eventKey="0">
-                                                            <Card.Body>
-                                                                <Accordion defaultActiveKey="0">
-                                                                    <Card>
-                                                                        <Card.Header>
-                                                                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                                                                Click me!
-                                            </Accordion.Toggle>
-                                                                        </Card.Header>
-                                                                        <Accordion.Collapse eventKey="0">
-                                                                            <Card.Body>
-                                                                                <Accordion defaultActiveKey="0">
-                                                                                    <Card>
-                                                                                        <Card.Header>
-                                                                                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                                                                                Click me!
-                                                            </Accordion.Toggle>
-                                                                                        </Card.Header>
-                                                                                        <Accordion.Collapse eventKey="0">
-                                                                                            <Card.Body>
-                                                                                                <ListGroup as="ul">
-                                                                                                    <ListGroup.Item as="li">
-                                                                                                        Cras justo odio
-                                                                                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                                                                                    </ListGroup.Item>
-                                                                                                    <ListGroup.Item as="li">
-                                                                                                        Dapibus ac facilisis in
-                                                                                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                                                                                    </ListGroup.Item>
-                                                                                                    <ListGroup.Item as="li" disabled>
-                                                                                                        Morbi leo risus
-                                                                                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                                                                                    </ListGroup.Item>
-                                                                                                    <ListGroup.Item as="li">
-                                                                                                        Porta ac consectetur ac
-                                                                                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                                                                                    </ListGroup.Item>
-                                                                                                </ListGroup>
-                                                                                            </Card.Body>
-                                                                                        </Accordion.Collapse>
-                                                                                    </Card>
-                                                                                    <Card>
-                                                                                        <Card.Header>
-                                                                                            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                                                                                                Click me!
-                                                            </Accordion.Toggle>
-                                                                                        </Card.Header>
-                                                                                        <Accordion.Collapse eventKey="1">
-                                                                                            <Card.Body>Hello! I'm another body</Card.Body>
-                                                                                        </Accordion.Collapse>
-                                                                                    </Card>
-                                                                                </Accordion>
-                                                                            </Card.Body>
-                                                                        </Accordion.Collapse>
-                                                                    </Card>
-                                                                    <Card>
-                                                                        <Card.Header>
-                                                                            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                                                                                Click me!
-                                            </Accordion.Toggle>
-                                                                        </Card.Header>
-                                                                        <Accordion.Collapse eventKey="1">
-                                                                            <Card.Body>Hello! I'm another body</Card.Body>
-                                                                        </Accordion.Collapse>
-                                                                    </Card>
-                                                                </Accordion>
-                                                            </Card.Body>
-                                                        </Accordion.Collapse>
-                                                    </Card>
-                                                    <Card>
-                                                        <Card.Header>
-                                                            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                                                                Click me!
-                                                            </Accordion.Toggle>
-                                                        </Card.Header>
-                                                        <Accordion.Collapse eventKey="1">
-                                                            <Card.Body>Hello! I'm another body</Card.Body>
-                                                        </Accordion.Collapse>
-                                                    </Card>
-                                                </Accordion>
-                                            </Card.Body>
-                                        </Accordion.Collapse>
-                                    </Card>
-                                    <Card>
-                                        <Card.Header>
-                                            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                                                Click me!
-                                            </Accordion.Toggle>
-                                        </Card.Header>
-                                        <Accordion.Collapse eventKey="1">
-                                            <Card.Body>Hello! I'm another body</Card.Body>
-                                        </Accordion.Collapse>
-                                    </Card>
-                                </Accordion></LLCard>
-                        </Row> */}
                     </Col>
                     <Col lg="9">
-                        {/* <Row className="mt-3">
-                            <Col><LLCard title={<>Status <Badge variant="success" style={{ float: 'right' }}>Success</Badge></>}>
-                                <ListGroup as="ul">
-                                    <ListGroup.Item as="li">
-                                        Cras justo odio
-                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item as="li">
-                                        Dapibus ac facilisis in
-                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item as="li" disabled>
-                                        Morbi leo risus
-                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item as="li">
-                                        Porta ac consectetur ac
-                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                    </ListGroup.Item>
-                                </ListGroup></LLCard></Col>
-                            <Col><LLCard title={<>Status <Badge variant="success" style={{ float: 'right' }}>Success</Badge></>}>
-                                2
-                                <Badge variant="success" style={{ float: 'right' }}>Success</Badge></LLCard></Col>
-                            <Col><LLCard title={<>Status <Badge variant="success" style={{ float: 'right' }}>Success</Badge></>}>
-                                3
-                                <Badge variant="success" style={{ float: 'right' }}>Success</Badge></LLCard></Col>
-                        </Row> */}
                         <Row className="mt-3">
                             {cards.map((e, i) => (
                                 <Col lg={colSizes[i]} className="mb-3">
@@ -474,6 +357,7 @@ function DTreeForm() {
                                         setCards={setCards}
                                         id={e.id}
                                         toggleS={toggleSizes}
+                                        colSize={colSizes[i]}
                                         setSize={i}
                                         title={e.title}
                                         header={e.header}

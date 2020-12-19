@@ -33,7 +33,7 @@ function Home() {
     `}
       </style>
       <Jumbotron style={{ backgroundImage: `url('https://source.unsplash.com/1600x300/?design')`, backgroundSize: 'cover', height: 500 }}>
-        <div style={{ backgroundColor: 'rgba(255,255,255,0.5)', padding: '100px', margin: '0px 0px' }}>
+        <div style={{ backgroundColor: 'rgba(255,255,255,0.75)', padding: '100px', margin: '-25px 0px' }}>
           <h1>Welcome to Paul Aglipay's Portfolio Site!</h1>
           Skilled Software Developer with experience in Network / Systems Engineering. Experienced Programmer Analyst / Network Engineer with a demonstrated history of working in the higher education industry. Proficient in Full-Stack development particularly in the MERN stack.
           <br /><br />
