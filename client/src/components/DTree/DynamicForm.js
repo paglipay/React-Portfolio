@@ -193,7 +193,7 @@ function DynamicForm({
         <Card style={{ height: '100%' }}>
             <Card.Header as="h5" onClick={() => toggleS(setSize)}>{header}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}</Card.Header>
 
-            {output ? output.map((d, i) => <pre style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace" }}>{d}</pre>) : <Card.Img variant="top" src={src} />}
+            {output ? output.map((d, i) => <pre key={`df_pre_${d.id}`} style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace" }}>{d}</pre>) : <Card.Img variant="top" src={src} />}
             <Card.Body>
                 <Row>
                     <Col lg={colSize !== 4 ? 6 : 12}>

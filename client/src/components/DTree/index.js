@@ -33,13 +33,16 @@ function DTreeForm() {
             id: 1,
             items: [
                 {
-                    "id": "Begin Demo?", "name": "Step 1 - Process 192.168.2.82",
-                    "value": <pre>{'pwd\nls -ls\nexit'}</pre>,
+                    "id": "Begin Demo?", "name": "Step 1 - Testing Cisco Parse",
+                    "value": "Testing cisco parse from a list of hostnames",
                     "type": "message"
                 },
                 { "id": "./json/excel/excel_dev_list.txt", "value": "", "type": "textarea" },
                 {
-                    "id": 2, "value": "Step 1 - Process 192.168.2.82", "type": "button", "action": {
+                    "id": 2,
+                    "value": "Step 1 - Process 192.168.2.82",
+                    "type": "button",
+                    "action": {
                         "jobs": [
                             {
                                 "import": "Key"
@@ -65,6 +68,40 @@ function DTreeForm() {
         {
             id: 2,
             items: [
+                {
+                    "id": "Begin Demo?", "name": "Step 1 - Testing Cisco Parse",
+                    "value": "Testing cisco parse from a list of hostnames",
+                    "type": "message"
+                },
+                {
+                    "id": 2,
+                    "value": "Step 1 - Process 192.168.2.82",
+                    "type": "button",
+                    "action": {
+                        "./CustomObj/CiscoObj/process_cisco_acls.json": [
+                            {
+                                "import": "ExtendedAccessListObj"
+                            },
+                            {
+                                "open": {
+                                    "src_net": "128.97.107.0/24",
+                                    "dest_net": "149.142.33.0/24"
+                                }
+                            }
+                        ],
+                        "jobs": [
+                            {
+                                "import": "Key"
+                            },
+                            "./CustomObj/CiscoObj/process_cisco_acls.json",
+                        ]
+                    }
+                },
+            ]
+        },
+        {
+            id: 3,
+            items: [
                 { "id": "Begin Demo?", "name": "Step 2 - Process 192.168.2.83", "value": "Step 2 - Process 192.168.2.83", "type": "message" },
                 { "id": "Host", "value": "", "type": "text" },
                 { "id": "Username", "value": "", "type": "text" },
@@ -79,10 +116,10 @@ function DTreeForm() {
             ]
         },
         {
-            id: 3,
+            id: 4,
             items: [
                 { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Step 3 - Process 192.168.2.32", "type": "message" },
-                { "id": "PASSCODE", "value": "", "type": "text" },
+                { "id": "PASSCODE", "value": <pre>{'pwd\nls -ls\nexit'}</pre>, "type": "text" },
                 {
                     "id": 4, "value": "Step 3 - Process 192.168.2.32", "type": "button", "action": {
                         "jobs": [
@@ -93,7 +130,7 @@ function DTreeForm() {
             ]
         },
         {
-            id: 4,
+            id: 5,
             items: [
                 { "id": "Done", "name": "Done", "value": "This is completed. Would you like to email yourself the results?", "type": "message" },
                 { "id": "Email Results", "value": "", "type": "text" },
@@ -364,7 +401,7 @@ function DTreeForm() {
                     <Col lg="9">
                         <Row className="mt-3">
                             {cards.map((e, i) => (
-                                <Col lg={colSizes[i]} className="mb-3">
+                                <Col key={`col_index_1${e.id}`} lg={colSizes[i]} className="mb-3">
                                     <DynamicForm
                                         src={e.src}
                                         key={e.id}
