@@ -22,7 +22,6 @@ function DynamicForm({
     const [badgeStatus, setBadgeStatus] = useState('info');
     const [sessionId, setSessionId] = useState(uuidv4());
 
-    const pictureCats = ['datacenter', 'facebook', 'javascript', 'python', 'beaches', 'city', 'nature', 'travel', 'calm']
 
     const [defaultSubmits, setDefaultSubmits] = useState([
         {

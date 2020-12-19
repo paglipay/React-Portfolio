@@ -12,11 +12,11 @@ function DTreeForm() {
     const [tasks, setTasks] = useState([])
     const [configTextAreaVal, setConfigTextAreaVal] = useState('')
     const ciscoConfigTextArea = useRef(null);
-    const [colSizes, setColSizes] = useState([4, 4, 4, 4, 4, 4, 4, 4])
+    const [colSizes, setColSizes] = useState([4, 4, 4, 4, 4, 4, 4, 4, 4])
     const [cards, setCards] = useState([])
 
 
-    const pictureCats = ['datacenter', 'facebook', 'javascript', 'python', 'beaches', 'city', 'nature', 'travel', 'calm']
+    const pictureCats = ['datacenter', 'facebook', 'python', 'beaches', 'city', 'nature', 'travel', 'calm']
     const toggleSizes = n => {
         setColSizes(colSizes.map((num, i) => i === n ? (num === 12 ? 4 : 12) : num))
     }
@@ -454,13 +454,13 @@ function DTreeForm() {
                             {cards.map((e, i) => (
                                 <Col lg={colSizes[i]} className="mb-3">
                                     <DynamicForm
+                                        src={e.src}
                                         key={e.id}
                                         cards={cards}
                                         setCards={setCards}
-                                        c_id={e.c_id}
                                         id={e.id}
                                         toggleS={toggleSizes}
-                                        setSize={e.c_id}
+                                        setSize={e.id}
                                         title={e.title}
                                         header={e.header}
                                         body={e.body}
