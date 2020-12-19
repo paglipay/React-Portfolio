@@ -452,7 +452,7 @@ function DTreeForm() {
                         </Row> */}
                         <Row className="mt-3">
                             {cards.map(e => (
-                                <Col lg={colSizes[e.c_id]} className="mb-3">
+                                <Col lg={colSizes[cards.length]} className="mb-3">
                                     <DynamicForm
                                         key={e.id}
                                         cards={cards}
