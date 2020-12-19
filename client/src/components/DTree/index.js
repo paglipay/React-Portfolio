@@ -2,14 +2,116 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Container, Row, Col, ListGroup, Accordion, Card, Button, ButtonGroup, Badge, Form } from 'react-bootstrap'
 import axios from "axios";
 import DTree2 from './DTree2'
+import DynamicForm from './DynamicForm'
 import LLCard from '../LobbyLogin/components/LLCard'
 import { XCircle, Folder2Open } from 'react-bootstrap-icons';
 // import API from "../../utils/API";
+import { v4 as uuidv4 } from 'uuid';
 
 function DTreeForm() {
     const [tasks, setTasks] = useState([])
     const [configTextAreaVal, setConfigTextAreaVal] = useState('')
     const ciscoConfigTextArea = useRef(null);
+    const [colSizes, setColSizes] = useState([4, 4, 4, 8, 4, 4, 8, 4, 4, 4])
+    const [cards, setCards] = useState([])
+
+    const formItemsCollection = [
+        {
+            id: 0,
+            items: [
+                { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Would you like a demo", "type": "message" },
+                {
+                    "id": 1, "value": "Begin Demo", "type": "button", "action": {
+                        "jobs": [
+                            "./my_packages/ParamikoObj/1.json",
+                        ]
+                    }
+                },
+            ]
+        },
+        {
+            id: 1,
+            items: [
+                {
+                    "id": "Begin Demo?", "name": "Step 1 - Process 192.168.2.82",
+                    "value": <pre>{'pwd\nls -ls\nexit'}</pre>,
+                    "type": "message"
+                },
+                { "id": "./json/excel/excel_dev_list.txt", "value": "", "type": "textarea" },
+                {
+                    "id": 2, "value": "Step 1 - Process 192.168.2.82", "type": "button", "action": {
+                        "jobs": [
+                            "./my_packages/ParamikoObj/2.json",
+                        ]
+                    }
+                },
+            ]
+        },
+        {
+            id: 2,
+            items: [
+                { "id": "Begin Demo?", "name": "Step 2 - Process 192.168.2.83", "value": "Step 2 - Process 192.168.2.83", "type": "message" },
+                { "id": "Host", "value": "", "type": "text" },
+                { "id": "Username", "value": "", "type": "text" },
+                { "id": "PASSCODE", "value": "", "type": "password" },
+                {
+                    "id": 3, "value": "Step 2 - Process 192.168.2.83", "type": "button", "action": {
+                        "jobs": [
+                            "./my_packages/ParamikoObj/3.json",
+                        ]
+                    }
+                },
+            ]
+        },
+        {
+            id: 3,
+            items: [
+                { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Step 3 - Process 192.168.2.32", "type": "message" },
+                { "id": "PASSCODE", "value": "", "type": "text" },
+                {
+                    "id": 4, "value": "Step 3 - Process 192.168.2.32", "type": "button", "action": {
+                        "jobs": [
+                            "./my_packages/ParamikoObj/32.json",
+                        ]
+                    }
+                },
+            ]
+        },
+        {
+            id: 4,
+            items: [
+                { "id": "Done", "name": "Done", "value": "This is completed. Would you like to email yourself the results?", "type": "message" },
+                { "id": "Email Results", "value": "", "type": "text" },
+            ]
+        }
+    ]
+
+
+
+    const pictureCats = ['datacenter', 'facebook', 'python', 'beaches', 'city', 'nature', 'travel', 'calm', 'javascript']
+    const toggleSizes = n => {
+        setColSizes(colSizes.map((num, i) => i === n ? (num === 8 ? 4 : 8) : num))
+    }
+
+    useEffect(() => {
+        let t_arry = []
+        for (let i = 0; i < 1; i++) {
+            const c_name = uuidv4()
+            t_arry.push({
+                id: c_name,
+                src: `https://source.unsplash.com/1600x900/?${pictureCats[i]}`,
+                title: 'Test Ubuntu Servers',
+                header: 'Featured Project',
+                body: c_name + " Some quick example text to build on the card title and make up the bulk of the card's content.",
+                formItemsCollection: formItemsCollection
+            })
+        }
+        setCards(t_arry)
+    }, [])
+
+    useEffect(() => {
+        console.log('colSizes: ', colSizes)
+    }, [colSizes])
 
     useEffect(() => {
         console.log('configTextAreaVal: ', configTextAreaVal)
@@ -78,8 +180,76 @@ function DTreeForm() {
                             <LLCard title="Jobs">
                                 <ListGroup as="ul">
                                     <ListGroup.Item as="li">
-                                        Cras justo odio
-                                <Button style={{ float: 'right' }} onClick={() => getTasks(0)}>Get</Button>
+                                        Add a new Card
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            const c_name = uuidv4()
+                                            setCards([...cards, {
+                                                id: c_name,
+                                                src: `https://source.unsplash.com/1600x900/?${pictureCats[cards.length]}`,
+                                                title: 'Test Connection to Ubuntu Servers',
+                                                header: 'Title Here',
+                                                body: " Some quick example text to build on the card title and make up the bulk of the card's content.",
+                                                formItemsCollection: formItemsCollection
+                                            }])
+                                        }}>Add</Button>
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([])
+                                        }}>Clear</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        Cisco Network Administration
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            let t_arry = []
+                                            for (let i = 0; i < 10; i++) {
+                                                const c_name = uuidv4()
+                                                t_arry.push({
+                                                    id: c_name,
+                                                    src: `https://source.unsplash.com/1600x900/?${pictureCats[i]}`,
+                                                    title: 'Test Connection to Ubuntu Servers',
+                                                    header: 'Featured Project',
+                                                    body: "I have a collection of ubuntu servers online that this script will connect to and test it's accessability. Please follow the step by step process provided, and see the results. Results will be shown above, located where the picture currently is on this card. Once complete, you will have the option to email the results to an email you provide.",
+                                                    formItemsCollection: formItemsCollection
+                                                })
+                                            }
+                                            setCards(t_arry)
+
+                                        }}>Launch Demo</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        Network Engineering
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([0, 1, 2, 3, 4])
+                                        }}>Launch Demo</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        DevOps
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([0, 1, 2, 3, 4])
+                                        }}>Launch Demo</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        MERN-Stack Development
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([0, 1, 2, 3, 4])
+                                        }}>Launch Demo</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        Python
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([0, 1, 2, 3, 4])
+                                        }}>Launch Demo</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        Network Automation
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([0, 1, 2, 3, 4])
+                                        }}>Launch Demo</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        Web Scraping
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([0, 1, 2, 3, 4])
+                                        }}>Launch Demo</Button>
                                     </ListGroup.Item>
                                     <ListGroup.Item as="li">
                                         Dapibus ac facilisis in
@@ -101,7 +271,7 @@ function DTreeForm() {
                                         <Button onClick={() => getTasks(1)}>Get</Button>
                                         <Button onClick={() => getTasks(2)}>Get</Button>
                                         <Button onClick={() => getTasks(3)}>Get</Button>
-                                        <Button onClick={() => getTasks(4)}>Get</Button>
+                                        <Button onClick={() => getTasks('abcd')}>Get4</Button>
                                         <Button onClick={() => getTasks(5)}>Get</Button>
                                         <Button onClick={() => getTasks(6)}>Get</Button>
                                         <Button onClick={() => getTasks(7)}>Get</Button>
@@ -115,9 +285,10 @@ function DTreeForm() {
                                         </Form.Group>
 
                                         <Button onClick={() => startPost(9, {
-                                            "./json/excel/excel_dev_list.txt": "c2960kauf-a-1",
+                                            // "./json/excel/excel_dev_list.txt": "br00f2n.luskin.ucla.net",
+                                            "./json/excel/excel_dev_list.txt": configTextAreaVal,
                                             // "./CustomObj/CiscoObj/_accept_list.txt": configTextAreaVal,
-                                            "C:/Users/Paul Aglipay/Desktop/New folder/c2960kauf-a-1.txt": configTextAreaVal,
+                                            // "C:/Users/Paul Aglipay/Desktop/New folder/br00f2n.luskin.ucla.net.txt": configTextAreaVal,
                                             "jobs": [
                                                 {
                                                     "import": "Key"
@@ -131,12 +302,32 @@ function DTreeForm() {
                                                             "True": "./CustomObj/CiscoObj/cisco_json_test_dev_list.json"
                                                         },
                                                         {
-                                                            "False": "./CustomObj/CiscoObj/process_cisco_conf.json"
+                                                            "False": "./CustomObj/CiscoObj/process_cisco_acls.json"
                                                         }
                                                     ]
                                                 },
                                             ]
                                         })}>Start 9 with POST</Button>
+                                        <Button onClick={() => startPost(9, {
+                                            // "./json/excel/excel_dev_list.txt": "br00f2n.luskin.ucla.net",
+                                            // "./json/excel/excel_dev_list.txt": configTextAreaVal,
+                                            // "./CustomObj/CiscoObj/_accept_list.txt": configTextAreaVal,
+                                            // "C:/Users/Paul Aglipay/Desktop/New folder/br00f2n.luskin.ucla.net.txt": configTextAreaVal,
+                                            "jobs": [
+                                                {
+                                                    "import": "ExtendedAccessListObj"
+                                                },
+                                                {
+                                                    "True": "ExtendedAccessListObj"
+                                                },
+                                                {
+                                                    "open": {
+                                                        "src_net": "149.142.0.0/16",
+                                                        "dest_net": "149.142.33.0/24"
+                                                    }
+                                                }
+                                            ]
+                                        })}>Start 9 with POST2</Button>
 
                                         {/* <Button onClick={() => {
                                             configTextAreaVal.split('\n').forEach(d => {
@@ -154,148 +345,30 @@ function DTreeForm() {
                                 </ListGroup>
                             </LLCard>
                         </Row>
-                        {/* <Row>
-                            <LLCard>
-                                <Accordion defaultActiveKey="0">
-                                    <Card>
-                                        <Card.Header>
-                                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                                Click me!
-                                            </Accordion.Toggle>
-                                        </Card.Header>
-                                        <Accordion.Collapse eventKey="0">
-                                            <Card.Body>
-                                                <Accordion defaultActiveKey="0">
-                                                    <Card>
-                                                        <Card.Header>
-                                                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                                                Click me!
-                                                            </Accordion.Toggle>
-                                                        </Card.Header>
-                                                        <Accordion.Collapse eventKey="0">
-                                                            <Card.Body>
-                                                                <Accordion defaultActiveKey="0">
-                                                                    <Card>
-                                                                        <Card.Header>
-                                                                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                                                                Click me!
-                                            </Accordion.Toggle>
-                                                                        </Card.Header>
-                                                                        <Accordion.Collapse eventKey="0">
-                                                                            <Card.Body>
-                                                                                <Accordion defaultActiveKey="0">
-                                                                                    <Card>
-                                                                                        <Card.Header>
-                                                                                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                                                                                Click me!
-                                                            </Accordion.Toggle>
-                                                                                        </Card.Header>
-                                                                                        <Accordion.Collapse eventKey="0">
-                                                                                            <Card.Body>
-                                                                                                <ListGroup as="ul">
-                                                                                                    <ListGroup.Item as="li">
-                                                                                                        Cras justo odio
-                                                                                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                                                                                    </ListGroup.Item>
-                                                                                                    <ListGroup.Item as="li">
-                                                                                                        Dapibus ac facilisis in
-                                                                                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                                                                                    </ListGroup.Item>
-                                                                                                    <ListGroup.Item as="li" disabled>
-                                                                                                        Morbi leo risus
-                                                                                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                                                                                    </ListGroup.Item>
-                                                                                                    <ListGroup.Item as="li">
-                                                                                                        Porta ac consectetur ac
-                                                                                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                                                                                    </ListGroup.Item>
-                                                                                                </ListGroup>
-                                                                                            </Card.Body>
-                                                                                        </Accordion.Collapse>
-                                                                                    </Card>
-                                                                                    <Card>
-                                                                                        <Card.Header>
-                                                                                            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                                                                                                Click me!
-                                                            </Accordion.Toggle>
-                                                                                        </Card.Header>
-                                                                                        <Accordion.Collapse eventKey="1">
-                                                                                            <Card.Body>Hello! I'm another body</Card.Body>
-                                                                                        </Accordion.Collapse>
-                                                                                    </Card>
-                                                                                </Accordion>
-                                                                            </Card.Body>
-                                                                        </Accordion.Collapse>
-                                                                    </Card>
-                                                                    <Card>
-                                                                        <Card.Header>
-                                                                            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                                                                                Click me!
-                                            </Accordion.Toggle>
-                                                                        </Card.Header>
-                                                                        <Accordion.Collapse eventKey="1">
-                                                                            <Card.Body>Hello! I'm another body</Card.Body>
-                                                                        </Accordion.Collapse>
-                                                                    </Card>
-                                                                </Accordion>
-                                                            </Card.Body>
-                                                        </Accordion.Collapse>
-                                                    </Card>
-                                                    <Card>
-                                                        <Card.Header>
-                                                            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                                                                Click me!
-                                                            </Accordion.Toggle>
-                                                        </Card.Header>
-                                                        <Accordion.Collapse eventKey="1">
-                                                            <Card.Body>Hello! I'm another body</Card.Body>
-                                                        </Accordion.Collapse>
-                                                    </Card>
-                                                </Accordion>
-                                            </Card.Body>
-                                        </Accordion.Collapse>
-                                    </Card>
-                                    <Card>
-                                        <Card.Header>
-                                            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                                                Click me!
-                                            </Accordion.Toggle>
-                                        </Card.Header>
-                                        <Accordion.Collapse eventKey="1">
-                                            <Card.Body>Hello! I'm another body</Card.Body>
-                                        </Accordion.Collapse>
-                                    </Card>
-                                </Accordion></LLCard>
-                        </Row> */}
                     </Col>
                     <Col lg="9">
-                        {/* <Row className="mt-3">
-                            <Col><LLCard title={<>Status <Badge variant="success" style={{ float: 'right' }}>Success</Badge></>}>
-                                <ListGroup as="ul">
-                                    <ListGroup.Item as="li">
-                                        Cras justo odio
-                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item as="li">
-                                        Dapibus ac facilisis in
-                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item as="li" disabled>
-                                        Morbi leo risus
-                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                    </ListGroup.Item>
-                                    <ListGroup.Item as="li">
-                                        Porta ac consectetur ac
-                                        <Badge variant="success" style={{ float: 'right' }}>Success</Badge>
-                                    </ListGroup.Item>
-                                </ListGroup></LLCard></Col>
-                            <Col><LLCard title={<>Status <Badge variant="success" style={{ float: 'right' }}>Success</Badge></>}>
-                                2
-                                <Badge variant="success" style={{ float: 'right' }}>Success</Badge></LLCard></Col>
-                            <Col><LLCard title={<>Status <Badge variant="success" style={{ float: 'right' }}>Success</Badge></>}>
-                                3
-                                <Badge variant="success" style={{ float: 'right' }}>Success</Badge></LLCard></Col>
-                        </Row> */}
+                        <Row className="mt-3">
+                            {cards.map((e, i) => (
+                                <Col lg={colSizes[i]} className="mb-3">
+                                    <DynamicForm
+                                        src={e.src}
+                                        key={e.id}
+                                        cards={cards}
+                                        setCards={setCards}
+                                        id={e.id}
+                                        toggleS={toggleSizes}
+                                        colSize={colSizes[i]}
+                                        setSize={i}
+                                        title={e.title}
+                                        header={e.header}
+                                        body={e.body}
+                                        formItemsCollection={e.formItemsCollection}
+                                    />
+                                </Col>
+                            )
+                            )
+                            }
+                        </Row>
                         <Row className="mt-3">
                             <Col lg="12">
                                 <LLCard title="Status">

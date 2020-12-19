@@ -33,9 +33,20 @@
     "mongoose": "^5.3.16",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
+    "nodemailer": "^6.4.16",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "react-diff-viewer": "^3.1.1",
     "socket.io": "^2.3.0"
-  }
+  },
+  "tasks": [
+    {
+      "label": "Launch App",
+      "type": "shell",
+      "command": "npm start",
+      "windows": {
+        "command": "npm start"
+      }
+    }
+  ]
 }
