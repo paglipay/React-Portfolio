@@ -3,10 +3,26 @@ import { Container, Row, Col, ListGroup, Badge, Card, Button, Spinner, Form } fr
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 
-function DynamicForm({ toggleS, setSize }) {
+function DynamicForm({
+    setCards,
+    cards,
+    id,
+    toggleS,
+    setSize,
+    header = "Featured",
+    title = "Card Title",
+    body = `
+    Some quick example text to build on the card title and make up the bulk of
+    the card's content.`,
+    formItemsCollection = []
+}) {
     const [formCounter, setFormCounter] = useState(0);
     const [output, setOutput] = useState();
+    const [badgeStatus, setBadgeStatus] = useState('info');
     const [sessionId, setSessionId] = useState(uuidv4());
+
+    const pictureCats = ['datacenter', 'facebook', 'javascript', 'python', 'beaches', 'city', 'nature', 'travel', 'calm']
+
     const [defaultSubmits, setDefaultSubmits] = useState([
         {
             // "./json/excel/excel_dev_list.txt": "br00f2n.luskin.ucla.net",
@@ -58,12 +74,12 @@ function DynamicForm({ toggleS, setSize }) {
         },
         {
             "jobs": [
-                "./my_packages/ParamikoObj/32.json",
+                "./my_packages/ParamikoObj/2.json",
             ]
         },
         {
             "jobs": [
-                "./my_packages/ParamikoObj/4.json",
+                "./my_packages/ParamikoObj/3.json",
             ]
         }
     ])
@@ -91,35 +107,7 @@ function DynamicForm({ toggleS, setSize }) {
             },
         ]
     });
-    const [formItemsCollection, setFormItemsCollection] = useState([
-        {
-            id: 1,
-            items: [
-                { "id": "./json/excel/excel_dev_list.txt", "value": "", "type": "textarea" },
-                { "id": 2, "value": "", "type": "button" },
-            ]
-        },
-        {
-            id: 2,
-            items: [
-                { "id": "PASSCODE", "value": "", "type": "text" },
-                { "id": 3, "value": "", "type": "button" },
-            ]
-        },
-        {
-            id: 3,
-            items: [
-                { "id": "PASSCODE", "value": "", "type": "text" },
-                { "id": 4, "value": "", "type": "button" },
-            ]
-        },
-        {
-            id: 4,
-            items: [
-                { "id": "Done", "value": "" },
-            ]
-        }
-    ])
+    // const [formItemsCollection, setFormItemsCollection] = useState(formItemsCollection)
     const [formItems, setFormItems] = useState([
         // { "id": "./json/excel/excel_dev_list.txt", "value": "" },
     ]);
@@ -135,14 +123,18 @@ function DynamicForm({ toggleS, setSize }) {
 
     let myVar;
     const showLoop = (id) => {
-        myVar = setInterval(() => loadDtree(id), 1000)
-    }    
-    
+        myVar = setInterval(() => loadDtree(id), 10000)
+    }
+
     const loadDtree = (id) => {
         console.log('loadDtree')
         axios.get("/api/dtree/start/" + id)
-            .then(res => {                
-                setOutput([res.data.ParamikoObj])
+            .then(res => {
+                let o_arry = res.data.ParamikoObj.map(e => e.split('\n'))
+                let t_arry = [].concat.apply([], o_arry)
+                // console.log(t_arry)
+                // console.log(t_arry.slice(t_arry.length - 5, t_arry.length))
+                setOutput([t_arry.slice(t_arry.length - 15, t_arry.length).join('\n')])
             })
             .catch(err => console.log(err));
     };
@@ -151,15 +143,29 @@ function DynamicForm({ toggleS, setSize }) {
         console.log('startPost')
         showLoop(id)
         setFormItems()
+        setBadgeStatus('warning')
         // const d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'] }
         axios.post("/api/dtree/start/" + id, d)
             .then(res => {
                 console.log(res.data)
                 clearInterval(myVar)
                 setFormCounter(formCounter + 1)
-                setOutput([res.data.ParamikoObj])
+
+                if (res.data.hasOwnProperty('ParamikoObj')) {
+                    let o_arry = res.data.ParamikoObj.map(e => e.split('\n'))
+                    let t_arry = [].concat.apply([], o_arry)
+                    // console.log(t_arry)
+                    // console.log(t_arry.slice(t_arry.length - 5, t_arry.length))
+                    setOutput([t_arry.join('\n')])
+                }
+                setBadgeStatus('success')
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err)
+                clearInterval(myVar)
+                setBadgeStatus('danger')
+                setFormItems()
+            });
     }
 
     const handleChange = e => {
@@ -174,14 +180,13 @@ function DynamicForm({ toggleS, setSize }) {
     return (
 
         <Card style={{ height: '100%' }}>
-            <Card.Header as="h5" onClick={() => toggleS(setSize)}>Featured <Badge variant="success" style={{ float: 'right' }}>Success</Badge>{' '}</Card.Header>
-            {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+            <Card.Header as="h5" onClick={() => toggleS(setSize)}>{header} {id}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}</Card.Header>
+
+            {output ? output.map((d, i) => <pre style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace" }}>{d}</pre>) : <Card.Img variant="top" src={`https://source.unsplash.com/1600x900/?${pictureCats[id]}`} />}
             <Card.Body>
-                <Card.Title>Card Title</Card.Title>
+                <Card.Title>{title}</Card.Title>
                 <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                {output ? output.map((d, i) => <pre style={{ "height": 300, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace" }}>{d}</pre>):null}
+                    {body}
                 </Card.Text>
                 {/* <h1>UUID:{sessionId}</h1> */}
                 <Form>
@@ -190,7 +195,7 @@ function DynamicForm({ toggleS, setSize }) {
                             return (<React.Fragment key={`frag-${d.id}`}>
                                 {/* <h1>{d.id}</h1> */}
                                 <Form.Group key={`fg-${d.id}`} controlId={`${d.id}`}>
-                                    <Form.Label key={`fl-${d.id}`}><h3 key={`h2-${d.id}`}>{d.id}</h3></Form.Label>
+                                    <Form.Label key={`fl-${d.id}`}><h4 key={`h2-${d.id}`}>{d.id}</h4></Form.Label>
                                     <Form.Control key={`fc-${d.id}`} key={`fc-${d.id}`} as="textarea" onChange={(e) => handleChange(e)} rows="3" style={{ height: 200 }} />
                                 </Form.Group>
                             </React.Fragment>)
@@ -199,7 +204,7 @@ function DynamicForm({ toggleS, setSize }) {
                             return (<React.Fragment key={`frag-${d.id}`}>
                                 {/* <h1>{d.id}</h1> */}
                                 <Form.Group key={`fg-${d.id}`} controlId={`${d.id}`}>
-                                    <Form.Label key={`fl-${d.id}`}><h2 key={`h2-${d.id}`}>{d.id}</h2></Form.Label>
+                                    <Form.Label key={`fl-${d.id}`}>{d.id}</Form.Label>
                                     {/* <Form.Control type="password" placeholder="Password" /> */}
                                     <Form.Control key={`fc-${d.id}`} key={`fc-${d.id}`} type="password" onChange={(e) => handleChange(e)} rows="3" />
                                 </Form.Group>
@@ -207,39 +212,44 @@ function DynamicForm({ toggleS, setSize }) {
                         }
                         else if (d.type === 'button') {
                             return (<React.Fragment key={`frag-${d.id}`}>
-                                <h1>{d.id}</h1>
+                                {/* <h5>{d.id}</h5> */}
                                 <Form.Group key={`fg-${d.id}`} controlId={`${d.id}`}>
-                                    <Button onClick={() => startPost(sessionId, defaultSubmits[d.id])} size="lg">Next</Button>
+                                    <Button style={{ float: 'middle' }} onClick={() => startPost(sessionId, d.action)} size="lg">Next</Button>
                                 </Form.Group>
                             </React.Fragment>)
                         }
                         else if (d.type === 'pre') {
                             return (<React.Fragment key={`frag-${d.id}`}>
-                                <h1>{d.id}</h1>
+                                <h4>{d.id}</h4>
                                 <pre>{d.value}</pre>
+                            </React.Fragment>)
+                        }
+                        else if (d.type === 'message') {
+                            return (<React.Fragment key={`frag-${d.id}`}>
+                                <h4>{d.id}</h4>
                             </React.Fragment>)
                         }
                         else {
                             return (<React.Fragment key={`frag-${d.id}`}>
                                 {/* <h1>{d.id}</h1> */}
                                 <Form.Group key={`fg-${d.id}`} controlId={`${d.id}`}>
-                                    <Form.Label key={`fl-${d.id}`}><h3 key={`h2-${d.id}`}>{d.id}</h3></Form.Label>
+                                    <Form.Label key={`fl-${d.id}`}>{d.id}</Form.Label>
                                     {/* <Form.Control type="password" placeholder="Password" /> */}
                                     <Form.Control key={`fc-${d.id}`} key={`fc-${d.id}`} type="text" onChange={(e) => handleChange(e)} rows="3" />
                                 </Form.Group>
                             </React.Fragment>)
                         }
                     }
-                    ) : <><Spinner animation="border" role="status">
+                    ) : <><h4>Processing Order...</h4><Spinner animation="border" role="status">
                         <span className="sr-only">Loading...</span>
-                    </Spinner><h1>Loading...</h1></>}
+                    </Spinner></>}
                 </Form>
             </Card.Body>
             <Card.Footer className="text-muted">
-
                 <Button onClick={() => startPost(sessionId, submitData)}>Start 9 with POST</Button>
                 <Button onClick={() => startPost(sessionId, defaultSubmits[1])}>Update 9 with POST</Button>
-                <Button onClick={() => startPost(sessionId, defaultSubmits[2])}>31</Button></Card.Footer>
+                <Button style={{ float: 'right' }} onClick={() => setCards(cards.filter(c => c.id !== id))}>Close</Button>
+            </Card.Footer>
         </Card>
 
     )

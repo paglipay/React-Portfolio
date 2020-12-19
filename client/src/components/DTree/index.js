@@ -11,7 +11,9 @@ function DTreeForm() {
     const [tasks, setTasks] = useState([])
     const [configTextAreaVal, setConfigTextAreaVal] = useState('')
     const ciscoConfigTextArea = useRef(null);
-    const [colSizes, setColSizes] = useState([12, 4, 4, 4, 4, 4])
+    const [colSizes, setColSizes] = useState([4, 4, 4, 4, 4, 4, 4, 4])
+    const [cards, setCards] = useState([])
+
 
     const toggleSizes = n => {
         setColSizes(colSizes.map((num, i) => i === n ? (num === 12 ? 4 : 12) : num))
@@ -88,8 +90,122 @@ function DTreeForm() {
                             <LLCard title="Jobs">
                                 <ListGroup as="ul">
                                     <ListGroup.Item as="li">
-                                        Cras justo odio
-                                <Button style={{ float: 'right' }} onClick={() => getTasks(0)}>Get</Button>
+                                        Add a new Card
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([...cards, {
+                                                id: cards.length,
+                                                title: cards.length,
+                                                header: cards.length,
+                                                body: cards.length + " Some quick example text to build on the card title and make up the bulk of the card's content.",
+                                                formItemsCollection: [
+                                                    {
+                                                        id: 0,
+                                                        items: [
+                                                            { "id": "Begin Demo?", "value": "Would you like a demo", "type": "message" },
+                                                            { "id": 1, "value": "Begin Demo", "type": "button", "action": {
+                                                                "jobs": [
+                                                                    "./my_packages/ParamikoObj/1.json",
+                                                                ]
+                                                            }
+                                                        },,
+                                                        ]
+                                                    },
+                                                    {
+                                                        id: 1,
+                                                        items: [
+                                                            { "id": "./json/excel/excel_dev_list.txt", "value": "", "type": "textarea" },
+                                                            { "id": 2, "value": "", "type": "button", "action": {
+                                                                "jobs": [
+                                                                    "./my_packages/ParamikoObj/2.json",
+                                                                ]
+                                                            }
+                                                        },
+                                                        ]
+                                                    },
+                                                    {
+                                                        id: 2,
+                                                        items: [
+                                                            { "id": "Host", "value": "", "type": "text" },
+                                                            { "id": "Username", "value": "", "type": "text" },
+                                                            { "id": "PASSCODE", "value": "", "type": "password" },
+                                                            {
+                                                                "id": 3, "value": "", "type": "button", "action": {
+                                                                    "jobs": [
+                                                                        "./my_packages/ParamikoObj/3.json",
+                                                                    ]
+                                                                }
+                                                            },
+                                                        ]
+                                                    },
+                                                    {
+                                                        id: 3,
+                                                        items: [
+                                                            { "id": "PASSCODE", "value": "", "type": "text" },
+                                                            { "id": 4, "value": "", "type": "button", "action": {
+                                                                "jobs": [
+                                                                    "./my_packages/ParamikoObj/32.json",
+                                                                ]
+                                                            }
+                                                        },
+                                                        ]
+                                                    },
+                                                    {
+                                                        id: 4,
+                                                        items: [
+                                                            { "id": "Done", "value": "", "type": "message" },
+                                                            { "id": "Email Results", "value": "", "type": "text" },
+                                                        ]
+                                                    }
+                                                ]
+                                            }])
+                                        }}>Add</Button>
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([])
+                                        }}>Clear</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        Cisco Network Administration
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([
+                                                { id: 0, title: '0', header: '0', body: '0' },
+                                            ])
+                                        }}>Launch Demo</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        Network Engineering
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([0, 1, 2, 3, 4])
+                                        }}>Launch Demo</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        DevOps
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([0, 1, 2, 3, 4])
+                                        }}>Launch Demo</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        MERN-Stack Development
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([0, 1, 2, 3, 4])
+                                        }}>Launch Demo</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        Python
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([0, 1, 2, 3, 4])
+                                        }}>Launch Demo</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        Network Automation
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([0, 1, 2, 3, 4])
+                                        }}>Launch Demo</Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item as="li">
+                                        Web Scraping
+                                        <Button style={{ float: 'right' }} onClick={() => {
+                                            setCards([0, 1, 2, 3, 4])
+                                        }}>Launch Demo</Button>
                                     </ListGroup.Item>
                                     <ListGroup.Item as="li">
                                         Dapibus ac facilisis in
@@ -111,7 +227,7 @@ function DTreeForm() {
                                         <Button onClick={() => getTasks(1)}>Get</Button>
                                         <Button onClick={() => getTasks(2)}>Get</Button>
                                         <Button onClick={() => getTasks(3)}>Get</Button>
-                                        <Button onClick={() => getTasks('./my_packages/ParamikoObj/31.json')}>Get4</Button>
+                                        <Button onClick={() => getTasks('abcd')}>Get4</Button>
                                         <Button onClick={() => getTasks(5)}>Get</Button>
                                         <Button onClick={() => getTasks(6)}>Get</Button>
                                         <Button onClick={() => getTasks(7)}>Get</Button>
@@ -328,9 +444,19 @@ function DTreeForm() {
                                 <Badge variant="success" style={{ float: 'right' }}>Success</Badge></LLCard></Col>
                         </Row> */}
                         <Row className="mt-3">
-                            {[0, 1, 2, 3, 4, 5].map(e => (
-                                <Col lg={colSizes[e]} className="mb-3">
-                                    <DynamicForm toggleS={toggleSizes} setSize={e} />
+                            {cards.map(e => (
+                                <Col lg={colSizes[e.id]} className="mb-3">
+                                    <DynamicForm
+                                        cards={cards}
+                                        setCards={setCards}
+                                        id={e.id}
+                                        toggleS={toggleSizes}
+                                        setSize={e.id}
+                                        title={e.title}
+                                        header={e.header}
+                                        body={e.body}
+                                        formItemsCollection={e.formItemsCollection}
+                                    />
                                 </Col>
                             )
                             )

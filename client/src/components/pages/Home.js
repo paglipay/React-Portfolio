@@ -7,6 +7,7 @@ import { ArrowRight } from 'react-bootstrap-icons';
 // import FeaturesPage from '../../components/MDB/FeaturesPage/FeaturesPage'
 // import NavTabs from "../NavTabs";
 import Todo from "../../components/Todo/App";
+import DTree from "../../components/DTree";
 
 function Home() {
   return (
@@ -41,7 +42,14 @@ function Home() {
           </p>
         </div>
       </Jumbotron>
-      <section style={{ backgroundColor: '#f4f4f4' }} class="section section-icons grey lighten-4 center">
+      <section className="section section-icons grey lighten-4 center">
+      <Container fluid>
+        <Row>
+          <DTree />
+        </Row>
+      </Container>
+      </section>
+      <section style={{ backgroundColor: '#f4f4f4' }} className="section section-icons grey lighten-4 center">
         <Container style={{ height: '100%' }}>
           <Row style={{ height: '100%' }}>
             <Col>
@@ -122,7 +130,7 @@ function Home() {
 
         </Container>
       </section>
-      <section class="section section-icons grey lighten-4 center">
+      <section className="section section-icons grey lighten-4 center">
         <Container>
           <Row>
             <Col>
