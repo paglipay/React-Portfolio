@@ -16,6 +16,7 @@ function DTreeForm() {
     const [cards, setCards] = useState([])
 
 
+    const pictureCats = ['datacenter', 'facebook', 'javascript', 'python', 'beaches', 'city', 'nature', 'travel', 'calm']
     const toggleSizes = n => {
         setColSizes(colSizes.map((num, i) => i === n ? (num === 12 ? 4 : 12) : num))
     }
@@ -96,7 +97,7 @@ function DTreeForm() {
                                             const c_name = uuidv4()
                                             setCards([...cards, {
                                                 id: c_name,
-                                                c_id: cards.length,
+                                                src: `https://source.unsplash.com/1600x900/?${pictureCats[cards.length]}`,
                                                 title: c_name,
                                                 header: c_name,
                                                 body: c_name + " Some quick example text to build on the card title and make up the bulk of the card's content.",
@@ -105,24 +106,26 @@ function DTreeForm() {
                                                         id: 0,
                                                         items: [
                                                             { "id": "Begin Demo?", "value": "Would you like a demo", "type": "message" },
-                                                            { "id": 1, "value": "Begin Demo", "type": "button", "action": {
-                                                                "jobs": [
-                                                                    "./my_packages/ParamikoObj/1.json",
-                                                                ]
-                                                            }
-                                                        },,
+                                                            {
+                                                                "id": 1, "value": "Begin Demo", "type": "button", "action": {
+                                                                    "jobs": [
+                                                                        "./my_packages/ParamikoObj/1.json",
+                                                                    ]
+                                                                }
+                                                            }, ,
                                                         ]
                                                     },
                                                     {
                                                         id: 1,
                                                         items: [
                                                             { "id": "./json/excel/excel_dev_list.txt", "value": "", "type": "textarea" },
-                                                            { "id": 2, "value": "", "type": "button", "action": {
-                                                                "jobs": [
-                                                                    "./my_packages/ParamikoObj/2.json",
-                                                                ]
-                                                            }
-                                                        },
+                                                            {
+                                                                "id": 2, "value": "", "type": "button", "action": {
+                                                                    "jobs": [
+                                                                        "./my_packages/ParamikoObj/2.json",
+                                                                    ]
+                                                                }
+                                                            },
                                                         ]
                                                     },
                                                     {
@@ -144,12 +147,13 @@ function DTreeForm() {
                                                         id: 3,
                                                         items: [
                                                             { "id": "PASSCODE", "value": "", "type": "text" },
-                                                            { "id": 4, "value": "", "type": "button", "action": {
-                                                                "jobs": [
-                                                                    "./my_packages/ParamikoObj/32.json",
-                                                                ]
-                                                            }
-                                                        },
+                                                            {
+                                                                "id": 4, "value": "", "type": "button", "action": {
+                                                                    "jobs": [
+                                                                        "./my_packages/ParamikoObj/32.json",
+                                                                    ]
+                                                                }
+                                                            },
                                                         ]
                                                     },
                                                     {
@@ -450,6 +454,7 @@ function DTreeForm() {
                             {cards.map(e => (
                                 <Col lg={colSizes[e.c_id]} className="mb-3">
                                     <DynamicForm
+                                        key={e.id}
                                         cards={cards}
                                         setCards={setCards}
                                         c_id={e.c_id}

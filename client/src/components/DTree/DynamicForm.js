@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 function DynamicForm({
     setCards,
     cards,
-    c_id,
+    src = `https://source.unsplash.com/1600x900/`,
     id,
     toggleS,
     setSize,
@@ -181,9 +181,9 @@ function DynamicForm({
     return (
 
         <Card style={{ height: '100%' }}>
-            <Card.Header as="h5" onClick={() => toggleS(setSize)}>{header} {id}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}</Card.Header>
+            <Card.Header as="h5" onClick={() => toggleS(setSize)}>{header}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}</Card.Header>
 
-            {output ? output.map((d, i) => <pre style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace" }}>{d}</pre>) : <Card.Img variant="top" src={`https://source.unsplash.com/1600x900/?${pictureCats[c_id]}`} />}
+            {output ? output.map((d, i) => <pre style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace" }}>{d}</pre>) : <Card.Img variant="top" src={src} />}
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>
