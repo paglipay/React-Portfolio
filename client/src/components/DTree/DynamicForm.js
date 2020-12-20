@@ -180,10 +180,10 @@ function DynamicForm({
     }
 
     const handleChange = e => {
-        // console.log(e.target.id)
+        console.log('handleChange type: ', e.target.type)
         setSubmitData({
             ...submitData,
-            [e.target.id]: e.target.value
+            [e.target.id]: (e.target.type === 'text' || e.target.type === 'password' ? [e.target.value] : e.target.value)
         })
         // this.setState({ [e.target.name]: e.target.value });
     }
@@ -271,9 +271,9 @@ function DynamicForm({
 
             </Card.Body>
             <Card.Footer className="text-muted">
-                <Button onClick={() => startPost(sessionId, submitData)}>Start 9 with POST</Button>
+                {/* <Button onClick={() => startPost(sessionId, submitData)}>Start 9 with POST</Button>
                 <Button onClick={() => startPost(sessionId, defaultSubmits[1])}>Update 9 with POST</Button>
-                <Button style={{ float: 'right' }} onClick={() => setCards(cards.filter(c => c.id !== id))}>Close</Button>
+                <Button style={{ float: 'right' }} onClick={() => setCards(cards.filter(c => c.id !== id))}>Close</Button> */}
                 {id}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}
             </Card.Footer>
         </Card>

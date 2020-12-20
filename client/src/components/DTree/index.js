@@ -72,7 +72,9 @@ function DTreeForm() {
                     "id": "Begin Demo?", "name": "Step 1 - Testing Cisco Parse",
                     "value": "Testing cisco parse from a list of hostnames",
                     "type": "message"
-                },
+                },                
+                { "id": "src_net", "value": "", "type": "text" },
+                { "id": "dest_net", "value": "", "type": "text" },
                 {
                     "id": 2,
                     "value": "Step 1 - Process 192.168.2.82",
@@ -82,12 +84,12 @@ function DTreeForm() {
                             {
                                 "import": "ExtendedAccessListObj"
                             },
-                            {
-                                "open": {
-                                    "src_net": "128.97.107.0/24",
-                                    "dest_net": "149.142.33.0/24"
-                                }
-                            }
+                            // {
+                            //     "open": {
+                            //         "src_net": "128.97.107.0/24",
+                            //         "dest_net": "149.142.33.0/24"
+                            //     }
+                            // }
                         ],
                         "jobs": [
                             {
@@ -105,7 +107,7 @@ function DTreeForm() {
                 { "id": "Begin Demo?", "name": "Step 2 - Process 192.168.2.83", "value": "Step 2 - Process 192.168.2.83", "type": "message" },
                 { "id": "Host", "value": "", "type": "text" },
                 { "id": "Username", "value": "", "type": "text" },
-                { "id": "PASSCODE", "value": "", "type": "password" },
+                { "id": "PASSCODE", "value": "", "type": "text" },
                 {
                     "id": 3, "value": "Step 2 - Process 192.168.2.83", "type": "button", "action": {
                         "jobs": [
