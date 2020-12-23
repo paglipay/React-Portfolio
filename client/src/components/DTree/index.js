@@ -20,10 +20,11 @@ function DTreeForm() {
             id: 0,
             items: [
                 { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Would you like a demo", "type": "message" },
+                { "id": "(PASSCODE): ", "value": "", "type": "text" },
                 {
                     "id": 1, "value": "Begin Demo", "type": "button", "action": {
                         "jobs": [
-                            "./my_packages/ParamikoObj/1.json",
+                            "./start.json" ,
                         ]
                     }
                 },
@@ -33,15 +34,33 @@ function DTreeForm() {
             id: 1,
             items: [
                 {
-                    "id": "Begin Demo?", "name": "Step 1 - Process 192.168.2.82",
-                    "value": <pre>{'pwd\nls -ls\nexit'}</pre>,
+                    "id": "Begin Demo?", "name": "Step 1 - Testing Cisco Parse",
+                    "value": "Testing cisco parse from a list of hostnames",
                     "type": "message"
                 },
                 { "id": "./json/excel/excel_dev_list.txt", "value": "", "type": "textarea" },
                 {
-                    "id": 2, "value": "Step 1 - Process 192.168.2.82", "type": "button", "action": {
+                    "id": 2,
+                    "value": "Step 1 - Process 192.168.2.82",
+                    "type": "button",
+                    "action": {
                         "jobs": [
-                            "./my_packages/ParamikoObj/2.json",
+                            {
+                                "import": "Key"
+                            },
+                            {
+                                "True": [
+                                    {
+                                        "True": "./CustomObj/CiscoObj/create_cisco_json_test.json"
+                                    },
+                                    {
+                                        "True": "./CustomObj/CiscoObj/cisco_json_test_dev_list.json"
+                                    },
+                                    {
+                                        "False": "./CustomObj/CiscoObj/process_cisco_acls.json"
+                                    }
+                                ]
+                            },
                         ]
                     }
                 },
@@ -50,10 +69,46 @@ function DTreeForm() {
         {
             id: 2,
             items: [
+                {
+                    "id": "Begin Demo?", "name": "Step 1 - Testing Cisco Parse",
+                    "value": "Testing cisco parse from a list of hostnames",
+                    "type": "message"
+                },
+                { "id": "src_net", "value": "", "type": "text" },
+                { "id": "dest_net", "value": "", "type": "text" },
+                {
+                    "id": 2,
+                    "value": "Step 1 - Process 192.168.2.82",
+                    "type": "button",
+                    "action": {
+                        "./CustomObj/CiscoObj/process_cisco_acls.json": [
+                            {
+                                "import": "ExtendedAccessListObj"
+                            },
+                            // {
+                            //     "open": {
+                            //         "src_net": "128.97.107.0/24",
+                            //         "dest_net": "149.142.33.0/24"
+                            //     }
+                            // }
+                        ],
+                        "jobs": [
+                            {
+                                "import": "Key"
+                            },
+                            "./CustomObj/CiscoObj/process_cisco_acls.json",
+                        ]
+                    }
+                },
+            ]
+        },
+        {
+            id: 3,
+            items: [
                 { "id": "Begin Demo?", "name": "Step 2 - Process 192.168.2.83", "value": "Step 2 - Process 192.168.2.83", "type": "message" },
                 { "id": "Host", "value": "", "type": "text" },
                 { "id": "Username", "value": "", "type": "text" },
-                { "id": "PASSCODE", "value": "", "type": "password" },
+                { "id": "PASSCODE", "value": "", "type": "text" },
                 {
                     "id": 3, "value": "Step 2 - Process 192.168.2.83", "type": "button", "action": {
                         "jobs": [
@@ -64,10 +119,10 @@ function DTreeForm() {
             ]
         },
         {
-            id: 3,
+            id: 4,
             items: [
                 { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Step 3 - Process 192.168.2.32", "type": "message" },
-                { "id": "PASSCODE", "value": "", "type": "text" },
+                { "id": "PASSCODE", "value": <pre>{'pwd\nls -ls\nexit'}</pre>, "type": "text" },
                 {
                     "id": 4, "value": "Step 3 - Process 192.168.2.32", "type": "button", "action": {
                         "jobs": [
@@ -78,7 +133,7 @@ function DTreeForm() {
             ]
         },
         {
-            id: 4,
+            id: 5,
             items: [
                 { "id": "Done", "name": "Done", "value": "This is completed. Would you like to email yourself the results?", "type": "message" },
                 { "id": "Email Results", "value": "", "type": "text" },
@@ -139,9 +194,9 @@ function DTreeForm() {
         setTasks([])
     }
 
-    const sendPost = (id, d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'], "Code": [''] }) => {
+    const sendPost = (id, d = { "(PASSCODE): ": [''], "custom_entry": ['echo custom_entry STUFF 1234'], "Code": [''] }) => {
         console.log('sendPost')
-        // const d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'] }
+        // const d = { "(PASSCODE): ": [''], "custom_entry": ['echo custom_entry STUFF 1234'] }
         axios.post("/api/dtree/send/" + id, d)
             .then(res => {
                 console.log(res.data)
@@ -149,9 +204,9 @@ function DTreeForm() {
             .catch(err => console.log(err));
     }
 
-    const startPost = (id, d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'], "Code": [''] }) => {
+    const startPost = (id, d = { "(PASSCODE): ": [''], "custom_entry": ['echo custom_entry STUFF 1234'], "Code": [''] }) => {
         console.log('startPost')
-        // const d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'] }
+        // const d = { "(PASSCODE): ": [''], "custom_entry": ['echo custom_entry STUFF 1234'] }
         axios.post("/api/dtree/start/" + id, d)
             .then(res => {
                 console.log(res.data)
@@ -349,8 +404,9 @@ function DTreeForm() {
                     <Col lg="9">
                         <Row className="mt-3">
                             {cards.map((e, i) => (
-                                <Col lg={colSizes[i]} className="mb-3">
+                                <Col key={`col_index_1${e.id}`} lg={colSizes[i]} className="mb-3">
                                     <DynamicForm
+                                        prompt_request={e.prompt_request}
                                         src={e.src}
                                         key={e.id}
                                         cards={cards}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, ListGroup, Badge, Card, Button, Spinner, Form } from 'react-bootstrap'
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
+import PromptWindow from './PromptWindow'
 
 function DynamicForm({
     setCards,
@@ -84,30 +85,33 @@ function DynamicForm({
             ]
         }
     ])
-    const [submitData, setSubmitData] = useState({
-        // "./json/excel/excel_dev_list.txt": "br00f2n.luskin.ucla.net",
-        "./json/excel/excel_dev_list.txt": 'br01f2.carnesalecommons.ucla.net',
-        // "./CustomObj/CiscoObj/_accept_list.txt": configTextAreaVal,
-        // "C:/Users/Paul Aglipay/Desktop/New folder/br00f2n.luskin.ucla.net.txt": configTextAreaVal,
-        "jobs": [
-            {
-                "import": "Key"
-            },
-            {
-                "True": [
-                    {
-                        "True": "./CustomObj/CiscoObj/create_cisco_json_test.json"
-                    },
-                    {
-                        "True": "./CustomObj/CiscoObj/cisco_json_test_dev_list.json"
-                    },
-                    {
-                        "False": "./CustomObj/CiscoObj/process_cisco_acls.json"
-                    }
-                ]
-            },
-        ]
-    });
+    // const [submitData, setSubmitData] = useState({
+    //     // "./json/excel/excel_dev_list.txt": "br00f2n.luskin.ucla.net",
+    //     "./json/excel/excel_dev_list.txt": 'br01f2.carnesalecommons.ucla.net',
+    //     // "./CustomObj/CiscoObj/_accept_list.txt": configTextAreaVal,
+    //     // "C:/Users/Paul Aglipay/Desktop/New folder/br00f2n.luskin.ucla.net.txt": configTextAreaVal,
+    //     "jobs": [
+    //         {
+    //             "import": "Key"
+    //         },
+    //         {
+    //             "True": [
+    //                 {
+    //                     "True": "./CustomObj/CiscoObj/create_cisco_json_test.json"
+    //                 },
+    //                 {
+    //                     "True": "./CustomObj/CiscoObj/cisco_json_test_dev_list.json"
+    //                 },
+    //                 {
+    //                     "False": "./CustomObj/CiscoObj/process_cisco_acls.json"
+    //                 }
+    //             ]
+    //         },
+    //     ]
+    // });
+
+    const [submitData, setSubmitData] = useState({});
+
     // const [formItemsCollection, setFormItemsCollection] = useState(formItemsCollection)
     const [formItems, setFormItems] = useState([
         // { "id": "./json/excel/excel_dev_list.txt", "value": "" },
@@ -128,23 +132,27 @@ function DynamicForm({
 
     let myVar;
     const showLoop = (id) => {
-        myVar = setInterval(() => loadDtree(id), 10000)
+        myVar = setInterval(() => loadDtree(id), 5000)
     }
 
     const loadDtree = (id) => {
         console.log('loadDtree')
         axios.get("/api/dtree/start/" + id)
             .then(res => {
+                console.log(res.data)
                 let o_arry = res.data.ParamikoObj.map(e => e.split('\n'))
                 let t_arry = [].concat.apply([], o_arry)
                 // console.log(t_arry)
                 // console.log(t_arry.slice(t_arry.length - 5, t_arry.length))
-                setOutput([t_arry.slice(t_arry.length - 15, t_arry.length).join('\n')])
+                setOutput([t_arry.join('\n')])
             })
             .catch(err => console.log(err));
     };
 
-    const startPost = (id, d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'], "Code": [''] }) => {
+    const startPost = (id, jobs = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'], "Code": [''] }) => {
+
+        const d = { ...submitData, jobs }
+
         console.log('startPost')
         showLoop(id)
         setFormItems()
@@ -155,7 +163,7 @@ function DynamicForm({
                 console.log(res.data)
                 clearInterval(myVar)
                 setFormCounter(formCounter + 1)
-
+                
                 if (res.data.hasOwnProperty('ParamikoObj')) {
                     let o_arry = res.data.ParamikoObj.map(e => e.split('\n'))
                     let t_arry = [].concat.apply([], o_arry)
@@ -174,20 +182,20 @@ function DynamicForm({
     }
 
     const handleChange = e => {
-        // console.log(e.target.id)
+        console.log('handleChange type: ', e.target.type)
         setSubmitData({
             ...submitData,
-            [e.target.id]: e.target.value
+            [e.target.id]: (e.target.type === 'text' || e.target.type === 'password' ? [e.target.value] : e.target.value)
         })
         // this.setState({ [e.target.name]: e.target.value });
     }
 
     return (
-
+        <>
         <Card style={{ height: '100%' }}>
             <Card.Header as="h5" onClick={() => toggleS(setSize)}>{header}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}</Card.Header>
 
-            {output ? output.map((d, i) => <pre style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace" }}>{d}</pre>) : <Card.Img variant="top" src={src} />}
+            {output ? output.map((d, i) => <pre key={`df_pre_${d.id}`} style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace" }}>{d}</pre>) : <Card.Img variant="top" src={src} />}
             <Card.Body>
                 <Row>
                     <Col lg={colSize !== 4 ? 6 : 12}>
@@ -225,7 +233,10 @@ function DynamicForm({
                                         <Form.Group key={`fg-${d.id}`} controlId={`${d.id}`}>
                                             <Button
                                                 style={{ float: 'right' }}
-                                                onClick={() => startPost(sessionId, d.action)} size="lg">Next</Button>
+                                                onClick={() => startPost(sessionId, d.action.jobs)} size="lg">Next</Button>
+                                            {/* <Button
+                                                style={{ float: 'right' }}
+                                                onClick={() => startPost(sessionId, submitData)} size="lg">Next</Button> */}
                                             {/* <hr /> */}
                                         </Form.Group>
                                     </React.Fragment>)
@@ -268,7 +279,7 @@ function DynamicForm({
                 {id}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}
             </Card.Footer>
         </Card>
-
+        </>
     )
 }
 
