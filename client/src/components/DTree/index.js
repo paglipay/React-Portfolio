@@ -20,10 +20,11 @@ function DTreeForm() {
             id: 0,
             items: [
                 { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Would you like a demo", "type": "message" },
+                { "id": "(PASSCODE): ", "value": "", "type": "text" },
                 {
                     "id": 1, "value": "Begin Demo", "type": "button", "action": {
                         "jobs": [
-                            "./my_packages/ParamikoObj/1.json",
+                            "./start.json" ,
                         ]
                     }
                 },
@@ -72,7 +73,7 @@ function DTreeForm() {
                     "id": "Begin Demo?", "name": "Step 1 - Testing Cisco Parse",
                     "value": "Testing cisco parse from a list of hostnames",
                     "type": "message"
-                },                
+                },
                 { "id": "src_net", "value": "", "type": "text" },
                 { "id": "dest_net", "value": "", "type": "text" },
                 {
@@ -405,6 +406,7 @@ function DTreeForm() {
                             {cards.map((e, i) => (
                                 <Col key={`col_index_1${e.id}`} lg={colSizes[i]} className="mb-3">
                                     <DynamicForm
+                                        prompt_request={e.prompt_request}
                                         src={e.src}
                                         key={e.id}
                                         cards={cards}

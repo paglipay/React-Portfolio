@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, ListGroup, Badge, Card, Button, Spinner, Form } from 'react-bootstrap'
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
+import PromptWindow from './PromptWindow'
 
 function DynamicForm({
     setCards,
@@ -131,25 +132,26 @@ function DynamicForm({
 
     let myVar;
     const showLoop = (id) => {
-        myVar = setInterval(() => loadDtree(id), 10000)
+        myVar = setInterval(() => loadDtree(id), 5000)
     }
 
     const loadDtree = (id) => {
         console.log('loadDtree')
         axios.get("/api/dtree/start/" + id)
             .then(res => {
+                console.log(res.data)
                 let o_arry = res.data.ParamikoObj.map(e => e.split('\n'))
                 let t_arry = [].concat.apply([], o_arry)
                 // console.log(t_arry)
                 // console.log(t_arry.slice(t_arry.length - 5, t_arry.length))
-                setOutput([t_arry.slice(t_arry.length - 15, t_arry.length).join('\n')])
+                setOutput([t_arry.join('\n')])
             })
             .catch(err => console.log(err));
     };
 
     const startPost = (id, jobs = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'], "Code": [''] }) => {
 
-        const d = {...submitData, jobs}
+        const d = { ...submitData, jobs }
 
         console.log('startPost')
         showLoop(id)
@@ -161,7 +163,7 @@ function DynamicForm({
                 console.log(res.data)
                 clearInterval(myVar)
                 setFormCounter(formCounter + 1)
-
+                
                 if (res.data.hasOwnProperty('ParamikoObj')) {
                     let o_arry = res.data.ParamikoObj.map(e => e.split('\n'))
                     let t_arry = [].concat.apply([], o_arry)
@@ -189,7 +191,7 @@ function DynamicForm({
     }
 
     return (
-
+        <>
         <Card style={{ height: '100%' }}>
             <Card.Header as="h5" onClick={() => toggleS(setSize)}>{header}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}</Card.Header>
 
@@ -277,7 +279,7 @@ function DynamicForm({
                 {id}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}
             </Card.Footer>
         </Card>
-
+        </>
     )
 }
 
