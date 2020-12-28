@@ -20,7 +20,7 @@ function DTreeForm() {
             id: 0,
             items: [
                 { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Would you like a demo", "type": "message" },
-                { "id": "(PASSCODE): ", "value": "", "type": "text" },
+                { "id": "Code", "value": "", "type": "text" },
                 {
                     "id": 1, "value": "Begin Demo", "type": "button", "action": {
                         "jobs": [

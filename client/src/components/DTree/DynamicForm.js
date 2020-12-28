@@ -151,17 +151,17 @@ function DynamicForm({
 
     const startPost = (id, jobs = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'], "Code": [''] }) => {
 
-        const d = { ...submitData, jobs }
+        const d = { ...submitData, jobs, id }
 
         console.log('startPost')
-        showLoop(id)
+        // showLoop(id)
         setFormItems()
         setBadgeStatus('warning')
         // const d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'] }
         axios.post("/api/dtree/start/" + id, d)
             .then(res => {
                 console.log(res.data)
-                clearInterval(myVar)
+                // clearInterval(myVar)
                 setFormCounter(formCounter + 1)
                 
                 if (res.data.hasOwnProperty('ParamikoObj')) {
