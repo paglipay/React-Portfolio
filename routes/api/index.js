@@ -2,6 +2,7 @@ const router = require("express").Router();
 const appointmentRoutes = require("./appointments");
 const employeeRoutes = require("./employees");
 const configRoutes = require("./configs");
+const collectionRoutes = require("./collections");
 // const bookRoutes = require("./books");
 const dtreeRoutes = require("./dtree");
 const userRoutes = require("./users");
@@ -15,6 +16,7 @@ router.use("/users", userRoutes);
 router.use("/appointments", appointmentRoutes);
 router.use("/employees", authCheckMiddleware, employeeRoutes);
 router.use("/configs", configRoutes);
+router.use("/collections", collectionRoutes);
 router.use("/dtree", dtreeRoutes);
 
 module.exports = router;

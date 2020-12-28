@@ -7,6 +7,7 @@ import LLCard from '../LobbyLogin/components/LLCard'
 import { XCircle, Folder2Open } from 'react-bootstrap-icons';
 // import API from "../../utils/API";
 import { v4 as uuidv4 } from 'uuid';
+import Collections from '../DTree/containers/CollectionsTable'
 
 function DTreeForm() {
     const [tasks, setTasks] = useState([])
@@ -17,21 +18,26 @@ function DTreeForm() {
 
     const formItemsCollection = [
         {
-            id: 0,
+            name: 0,
             items: [
                 { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Would you like a demo", "type": "message" },
                 { "id": "Code", "value": "", "type": "text" },
                 {
                     "id": 1, "value": "Begin Demo", "type": "button", "action": {
                         "jobs": [
-                            "./start.json" ,
+                            {
+                                "import": "Key"
+                            },
+                            {
+                                "True": "./start.json"
+                            }
                         ]
                     }
                 },
             ]
         },
         {
-            id: 1,
+            name: 1,
             items: [
                 {
                     "id": "Begin Demo?", "name": "Step 1 - Testing Cisco Parse",
@@ -67,7 +73,7 @@ function DTreeForm() {
             ]
         },
         {
-            id: 2,
+            name: 2,
             items: [
                 {
                     "id": "Begin Demo?", "name": "Step 1 - Testing Cisco Parse",
@@ -103,7 +109,7 @@ function DTreeForm() {
             ]
         },
         {
-            id: 3,
+            name: 3,
             items: [
                 { "id": "Begin Demo?", "name": "Step 2 - Process 192.168.2.83", "value": "Step 2 - Process 192.168.2.83", "type": "message" },
                 { "id": "Host", "value": "", "type": "text" },
@@ -119,7 +125,7 @@ function DTreeForm() {
             ]
         },
         {
-            id: 4,
+            name: 4,
             items: [
                 { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Step 3 - Process 192.168.2.32", "type": "message" },
                 { "id": "PASSCODE", "value": <pre>{'pwd\nls -ls\nexit'}</pre>, "type": "text" },
@@ -133,7 +139,7 @@ function DTreeForm() {
             ]
         },
         {
-            id: 5,
+            name: 5,
             items: [
                 { "id": "Done", "name": "Done", "value": "This is completed. Would you like to email yourself the results?", "type": "message" },
                 { "id": "Email Results", "value": "", "type": "text" },
@@ -228,7 +234,9 @@ function DTreeForm() {
                 <Button onClick={() => getTasks(5)}>Get</Button>
                 <Button onClick={() => getTasks(6)}>Get</Button>
                 <Button onClick={() => getTasks(7)}>Get</Button> */}
-
+                <Row>
+                    <Collections />
+                </Row>
                 <Row>
                     <Col lg="3">
                         <Row className="mt-3">
@@ -272,39 +280,21 @@ function DTreeForm() {
                                     </ListGroup.Item>
                                     <ListGroup.Item as="li">
                                         Network Engineering
-                                        <Button style={{ float: 'right' }} onClick={() => {
-                                            setCards([0, 1, 2, 3, 4])
-                                        }}>Launch Demo</Button>
                                     </ListGroup.Item>
                                     <ListGroup.Item as="li">
                                         DevOps
-                                        <Button style={{ float: 'right' }} onClick={() => {
-                                            setCards([0, 1, 2, 3, 4])
-                                        }}>Launch Demo</Button>
                                     </ListGroup.Item>
                                     <ListGroup.Item as="li">
                                         MERN-Stack Development
-                                        <Button style={{ float: 'right' }} onClick={() => {
-                                            setCards([0, 1, 2, 3, 4])
-                                        }}>Launch Demo</Button>
                                     </ListGroup.Item>
                                     <ListGroup.Item as="li">
                                         Python
-                                        <Button style={{ float: 'right' }} onClick={() => {
-                                            setCards([0, 1, 2, 3, 4])
-                                        }}>Launch Demo</Button>
                                     </ListGroup.Item>
                                     <ListGroup.Item as="li">
                                         Network Automation
-                                        <Button style={{ float: 'right' }} onClick={() => {
-                                            setCards([0, 1, 2, 3, 4])
-                                        }}>Launch Demo</Button>
                                     </ListGroup.Item>
                                     <ListGroup.Item as="li">
                                         Web Scraping
-                                        <Button style={{ float: 'right' }} onClick={() => {
-                                            setCards([0, 1, 2, 3, 4])
-                                        }}>Launch Demo</Button>
                                     </ListGroup.Item>
                                     <ListGroup.Item as="li">
                                         Dapibus ac facilisis in

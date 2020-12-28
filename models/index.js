@@ -5,5 +5,6 @@ module.exports = {
   Employee: require("./employee"),
   User: require("./User"),
   Mop: require("./mop"),
-  Job: require("./job")
+  Job: require("./job"),
+  Collection: require("./collection")
 };
