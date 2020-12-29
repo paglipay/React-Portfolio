@@ -1,14 +1,18 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const collectionSchema = new Schema({
+const projectSchema = new Schema({
     name: { type: String, required: true },
-    projects: [
+    forms: [
+        {
+            type: Schema.Types.ObjectId,
+            id: "Form"
+        }
     ],
     author: { type: String, required: false },
     date: { type: Date, default: Date.now }
 });
 
-const Collection = mongoose.model("Collection", collectionSchema);
+const Project = mongoose.model("Project", projectSchema);
 
-module.exports = Collection;
+module.exports = Project;

@@ -6,5 +6,6 @@ module.exports = {
   User: require("./User"),
   Mop: require("./mop"),
   Job: require("./job"),
-  Collection: require("./collection")
+  Collection: require("./collection"),
+  Project: require("./project")
 };

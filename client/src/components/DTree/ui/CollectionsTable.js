@@ -40,7 +40,7 @@ export default function CollectionsTable({ collectionData, fetchCollections, onR
                       <InputGroup.Prepend>
                         <InputGroup.Checkbox aria-label="Checkbox for following text input" />
                         <Button onClick={() => onActivatePressed(collection._id)}><Folder2Open /></Button>
-                        <Button className="btn-danger" onClick={() => onRemovePressed(collection._id)}><XCircle /></Button>
+                        {/* <Button className="btn-danger" onClick={() => onRemovePressed(collection._id)}><XCircle /></Button> */}
                       </InputGroup.Prepend>
                       {/* <FormControl aria-label="Text input with checkbox" /> */}
                     </InputGroup>

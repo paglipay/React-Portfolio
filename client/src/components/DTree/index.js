@@ -8,144 +8,241 @@ import { XCircle, Folder2Open } from 'react-bootstrap-icons';
 // import API from "../../utils/API";
 import { v4 as uuidv4 } from 'uuid';
 import Collections from '../DTree/containers/CollectionsTable'
+import { connect } from 'react-redux';
+import { addCollectionRequest } from '../../redux/collection/actions';
 
-function DTreeForm() {
+function DTreeForm({ collectionData }) {
     const [tasks, setTasks] = useState([])
     const [configTextAreaVal, setConfigTextAreaVal] = useState('')
     const ciscoConfigTextArea = useRef(null);
     const [colSizes, setColSizes] = useState([4, 4, 4, 8, 4, 4, 8, 4, 4, 4])
     const [cards, setCards] = useState([])
+    const [formItemsCollection, setFormItemsCollection] = useState([{
+        id: "0",
+        name: "Test (3) servers",
+        form_items: [
+            {
+                "id": "f00",
+                "name": "Begin Demo2",
+                "value": "Would you like a demo2",
+                "type": "message"
+            },
+            {
+                "id": "f01",
+                "name": "Code",
+                "value": "Enter Code",
+                "type": "text"
+            },
+            {
+                "id": "f02",
+                "name": "Next",
+                "value": "Next",
+                "type": "button",
+                "action": {
+                    "jobs": [
+                        {
+                            "import": "Key"
+                        },
+                        {
+                            "False": "./my_packages/ParamikoObj/1.json"
+                        },
+                        {
+                            "False": "./my_packages/ParamikoObj/2.json"
+                        },
+                        {
+                            "False": "./my_packages/ParamikoObj/3.json"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        id: "2",
+        name: "2",
+        form_items: [
+            { "id": "Done", "name": "Done", "value": "This is completed. Would you like to email yourself the results?", "type": "message" }
+        ]
+    }])
 
-    const formItemsCollection = [
-        {
-            name: 0,
-            items: [
-                { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Would you like a demo", "type": "message" },
-                { "id": "Code", "value": "", "type": "text" },
-                {
-                    "id": 1, "value": "Begin Demo", "type": "button", "action": {
-                        "jobs": [
-                            {
-                                "import": "Key"
-                            },
-                            {
-                                "True": "./start.json"
-                            }
-                        ]
-                    }
-                },
-            ]
-        },
-        {
-            name: 1,
-            items: [
-                {
-                    "id": "Begin Demo?", "name": "Step 1 - Testing Cisco Parse",
-                    "value": "Testing cisco parse from a list of hostnames",
-                    "type": "message"
-                },
-                { "id": "./json/excel/excel_dev_list.txt", "value": "", "type": "textarea" },
-                {
-                    "id": 2,
-                    "value": "Step 1 - Process 192.168.2.82",
-                    "type": "button",
-                    "action": {
-                        "jobs": [
-                            {
-                                "import": "Key"
-                            },
-                            {
-                                "True": [
-                                    {
-                                        "True": "./CustomObj/CiscoObj/create_cisco_json_test.json"
-                                    },
-                                    {
-                                        "True": "./CustomObj/CiscoObj/cisco_json_test_dev_list.json"
-                                    },
-                                    {
-                                        "False": "./CustomObj/CiscoObj/process_cisco_acls.json"
-                                    }
-                                ]
-                            },
-                        ]
-                    }
-                },
-            ]
-        },
-        {
-            name: 2,
-            items: [
-                {
-                    "id": "Begin Demo?", "name": "Step 1 - Testing Cisco Parse",
-                    "value": "Testing cisco parse from a list of hostnames",
-                    "type": "message"
-                },
-                { "id": "src_net", "value": "", "type": "text" },
-                { "id": "dest_net", "value": "", "type": "text" },
-                {
-                    "id": 2,
-                    "value": "Step 1 - Process 192.168.2.82",
-                    "type": "button",
-                    "action": {
-                        "./CustomObj/CiscoObj/process_cisco_acls.json": [
-                            {
-                                "import": "ExtendedAccessListObj"
-                            },
-                            // {
-                            //     "open": {
-                            //         "src_net": "128.97.107.0/24",
-                            //         "dest_net": "149.142.33.0/24"
-                            //     }
-                            // }
-                        ],
-                        "jobs": [
-                            {
-                                "import": "Key"
-                            },
-                            "./CustomObj/CiscoObj/process_cisco_acls.json",
-                        ]
-                    }
-                },
-            ]
-        },
-        {
-            name: 3,
-            items: [
-                { "id": "Begin Demo?", "name": "Step 2 - Process 192.168.2.83", "value": "Step 2 - Process 192.168.2.83", "type": "message" },
-                { "id": "Host", "value": "", "type": "text" },
-                { "id": "Username", "value": "", "type": "text" },
-                { "id": "PASSCODE", "value": "", "type": "text" },
-                {
-                    "id": 3, "value": "Step 2 - Process 192.168.2.83", "type": "button", "action": {
-                        "jobs": [
-                            "./my_packages/ParamikoObj/3.json",
-                        ]
-                    }
-                },
-            ]
-        },
-        {
-            name: 4,
-            items: [
-                { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Step 3 - Process 192.168.2.32", "type": "message" },
-                { "id": "PASSCODE", "value": <pre>{'pwd\nls -ls\nexit'}</pre>, "type": "text" },
-                {
-                    "id": 4, "value": "Step 3 - Process 192.168.2.32", "type": "button", "action": {
-                        "jobs": [
-                            "./my_packages/ParamikoObj/32.json",
-                        ]
-                    }
-                },
-            ]
-        },
-        {
-            name: 5,
-            items: [
-                { "id": "Done", "name": "Done", "value": "This is completed. Would you like to email yourself the results?", "type": "message" },
-                { "id": "Email Results", "value": "", "type": "text" },
-            ]
-        }
-    ]
+    // const formItemsCollection = [
+    //     {
+    //         id:"0",
+    //         name: "Test (3) servers",
+    //         form_items: [
+    //             {
+    //                 "id":"f00",
+    //                 "name": "Begin Demo2",
+    //                 "value": "Would you like a demo2",
+    //                 "type": "message"
+    //             },
+    //             {
+    //                 "id":"f01",
+    //                 "name": "Code",
+    //                 "value": "Enter Code",
+    //                 "type": "text"
+    //             },
+    //             {
+    //                 "id":"f02",
+    //                 "name": "Next",
+    //                 "value": "Next",
+    //                 "type": "button",
+    //                 "action": {
+    //                     "jobs": [
+    //                         {
+    //                             "import": "Key"
+    //                         },
+    //                         {
+    //                             "False": "./my_packages/ParamikoObj/1.json"
+    //                         },
+    //                         {
+    //                             "False": "./my_packages/ParamikoObj/2.json"
+    //                         },
+    //                         {
+    //                             "False": "./my_packages/ParamikoObj/3.json"
+    //                         }
+    //                     ]
+    //                 }
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         id:"1",
+    //         name: 1,
+    //         form_items: [
+    //             { 
+    //                 "id":"f10", "name": "Begin Demo?", "value": "Would you like a demo", "type": "message" },
+    //             { 
+    //                 "id":"f11", "value": "", "type": "text" },
+    //             {
+    //                 "id":"f12", "value": "Begin Demo", "type": "button", "action": {
+    //                     "jobs": [
+    //                         {
+    //                             "import": "Key"
+    //                         },
+    //                         {
+    //                             "False": "./start.json"
+    //                         }
+    //                     ]
+    //                 }
+    //             },
+    //         ]
+    //     },
+    //     {
+    //         id:"2",
+    //         name: "2",
+    //         form_items: [
+    //             {
+    //                 "id": "Begin Demo?", "name": "Step 1 - Testing Cisco Parse",
+    //                 "value": "Testing cisco parse from a list of hostnames",
+    //                 "type": "message"
+    //             },
+    //             { "id": "./json/excel/excel_dev_list.txt", "value": "", "type": "textarea" },
+    //             {
+    //                 "id": 3,
+    //                 "value": "Step 1 - Process 192.168.2.82",
+    //                 "type": "button",
+    //                 "action": {
+    //                     "jobs": [
+    //                         {
+    //                             "import": "Key"
+    //                         },
+    //                         {
+    //                             "False": [
+    //                                 {
+    //                                     "True": "./CustomObj/CiscoObj/create_cisco_json_test.json"
+    //                                 },
+    //                                 {
+    //                                     "True": "./CustomObj/CiscoObj/cisco_json_test_dev_list.json"
+    //                                 },
+    //                                 {
+    //                                     "False": "./CustomObj/CiscoObj/process_cisco_acls.json"
+    //                                 }
+    //                             ]
+    //                         },
+    //                     ]
+    //                 }
+    //             },
+    //         ]
+    //     },
+    //     {
+    //         id:"3",
+    //         name: "3",
+    //         form_items: [
+    //             {
+    //                 "id": "Begin Demo?", "name": "Step 1 - Testing Cisco Parse",
+    //                 "value": "Testing cisco parse from a list of hostnames",
+    //                 "type": "message"
+    //             },
+    //             { "id": "src_net", "value": "", "type": "text" },
+    //             { "id": "dest_net", "value": "", "type": "text" },
+    //             {
+    //                 "id": 4,
+    //                 "value": "Step 1 - Process 192.168.2.82",
+    //                 "type": "button",
+    //                 "action": {
+    //                     "./CustomObj/CiscoObj/process_cisco_acls.json": [
+    //                         {
+    //                             "import": "ExtendedAccessListObj"
+    //                         },
+    //                         // {
+    //                         //     "open": {
+    //                         //         "src_net": "128.97.107.0/24",
+    //                         //         "dest_net": "149.142.33.0/24"
+    //                         //     }
+    //                         // }
+    //                     ],
+    //                     "jobs": [
+    //                         {
+    //                             "import": "Key"
+    //                         },
+    //                         "./CustomObj/CiscoObj/process_cisco_acls.json",
+    //                     ]
+    //                 }
+    //             },
+    //         ]
+    //     },
+    //     {
+    //         id:"4",
+    //         name: "4",
+    //         form_items: [
+    //             { "id": "Begin Demo?", "name": "Step 2 - Process 192.168.2.83", "value": "Step 2 - Process 192.168.2.83", "type": "message" },
+    //             { "id": "Host", "value": "", "type": "text" },
+    //             { "id": "Username", "value": "", "type": "text" },
+    //             { "id": "PASSCODE", "value": "", "type": "text" },
+    //             {
+    //                 "id": 5, "value": "Step 2 - Process 192.168.2.83", "type": "button", "action": {
+    //                     "jobs": [
+    //                         "./my_packages/ParamikoObj/3.json",
+    //                     ]
+    //                 }
+    //             },
+    //         ]
+    //     },
+    //     {
+    //         id:"5",
+    //         name: "5",
+    //         form_items: [
+    //             { "id": "Begin Demo?", "name": "Begin Demo?", "value": "Step 3 - Process 192.168.2.32", "type": "message" },
+    //             { "id": "PASSCODE", "value": <pre>{'pwd\nls -ls\nexit'}</pre>, "type": "text" },
+    //             {
+    //                 "id": 6, "value": "Step 3 - Process 192.168.2.32", "type": "button", "action": {
+    //                     "jobs": [
+    //                         "./my_packages/ParamikoObj/32.json",
+    //                     ]
+    //                 }
+    //             },
+    //         ]
+    //     },
+    //     {
+    //         id:"6",
+    //         name: "6",
+    //         form_items: [
+    //             { "id": "Done", "name": "Done", "value": "This is completed. Would you like to email yourself the results?", "type": "message" },
+    //             { "id": "Email Results", "value": "", "type": "text" },
+    //         ]
+    //     }
+    // ]
 
 
 
@@ -153,6 +250,29 @@ function DTreeForm() {
     const toggleSizes = n => {
         setColSizes(colSizes.map((num, i) => i === n ? (num === 8 ? 4 : 8) : num))
     }
+
+    useEffect(() => {
+        console.log('collectionData.activeCollection: ', collectionData.activeCollection)
+
+        if (collectionData.activeCollection && collectionData.activeCollection.projects) {
+            let t_arry = []
+            let i = 0
+            // for (let i = 0; i < 1; i++) {
+            collectionData.activeCollection.projects.forEach(p => {
+                const c_name = uuidv4()
+                t_arry.push({
+                    id: c_name,
+                    src: `https://source.unsplash.com/1600x900/?${pictureCats[i]}`,
+                    title: p.name,
+                    header: 'Featured Project',
+                    body: " Some quick example text to build on the card title and make up the bulk of the card's content.",
+                    formItemsCollection: p.forms
+                })
+                i += 1
+            })
+            setCards(t_arry)
+        }
+    }, [collectionData]);
 
     useEffect(() => {
         let t_arry = []
@@ -235,12 +355,11 @@ function DTreeForm() {
                 <Button onClick={() => getTasks(6)}>Get</Button>
                 <Button onClick={() => getTasks(7)}>Get</Button> */}
                 <Row>
-                    <Collections />
-                </Row>
-                <Row>
                     <Col lg="3">
                         <Row className="mt-3">
+
                             <LLCard title="Jobs">
+                                <Collections />
                                 <ListGroup as="ul">
                                     <ListGroup.Item as="li">
                                         Add a new Card
@@ -464,4 +583,17 @@ function DTreeForm() {
     )
 }
 
-export default DTreeForm
+// export default DTreeForm
+
+const mapStateToProps = state => {
+    return {
+        collectionData: state.collection
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    onCreatePressed: text => dispatch(addCollectionRequest(text)),
+    // onCompletedPressed: id => dispatch(markTodoAsCompletedRequest(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DTreeForm)
