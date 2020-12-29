@@ -252,7 +252,7 @@ function DTreeForm({ collectionData }) {
     }
 
     useEffect(() => {
-        console.log('collectionData.activeCollection: ', collectionData.activeCollection)
+        // console.log('collectionData.activeCollection: ', collectionData.activeCollection)
 
         if (collectionData.activeCollection && collectionData.activeCollection.projects) {
             let t_arry = []
