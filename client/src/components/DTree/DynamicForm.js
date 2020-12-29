@@ -127,7 +127,7 @@ function DynamicForm({
 
     useEffect(() => {
         console.log(formCounter)
-        setFormItems(formItemsCollection[formCounter]['items'])
+        setFormItems(formItemsCollection[formCounter]['form_items'])
     }, [formCounter])
 
     let myVar;
@@ -257,7 +257,7 @@ function DynamicForm({
                                     return (<React.Fragment key={`frag-${d.id}`}>
                                         {/* <h1>{d.id}</h1> */}
                                         <Form.Group key={`fg-${d.id}`} controlId={`${d.id}`}>
-                                            <Form.Label key={`fl-${d.id}`}>{d.id}</Form.Label>
+                                            <Form.Label key={`fl-${d.id}`}>{d.value}</Form.Label>
                                             {/* <Form.Control type="password" placeholder="Password" /> */}
                                             <Form.Control key={`fc-${d.id}`} key={`fc-${d.id}`} type="text" onChange={(e) => handleChange(e)} rows="3" />
                                         </Form.Group>
