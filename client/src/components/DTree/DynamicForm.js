@@ -149,9 +149,10 @@ function DynamicForm({
             .catch(err => console.log(err));
     };
 
-    const startPost = (id, jobs = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'], "Code": [''] }) => {
+    const startPost = (id, data) => {
 
-        const d = { ...submitData, jobs, id }
+        console.log('startPost: data: ', data)
+        const d = { ...submitData, ...data, id }
 
         console.log('startPost')
         // showLoop(id)
@@ -233,7 +234,7 @@ function DynamicForm({
                                         <Form.Group key={`fg-${d.id}`} controlId={`${d.id}`}>
                                             <Button
                                                 style={{ float: 'right' }}
-                                                onClick={() => startPost(sessionId, d.action.jobs)} size="lg">Next</Button>
+                                                onClick={() => startPost(sessionId, d.action)} size="lg">Next</Button>
                                             {/* <Button
                                                 style={{ float: 'right' }}
                                                 onClick={() => startPost(sessionId, submitData)} size="lg">Next</Button> */}
