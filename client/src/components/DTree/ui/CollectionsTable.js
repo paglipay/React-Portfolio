@@ -20,7 +20,7 @@ export default function CollectionsTable({ collectionData, fetchCollections, onR
               <div className="input-group-prepend">
                 <span className="input-group-text" id="">
                   Search
-            </span>
+                </span>
               </div>
               <input
                 className="form-control mr-sm-2"
@@ -38,14 +38,14 @@ export default function CollectionsTable({ collectionData, fetchCollections, onR
                   <td>
                     <InputGroup className="mb-3">
                       <InputGroup.Prepend>
-                        <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                        {/* <InputGroup.Checkbox aria-label="Checkbox for following text input" /> */}
                         <Button onClick={() => onActivatePressed(collection._id)}><Folder2Open /></Button>
                         {/* <Button className="btn-danger" onClick={() => onRemovePressed(collection._id)}><XCircle /></Button> */}
                       </InputGroup.Prepend>
                       {/* <FormControl aria-label="Text input with checkbox" /> */}
                     </InputGroup>
                   </td>
-                  <td><pre>{collection.name} </pre></td></tr>)}
+                  <td>{collection.name}</td></tr>)}
             </tbody>
           </Table>
         </>

@@ -357,8 +357,7 @@ function DTreeForm({ collectionData }) {
                 <Row>
                     <Col lg="3">
                         <Row className="mt-3">
-
-                            <LLCard title="Jobs">
+                            <LLCard title="Showcase Catagories">
                                 <Collections />
                                 <ListGroup as="ul">
                                     <ListGroup.Item as="li">
