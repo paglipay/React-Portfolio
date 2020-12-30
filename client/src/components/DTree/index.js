@@ -265,7 +265,7 @@ function DTreeForm({ collectionData }) {
                     src: `https://source.unsplash.com/1600x900/?${pictureCats[i]}`,
                     title: p.name,
                     header: 'Featured Project',
-                    body: " Some quick example text to build on the card title and make up the bulk of the card's content.",
+                    body: p.description,
                     formItemsCollection: p.forms
                 })
                 i += 1
