@@ -6,6 +6,7 @@ import employeeReducer from './employee/employeeReducer'
 import appointmentReducer from './appointment/appointmentReducer'
 import todoReducer from './todo/reducers'
 import configReducer from './ciscoConfig/reducers'
+import collectionReducer from './collection/reducers'
 
 const rootReducer = combineReducers({
   // cake: cakeReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   employee: employeeReducer,
   appointment: appointmentReducer,
   todo: todoReducer,
-  config: configReducer
+  config: configReducer,
+  collection: collectionReducer
 })
 
 export default rootReducer
