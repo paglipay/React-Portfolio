@@ -27,7 +27,7 @@ module.exports = {
         // console.log('req.body: ', req.body)
         axios.post('https://paglipay-dtree.herokuapp.com/start/' + req.params.id, req.body)
             .then(resp => {
-                console.log(resp.data);
+                // console.log(resp.data);
                 res.json(resp.data)
             })
             .catch(error => {
