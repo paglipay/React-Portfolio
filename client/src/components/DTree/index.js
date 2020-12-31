@@ -29,28 +29,43 @@ function DTreeForm({ collectionData }) {
             },
             {
                 "id": "f01",
-                "name": "Code",
-                "value": "Enter Code",
+                "name": "ip",
+                "value": "Enter ip",
                 "type": "text"
             },
             {
                 "id": "f02",
+                "name": "username",
+                "value": "Enter username",
+                "type": "text"
+            },
+            {
+                "id": "f03",
+                "name": "password",
+                "value": "Enter Code",
+                "type": "text"
+            },
+            {
+                "id": "f04",
                 "name": "Next",
                 "value": "Next",
                 "type": "button",
                 "action": {
+                
+                    "form_items_to_dic": {
+                        "form_items": [
+                            'ip',
+                            'username',
+                            'password'
+                        ],
+                        "to_dic_name": "./json/paramiko/ubuntu/open/form_dic.json"
+                    },
                     "jobs": [
                         {
                             "import": "Key"
                         },
                         {
-                            "False": "./my_packages/ParamikoObj/1.json"
-                        },
-                        {
-                            "False": "./my_packages/ParamikoObj/2.json"
-                        },
-                        {
-                            "False": "./my_packages/ParamikoObj/3.json"
+                            "True": "./start.json"
                         }
                     ]
                 }
