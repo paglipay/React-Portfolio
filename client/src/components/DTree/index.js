@@ -47,6 +47,12 @@ function DTreeForm({ collectionData }) {
             },
             {
                 "id": "f04",
+                "name": "send_cmd",
+                "value": "Enter Command",
+                "type": "text"
+            },
+            {
+                "id": "f05",
                 "name": "Next",
                 "value": "Next",
                 "type": "button",
@@ -56,7 +62,8 @@ function DTreeForm({ collectionData }) {
                         "form_items": [
                             'ip',
                             'username',
-                            'password'
+                            'password',
+                            'send_cmd'
                         ],
                         "to_dic_name": "./json/paramiko/ubuntu/open/form_dic.json"
                     },
