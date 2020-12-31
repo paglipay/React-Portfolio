@@ -160,8 +160,11 @@ function DynamicForm({
                 build_dic[e] = submitData[e]
             })
             new_dic[new_dic_name] = [build_dic]
+            const d = { ...submitData, ...data, id, ...new_dic }
         }
-        const d = { ...submitData, ...data, id, ...new_dic }
+        else {
+            const d = { ...submitData, ...data, id }
+        }
 
         console.log('startPost d: ', d)
         showLoop(id)
