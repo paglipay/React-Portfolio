@@ -166,11 +166,7 @@ function DynamicForm({
             d = { ...submitData, ...data, id }
         }
 
-<<<<<<< HEAD
-        console.log('startPost')
-=======
         console.log('startPost d: ', d)
->>>>>>> c4692fc5f6c9b177ebe5476c061007f7409adc6f
         showLoop(id)
         setFormItems()
         setBadgeStatus('warning')
