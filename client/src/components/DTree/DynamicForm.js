@@ -150,7 +150,7 @@ function DynamicForm({
     };
 
     const startPost = (id, data) => {
-
+        const d = {}
         // console.log('startPost: data: ', data)
         let new_dic = {}
         if ('form_items_to_dic' in data) {
@@ -160,10 +160,10 @@ function DynamicForm({
                 build_dic[e] = submitData[e]
             })
             new_dic[new_dic_name] = [build_dic]
-            const d = { ...submitData, ...data, id, ...new_dic }
+            d = { ...submitData, ...data, id, ...new_dic }
         }
         else {
-            const d = { ...submitData, ...data, id }
+            d = { ...submitData, ...data, id }
         }
 
         console.log('startPost d: ', d)
