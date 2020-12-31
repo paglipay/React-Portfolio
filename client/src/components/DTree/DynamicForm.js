@@ -150,7 +150,7 @@ function DynamicForm({
     };
 
     const startPost = (id, data) => {
-        const d = {}
+        let d = {}
         // console.log('startPost: data: ', data)
         let new_dic = {}
         if ('form_items_to_dic' in data) {
