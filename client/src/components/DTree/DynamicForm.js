@@ -150,18 +150,30 @@ function DynamicForm({
     };
 
     const startPost = (id, data) => {
-
+        let d = {}
         // console.log('startPost: data: ', data)
-        const d = { ...submitData, ...data, id }
+        let new_dic = {}
+        if ('form_items_to_dic' in data) {
+            const new_dic_name = data['form_items_to_dic']['to_dic_name']
+            let build_dic = {}
+            data['form_items_to_dic']['form_items'].forEach(e => {
+                build_dic[e] = submitData[e]
+            })
+            new_dic[new_dic_name] = [build_dic]
+            d = { ...submitData, ...data, id, ...new_dic }
+        }
+        else {
+            d = { ...submitData, ...data, id }
+        }
 
-        // console.log('startPost')
+        console.log('startPost d: ', d)
         showLoop(id)
         setFormItems()
         setBadgeStatus('warning')
         // const d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'] }
         axios.post("/api/dtree/start/" + id, d)
             .then(res => {
-                // console.log(res.data)
+                console.log(res.data)
                 clearInterval(myVar)
                 setFormCounter(formCounter + 1)
 
@@ -186,12 +198,12 @@ function DynamicForm({
         // console.log('handleChange type: ', e.target.type)
         setSubmitData({
             ...submitData,
-            [e.target.id]: (e.target.type === 'text' || e.target.type === 'password' ? [e.target.value] : e.target.value)
+            [e.target.name]: (e.target.type === 'text' || e.target.type === 'password' ? [e.target.value] : e.target.value)
         })
         // this.setState({ [e.target.name]: e.target.value });
     }
 
-    const handleSubmit = e =>{
+    const handleSubmit = e => {
         e.preventDefault()
     }
 
@@ -267,7 +279,7 @@ function DynamicForm({
                                             <Form.Group key={`fg-${d.id}`} controlId={`${d.id}`}>
                                                 <Form.Label key={`fl-${d.id}`}>{d.value}</Form.Label>
                                                 {/* <Form.Control type="password" placeholder="Password" /> */}
-                                                <Form.Control key={`fc-${d.id}`} key={`fc-${d.id}`} type="text" onChange={(e) => handleChange(e)} rows="3" />
+                                                <Form.Control key={`fc-${d.id}`} name={`${d.name}`} type="text" onChange={(e) => handleChange(e)} rows="3" />
                                             </Form.Group>
                                         </React.Fragment>)
                                     }

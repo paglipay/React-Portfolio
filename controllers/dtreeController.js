@@ -4,14 +4,22 @@ const axios = require('axios')
 module.exports = {
     show: function (req, res) {
         // console.log('axios')
-        axios.get('https://paglipay-dtree.herokuapp.com/show/' + req.params.id).then(resp => {
+        let server_url = 'http://localhost:5000/show/'
+        if (process.env.NODE_ENV === "production") {
+            server_url = 'https://paglipay-dtree.herokuapp.com/show/';
+        }
+        axios.get(server_url + req.params.id).then(resp => {
             // console.log(resp.data);
             res.json(resp.data)
         });
     },
     send: function (req, res) {
         // console.log('req.body: ', req.body)
-        axios.post('https://paglipay-dtree.herokuapp.com/show/' + req.params.id, req.body)
+        let server_url = 'http://localhost:5000/show/'
+        if (process.env.NODE_ENV === "production") {
+            server_url = 'https://paglipay-dtree.herokuapp.com/show/';
+        }
+        axios.post(server_url + req.params.id, req.body)
             .then(resp => {
                 // console.log(resp.data);
                 res.json(resp.data)
@@ -22,7 +30,11 @@ module.exports = {
     },
     start: function (req, res) {
         // console.log('req.body: ', req.body)
-        axios.post('https://paglipay-dtree.herokuapp.com/start/' + req.params.id, req.body)
+        let server_url = 'http://localhost:5000/start/'
+        if (process.env.NODE_ENV === "production") {
+            server_url = 'https://paglipay-dtree.herokuapp.com/start/';
+        }
+        axios.post(server_url + req.params.id, req.body)
             .then(resp => {
                 // console.log(resp.data);
                 res.json(resp.data)
