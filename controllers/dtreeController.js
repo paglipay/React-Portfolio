@@ -29,7 +29,7 @@ module.exports = {
             })
     },
     start: function (req, res) {
-        // console.log('req.body: ', req.body)
+        console.log('req.body: ', req.body)
         const server_url = 'http://localhost:5000/start/'
         if (process.env.NODE_ENV === "production") {
             const server_url = 'https://paglipay-dtree.herokuapp.com/start/';
