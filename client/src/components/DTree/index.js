@@ -36,7 +36,7 @@ function DTreeForm({ collectionData }) {
             {
                 "id": "f02",
                 "name": "username",
-                "value": "Enter username",
+                "value": "Enter Username",
                 "type": "text"
             },
             {
@@ -72,7 +72,17 @@ function DTreeForm({ collectionData }) {
                             "import": "Key"
                         },
                         {
-                            "True": "./start.json"
+                            "True": [
+                                {
+                                    "True": "./json/paramiko/ubuntu/open/_create_list.json"
+                                },
+                                {
+                                    "True": "./json/paramiko/ubuntu/send_cmd/_create_list.json"
+                                },
+                                {
+                                    "True": "./json/paramiko/ubuntu/send_cmd/do.json"
+                                }
+                            ]
                         }
                     ]
                 }
