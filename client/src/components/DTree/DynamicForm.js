@@ -226,28 +226,28 @@ function DynamicForm({
                             <Form onSubmit={handleSubmit}>
                                 {formItems ? formItems.map((d, i) => {
                                     if (d.type === 'textarea') {
-                                        return (<React.Fragment key={`frag-${d.id}`}>
+                                        return (<React.Fragment key={`tafrag-${d.id}-${d.name}`}>
                                             {/* <h1>{d.id}</h1> */}
-                                            <Form.Group key={`${id}-fg-${d.id}`} controlId={`${id}-${d.id}`}>
-                                                <Form.Label key={`${id}-fl-${d.id}`}><h4 key={`${id}-h2-${d.id}`}>{id}-{d.id}</h4></Form.Label>
-                                                <Form.Control key={`${id}-fc-${d.id}`} key={`${id}-fc-${d.id}`} as="textarea" onChange={(e) => handleChange(e)} rows="3" style={{ height: 200 }} />
+                                            <Form.Group key={`${id}-tafg-${d.id}-${d.name}`} controlId={`${id}-tafgcid-${d.id}-${d.name}`}>
+                                                <Form.Label key={`${id}-tafl-${d.id}-${d.name}`}><h4 key={`${id}-tah2-${d.id}-${d.name}`}>{id}-{d.id}</h4></Form.Label>
+                                                <Form.Control key={`${id}-tafc-${d.id}-${d.name}`} key={`${id}-tafc-${d.id}-${d.name}`} as="textarea" onChange={(e) => handleChange(e)} rows="3" style={{ height: 200 }} />
                                             </Form.Group>
                                         </React.Fragment>)
                                     }
                                     else if (d.type === 'password') {
-                                        return (<React.Fragment key={`${id}-pfrag-${d.id}`}>
+                                        return (<React.Fragment key={`${id}-pfrag-${d.id}-${d.name}`}>
                                             {/* <h1>{d.id}</h1> */}
-                                            <Form.Group key={`${id}-pfg-${d.id}`} controlId={`${id}-cid-${d.id}`}>
-                                                <Form.Label key={`${id}-pfl-${d.id}`}>{d.id}</Form.Label>
+                                            <Form.Group key={`${id}-pfg-${d.id}-${d.name}`} controlId={`${id}-cid-${d.id}-${d.name}`}>
+                                                <Form.Label key={`${id}-pfl-${d.id}-${d.name}`}>{d.id}</Form.Label>
                                                 {/* <Form.Control type="password" placeholder="Password" /> */}
                                                 <Form.Control key={`${id}-pfc-${d.id}`} type="password" onChange={(e) => handleChange(e)} rows="3" />
                                             </Form.Group>
                                         </React.Fragment>)
                                     }
                                     else if (d.type === 'button') {
-                                        return (<React.Fragment key={`${id}-bfrag-${d.id}`}>
+                                        return (<React.Fragment key={`${id}-bfrag-${d.id}-${d.name}`}>
                                             {/* <h5>{d.id}</h5> */}
-                                            <Form.Group key={`${id}-bfg-${d.id}`} controlId={`${id}-bcid-${d.id}`}>
+                                            <Form.Group key={`${id}-bfg-${d.id}-${d.name}`} controlId={`${id}-bcid-${d.id}-${d.name}`}>
                                                 <Button
                                                     style={{ float: 'right' }}
                                                     onClick={(e) => {
@@ -262,13 +262,13 @@ function DynamicForm({
                                         </React.Fragment>)
                                     }
                                     else if (d.type === 'pre') {
-                                        return (<React.Fragment key={`${id}-pfrag-${d.id}`}>
+                                        return (<React.Fragment key={`${id}-pfrag-${d.id}-${d.name}`}>
                                             <h4>{d.id}</h4>
                                             <pre>{d.value}</pre>
                                         </React.Fragment>)
                                     }
                                     else if (d.type === 'message') {
-                                        return (<React.Fragment key={`${id}-mfrag-${d.id}`}>
+                                        return (<React.Fragment key={`${id}-mfrag-${d.id}-${d.name}`}>
                                             <h5>{d.name}</h5>
                                             <p>{d.value}</p>
                                         </React.Fragment>)
@@ -276,10 +276,10 @@ function DynamicForm({
                                     else {
                                         return (<React.Fragment key={`${id}-tfrag-${d.id}`}>
                                             {/* <h1>{d.id}</h1> */}
-                                            <Form.Group key={`${id}-tfg-${d.id}`} controlId={`${d.id}`}>
-                                                <Form.Label key={`${id}-tfl-${d.id}`}>{d.value}</Form.Label>
+                                            <Form.Group key={`${id}-tfg-${d.id}-${d.name}`} controlId={`${id}-tcid-${d.id}-${d.name}`}>
+                                                <Form.Label key={`${id}-tfl-${d.id}-${d.name}`}>{d.value}</Form.Label>
                                                 {/* <Form.Control type="password" placeholder="Password" /> */}
-                                                <Form.Control key={`${id}-tfc-${d.id}`} name={`${d.name}`} type="text" onChange={(e) => handleChange(e)} rows="3" />
+                                                <Form.Control key={`${id}-tfc-${d.id}-${d.name}`} name={`${d.name}`} type="text" onChange={(e) => handleChange(e)} rows="3" />
                                             </Form.Group>
                                         </React.Fragment>)
                                     }
