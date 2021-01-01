@@ -15,7 +15,7 @@ export default function CollectionsTable({ collectionData, fetchCollections, onR
     <h2>{collectionData.error}</h2>
   ) : (
         <>
-          <div className="searchbox">
+          {/* <div className="searchbox">
             <div className="input-group">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="">
@@ -29,7 +29,7 @@ export default function CollectionsTable({ collectionData, fetchCollections, onR
                 aria-label="Search"
               />
             </div>
-          </div>
+          </div> */}
           <Table>
             <tbody>
               {collectionData &&
