@@ -72,17 +72,7 @@ function DTreeForm({ collectionData }) {
                             "import": "Key"
                         },
                         {
-                            "True": [
-                                {
-                                    "True": "./json/paramiko/ubuntu/open/_create_list.json"
-                                },
-                                {
-                                    "True": "./json/paramiko/ubuntu/send_cmd/_create_list.json"
-                                },
-                                {
-                                    "True": "./json/paramiko/ubuntu/send_cmd/do.json"
-                                }
-                            ]
+                            "True": "./start.json"
                         }
                     ]
                 }
