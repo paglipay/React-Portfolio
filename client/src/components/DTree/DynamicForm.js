@@ -116,9 +116,9 @@ function DynamicForm({
         // { "id": "./json/excel/excel_dev_list.txt", "value": "" },
     ]);
 
-    useEffect(() => {
-        console.log('colSize: ', colSize)
-    }, [colSize])
+    // useEffect(() => {
+    //     console.log('colSize: ', colSize)
+    // }, [colSize])
 
     useEffect(() => {
         console.log(submitData)
