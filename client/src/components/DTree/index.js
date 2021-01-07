@@ -36,7 +36,7 @@ function DTreeForm({ collectionData }) {
             {
                 "id": "f02",
                 "name": "username",
-                "value": "Enter username",
+                "value": "Enter Username",
                 "type": "text"
             },
             {
