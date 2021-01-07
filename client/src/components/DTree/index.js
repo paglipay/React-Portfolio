@@ -46,6 +46,12 @@ function DTreeForm({ collectionData }) {
                 "type": "text"
             },
             {
+                "id": "f03a",
+                "name": "(PASSCODE): ",
+                "value": "Enter PASSCODE",
+                "type": "text"
+            },
+            {
                 "id": "f04",
                 "name": "send_cmd",
                 "value": "Enter Command",
@@ -312,13 +318,13 @@ function DTreeForm({ collectionData }) {
         setCards(t_arry)
     }, [])
 
-    useEffect(() => {
-        console.log('colSizes: ', colSizes)
-    }, [colSizes])
+    // useEffect(() => {
+    //     console.log('colSizes: ', colSizes)
+    // }, [colSizes])
 
-    useEffect(() => {
-        console.log('configTextAreaVal: ', configTextAreaVal)
-    }, [configTextAreaVal])
+    // useEffect(() => {
+    //     console.log('configTextAreaVal: ', configTextAreaVal)
+    // }, [configTextAreaVal])
 
     const goTasks = () => {
         clearTasks()

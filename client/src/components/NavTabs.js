@@ -41,12 +41,12 @@ function NavTabs({ authenticated, logout }) {
                         <NavDropdown.Item as={Link} to="/devices">Devices</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/dtree">DTree</NavDropdown.Item>
                     </NavDropdown>
-                    <Alert variant="danger" dismissible className="mt-3">                
+                    {/* <Alert variant="danger" dismissible className="mt-3">                
                         <Alert.Heading>Work in Progress</Alert.Heading>
                             <p>
                                 Thank you for visiting. Paglipay is currently under maintenance, but feel free to explore as some of the functionality is available for testing.
                             </p>
-                    </Alert>
+                    </Alert> */}
                 </Nav>
                 <Form inline>
                     {authenticated ? (
