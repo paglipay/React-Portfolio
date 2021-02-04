@@ -39,7 +39,7 @@ export default function CollectionsTable({ collectionData, fetchCollections, onR
                     <InputGroup className="mb-3">
                       <InputGroup.Prepend>
                         {/* <InputGroup.Checkbox aria-label="Checkbox for following text input" /> */}
-                        <Button onClick={() => onActivatePressed(collection._id)}><Folder2Open /></Button>
+                        <Button id={`b-col-${collection._id}`} key={`b-col-${collection._id}`} onClick={() => onActivatePressed(collection._id)}><Folder2Open /></Button>
                         {/* <Button className="btn-danger" onClick={() => onRemovePressed(collection._id)}><XCircle /></Button> */}
                       </InputGroup.Prepend>
                       {/* <FormControl aria-label="Text input with checkbox" /> */}

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, ListGroup, Badge, Card, Button, Spinner, Form } from 'react-bootstrap'
 import axios from "axios";
-import { v4 as uuidv4 } from 'uuid';
 import PromptWindow from './PromptWindow'
 
 function DynamicForm({
@@ -22,7 +21,7 @@ function DynamicForm({
     const [formCounter, setFormCounter] = useState(0);
     const [output, setOutput] = useState();
     const [badgeStatus, setBadgeStatus] = useState('info');
-    const [sessionId, setSessionId] = useState(uuidv4());
+    const [sessionId, setSessionId] = useState(id);
 
 
     const [defaultSubmits, setDefaultSubmits] = useState([
@@ -117,9 +116,9 @@ function DynamicForm({
         // { "id": "./json/excel/excel_dev_list.txt", "value": "" },
     ]);
 
-    useEffect(() => {
-        console.log('colSize: ', colSize)
-    }, [colSize])
+    // useEffect(() => {
+    //     console.log('colSize: ', colSize)
+    // }, [colSize])
 
     useEffect(() => {
         console.log(submitData)
