@@ -27,36 +27,36 @@ function DTreeForm({ collectionData }) {
                 "value": "Would you like a demo2",
                 "type": "message"
             },
-            {
-                "id": "f01",
-                "name": "ip",
-                "value": "Enter ip",
-                "type": "text"
-            },
-            {
-                "id": "f02",
-                "name": "username",
-                "value": "Enter Username",
-                "type": "text"
-            },
-            {
-                "id": "f03",
-                "name": "password",
-                "value": "Enter Code",
-                "type": "text"
-            },
-            {
-                "id": "f03a",
-                "name": "(PASSCODE): ",
-                "value": "Enter PASSCODE",
-                "type": "text"
-            },
-            {
-                "id": "f04",
-                "name": "send_cmd",
-                "value": "Enter Command",
-                "type": "text"
-            },
+            // {
+            //     "id": "f01",
+            //     "name": "ip",
+            //     "value": "Enter ip",
+            //     "type": "text"
+            // },
+            // {
+            //     "id": "f02",
+            //     "name": "username",
+            //     "value": "Enter Username",
+            //     "type": "text"
+            // },
+            // {
+            //     "id": "f03",
+            //     "name": "password",
+            //     "value": "Enter Code",
+            //     "type": "text"
+            // },
+            // {
+            //     "id": "f03a",
+            //     "name": "(PASSCODE): ",
+            //     "value": "Enter PASSCODE",
+            //     "type": "text"
+            // },
+            // {
+            //     "id": "f04",
+            //     "name": "send_cmd",
+            //     "value": "Enter Command",
+            //     "type": "text"
+            // },
             {
                 "id": "f05",
                 "name": "Next",
@@ -383,7 +383,7 @@ function DTreeForm({ collectionData }) {
                 <Button onClick={() => getTasks(6)}>Get</Button>
                 <Button onClick={() => getTasks(7)}>Get</Button> */}
                 <Row>
-                    <Col lg="3">
+                    <Col lg="3" >
                         <Row className="mt-3">
                             <LLCard title="Showcase Catagories">
                                 <Collections />
@@ -540,7 +540,7 @@ function DTreeForm({ collectionData }) {
                     <Col lg="9">
                         <Row className="mt-3">
                             {cards.map((e, i) => (
-                                <Col key={`col_index_1${e.id}`} lg={colSizes[i]} className="mb-3">
+                                <Col key={`col_index_1${e.id}`} lg={colSizes[i]} className="mb-3" style={{transition: '350ms'}}>
                                     <DynamicForm
                                         prompt_request={e.prompt_request}
                                         src={e.src}
