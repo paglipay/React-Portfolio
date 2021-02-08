@@ -22,6 +22,7 @@ import TouchlessLogin from "./components/TouchlessLogin/TouchlessLoginUrl";
 import EmployeeAppointments from './components/EmployeeAppointments/AppointmentsContainer';
 import DTree from './components/DTree';
 import DynamicForm from './components/DTree/DynamicForm';
+import Navbar from './components/SideNavBar/Navbar';
 
 function App() {
 
@@ -52,6 +53,7 @@ function App() {
         <div>
           {/* <Nav /> */}
           <NavTabs authenticated={authenticated} logout={logout} />
+          <Navbar />
           <Switch>
             <Route exact path={["/", "/home"]}>
               <Home />
