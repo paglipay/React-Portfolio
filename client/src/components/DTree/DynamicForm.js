@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, ListGroup, Badge, Card, Button, Spinner, Form } from 'react-bootstrap'
 import axios from "axios";
 import PromptWindow from './PromptWindow'
+import DTable from './DTable/DTable';
 
 function DynamicForm({
     setCards,
@@ -20,6 +21,7 @@ function DynamicForm({
 }) {
     const [formCounter, setFormCounter] = useState(0);
     const [output, setOutput] = useState();
+    const [dtabledata, setDtabledata] = useState(false);
     const [badgeStatus, setBadgeStatus] = useState('info');
     const [sessionId, setSessionId] = useState(id);
 
@@ -138,12 +140,18 @@ function DynamicForm({
         // console.log('loadDtree')
         axios.get("/api/dtree/start/" + id)
             .then(res => {
-                console.log(res.data)
-                let o_arry = res.data.ParamikoObj.map(e => e.split('\n'))
-                let t_arry = [].concat.apply([], o_arry)
-                // console.log(t_arry)
-                // console.log(t_arry.slice(t_arry.length - 5, t_arry.length))
-                setOutput([t_arry.join('\n')])
+                console.log(res.data)                
+                if (res.data.hasOwnProperty('ParamikoObj')) {
+                    let o_arry = res.data.ParamikoObj.map(e => e.split('\n'))
+                    let t_arry = [].concat.apply([], o_arry)
+                    // console.log(t_arry)
+                    // console.log(t_arry.slice(t_arry.length - 5, t_arry.length))
+                    setOutput([t_arry.join('\n')])
+                }
+                else if (res.data.hasOwnProperty('acl_networks')) {
+                    console.log(res.data.acl_networks)
+                    setDtabledata(res.data.acl_networks)
+                }
             })
             .catch(err => console.log(err));
     };
@@ -183,6 +191,10 @@ function DynamicForm({
                     // console.log(t_arry.slice(t_arry.length - 5, t_arry.length))
                     setOutput([t_arry.join('\n')])
                 }
+                else if (res.data.hasOwnProperty('acl_networks')) {
+                    console.log(res.data.acl_networks)
+                    setDtabledata(res.data.acl_networks)
+                }
                 setBadgeStatus('success')
             })
             .catch(err => {
@@ -212,6 +224,7 @@ function DynamicForm({
                 <Card.Header as="h5" onClick={() => toggleS(setSize)}>{header}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}</Card.Header>
 
                 {output ? output.map((d, i) => <pre key={`${id}-df_pre_${d.id}`} style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace" }}>{d}</pre>) : <Card.Img variant="top" src={src} />}
+                {dtabledata ? <DTable data={dtabledata} /> : null}
                 <Card.Body>
                     <Row>
                         <Col lg={colSize !== 4 ? 6 : 12}>
