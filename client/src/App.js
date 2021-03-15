@@ -53,7 +53,7 @@ function App() {
         <div>
           {/* <Nav /> */}
           <NavTabs authenticated={authenticated} logout={logout} />
-          <Navbar />
+          {/* <Navbar /> */}
           <Switch>
             <Route exact path={["/", "/home"]}>
               <Home />
