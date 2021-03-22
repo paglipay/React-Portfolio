@@ -16,3 +16,8 @@ export const postSuccess = (data, key) => ({
     payload: { data, key },
 });
 
+// export const GET_PROFILES = 'GET_PROFILES';
+// export const profilesSuccess = (data, key) => ({
+//     type: GET_PROFILES,
+//     payload: { data, key },
+// });

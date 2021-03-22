@@ -31,15 +31,17 @@ function DTree2({ id }) {
     const sendDtree = (id) => {
         console.log('sendDtree')
         showLoop(id)
-        const d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo (PASSCODE): '],"jobs": [
-            "./my_packages/ParamikoObj/1.json",
-        ] }
+        const d = {
+            "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo (PASSCODE): '], "jobs": [
+                "./my_packages/ParamikoObj/1.json",
+            ]
+        }
         axios.post("/api/dtree/start/" + id, d)
             .then(res => {
                 // console.log(res.data)
                 clearInterval(myVar)
                 setDtree({ "id": id, "output": res.data.ParamikoObj, "prompt_request": res.data.prompt_request, "sending": res.data.sending })
-                
+
             })
             .catch(err => {
                 console.log(err)

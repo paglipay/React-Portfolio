@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Layout from '../semantic_ui/ResponsiveLayout/Layout';
-import { homeObjOne, array_of_questions_arry, questions_keys } from './Data';
+import React, { useState, useEffect, createRef } from 'react';
+import Layout from '../semantic_ui/ResponsiveLayout/Layout2';
+import Layout2a from '../semantic_ui/ResponsiveLayout/Layout2a';
 import { dynamicForm } from '../dynamicform/dynamicform'
 import Answers from './Answers/Answers'
 import Submit from './Submit'
 import { restructureQuestionsForPost } from './helperFunctions'
 
 function DynamicQuestions(props) {
+  const { homeObjOne, array_of_questions_arry, questions_keys, customerId } = props;
+
   const [arrayOfQuestionsArry, setArrayOfQuestionsArry] = useState(array_of_questions_arry)
   const [questionIndex, setQuestionIndex] = useState(0)
   const [homeObjOneD, setHomeObjOneD] = useState(homeObjOne)
@@ -21,7 +23,11 @@ function DynamicQuestions(props) {
       props.addAnswersRequest(questionsPost, questions_keys[props.qIndex])
       setQuestionsPost({})
       setQuestionIndex(0)
-      // props.history.push('/orders')
+      // props.history.push('/reviewcomplete')
+
+      if (questions_keys.length - 1 > props.qIndex) {
+        props.setQIndex(props.qIndex + 1)
+      }
     }
   }
 
@@ -34,27 +40,56 @@ function DynamicQuestions(props) {
   }
 
   useEffect(() => {
-    // console.log('props:', props)
-    console.log('questionsPost:', questionsPost)
     setHomeObjOneD({
       ...homeObjOne,
       questionIndex,
       buttonLabel: arrayOfQuestionsArry[props.qIndex].length === questionIndex + 1 ? 'Review / Complete' : 'Next',
-      description: dynamicForm(arrayOfQuestionsArry[props.qIndex][questionIndex]['questions'], setQuestionsPost, questionsPost, arrayOfQuestionsArry[props.qIndex][questionIndex]['headline']),
+      description: dynamicForm(props, arrayOfQuestionsArry[props.qIndex][questionIndex]['questions'], setQuestionsPost, questionsPost, arrayOfQuestionsArry[props.qIndex][questionIndex]['headline']),
       headline: arrayOfQuestionsArry[props.qIndex][questionIndex]['headline'],
     })
-  }, [questionIndex, questionsPost, props.qIndex]);
+  }, [questionIndex, questionsPost]);
 
   useEffect(() => {
-    console.log('useEffect props.questions')
-    props.questions && props.questions.results && props.questions.results[questions_keys[props.qIndex]] && setQuestionsPost(props.questions.results[questions_keys[props.qIndex]])
+    props.questions &&
+      props.questions.results &&
+      props.questions.results[questions_keys[props.qIndex]] &&
+      setQuestionsPost(props.questions.results[questions_keys[props.qIndex]])
+
+
   }, [props.questions]);
+
+  useEffect(() => {
+    setQuestionsPost({})
+    setQuestionIndex(0)
+    if (customerId) {
+      props.getAnswersById(customerId, questions_keys[props.qIndex])
+    }
+  }, [props.qIndex]);
 
   return (
     <>
-      <Layout key={props.qIndex} {...homeObjOneD} right_side={<><Submit /><Answers /></>}>
-        {homeObjOneD.description}
-      </Layout>
+      { (props.match.path === '/reviewcomplete' || props.match.path === '/orders') ? (<Layout {...props} activeStep={props.match.path === '/orders' ? 2 : 1} contextRef={createRef} key={props.qIndex} {...homeObjOneD} right_side={<><Answers key='a1' {...props} data={['Profile']} />
+
+        {props.match.path !== '/orders' && <Submit {...props} />}
+
+      </>}>
+        <Answers key='a2' {...props}
+          data={[
+            'Orders',
+            'Customer Questions']}
+        />
+        <br /><br />
+      </Layout>) : (<>
+        <Layout2a {...props} contextRef={createRef} key={props.qIndex} {...homeObjOneD} right_side={<>
+          {/* <Submit {...props} /> */}
+          <Answers key='a3' {...props}
+            data={props.questions_keys}
+          /></>}>
+          {homeObjOneD.description}
+
+        </Layout2a>
+      </>)
+      }
     </>
   );
 }

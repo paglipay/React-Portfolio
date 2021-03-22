@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Container, Row, Col, ListGroup, Badge, Card, Button, Spinner, Form } from 'react-bootstrap'
 import axios from "axios";
 import PromptWindow from './PromptWindow'
@@ -22,9 +22,10 @@ function DynamicForm({
     const [formCounter, setFormCounter] = useState(0);
     const [output, setOutput] = useState();
     const [dtabledata, setDtabledata] = useState(false);
+    const [promptRequest, setPromptRequest] = useState([]);
     const [badgeStatus, setBadgeStatus] = useState('info');
     const [sessionId, setSessionId] = useState(id);
-
+    const windowRef = useRef()
 
     const [defaultSubmits, setDefaultSubmits] = useState([
         {
@@ -140,17 +141,24 @@ function DynamicForm({
         // console.log('loadDtree')
         axios.get("/api/dtree/start/" + id)
             .then(res => {
-                console.log(res.data)                
+                console.log(res.data)
                 if (res.data.hasOwnProperty('ParamikoObj')) {
                     let o_arry = res.data.ParamikoObj.map(e => e.split('\n'))
                     let t_arry = [].concat.apply([], o_arry)
                     // console.log(t_arry)
                     // console.log(t_arry.slice(t_arry.length - 5, t_arry.length))
                     setOutput([t_arry.join('\n')])
+                    // console.log('windowRef: ', windowRef)
+                    windowRef.current.scrollTop = windowRef.current.scrollHeight
+
                 }
                 else if (res.data.hasOwnProperty('acl_networks')) {
                     console.log(res.data.acl_networks)
                     setDtabledata(res.data.acl_networks)
+                }
+                if (res.data.hasOwnProperty('prompt_request')) {
+                    console.log(res.data.prompt_request)
+                    setPromptRequest(res.data.prompt_request)
                 }
             })
             .catch(err => console.log(err));
@@ -190,10 +198,15 @@ function DynamicForm({
                     // console.log(t_arry)
                     // console.log(t_arry.slice(t_arry.length - 5, t_arry.length))
                     setOutput([t_arry.join('\n')])
+                    windowRef.current.scrollTop = windowRef.current.scrollHeight
                 }
                 else if (res.data.hasOwnProperty('acl_networks')) {
                     console.log(res.data.acl_networks)
                     setDtabledata(res.data.acl_networks)
+                }
+                if (res.data.hasOwnProperty('prompt_request')) {
+                    console.log(res.data.prompt_request)
+                    setPromptRequest(res.data.prompt_request)
                 }
                 setBadgeStatus('success')
             })
@@ -223,8 +236,28 @@ function DynamicForm({
             <Card style={{ height: '100%' }}>
                 <Card.Header as="h5" onClick={() => toggleS(setSize)}>{header}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}</Card.Header>
 
-                {output ? output.map((d, i) => <pre key={`${id}-df_pre_${d.id}`} style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace" }}>{d}</pre>) : <Card.Img variant="top" src={src} />}
+                {output ? output.map((d, i) => <pre ref={windowRef} key={`${id}-df_pre_${d.id}`} style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace", "scrollBehavior":"smooth" }}>{d}</pre>) : <Card.Img variant="top" src={src} />}
                 {dtabledata ? <DTable data={dtabledata} /> : null}
+
+                {true ? promptRequest.map((e, i) => {
+                    return (
+                        <Card key={`promptRequest-${i}`}><Card.Body><h3>Prompt Request: {e}</h3><Form>
+                            <React.Fragment key={`-pfrag-${e}`}>
+                                <Form.Group key={`-pfg-${e}`} controlId={`-cid-${e}`}>
+                                    <Form.Label key={`-pfl-${e}`}>{e}</Form.Label>
+                                    <Form.Control key={`-pfc-${e}`} type="text" onChange={(elem) => handleChange(elem)} rows="3" />
+                                </Form.Group>
+                            </React.Fragment>
+                            <Form.Group key={``} controlId={``}>
+                                <Button
+                                    style={{ float: 'right' }}
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        // startPost(sessionId, d.action)
+                                    }} size="lg">Submit</Button>
+                            </Form.Group>
+                        </Form></Card.Body></Card>)
+                }) : <h1>Prompt Request: HERE</h1>}
                 <Card.Body>
                     <Row>
                         <Col lg={colSize !== 4 ? 6 : 12}>
