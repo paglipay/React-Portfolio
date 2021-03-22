@@ -1,13 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { connect } from 'react-redux'
-
 import {
     Header,
     Segment,
     Icon,
-    Image,
 } from 'semantic-ui-react'
+import DTable from '../../DynamicTable/DynamicTable'
 
 const consolidateQIndexes = (data) => {
     let results = {}
@@ -20,14 +18,21 @@ const consolidateQIndexes = (data) => {
 
 const displayResults = (results) => {
     return Object.keys(results).map((e, i) => {
-        return (<><hr /><h3>{e}</h3><br />{results[e].map(l => {
-            return (<p><b>{l.question}</b><br />{l.answer}</p>)
+        return (<><hr /><h3>{e}</h3>{results[e].map(l => {
+            return (<><p><b>{l.question}</b><br />{l.answer}</p>
+                {Array.isArray(l.answer) ? <DTable  key={`${i}${l}`} headers={['key', 'text', 'value']} data={
+                    [
+                        { key: '8:00', text: '8:00', value: '8:00' },
+                        { key: '10:00', text: '10:00', value: '10:00' },
+                    ]} /> : null}
+            </>)
         })}</>)
     })
 }
 
 function Answers(props) {
-    const data = ['Register', 'Profile', 'Customer Questions', 'Order Form']
+    // const data = ['Profile', 'Customer Questions', 'Order Form']
+    const data = props.data
 
     return (
         <>
@@ -35,21 +40,30 @@ function Answers(props) {
                 return (
                     <Segment key={i}>
                         <span>
-                            <Link to='/profile'>
-                                {/* <Label style={{ float: 'right' }}> */}
-                                <Icon name='edit' style={{ float: 'right' }} />
-                                {/* </Label> */}
-                            </Link>
+                            {props.qIndex > i ? <div style={{ float: 'right' }}>Edit{' '}<Icon key={i} name='edit' onClick={() => {
+                                props.setQIndex(i)
+                                props.history.push('/placeorder')
+                            }} style={{ float: 'right', cursor: "pointer" }} /></div> : null}
                         </span>
-                        <span><Header as='h2'><Image src='/images/avatar/small/elliot.jpg' size='medium' circular />{e}</Header></span>
-                        {displayResults(consolidateQIndexes(props.questions.results && props.questions.results[data[i]] ? props.questions.results[data[i]] : {}))}
-                    </Segment>)
+
+                        {props.qIndex === i ?
+                            (<span><Header>
+                                {props.questions.results && props.questions.results[data[i]] && Object.keys(props.questions.results[data[i]]).length !== 0 ? <Icon key={i} circular name="check" /> : <Icon key={i} circular name="exclamation triangle" />}
+                                {e}
+                            </Header></span>) : (<>
+                                {props.questions.results && props.questions.results[data[i]] && Object.keys(props.questions.results[data[i]]).length !== 0 ? <Icon key={i} circular name="check" /> : <Icon key={i} circular name="exclamation triangle" />}
+                                {e}
+                            </>)
+                        }
+                        {
+                            // props.location.pathname !== '/placeorder' &&
+                            props.questions.results && props.questions.results[data[i]] ? displayResults(consolidateQIndexes(props.questions.results && props.questions.results[data[i]] ? props.questions.results[data[i]] : {})) : <p></p>}
+                    </Segment>
+                )
             })}
         </>
     );
 }
-
-// export default Orders;
 
 const mapStateToProps = state => {
     return {
