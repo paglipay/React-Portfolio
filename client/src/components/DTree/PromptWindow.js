@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form, Toast, Alert, Button, Modal } from 'react-bootstrap';
 
-function PromptWindow({ name }) {
+function PromptWindow({ name, id }) {
     const [toastShow, setToastShow] = useState(true);
 
     const [show, setShow] = useState(true);

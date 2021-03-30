@@ -88,7 +88,7 @@ function DTree2({ id }) {
                                         </Accordion.Collapse>
                                     </Card> : <h2>LoadingHere too...</h2>) : <h1>Loading...</h1>}
                             </Accordion>
-                            {dtree['prompt_request'] ? dtree['prompt_request'].map((p, i) => p ? <><PromptWindow name={p} /></> : <h2>LoadingHere too...</h2>) : <h1>Loading...</h1>}
+                            {dtree['prompt_request'] ? dtree['prompt_request'].map((p, i) => p ? <><PromptWindow name={p} id={id} /></> : <h2>LoadingHere too...</h2>) : <h1>Loading...</h1>}
                         </Col>
                     </Row>
 

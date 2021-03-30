@@ -236,7 +236,7 @@ function DynamicForm({
             <Card style={{ height: '100%' }}>
                 <Card.Header as="h5" onClick={() => toggleS(setSize)}>{header}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}</Card.Header>
 
-                {output ? output.map((d, i) => <pre ref={windowRef} key={`${id}-df_pre_${d.id}`} style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace", "scrollBehavior":"smooth" }}>{d}</pre>) : <Card.Img variant="top" src={src} />}
+                {output ? output.map((d, i) => <pre ref={windowRef} key={`${id}-df_pre_${d.id}`} style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace", "scrollBehavior": "smooth" }}>{d}</pre>) : <Card.Img variant="top" src={src} />}
                 {dtabledata ? <DTable data={dtabledata} /> : null}
 
                 {true ? promptRequest.map((e, i) => {
@@ -245,15 +245,19 @@ function DynamicForm({
                             <React.Fragment key={`-pfrag-${e}`}>
                                 <Form.Group key={`-pfg-${e}`} controlId={`-cid-${e}`}>
                                     <Form.Label key={`-pfl-${e}`}>{e}</Form.Label>
-                                    <Form.Control key={`-pfc-${e}`} type="text" onChange={(elem) => handleChange(elem)} rows="3" />
+                                    <Form.Control key={`-pfc-${e}`} name={`${e}`} type="text" onChange={(elem) => handleChange(elem)} rows="3" />
                                 </Form.Group>
                             </React.Fragment>
                             <Form.Group key={``} controlId={``}>
                                 <Button
                                     style={{ float: 'right' }}
-                                    onClick={(e) => {
-                                        e.preventDefault()
+                                    onClick={(elem) => {
+                                        elem.preventDefault()
                                         // startPost(sessionId, d.action)
+                                        console.log('promptRequest-id: ', id, '-', e, '-', submitData[e])
+
+                                        axios.post("/api/dtree/send/" + id, { [e]: submitData[e] })
+                                            .then(res => { console.log('Success!') })
                                     }} size="lg">Submit</Button>
                             </Form.Group>
                         </Form></Card.Body></Card>)

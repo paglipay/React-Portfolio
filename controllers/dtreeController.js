@@ -15,9 +15,9 @@ module.exports = {
     },
     send: function (req, res) {
         // console.log('req.body: ', req.body)
-        let server_url = 'http://localhost:5000/show/'
+        let server_url = 'http://localhost:5000/send/'
         if (process.env.NODE_ENV === "production") {
-            server_url = 'https://paglipay-dtree.herokuapp.com/show/';
+            server_url = 'https://paglipay-dtree.herokuapp.com/send/';
         }
         axios.post(server_url + req.params.id, req.body)
             .then(resp => {
