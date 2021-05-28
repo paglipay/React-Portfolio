@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Container, Row, Col, ListGroup, Badge, Card, Button, Spinner, Form } from 'react-bootstrap'
+import { Container, Row, Col, Image, Badge, Card, Button, Spinner, Form } from 'react-bootstrap'
 import axios from "axios";
 import PromptWindow from './PromptWindow'
 import DTable from './DTable/DTable';
-
+import { BsPersonFill } from "react-icons/bs";
 function DynamicForm({
     setCards,
     cards,
@@ -132,9 +132,12 @@ function DynamicForm({
         setFormItems(formItemsCollection[formCounter]['form_items'])
     }, [formCounter])
 
+    
+
+
     let myVar;
-    const showLoop = (id) => {
-        myVar = setInterval(() => loadDtree(id), 5000)
+    const showLoop = (id, timeSize) => {
+        myVar = setInterval(() => loadDtree(id), timeSize)
     }
 
     const loadDtree = (id) => {
@@ -182,7 +185,7 @@ function DynamicForm({
         }
 
         console.log('startPost d: ', d)
-        showLoop(id)
+        showLoop(id, 3000)
         setFormItems()
         setBadgeStatus('warning')
         // const d = { "(PASSCODE): ": ['26559@pa'], "custom_entry": ['echo custom_entry STUFF 1234'] }
@@ -234,7 +237,9 @@ function DynamicForm({
     return (
         <>
             <Card style={{ height: '100%' }}>
-                <Card.Header as="h5" onClick={() => toggleS(setSize)}>{header}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}</Card.Header>
+                <Card.Header as="h5" onClick={() => toggleS(setSize)}>
+                    {/* <BsPersonFill size={50}/> */}
+                    <Image src={`https://randomuser.me/api/portraits/med/men/${(() => Math.floor(Math.random() * 10))()}.jpg`} roundedCircle />{' '}{header}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}</Card.Header>
 
                 {output ? output.map((d, i) => <pre ref={windowRef} key={`${id}-df_pre_${d.id}`} style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace", "scrollBehavior": "smooth" }}>{d}</pre>) : <Card.Img variant="top" src={src} />}
                 {dtabledata ? <DTable data={dtabledata} /> : null}
