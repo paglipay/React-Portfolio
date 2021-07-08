@@ -239,7 +239,9 @@ function DynamicForm({
             <Card style={{ height: '100%' }}>
                 <Card.Header as="h5" onClick={() => toggleS(setSize)}>
                     {/* <BsPersonFill size={50}/> */}
-                    <Image src={`https://randomuser.me/api/portraits/med/men/${(() => Math.floor(Math.random() * 10))()}.jpg`} roundedCircle />{' '}{header}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}</Card.Header>
+                    {/* <Image src={`https://randomuser.me/api/portraits/med/men/${(() => Math.floor(Math.random() * 10))()}.jpg`} roundedCircle /> */}
+                    {' '}{header}<Badge variant={badgeStatus} style={{ float: 'right' }}>{badgeStatus.charAt(0).toUpperCase() + badgeStatus.slice(1)}</Badge>{' '}
+                    </Card.Header>
 
                 {output ? output.map((d, i) => <pre ref={windowRef} key={`${id}-df_pre_${d.id}`} style={{ "height": 250, "backgroundColor": "black", "color": "greenyellow", "fontFamily": "monospace", "scrollBehavior": "smooth" }}>{d}</pre>) : <Card.Img variant="top" src={src} />}
                 {dtabledata ? <DTable data={dtabledata} /> : null}
