@@ -21,7 +21,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import TouchlessLogin from "./components/TouchlessLogin/TouchlessLoginUrl";
 import EmployeeAppointments from './components/EmployeeAppointments/AppointmentsContainer';
 import DTree from './components/DTree';
-import DynamicForm from './components/DTree/DynamicForm';
+// import DynamicForm from './components/DTree/DynamicForm';
+import Dictaphone from './components/Dictaphone/Dictaphone'
 import Navbar from './components/SideNavBar/Navbar';
 
 function App() {
@@ -95,7 +96,7 @@ function App() {
               <Todos />
             </Route>
             <Route exact path="/dynamicform">
-              <DynamicForm />
+              <Dictaphone />
             </Route>
             <Route exact path="/employeedirectory">
               <EmployeeDirectory />
