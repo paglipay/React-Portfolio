@@ -44,15 +44,10 @@ const Dictaphone = () => {
             .then(async (res) => {
               console.log(res);
               // await listenStop();
-              res.data["VoiceResponseObj"]
-                ? await speak({
-                    text: res.data["VoiceResponseObj"].join(".\n "),
-                    // voice: voices[4],
-                  })
-                : await speak({
-                    text: res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
-                    // voice: voices[4],
-                  });
+              await speak({
+                text: res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
+                // voice: voices[4],
+              });
               await start(res.data["VoiceCmdObj"]);
 
               // }
