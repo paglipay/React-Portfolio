@@ -16,8 +16,7 @@ const Dictaphone = () => {
 
   const start = async (e_ary) => {
     const uuid = uuidv4();
-    const new_cmds = await e_ary.map((e_val) => {
-      const e = e_val.toLowerCase();
+    const new_cmds = await e_ary.map((e) => {
       return {
         command: e,
         callback: async () => {
@@ -28,7 +27,7 @@ const Dictaphone = () => {
           setMessage(`You said ${e}.`);
           speak({ text: `${e}.` });
           await axios
-            .post(`https://automate.paglipay.info/start/${uuid}:${e}`, {
+            .post(`http://corp.paglipay.info:5003/start/${uuid}:${e}`, {
               jobs: [
                 {
                   import: "Key",
@@ -59,9 +58,9 @@ const Dictaphone = () => {
     setCommands(new_cmds.filter((f) => f["command"] !== ""));
   };
 
-  useEffect(() => {
-    start(["computer"]);
-  }, []);
+  // useEffect(() => {
+  //   start(["computer"]);
+  // }, []);
 
   useEffect(() => {
     console.log("commands", commands);
@@ -105,14 +104,14 @@ const Dictaphone = () => {
       <div>
         <span>listening: {listening ? "on" : "off"}</span>
         <div>
-          {/* <Button
+          <Button
             type="button"
             onClick={() => {
               start(["computer"]);
             }}
           >
             Start
-          </Button> */}
+          </Button>
           <Button type="button" onClick={resetTranscript}>
             Reset
           </Button>
