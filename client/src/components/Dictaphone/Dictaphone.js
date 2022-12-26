@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useSpeechSynthesis } from "react-speech-kit";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -58,8 +59,7 @@ const Dictaphone = () => {
     setCommands(new_cmds.filter((f) => f["command"] !== ""));
   };
 
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     console.log("commands", commands);
@@ -103,26 +103,23 @@ const Dictaphone = () => {
       <div>
         <span>listening: {listening ? "on" : "off"}</span>
         <div>
-          <button type="button" onClick={() => start(40)}>
-            Start0
-          </button>
-          <button
+          <Button
             type="button"
             onClick={() => {
               start(["computer"]);
             }}
           >
-            Start1
-          </button>
-          <button type="button" onClick={resetTranscript}>
+            Start
+          </Button>
+          <Button type="button" onClick={resetTranscript}>
             Reset
-          </button>
-          <button type="button" onClick={listenContinuously}>
+          </Button>
+          <Button type="button" onClick={listenContinuously}>
             Listen
-          </button>
-          <button type="button" onClick={SpeechRecognition.stopListening}>
+          </Button>
+          <Button type="button" onClick={SpeechRecognition.stopListening}>
             Stop
-          </button>
+          </Button>
         </div>
       </div>
       <div>
