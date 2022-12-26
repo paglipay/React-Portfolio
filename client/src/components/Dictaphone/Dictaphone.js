@@ -10,7 +10,7 @@ const Dictaphone = () => {
   const [consolelog, setConsolelog] = useState("");
   const [message, setMessage] = useState("");
   // const [value, setValue] = useState("");
-  const { speak, voices } = useSpeechSynthesis();
+  const { speak } = useSpeechSynthesis();
 
   const [commands, setCommands] = useState([]);
 
@@ -26,7 +26,7 @@ const Dictaphone = () => {
             await audio.play();
           }
           setMessage(`You said ${e}.`);
-          // speak({ text: `${e}.` });
+          speak({ text: `${e}.` });
           await axios
             .post(`https://automate.paglipay.info/start/${uuid}:${e}`, {
               jobs: [
@@ -47,11 +47,11 @@ const Dictaphone = () => {
               res.data["VoiceResponseObj"]
                 ? await speak({
                     text: res.data["VoiceResponseObj"].join(".\n "),
-                    voice: voices[4],
+                    // voice: voices[4],
                   })
                 : await speak({
                     text: res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
-                    voice: voices[4],
+                    // voice: voices[4],
                   });
               await start(res.data["VoiceCmdObj"]);
 
