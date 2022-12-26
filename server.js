@@ -118,7 +118,6 @@ server.listen(PORT, function () {
     console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 
-
 //socket stuff that needs to be moved
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 const users = {};
