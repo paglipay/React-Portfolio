@@ -15,9 +15,9 @@ const Dictaphone = () => {
   const [commands, setCommands] = useState([]);
 
   const start = async (e_ary) => {
-    // const e = 0;
     const uuid = uuidv4();
-    const new_cmds = await e_ary.map((e) => {
+    const new_cmds = await e_ary.map((e_val) => {
+      const e = e_val.toLowerCase();
       return {
         command: e,
         callback: async () => {
@@ -43,11 +43,16 @@ const Dictaphone = () => {
             })
             .then(async (res) => {
               console.log(res);
-              await listenStop();
-              await speak({
-                text: res.data["VoiceCmdObj"].join(".\n "),
-                voice: voices[4],
-              });
+              // await listenStop();
+              res.data["VoiceResponseObj"]
+                ? await speak({
+                    text: res.data["VoiceResponseObj"].join(".\n "),
+                    voice: voices[4],
+                  })
+                : await speak({
+                    text: res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
+                    voice: voices[4],
+                  });
               await start(res.data["VoiceCmdObj"]);
 
               // }
@@ -59,7 +64,9 @@ const Dictaphone = () => {
     setCommands(new_cmds.filter((f) => f["command"] !== ""));
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    start(["computer"]);
+  }, []);
 
   useEffect(() => {
     console.log("commands", commands);
@@ -103,14 +110,14 @@ const Dictaphone = () => {
       <div>
         <span>listening: {listening ? "on" : "off"}</span>
         <div>
-          <Button
+          {/* <Button
             type="button"
             onClick={() => {
               start(["computer"]);
             }}
           >
             Start
-          </Button>
+          </Button> */}
           <Button type="button" onClick={resetTranscript}>
             Reset
           </Button>
