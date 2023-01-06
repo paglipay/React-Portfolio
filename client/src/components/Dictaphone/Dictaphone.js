@@ -52,7 +52,7 @@ const Dictaphone = () => {
               console.log(res);
               // await listenStop();
               await speak({
-                text: res.data["VoiceCmdObj"].length < 4 ? res.data["VoiceCmdObj"].join(".\n ") : res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
+                text: res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
                 // voice: voices[4],
               });
               await start(res.data["VoiceCmdObj"]);
