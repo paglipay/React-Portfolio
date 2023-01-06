@@ -18,7 +18,7 @@ const Dictaphone = () => {
     const uuid = uuidv4();
     const new_cmds = await e_ary.map((e) => {
       return {
-        command: e,
+        command: e.split('/').pop(),
         callback: async () => {
           if (e === "computer") {
             const audio = new Audio("./computerbeep_50.mp3");
