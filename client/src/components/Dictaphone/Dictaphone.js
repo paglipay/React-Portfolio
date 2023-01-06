@@ -13,8 +13,8 @@ const Dictaphone = () => {
   const { speak } = useSpeechSynthesis();
 
   const [commands, setCommands] = useState([]);
-  const [repeatCommand, setRepeatCommand] = useState(false);
-  const [debug, setDebug] = useState(false);
+  const [repeatCommand, setRepeatCommand] = useState(true);
+  const [debug, setDebug] = useState(true);
   const start = async (e_ary) => {
     const uuid = uuidv4();
     const new_cmds = await e_ary.map((e) => {
@@ -52,7 +52,7 @@ const Dictaphone = () => {
               console.log(res);
               // await listenStop();
               await speak({
-                text: res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
+                text: res.data["VoiceCmdObj"].slice(0, 1).join(".\n ").replace('/', ' '),
                 // voice: voices[4],
               });
               await start(res.data["VoiceCmdObj"]);
@@ -118,12 +118,14 @@ const Dictaphone = () => {
               id={`default-checkbox`}
               label={`Repeat Command`}
               onClick={() => setRepeatCommand(!repeatCommand)}
+              checked ={repeatCommand}
             />
             <Form.Check
               type="checkbox"
               id={`default-checkbox`}
               label={`Debug Mode`}
               onClick={() => setDebug(!debug)}
+              checked ={debug}
             />
           </Form>
           <Button
