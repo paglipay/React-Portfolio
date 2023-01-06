@@ -13,12 +13,13 @@ const Dictaphone = () => {
   const { speak } = useSpeechSynthesis();
 
   const [commands, setCommands] = useState([]);
-  const [repeatCommand, setRepeatCommand] = useState(false)
+  const [repeatCommand, setRepeatCommand] = useState(false);
+  const [debug, setDebug] = useState(false);
   const start = async (e_ary) => {
     const uuid = uuidv4();
     const new_cmds = await e_ary.map((e) => {
       return {
-        command: e.split('/').pop(),
+        command: e.split("/").pop(),
         callback: async () => {
           if (e === "computer") {
             const audio = new Audio("./computerbeep_50.mp3");
@@ -26,26 +27,32 @@ const Dictaphone = () => {
           }
           await listenStop();
           setMessage(`You said ${e}.`);
-          repeatCommand && speak({ text: `${e.split('/').pop()}.` });
+          repeatCommand &&
+            speak({ text: `${debug ? e : e.split("/").pop()}.` });
           await axios
-            .post(`https://automate.paglipay.info/start/${uuid}:${e.split('/').pop()}`, {
-              jobs: [
-                {
-                  import: "Key",
-                },
-                {
-                  True: [`./my_packages/VoiceCmdObj/${e}/_create_list.json`],
-                },
-                {
-                  True: [`./my_packages/VoiceCmdObj/${e}/out.json`],
-                },
-              ],
-            })
+            .post(
+              `https://automate.paglipay.info/start/${uuid}:${e
+                .split("/")
+                .pop()}`,
+              {
+                jobs: [
+                  {
+                    import: "Key",
+                  },
+                  {
+                    True: [`./my_packages/VoiceCmdObj/${e}/_create_list.json`],
+                  },
+                  {
+                    True: [`./my_packages/VoiceCmdObj/${e}/out.json`],
+                  },
+                ],
+              }
+            )
             .then(async (res) => {
               console.log(res);
               // await listenStop();
               await speak({
-                text: res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
+                text: res.data["VoiceCmdObj"].length < 4 ? res.data["VoiceCmdObj"].join(".\n ") : res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
                 // voice: voices[4],
               });
               await start(res.data["VoiceCmdObj"]);
@@ -106,12 +113,18 @@ const Dictaphone = () => {
         <span>listening: {listening ? "on" : "off"}</span>
         <div>
           <Form>
-          <Form.Check 
-            type="checkbox"
-            id={`default-checkbox`}
-            label={`Repeat Command`}
-            onClick={() => setRepeatCommand(!repeatCommand)}
-          />
+            <Form.Check
+              type="checkbox"
+              id={`default-checkbox`}
+              label={`Repeat Command`}
+              onClick={() => setRepeatCommand(!repeatCommand)}
+            />
+            <Form.Check
+              type="checkbox"
+              id={`default-checkbox`}
+              label={`Debug Mode`}
+              onClick={() => setDebug(!debug)}
+            />
           </Form>
           <Button
             type="button"
@@ -132,9 +145,11 @@ const Dictaphone = () => {
           </Button>
         </div>
       </div>
-      <div>
-        <pre>{consolelog}</pre>
-      </div>
+      {debug && (
+        <div>
+          <pre>{consolelog}</pre>
+        </div>
+      )}
       <div>{message}</div>
       <div>
         <span>{transcript}</span>
