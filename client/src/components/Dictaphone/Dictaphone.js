@@ -24,6 +24,7 @@ const Dictaphone = () => {
             const audio = new Audio("./computerbeep_50.mp3");
             await audio.play();
           }
+          await listenStop();
           setMessage(`You said ${e}.`);
           speak({ text: `${e}.` });
           await axios
