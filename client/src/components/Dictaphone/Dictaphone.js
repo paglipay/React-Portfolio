@@ -28,7 +28,7 @@ const Dictaphone = () => {
           await listenStop();
           setMessage(`You said ${e}.`);
           repeatCommand &&
-            speak({ text: `${debug ? e : e.split("/").pop()}.` });
+            speak({ text: `${debug ? e.replace('/', ' ') : e.split("/").pop()}.` });
           await axios
             .post(
               `https://automate.paglipay.info/start/${uuid}:${e
@@ -52,7 +52,7 @@ const Dictaphone = () => {
               console.log(res);
               // await listenStop();
               await speak({
-                text: res.data["VoiceCmdObj"].slice(0, 1).map(e => e.replace('/', ' ')).join(".\n "),
+                text: res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
                 // voice: voices[4],
               });
               await start(res.data["VoiceCmdObj"]);
