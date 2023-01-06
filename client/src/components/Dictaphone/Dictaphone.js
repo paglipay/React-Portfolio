@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useSpeechSynthesis } from "react-speech-kit";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -13,7 +13,7 @@ const Dictaphone = () => {
   const { speak } = useSpeechSynthesis();
 
   const [commands, setCommands] = useState([]);
-
+  const [repeatCommand, setRepeatCommand] = useState(false)
   const start = async (e_ary) => {
     const uuid = uuidv4();
     const new_cmds = await e_ary.map((e) => {
@@ -26,7 +26,7 @@ const Dictaphone = () => {
           }
           await listenStop();
           setMessage(`You said ${e}.`);
-          speak({ text: `${e}.` });
+          repeatCommand && speak({ text: `${e}.` });
           await axios
             .post(`https://automate.paglipay.info/start/${uuid}:${e.split('/').pop()}`, {
               jobs: [
@@ -65,7 +65,7 @@ const Dictaphone = () => {
 
   useEffect(() => {
     console.log("commands", commands);
-    setConsolelog(commands.map((e) => e.command).join("\n"));
+    setConsolelog(commands.map((e) => e.command).join(", "));
   }, [commands]);
 
   const {
@@ -105,6 +105,14 @@ const Dictaphone = () => {
       <div>
         <span>listening: {listening ? "on" : "off"}</span>
         <div>
+          <Form>
+          <Form.Check 
+            type="checkbox"
+            id={`default-checkbox`}
+            label={`Repeat Command`}
+            onClick={() => setRepeatCommand(!repeatCommand)}
+          />
+          </Form>
           <Button
             type="button"
             onClick={() => {
