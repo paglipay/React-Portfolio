@@ -65,7 +65,7 @@ const Dictaphone = () => {
 
   useEffect(() => {
     console.log("commands", commands);
-    setConsolelog(commands.map((e) => e.command).join(", "));
+    setConsolelog(commands.map((e) => e.command).join("\n"));
   }, [commands]);
 
   const {
