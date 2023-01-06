@@ -28,7 +28,7 @@ const Dictaphone = () => {
           await listenStop();
           setMessage(`You said ${e}.`);
           repeatCommand &&
-            speak({ text: `${debug ? e.replace('/', ' ') : e.split("/").pop()}.` });
+            speak({ text: `${debug ? e : e.split("/").pop()}.` });
           await axios
             .post(
               `https://automate.paglipay.info/start/${uuid}:${e
