@@ -28,7 +28,7 @@ const Dictaphone = () => {
           setMessage(`You said ${e}.`);
           speak({ text: `${e}.` });
           await axios
-            .post(`https://automate.paglipay.info/start/${uuid}:${e}`, {
+            .post(`https://automate.paglipay.info/start/${uuid}:${e.split('/').pop()}`, {
               jobs: [
                 {
                   import: "Key",
