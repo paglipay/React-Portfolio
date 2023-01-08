@@ -11,7 +11,7 @@ const Dictaphone = () => {
   const [message, setMessage] = useState("");
   // const [value, setValue] = useState("");
   const { speak } = useSpeechSynthesis();
-
+  const [acceptedCommand, setAcceptedCommand] = useState("");
   const [commands, setCommands] = useState([]);
   const [repeatCommand, setRepeatCommand] = useState(true);
   const [debug, setDebug] = useState(true);
@@ -21,6 +21,7 @@ const Dictaphone = () => {
       return {
         command: e.split("/").pop(),
         callback: async () => {
+          setAcceptedCommand(e);
           if (e === "computer") {
             const audio = new Audio("./computerbeep_50.mp3");
             await audio.play();
@@ -51,6 +52,15 @@ const Dictaphone = () => {
             .then(async (res) => {
               console.log(res);
               // await listenStop();
+
+              if (res.data.hasOwnProperty("VoiceCmdObj" === false)) {
+                speak({
+                  text: "I am aware of this command, but I do not yet have an action for it. Would you like to create one?",
+                });
+
+                start(["create command", e]);
+              }
+
               await speak({
                 text: res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
                 // voice: voices[4],
@@ -58,6 +68,12 @@ const Dictaphone = () => {
               await start(res.data["VoiceCmdObj"]);
 
               // }
+            })
+            .catch(async (res) => {
+              console.log(res);
+              await speak({
+                text: "Sorry, there appears to be an issue connecting to the server.",
+              });
             });
         },
       };
@@ -118,14 +134,14 @@ const Dictaphone = () => {
               id={`default-checkbox`}
               label={`Repeat Command`}
               onClick={() => setRepeatCommand(!repeatCommand)}
-              checked ={repeatCommand}
+              checked={repeatCommand}
             />
             <Form.Check
               type="checkbox"
               id={`default-checkbox`}
               label={`Debug Mode`}
               onClick={() => setDebug(!debug)}
-              checked ={debug}
+              checked={debug}
             />
           </Form>
           <Button
@@ -153,6 +169,9 @@ const Dictaphone = () => {
         </div>
       )}
       <div>{message}</div>
+      <div>
+        <span>{acceptedCommand}</span>
+      </div>
       <div>
         <span>{transcript}</span>
       </div>
