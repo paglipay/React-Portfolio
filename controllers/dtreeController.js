@@ -11,6 +11,16 @@ module.exports = {
         axios.get(server_url + req.params.id).then(resp => {
             // console.log(resp.data);
             res.json(resp.data)
+        })
+        .catch(error => {
+            console.log(error.message)
+            res.json({"ParamikoObj": [".catch(error =>"],"sending": [
+                {
+                "recv": [
+                "START",
+                "GO"],
+                "send": "pwd"
+                }]})
         });
     },
     send: function (req, res) {
@@ -26,6 +36,13 @@ module.exports = {
             })
             .catch(error => {
                 console.log(error.message)
+                res.json({"ParamikoObj": [".catch(error =>"],"sending": [
+                    {
+                    "recv": [
+                    "START",
+                    "GO"],
+                    "send": "pwd"
+                    }]})
             })
     },
     start: function (req, res) {
@@ -41,6 +58,13 @@ module.exports = {
             })
             .catch(error => {
                 console.log(error.message)
+                res.json({"ParamikoObj": [".catch(error =>"],"sending": [
+                    {
+                    "recv": [
+                    "START",
+                    "GO"],
+                    "send": "pwd"
+                    }]})
             })
     }
 };
