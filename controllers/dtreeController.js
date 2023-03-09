@@ -14,7 +14,7 @@ module.exports = {
         })
         .catch(error => {
             console.log(error.message)
-            res.json({"ParamikoObj": [".catch(error =>"],"sending": [
+            res.json({"ParamikoObj": ["Working..."],"sending": [
                 {
                 "recv": [
                 "START",
@@ -36,7 +36,7 @@ module.exports = {
             })
             .catch(error => {
                 console.log(error.message)
-                res.json({"ParamikoObj": [".catch(error =>"],"sending": [
+                res.json({"ParamikoObj": ["Working..."],"sending": [
                     {
                     "recv": [
                     "START",
@@ -58,7 +58,7 @@ module.exports = {
             })
             .catch(error => {
                 console.log(error.message)
-                res.json({"ParamikoObj": [".catch(error =>"],"sending": [
+                res.json({"ParamikoObj": ["Working..."],"sending": [
                     {
                     "recv": [
                     "START",
