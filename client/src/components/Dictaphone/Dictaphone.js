@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useSpeechSynthesis } from "react-speech-kit";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -11,39 +11,56 @@ const Dictaphone = () => {
   const [message, setMessage] = useState("");
   // const [value, setValue] = useState("");
   const { speak } = useSpeechSynthesis();
-
+  const [acceptedCommand, setAcceptedCommand] = useState("");
   const [commands, setCommands] = useState([]);
-
+  const [repeatCommand, setRepeatCommand] = useState(true);
+  const [debug, setDebug] = useState(true);
   const start = async (e_ary) => {
     const uuid = uuidv4();
-    const new_cmds = await e_ary.map((e_val) => {
-      const e = e_val.toLowerCase();
+    const new_cmds = await e_ary.map((e) => {
       return {
-        command: e,
+        command: e.split("/").pop(),
         callback: async () => {
+          setAcceptedCommand(e);
           if (e === "computer") {
             const audio = new Audio("./computerbeep_50.mp3");
             await audio.play();
           }
+          await listenStop();
           setMessage(`You said ${e}.`);
-          speak({ text: `${e}.` });
+          repeatCommand &&
+            speak({ text: `${debug ? e : e.split("/").pop()}.` });
           await axios
-            .post(`https://automate.paglipay.info/start/${uuid}:${e}`, {
-              jobs: [
-                {
-                  import: "Key",
-                },
-                {
-                  True: [`./my_packages/VoiceCmdObj/${e}/_create_list.json`],
-                },
-                {
-                  True: [`./my_packages/VoiceCmdObj/${e}/out.json`],
-                },
-              ],
-            })
+            .post(
+              `https://automate.paglipay.info/start/${uuid}:${e
+                .split("/")
+                .pop()}`,
+              {
+                jobs: [
+                  {
+                    import: "Key",
+                  },
+                  {
+                    True: [`./my_packages/VoiceCmdObj/${e}/_create_list.json`],
+                  },
+                  {
+                    True: [`./my_packages/VoiceCmdObj/${e}/out.json`],
+                  },
+                ],
+              }
+            )
             .then(async (res) => {
               console.log(res);
               // await listenStop();
+
+              if (res.data.hasOwnProperty("VoiceCmdObj" === false)) {
+                speak({
+                  text: "I am aware of this command, but I do not yet have an action for it. Would you like to create one?",
+                });
+
+                start(["create command", e]);
+              }
+
               await speak({
                 text: res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
                 // voice: voices[4],
@@ -51,6 +68,12 @@ const Dictaphone = () => {
               await start(res.data["VoiceCmdObj"]);
 
               // }
+            })
+            .catch(async (res) => {
+              console.log(res);
+              await speak({
+                text: "Sorry, there appears to be an issue connecting to the server.",
+              });
             });
         },
       };
@@ -59,9 +82,9 @@ const Dictaphone = () => {
     setCommands(new_cmds.filter((f) => f["command"] !== ""));
   };
 
-  useEffect(() => {
-    start(["computer"]);
-  }, []);
+  // useEffect(() => {
+  //   start(["computer"]);
+  // }, []);
 
   useEffect(() => {
     console.log("commands", commands);
@@ -105,14 +128,30 @@ const Dictaphone = () => {
       <div>
         <span>listening: {listening ? "on" : "off"}</span>
         <div>
-          {/* <Button
+          <Form>
+            <Form.Check
+              type="checkbox"
+              id={`default-checkbox`}
+              label={`Repeat Command`}
+              onClick={() => setRepeatCommand(!repeatCommand)}
+              checked={repeatCommand}
+            />
+            <Form.Check
+              type="checkbox"
+              id={`default-checkbox`}
+              label={`Debug Mode`}
+              onClick={() => setDebug(!debug)}
+              checked={debug}
+            />
+          </Form>
+          <Button
             type="button"
             onClick={() => {
               start(["computer"]);
             }}
           >
             Start
-          </Button> */}
+          </Button>
           <Button type="button" onClick={resetTranscript}>
             Reset
           </Button>
@@ -124,10 +163,15 @@ const Dictaphone = () => {
           </Button>
         </div>
       </div>
-      <div>
-        <pre>{consolelog}</pre>
-      </div>
+      {debug && (
+        <div>
+          <pre>{consolelog}</pre>
+        </div>
+      )}
       <div>{message}</div>
+      <div>
+        <span>{acceptedCommand}</span>
+      </div>
       <div>
         <span>{transcript}</span>
       </div>
