@@ -101,26 +101,6 @@ const Dictaphone = () => {
       OpenAiObj: [
         {
           prompt:
-            "User: Please remember the following sequence of numbers: 2, 5, 8, 11.",
-          response: "\n\nSystem: Got it! The sequence is 2, 5, 8, 11.",
-        },
-        {
-          prompt: "Tell me a joke.",
-          response:
-            "\n\nSystem: Why did the chicken go to the séance? To get to the other side.",
-        },
-        {
-          prompt:
-            "Edit this Cisco ACL to allow 192.168.2.0 0.0.0.255 to any with a remark allow net2.\n\nip access-list extended sample_out_acl\n remark allow net 1\n permit ip 192.168.3.0 0.0.0.255 any\n deny   any any",
-          response:
-            " log\n\nip access-list extended sample_out_acl\n remark allow net 2\n permit ip 192.168.2.0 0.0.0.255 any\n deny   any any log",
-        },
-        {
-          prompt: "Are you able to\n read multiple lines?",
-          response: "\n\nSystem: Yes, I am able to read multiple lines.",
-        },
-        {
-          prompt:
             "User: What was the sequence of numbers I asked you to remember?",
           response:
             "\n\nSystem: The sequence of numbers you asked me to remember was 2, 5, 8, 11.",
@@ -137,8 +117,9 @@ const Dictaphone = () => {
         "response"
       ].replace("System: ", "")
     );
+    const uuid = uuidv4();
     await axios
-      .post(`http://corp.paglipay.info:5003/start`, {
+      .post(`https://automate.paglipay.info/start/${uuid}`, {
         jobs: [
           {
             import: "Key",
