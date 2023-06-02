@@ -162,7 +162,6 @@ const Dictaphone = () => {
 
         if (res.data.hasOwnProperty("OpenAiObj")) {
           setPrompt(
-            ...prompt,
             res.data["OpenAiObj"][res.data["OpenAiObj"].length - 1][
               "response"
             ].replace("System: ", "")
