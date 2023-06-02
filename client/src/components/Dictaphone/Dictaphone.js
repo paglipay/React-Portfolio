@@ -129,9 +129,16 @@ const Dictaphone = () => {
       PASSCODE: [],
       uuid: "6",
     };
-    console.log("prompt", prompt, appUuid, res_data["OpenAiObj"][res_data["OpenAiObj"].length - 1]["response"].replace("System: ", ""));
+    console.log(
+      "prompt",
+      prompt,
+      appUuid,
+      res_data["OpenAiObj"][res_data["OpenAiObj"].length - 1][
+        "response"
+      ].replace("System: ", "")
+    );
     await axios
-      .post(`https://paglipay-dtree.herokuapp.com/start`, {
+      .post(`http://corp.paglipay.info:5003/start`, {
         jobs: [
           {
             import: "Key",
@@ -143,37 +150,19 @@ const Dictaphone = () => {
               },
               {
                 open: {
-                  ip: "http://corp.paglipay.info:5003/start",
+                  ip: `http://192.168.2.213:5000/start/{$appUuid}`,
                   jobs: [
                     {
                       import: "Key",
                     },
+                    "213",
                     {
                       True: [
                         {
-                          import: "RequestsObj",
+                          import: "OpenAiObj",
                         },
                         {
-                          open: {
-                            ip: `http://192.168.2.213:5000/start/{$appUuid}`,
-                            jobs: [
-                              {
-                                import: "Key",
-                              },
-                              "213",
-                              {
-                                True: [
-                                  {
-                                    import: "OpenAiObj",
-                                  },
-                                  {
-                                    True: `{$prompt}`,
-                                  },
-                                  "end",
-                                ],
-                              },
-                            ],
-                          },
+                          True: `{$prompt}`,
                         },
                         "end",
                       ],
@@ -181,9 +170,7 @@ const Dictaphone = () => {
                   ],
                 },
               },
-              {
-                True: "end",
-              },
+              "end",
             ],
           },
         ],
