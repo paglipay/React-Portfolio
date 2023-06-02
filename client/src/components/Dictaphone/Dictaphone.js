@@ -126,7 +126,6 @@ const Dictaphone = () => {
                         {
                           True: `${prompt}`,
                         },
-                        "end",
                       ],
                     },
                   ],
