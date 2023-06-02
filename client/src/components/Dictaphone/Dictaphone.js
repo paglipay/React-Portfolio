@@ -100,7 +100,7 @@ const Dictaphone = () => {
 
     const uuid = uuidv4();
     await axios
-      .post(`https://automate.paglipay.info/start/${uuid}`, {
+      .post(`https://automate.paglipay.info/start/${appUuid}`, {
         jobs: [
           {
             import: "Key",
@@ -108,30 +108,11 @@ const Dictaphone = () => {
           {
             True: [
               {
-                import: "RequestsObj",
+                import: "OpenAiObj",
               },
               {
-                open: {
-                  ip: `http://192.168.2.213:5000/start/${appUuid}`,
-                  jobs: [
-                    {
-                      import: "Key",
-                    },
-                    "213",
-                    {
-                      True: [
-                        {
-                          import: "OpenAiObj",
-                        },
-                        {
-                          True: `${prompt}`,
-                        },
-                      ],
-                    },
-                  ],
-                },
+                True: `${prompt}`,
               },
-              "end",
             ],
           },
         ],
@@ -313,7 +294,7 @@ const Dictaphone = () => {
             <Form.Control
               onFocus={cpTranscriptToPrompt}
               as="textarea"
-              rows={3}
+              rows={6}
               value={prompt}
               onChange={(e) => {
                 setPrompt(e.target.value);
