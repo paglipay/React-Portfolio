@@ -131,7 +131,7 @@ const Dictaphone = () => {
               },
               {
                 open: {
-                  ip: `http://192.168.2.213:5000/start/{$appUuid}`,
+                  ip: `http://192.168.2.213:5000/start/${appUuid}`,
                   jobs: [
                     {
                       import: "Key",
@@ -143,7 +143,7 @@ const Dictaphone = () => {
                           import: "OpenAiObj",
                         },
                         {
-                          True: `{$prompt}`,
+                          True: `${prompt}`,
                         },
                         "end",
                       ],
