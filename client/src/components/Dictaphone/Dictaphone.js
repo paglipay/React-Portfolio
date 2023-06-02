@@ -161,6 +161,12 @@ const Dictaphone = () => {
         // await listenStop();
 
         if (res.data.hasOwnProperty("OpenAiObj")) {
+          setPrompt(
+            ...prompt,
+            res.data["OpenAiObj"][res.data["OpenAiObj"].length - 1][
+              "response"
+            ].replace("System: ", "")
+          );
           speak({
             text: res.data["OpenAiObj"][res.data["OpenAiObj"].length - 1][
               "response"
