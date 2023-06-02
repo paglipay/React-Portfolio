@@ -71,7 +71,6 @@ const Dictaphone = () => {
               });
               await start(res.data["VoiceCmdObj"]);
 
-              // }
             })
             .catch(async (res) => {
               console.log(res);
@@ -215,7 +214,7 @@ const Dictaphone = () => {
     console.log("commands", commands);
     setConsolelog(commands.map((e) => e.command).join("\n"));
     setCommandButtons(
-      commands.map((e) => <Button onClick={(elem) => commandSubmit(e.command)}>{e.command}</Button>)
+      commands.map((e) => <>{' '}<Button onClick={e.callback}>{e.command}</Button>{' '}</>)
     );
   }, [commands]);
 
