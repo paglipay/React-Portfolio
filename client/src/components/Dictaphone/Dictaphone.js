@@ -14,6 +14,7 @@ const Dictaphone = () => {
   const { speak } = useSpeechSynthesis();
   const [acceptedCommand, setAcceptedCommand] = useState("");
   const [commands, setCommands] = useState([]);
+  const [commandButtons, setCommandButtons] = useState([]);
   const [repeatCommand, setRepeatCommand] = useState(true);
   const [debug, setDebug] = useState(true);
 
@@ -142,16 +143,65 @@ const Dictaphone = () => {
 
         if (res.data.hasOwnProperty("OpenAiObj")) {
           setPrompt(
-            res.data["OpenAiObj"][res.data["OpenAiObj"].length - 1][
-              "response"
-            ].replace("system: ", "").replace("System: ", "")
+            res.data["OpenAiObj"][res.data["OpenAiObj"].length - 1]["response"]
+              .replace("system: ", "")
+              .replace("System: ", "")
           );
           speak({
             text: res.data["OpenAiObj"][res.data["OpenAiObj"].length - 1][
               "response"
-            ].replace("system: ", "").replace("System: ", ""),
+            ]
+              .replace("system: ", "")
+              .replace("System: ", ""),
           });
         }
+      })
+      .catch(async (res) => {
+        console.log(res);
+        await speak({
+          text: "Sorry, there appears to be an issue connecting to the server.",
+        });
+      });
+  };
+
+  const commandSubmit = async (e) => {
+    const uuid = uuidv4();
+    await axios
+      .post(
+        `https://automate.paglipay.info/start/${uuid}:${e.split("/").pop()}`,
+        {
+          jobs: [
+            {
+              import: "Key",
+            },
+            {
+              True: [`./my_packages/VoiceCmdObj/${e}/_create_list.json`],
+            },
+            {
+              True: [`./my_packages/VoiceCmdObj/${e}/out.json`],
+            },
+          ],
+        }
+      )
+      .then(async (res) => {
+        console.log(res);
+        // await listenStop();
+
+        if (res.data.hasOwnProperty("VoiceCmdObj" === false)) {
+          speak({
+            text: "I am aware of this command, but I do not yet have an action for it. Would you like to create one?",
+          });
+
+          start(["create command", e]);
+        }
+
+        await speak({
+          text: res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
+          // voice: voices[4],
+        });
+        await start(res.data["VoiceCmdObj"]);
+
+        // }
       })
       .catch(async (res) => {
         console.log(res);
@@ -164,6 +214,9 @@ const Dictaphone = () => {
   useEffect(() => {
     console.log("commands", commands);
     setConsolelog(commands.map((e) => e.command).join("\n"));
+    setCommandButtons(
+      commands.map((e) => <Button onClick={(elem) => commandSubmit(e.command)}>{e.command}</Button>)
+    );
   }, [commands]);
 
   // useEffect(() => {
@@ -245,7 +298,8 @@ const Dictaphone = () => {
       </div>
       {debug && (
         <div>
-          <pre>{consolelog}</pre>
+          {/* <pre>{consolelog}</pre> */}
+          {commandButtons}
         </div>
       )}
       <div>{message}</div>
