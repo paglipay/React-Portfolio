@@ -144,12 +144,12 @@ const Dictaphone = () => {
           setPrompt(
             res.data["OpenAiObj"][res.data["OpenAiObj"].length - 1][
               "response"
-            ].replace("System: ", "")
+            ].replace("system: ", "")
           );
           speak({
             text: res.data["OpenAiObj"][res.data["OpenAiObj"].length - 1][
               "response"
-            ].replace("System: ", ""),
+            ].replace("system: ", ""),
           });
         }
       })
