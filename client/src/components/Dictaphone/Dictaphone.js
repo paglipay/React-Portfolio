@@ -97,26 +97,7 @@ const Dictaphone = () => {
 
   const sendPrompt = async (e) => {
     e.preventDefault();
-    const res_data = {
-      OpenAiObj: [
-        {
-          prompt:
-            "User: What was the sequence of numbers I asked you to remember?",
-          response:
-            "\n\nSystem: The sequence of numbers you asked me to remember was 2, 5, 8, 11.",
-        },
-      ],
-      PASSCODE: [],
-      uuid: "6",
-    };
-    console.log(
-      "prompt",
-      prompt,
-      appUuid,
-      res_data["OpenAiObj"][res_data["OpenAiObj"].length - 1][
-        "response"
-      ].replace("System: ", "")
-    );
+
     const uuid = uuidv4();
     await axios
       .post(`https://automate.paglipay.info/start/${uuid}`, {
