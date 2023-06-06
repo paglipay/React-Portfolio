@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Row, Col, Image } from "react-bootstrap";
 import { useSpeechSynthesis } from "react-speech-kit";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-const Dictaphone = () => {
+
+function Dictaphone() {
   const [consolelog, setConsolelog] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState([
+    <Image src="./logo192.png"></Image>
+  ]);
   const [prompt, setPrompt] = useState("");
-  // const [value, setValue] = useState("");
+  const [conversationHistory, setConversationHistory] = useState([]);
   const { speak } = useSpeechSynthesis();
   const [acceptedCommand, setAcceptedCommand] = useState("");
   const [commands, setCommands] = useState([]);
@@ -31,14 +34,14 @@ const Dictaphone = () => {
             await audio.play();
           }
           await listenStop();
-          setMessage(`You said ${e}.`);
+          //   setMessage(`You said ${e}.`);
           repeatCommand &&
             speak({ text: `${debug ? e : e.split("/").pop()}.` });
           await axios
             .post(
-              `https://automate.paglipay.info/start/${uuid}:${e
-                .split("/")
-                .pop()}`,
+              `https://automate.paglipay.info/start/${uuid}:${e.split("/").pop()}`,
+              // `http://192.168.2.213:5000/start/${uuid}:${e.split("/").pop()}`,
+              // `https://paglipay-dtree.herokuapp.com/start/${uuid}:${e.split("/").pop()}`,
               {
                 jobs: [
                   {
@@ -70,7 +73,6 @@ const Dictaphone = () => {
                 // voice: voices[4],
               });
               await start(res.data["VoiceCmdObj"]);
-
             })
             .catch(async (res) => {
               console.log(res);
@@ -89,6 +91,10 @@ const Dictaphone = () => {
     setAppUuid(uuidv4());
   }, []);
 
+  useEffect(() => {
+    console.log("appUuid", appUuid);
+  }, [appUuid]);
+
   const cpTranscriptToPrompt = async (e) => {
     e.preventDefault();
     setPrompt(transcript);
@@ -96,11 +102,13 @@ const Dictaphone = () => {
   };
 
   const sendPrompt = async (e) => {
-    e.preventDefault();
-
+    await e.preventDefault();
+    listenStop();
     const uuid = uuidv4();
     await axios
-      .post(`https://automate.paglipay.info/start/${appUuid}`, {
+      // .post(`https://automate.paglipay.info/start/${appUuid}`, {
+      // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
+      .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
         jobs: [
           {
             import: "Key",
@@ -109,6 +117,9 @@ const Dictaphone = () => {
             True: [
               {
                 import: "OpenAiObj",
+              },
+              {
+                conversation_history: conversationHistory,
               },
               {
                 True: `${prompt}`,
@@ -122,18 +133,33 @@ const Dictaphone = () => {
         // await listenStop();
 
         if (res.data.hasOwnProperty("OpenAiObj")) {
-          setPrompt(
-            res.data["OpenAiObj"][res.data["OpenAiObj"].length - 1]["response"]
-              .replace("system: ", "")
-              .replace("System: ", "")
+          setConversationHistory(res.data["OpenAiObj"]);
+          //   setMessage(
+          //     res.data["OpenAiObj"][res.data["OpenAiObj"].length - 1]["response"][
+          //       "content"
+          //     ]
+          //   );
+          const res_data = res.data["OpenAiObj"]
+          setMessage(
+            res_data.map((e) =>
+              "content" in e.response ? (
+                <pre style={{textAlign:'left'}}>{e.response.content}</pre>
+              ) : (
+                <Image src={e.response["image"]}></Image>
+              )
+            )
           );
-          speak({
-            text: res.data["OpenAiObj"][res.data["OpenAiObj"].length - 1][
-              "response"
-            ]
-              .replace("system: ", "")
-              .replace("System: ", ""),
-          });
+
+          if (
+            "content" in
+            res_data[res_data.length - 2]["response"]
+          ) {
+            speak({
+              text: res_data[res_data.length - 2][
+                "response"
+              ]["content"],
+            });
+          }
         }
       })
       .catch(async (res) => {
@@ -144,44 +170,68 @@ const Dictaphone = () => {
       });
   };
 
-  const commandSubmit = async (e) => {
+  const sendTranscript = async (e) => {
+    await e.preventDefault();
+    listenStop();
     const uuid = uuidv4();
     await axios
-      .post(
-        `https://automate.paglipay.info/start/${uuid}:${e.split("/").pop()}`,
-        {
-          jobs: [
-            {
-              import: "Key",
-            },
-            {
-              True: [`./my_packages/VoiceCmdObj/${e}/_create_list.json`],
-            },
-            {
-              True: [`./my_packages/VoiceCmdObj/${e}/out.json`],
-            },
-          ],
-        }
-      )
+      // .post(`https://automate.paglipay.info/start/${appUuid}`, {
+      // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
+      .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
+        jobs: [
+          {
+            import: "Key",
+          },
+          {
+            True: [
+              {
+                import: "OpenAiObj",
+              },
+              {
+                conversation_history: conversationHistory,
+              },
+              {
+                True: `${transcript}`,
+              },
+            ],
+          },
+        ],
+      })
       .then(async (res) => {
         console.log(res);
         // await listenStop();
 
-        if (res.data.hasOwnProperty("VoiceCmdObj" === false)) {
-          speak({
-            text: "I am aware of this command, but I do not yet have an action for it. Would you like to create one?",
-          });
+        if (res.data.hasOwnProperty("OpenAiObj")) {
+          setConversationHistory(res.data["OpenAiObj"]);
+          //   setMessage(
+          //     res.data["OpenAiObj"][res.data["OpenAiObj"].length - 1]["response"][
+          //       "content"
+          //     ]
+          //   );
 
-          start(["create command", e]);
+          const res_data = res.data["OpenAiObj"]
+
+          setMessage(
+            res_data.map((e) =>
+              "content" in e.response ? (
+                <pre style={{textAlign:'left'}}>{e.response.content}</pre>
+              ) : (
+                <Image src={e.response["image"]}></Image>
+              )
+            )
+          );
+
+          if (
+            "content" in
+            res_data[res_data.length - 2]["response"]
+          ) {
+            speak({
+              text: res_data[res_data.length - 2][
+                "response"
+              ]["content"],
+            });
+          }
         }
-
-        await speak({
-          text: res.data["VoiceCmdObj"].slice(0, 1).join(".\n "),
-          // voice: voices[4],
-        });
-        await start(res.data["VoiceCmdObj"]);
-
-        // }
       })
       .catch(async (res) => {
         console.log(res);
@@ -195,7 +245,12 @@ const Dictaphone = () => {
     console.log("commands", commands);
     setConsolelog(commands.map((e) => e.command).join("\n"));
     setCommandButtons(
-      commands.map((e) => <>{' '}<Button onClick={e.callback}>{e.command}</Button>{' '}</>)
+      commands.map((e) => (
+        <>
+          {" "}
+          <Button onClick={e.callback}>{e.command}</Button>{" "}
+        </>
+      ))
     );
   }, [commands]);
 
@@ -239,7 +294,19 @@ const Dictaphone = () => {
   return (
     <div>
       <div>
-        <span>listening: {listening ? "on" : "off"}</span>
+        <h1>UUID: {appUuid}</h1>
+        <Row>
+          <Col lg={1}>
+            <div></div>
+          </Col>
+          <Col lg={10}>
+            <div>{message}</div>
+          </Col>
+          <Col lg={1}>
+            <div></div>
+          </Col>
+        </Row>
+        <h1>listening: {listening ? "on" : "off"}</h1>
         <div>
           <Form>
             <Form.Check
@@ -282,12 +349,19 @@ const Dictaphone = () => {
           {commandButtons}
         </div>
       )}
-      <div>{message}</div>
       <div>
         <span>{acceptedCommand}</span>
       </div>
+
       <div>
-        <span>{transcript}</span>
+        <Form>
+          <Form.Group controlId="trascript">
+            <h3 onClick={cpTranscriptToPrompt}>{transcript}</h3>
+          </Form.Group>
+          <Button variant="primary" type="button" onClick={sendTranscript}>
+            sendTranscript
+          </Button>
+        </Form>
         <Form>
           <Form.Group controlId="trascript">
             <Form.Label>Transcript</Form.Label>
@@ -302,12 +376,12 @@ const Dictaphone = () => {
             />
           </Form.Group>
           <Button variant="primary" type="button" onClick={sendPrompt}>
-            Submit
+            sendPrompt
           </Button>
         </Form>
       </div>
     </div>
   );
-};
+}
 
 export default Dictaphone;
