@@ -22,8 +22,9 @@ import TouchlessLogin from "./components/TouchlessLogin/TouchlessLoginUrl";
 import EmployeeAppointments from './components/EmployeeAppointments/AppointmentsContainer';
 import DTree from './components/DTree';
 // import DynamicForm from './components/DTree/DynamicForm';
-import Dictaphone from './components/Dictaphone/Dictaphone'
+import AiChat from './components/AiChat/AiChat'
 import Navbar from './components/SideNavBar/Navbar';
+import ReactChatWindow from './components/ReactChatWindow/ReactChatWindow';
 
 function App() {
 
@@ -58,9 +59,11 @@ function App() {
           <Switch>
             <Route exact path={["/", "/home"]}>
               <Home />
+              <ReactChatWindow />
             </Route>
             <Route exact path={["/", "/contact"]}>
               <Contact />
+              <ReactChatWindow />
             </Route>
             <Route exact path="/touchlesslogin/:id" component={TouchlessLogin} />
 
@@ -96,7 +99,7 @@ function App() {
               <Todos />
             </Route>
             <Route exact path="/dynamicform">
-              <Dictaphone />
+              <AiChat />
             </Route>
             <Route exact path="/employeedirectory">
               <EmployeeDirectory />
