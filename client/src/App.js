@@ -26,10 +26,10 @@ import AiChat from "./components/AiChat/AiChat";
 import Navbar from "./components/SideNavBar/Navbar";
 // import ReactChatWindow from "./components/ReactChatWindow/ReactChatWindow";
 import { ChatWidget } from "@papercups-io/chat-widget";
-import {Storytime} from '@papercups-io/storytime';
+import { Storytime } from "@papercups-io/storytime";
 
 const st = Storytime.init({
-  accountId: 'bdb39323-3d20-4565-b3e6-c503fb524fba',
+  accountId: 'b5200b14-be9d-4915-aa64-f514fb2c6ad5',
 
   // Optionally pass in metadata to identify the customer
   // customer: {
@@ -80,9 +80,9 @@ function App() {
                 // `accountId` is used instead of `token` in older versions
                 // of the @papercups-io/chat-widget package (before v1.2.x).
                 // You can delete this line if you are on the latest version.
-                // accountId="bdb39323-3d20-4565-b3e6-c503fb524fba"
-                token="bdb39323-3d20-4565-b3e6-c503fb524fba"
-                inbox="55e34b3a-db54-4025-be53-8e692b360d7b"
+                // accountId="b5200b14-be9d-4915-aa64-f514fb2c6ad5"
+                token="b5200b14-be9d-4915-aa64-f514fb2c6ad5"
+                inbox="66180fcb-f6bf-49a6-934f-098ddc0a94c4"
                 title="Welcome to Paglipay"
                 subtitle="Ask us anything in the chat window below 😊"
                 primaryColor="#1890ff"
