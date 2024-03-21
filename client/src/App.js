@@ -26,10 +26,10 @@ import AiChat from "./components/AiChat/AiChat";
 import Navbar from "./components/SideNavBar/Navbar";
 // import ReactChatWindow from "./components/ReactChatWindow/ReactChatWindow";
 import { ChatWidget } from "@papercups-io/chat-widget";
-import { Storytime } from "@papercups-io/storytime";
+import {Storytime} from '@papercups-io/storytime';
 
 const st = Storytime.init({
-  accountId: "5453b892-c703-4b9c-be85-43b1f28d47ce",
+  accountId: 'deb5485b-6637-4cb9-8ec1-29e8f4b9e083',
 
   // Optionally pass in metadata to identify the customer
   // customer: {
@@ -39,8 +39,9 @@ const st = Storytime.init({
   // },
 
   // Optionally specify the base URL
-  baseUrl: "https://paglipay-react-portfolio.herokuapp.com",
+  baseUrl: 'https://paglipay-react-portfolio.herokuapp.com',
 });
+
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
 
