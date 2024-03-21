@@ -39,7 +39,7 @@ const st = Storytime.init({
   // },
 
   // Optionally specify the base URL
-  baseUrl: "https://papercups.paglipay.info",
+  baseUrl: "https://paglipay-react-portfolio.herokuapp.com",
 });
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
