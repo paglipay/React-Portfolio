@@ -29,7 +29,7 @@ import { ChatWidget } from "@papercups-io/chat-widget";
 import { Storytime } from "@papercups-io/storytime";
 
 const st = Storytime.init({
-  accountId: 'b5200b14-be9d-4915-aa64-f514fb2c6ad5',
+  accountId: '92f19e78-dace-4d8a-a700-2b089cda13e4',
 
   // Optionally pass in metadata to identify the customer
   // customer: {
@@ -39,7 +39,7 @@ const st = Storytime.init({
   // },
 
   // Optionally specify the base URL
-  baseUrl: 'https://papercups.paglipay.info',
+  baseUrl: 'https://app.papercups.io',
 });
 
 function App() {
@@ -80,9 +80,9 @@ function App() {
                 // `accountId` is used instead of `token` in older versions
                 // of the @papercups-io/chat-widget package (before v1.2.x).
                 // You can delete this line if you are on the latest version.
-                // accountId="b5200b14-be9d-4915-aa64-f514fb2c6ad5"
-                token="b5200b14-be9d-4915-aa64-f514fb2c6ad5"
-                inbox="66180fcb-f6bf-49a6-934f-098ddc0a94c4"
+                // accountId="92f19e78-dace-4d8a-a700-2b089cda13e4"
+                token="92f19e78-dace-4d8a-a700-2b089cda13e4"
+                inbox="26103822-422c-46f4-b08a-fdec370ea791"
                 title="Welcome to Paglipay"
                 subtitle="Ask us anything in the chat window below 😊"
                 primaryColor="#1890ff"
@@ -92,7 +92,7 @@ function App() {
                 agentUnavailableText="We're away at the moment."
                 requireEmailUpfront={false}
                 iconVariant="outlined"
-                baseUrl="https://papercups.paglipay.info"
+                baseUrl="https://app.papercups.io"
                 // Optionally include data about your customer here to identify them
                 // customer={{
                 //   name: __CUSTOMER__.name,
