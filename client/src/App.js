@@ -39,7 +39,7 @@ const st = Storytime.init({
   // },
 
   // Optionally specify the base URL
-  baseUrl: 'https://paglipay-react-portfolio.herokuapp.com',
+  baseUrl: 'https://papercups.paglipay.info',
 });
 
 function App() {
@@ -92,7 +92,7 @@ function App() {
                 agentUnavailableText="We're away at the moment."
                 requireEmailUpfront={false}
                 iconVariant="outlined"
-                baseUrl="https://paglipay-react-portfolio.herokuapp.com"
+                baseUrl="https://papercups.paglipay.info"
                 // Optionally include data about your customer here to identify them
                 // customer={{
                 //   name: __CUSTOMER__.name,
