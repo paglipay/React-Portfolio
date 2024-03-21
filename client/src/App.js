@@ -29,7 +29,7 @@ import { ChatWidget } from "@papercups-io/chat-widget";
 import {Storytime} from '@papercups-io/storytime';
 
 const st = Storytime.init({
-  accountId: 'deb5485b-6637-4cb9-8ec1-29e8f4b9e083',
+  accountId: 'bdb39323-3d20-4565-b3e6-c503fb524fba',
 
   // Optionally pass in metadata to identify the customer
   // customer: {
@@ -80,9 +80,9 @@ function App() {
                 // `accountId` is used instead of `token` in older versions
                 // of the @papercups-io/chat-widget package (before v1.2.x).
                 // You can delete this line if you are on the latest version.
-                // accountId="deb5485b-6637-4cb9-8ec1-29e8f4b9e083"
-                token="deb5485b-6637-4cb9-8ec1-29e8f4b9e083"
-                inbox="fd028522-e20d-42c9-816a-b47d835c63cf"
+                // accountId="bdb39323-3d20-4565-b3e6-c503fb524fba"
+                token="bdb39323-3d20-4565-b3e6-c503fb524fba"
+                inbox="55e34b3a-db54-4025-be53-8e692b360d7b"
                 title="Welcome to Paglipay"
                 subtitle="Ask us anything in the chat window below 😊"
                 primaryColor="#1890ff"
@@ -92,7 +92,7 @@ function App() {
                 agentUnavailableText="We're away at the moment."
                 requireEmailUpfront={false}
                 iconVariant="outlined"
-                baseUrl="https://papercups.paglipay.info"
+                baseUrl="https://paglipay-react-portfolio.herokuapp.com"
                 // Optionally include data about your customer here to identify them
                 // customer={{
                 //   name: __CUSTOMER__.name,
