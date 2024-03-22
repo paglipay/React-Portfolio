@@ -13,10 +13,12 @@ function NavTabs({ authenticated, logout }) {
         <>
             <Navbar bg="dark" variant="dark" sticky="top">
                 <Navbar.Brand as={Link} to="/">PA</Navbar.Brand>
+                
                 <Nav className="mr-auto">
                     {/* <Nav.Link as={Link} to="/about">About</Nav.Link>
                     <Nav.Link as={Link} to="/blog">Blog</Nav.Link> */}
                     <Nav.Link as={Link} to="/">Home</Nav.Link>
+                    <Nav.Link as="a" href="https://paglipay-portfolio-resume-f83d641338bb.herokuapp.com/">Resume</Nav.Link>
                     {/* <Nav.Link as={Link} to="/">Resume</Nav.Link>
                     <Nav.Link as={Link} to="/">Blog</Nav.Link>
                     <Nav.Link as={Link} to="/contact">Contact</Nav.Link> */}
