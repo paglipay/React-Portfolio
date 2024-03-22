@@ -8,7 +8,12 @@ import {
   Col,
   Tabs,
   Tab,
+<<<<<<< HEAD
   Modal
+=======
+  Modal,
+  Image
+>>>>>>> 27284744f8726d0c698cd12fdffbdce6b5a70362
 } from "react-bootstrap";
 import { ArrowRight } from "react-bootstrap-icons";
 // import { MDBIcon } from "mdbreact";
@@ -18,10 +23,18 @@ import { ArrowRight } from "react-bootstrap-icons";
 // import NavTabs from "../NavTabs";
 import Todo from "../../components/Todo/App";
 import DTree from "../../components/DTree";
+<<<<<<< HEAD
 import ReactPlayer from 'react-player'
 
 function Home() {
 
+=======
+// import ReactPlayer from 'react-player'
+import { ChatWidget } from "@papercups-io/chat-widget";
+// import { Storytime } from "@papercups-io/storytime";
+
+function Home() {
+>>>>>>> 27284744f8726d0c698cd12fdffbdce6b5a70362
   const [show, setShow] = React.useState(false);
 
   const handleClose = () => setShow(false);
@@ -74,18 +87,63 @@ function Home() {
               Learn more
             </Button>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal size="lg" show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Now with AI Assistance! How to use...</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 Select Showcase Categories to view Featured Projects.
-                <br /><br />
-                Please use our chatbot to ask any questions you may have about the developer or anything about life in general.
-                <br /><br />
+                <br />
+                <br />
                 A great place to start would be the "Docker Swarm" demos.
-                <br /><br />
-                <ReactPlayer url="https://youtu.be/bNxdUh4Ogwc?si=3-ZcpK6xD28E07IQ" controls={true} />
+                <br />
+                <br />
+                {/* <ReactPlayer url="https://youtu.be/bNxdUh4Ogwc?si=3-ZcpK6xD28E07IQ" controls={true} /> */}
+                <iframe
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/RAqPD-EjAT4?si=ImuK_IECZsavRViz"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+                <br />
+                <br />
+                Please feel free to use our chatbot to ask any questions you may have about
+                the developer or anything about life in general
+                <ChatWidget
+                // `accountId` is used instead of `token` in older versions
+                // of the @papercups-io/chat-widget package (before v1.2.x).
+                // You can delete this line if you are on the latest version.
+                // accountId="92f19e78-dace-4d8a-a700-2b089cda13e4"
+                token="92f19e78-dace-4d8a-a700-2b089cda13e4"
+                inbox="26103822-422c-46f4-b08a-fdec370ea791"
+                title="Welcome to Paglipay"
+                subtitle="Ask us anything in the chat window below 😊"
+                primaryColor="#1890ff"
+                newMessagePlaceholder="Start typing..."
+                showAgentAvailability={false}
+                agentAvailableText="We're online right now!"
+                agentUnavailableText="We're away at the moment."
+                requireEmailUpfront={false}
+                iconVariant="outlined"
+                baseUrl="https://app.papercups.io"
+
+                // styles={{ padding: "10px 20px", textAlign: "center" }}
+                // Optionally include data about your customer here to identify them
+                // customer={{
+                //   name: __CUSTOMER__.name,
+                //   email: __CUSTOMER__.email,
+                //   external_id: __CUSTOMER__.id,
+                //   metadata: {
+                //     plan: "premium"
+                //   }
+                // }}
+              />
+              <Image src="./chat-logo.png"></Image>
+              {/* <ArrowRight /> */}
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
