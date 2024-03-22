@@ -28,6 +28,27 @@ function Home() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
+  const mouseClickEvents = ['mousedown', 'click', 'mouseup'];
+  
+  function simulateMouseClick(element){
+    mouseClickEvents.forEach(mouseEventType =>
+      element.dispatchEvent(
+        new MouseEvent(mouseEventType, {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+            buttons: 1
+        })
+      )
+    );
+  }
+  
+  const clickChat = () => {
+    console.log("clickChat");
+    const element = document.querySelector('button[class~="Papercups-toggleButton"]');
+    simulateMouseClick(element);
+  }
   return (
     <div>
       <style type="text/css">
@@ -93,10 +114,10 @@ function Home() {
                   height="315"
                   src="https://www.youtube.com/embed/RAqPD-EjAT4?si=ImuK_IECZsavRViz"
                   title="YouTube video player"
-                  frameborder="0"
+                  // frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
+                  // referrerpolicy="strict-origin-when-cross-origin"
+                  // allowfullscreen
                 ></iframe>
                 <br />
                 <br />
@@ -131,7 +152,7 @@ function Home() {
                 //   }
                 // }}
               />
-              <Image src="./chat-logo.png"></Image>
+              <Image src="./chat-logo.png" onClick={clickChat}></Image>
               {/* <ArrowRight /> */}
               </Modal.Body>
               <Modal.Footer>
