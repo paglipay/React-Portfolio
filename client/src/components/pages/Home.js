@@ -8,12 +8,8 @@ import {
   Col,
   Tabs,
   Tab,
-<<<<<<< HEAD
-  Modal
-=======
   Modal,
   Image
->>>>>>> 27284744f8726d0c698cd12fdffbdce6b5a70362
 } from "react-bootstrap";
 import { ArrowRight } from "react-bootstrap-icons";
 // import { MDBIcon } from "mdbreact";
@@ -23,18 +19,11 @@ import { ArrowRight } from "react-bootstrap-icons";
 // import NavTabs from "../NavTabs";
 import Todo from "../../components/Todo/App";
 import DTree from "../../components/DTree";
-<<<<<<< HEAD
-import ReactPlayer from 'react-player'
-
-function Home() {
-
-=======
 // import ReactPlayer from 'react-player'
 import { ChatWidget } from "@papercups-io/chat-widget";
 // import { Storytime } from "@papercups-io/storytime";
 
 function Home() {
->>>>>>> 27284744f8726d0c698cd12fdffbdce6b5a70362
   const [show, setShow] = React.useState(false);
 
   const handleClose = () => setShow(false);
