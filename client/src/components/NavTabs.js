@@ -30,6 +30,7 @@ function NavTabs({ authenticated, logout }) {
           <Nav.Link as={Link} to="/">
             Home
           </Nav.Link>
+
           <Nav.Link
             as="a"
             href="https://paglipay-portfolio-resume-f83d641338bb.herokuapp.com/"
@@ -79,16 +80,20 @@ function NavTabs({ authenticated, logout }) {
                                 Thank you for visiting. Paglipay is currently under maintenance, but feel free to explore as some of the functionality is available for testing.
                             </p>
                     </Alert> */}
+          <Nav.Link as={Link} to="/signup">
+            Register
+          </Nav.Link>
         </Nav>
-        <Form inline>
-          {authenticated ? (
-            <Button onClick={logout}>Logout</Button>
-          ) : (
-            <Link to={`/login`}>
-              <Button>Login</Button>
-            </Link>
-          )}
-        </Form>
+
+        {/* <Form inline> */}
+        {authenticated ? (
+          <Button onClick={logout}>Logout</Button>
+        ) : (
+          <Link to={`/login`}>
+            <Button>Login</Button>
+          </Link>
+        )}
+        {/* </Form> */}
         {/* <Form inline>
                     {authenticated ? (
                         <Button onClick={logout} >LOGOUT</Button>
