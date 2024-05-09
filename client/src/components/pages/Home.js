@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import io from "socket.io-client";
+import Peer from "simple-peer";
+import styled from "styled-components";
 import {
   Jumbotron,
   Button,
@@ -9,7 +12,7 @@ import {
   Tabs,
   Tab,
   Modal,
-  Image
+  Image,
 } from "react-bootstrap";
 import { ArrowRight } from "react-bootstrap-icons";
 // import { MDBIcon } from "mdbreact";
@@ -22,33 +25,170 @@ import DTree from "../../components/DTree";
 // import ReactPlayer from 'react-player'
 import { ChatWidget } from "@papercups-io/chat-widget";
 // import { Storytime } from "@papercups-io/storytime";
+import LLModal from "../LobbyLogin/components/LLModal";
+import VideoChat from "../ReactVideoChat";
+const Video = styled.video`
+  border: 1px solid blue;
+  width: 50%;
+  height: 50%;
+`;
 
 function Home() {
+  const [showVideoChat, setShowVideoChat] = useState(false);
+  const [yourID, setYourID] = useState("1234");
+  const [users, setUsers] = useState([{ name: '' }]);
+  const [stream, setStream] = useState();
+  const [receivingCall, setReceivingCall] = useState(false);
+  const [caller, setCaller] = useState("");
+  const [callerSignal, setCallerSignal] = useState();
+  const [callAccepted, setCallAccepted] = useState(false);
+
+  const userVideo = useRef();
+  const partnerVideo = useRef();
+  const socket = useRef();
+
   const [show, setShow] = React.useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
-  const mouseClickEvents = ['mousedown', 'click', 'mouseup'];
-  
-  function simulateMouseClick(element){
-    mouseClickEvents.forEach(mouseEventType =>
+
+  const mouseClickEvents = ["mousedown", "click", "mouseup"];
+
+  useEffect(() => {
+    socket.current = io.connect("/");
+    // navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+    //     setStream(stream);
+    //     if (userVideo.current) {
+    //         userVideo.current.srcObject = stream;
+    //     }
+    // })
+
+    socket.current.on("yourID", (id) => {
+      setYourID(id);
+    });
+    socket.current.on("allUsers", (users) => {
+      setUsers(users);
+      console.log(users);
+    });
+
+    socket.current.on("hey", (data) => {
+      setReceivingCall(true);
+      setCaller(data.from);
+      setCallerSignal(data.signal);
+    });
+  }, []);
+
+  function handleBtnClick(event) {
+    setShowVideoChat(true);
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: true })
+      .then((stream) => {
+        setStream(stream);
+        if (userVideo.current) {
+          userVideo.current.srcObject = stream;
+        }
+      });
+  }
+
+  function callPeer(id) {
+    const peer = new Peer({
+      initiator: true,
+      trickle: false,
+      config: {
+        iceServers: [
+          {
+            urls: "stun:numb.viagenie.ca",
+            username: "sultan1640@gmail.com",
+            credential: "98376683",
+          },
+          {
+            urls: "turn:numb.viagenie.ca",
+            username: "sultan1640@gmail.com",
+            credential: "98376683",
+          },
+        ],
+      },
+      stream: stream,
+    });
+
+    peer.on("signal", (data) => {
+      socket.current.emit("callUser", {
+        userToCall: id,
+        signalData: data,
+        from: yourID,
+      });
+    });
+
+    peer.on("stream", (stream) => {
+      if (partnerVideo.current) {
+        partnerVideo.current.srcObject = stream;
+      }
+    });
+
+    socket.current.on("callAccepted", (signal) => {
+      setCallAccepted(true);
+      peer.signal(signal);
+    });
+  }
+
+  function acceptCall() {
+    setCallAccepted(true);
+    const peer = new Peer({
+      initiator: false,
+      trickle: false,
+      stream: stream,
+    });
+    peer.on("signal", (data) => {
+      socket.current.emit("acceptCall", { signal: data, to: caller });
+    });
+
+    peer.on("stream", (stream) => {
+      partnerVideo.current.srcObject = stream;
+    });
+
+    peer.signal(callerSignal);
+  }
+
+  let UserVideo;
+  if (stream) {
+    UserVideo = <Video playsInline muted ref={userVideo} autoPlay />;
+  }
+
+  let PartnerVideo;
+  if (callAccepted) {
+    PartnerVideo = <Video playsInline ref={partnerVideo} autoPlay />;
+  }
+
+  let incomingCall;
+  if (receivingCall) {
+    incomingCall = (
+      <div>
+        <p>{caller} is calling you</p>
+        <Button onClick={acceptCall}>Accept</Button>
+      </div>
+    );
+  }
+
+  function simulateMouseClick(element) {
+    mouseClickEvents.forEach((mouseEventType) =>
       element.dispatchEvent(
         new MouseEvent(mouseEventType, {
-            view: window,
-            bubbles: true,
-            cancelable: true,
-            buttons: 1
+          view: window,
+          bubbles: true,
+          cancelable: true,
+          buttons: 1,
         })
       )
     );
   }
-  
+
   const clickChat = () => {
     console.log("clickChat");
-    const element = document.querySelector('button[class~="Papercups-toggleButton"]');
+    const element = document.querySelector(
+      'button[class~="Papercups-toggleButton"]'
+    );
     simulateMouseClick(element);
-  }
+  };
   return (
     <div>
       <style type="text/css">
@@ -121,39 +261,46 @@ function Home() {
                 ></iframe>
                 <br />
                 <br />
-                Please feel free to use our chatbot to ask any questions you may have about
-                the developer or anything about life in general
+                Please feel free to use our chatbot to ask any questions you may
+                have about the developer or anything about life in general
                 <ChatWidget
-                // `accountId` is used instead of `token` in older versions
-                // of the @papercups-io/chat-widget package (before v1.2.x).
-                // You can delete this line if you are on the latest version.
-                // accountId="92f19e78-dace-4d8a-a700-2b089cda13e4"
-                token="92f19e78-dace-4d8a-a700-2b089cda13e4"
-                inbox="26103822-422c-46f4-b08a-fdec370ea791"
-                title="Welcome to Paglipay"
-                subtitle="Ask us anything in the chat window below 😊"
-                primaryColor="#1890ff"
-                newMessagePlaceholder="Start typing..."
-                showAgentAvailability={false}
-                agentAvailableText="We're online right now!"
-                agentUnavailableText="We're away at the moment."
-                requireEmailUpfront={false}
-                iconVariant="outlined"
-                baseUrl="https://app.papercups.io"
+                  // `accountId` is used instead of `token` in older versions
+                  // of the @papercups-io/chat-widget package (before v1.2.x).
+                  // You can delete this line if you are on the latest version.
+                  // accountId="92f19e78-dace-4d8a-a700-2b089cda13e4"
+                  token="92f19e78-dace-4d8a-a700-2b089cda13e4"
+                  inbox="26103822-422c-46f4-b08a-fdec370ea791"
+                  title="Welcome to Paglipay"
+                  subtitle="Ask us anything in the chat window below 😊"
+                  primaryColor="#1890ff"
+                  newMessagePlaceholder="Start typing..."
+                  showAgentAvailability={false}
+                  agentAvailableText="We're online right now!"
+                  agentUnavailableText="We're away at the moment."
+                  requireEmailUpfront={false}
+                  iconVariant="outlined"
+                  baseUrl="https://app.papercups.io"
 
-                // styles={{ padding: "10px 20px", textAlign: "center" }}
-                // Optionally include data about your customer here to identify them
-                // customer={{
-                //   name: __CUSTOMER__.name,
-                //   email: __CUSTOMER__.email,
-                //   external_id: __CUSTOMER__.id,
-                //   metadata: {
-                //     plan: "premium"
-                //   }
-                // }}
-              />
-              <Image src="./chat-logo.png" onClick={clickChat}></Image>
-              {/* <ArrowRight /> */}
+                  // styles={{ padding: "10px 20px", textAlign: "center" }}
+                  // Optionally include data about your customer here to identify them
+                  // customer={{
+                  //   name: __CUSTOMER__.name,
+                  //   email: __CUSTOMER__.email,
+                  //   external_id: __CUSTOMER__.id,
+                  //   metadata: {
+                  //     plan: "premium"
+                  //   }
+                  // }}
+                />
+                <Image src="./chat-logo.png" onClick={clickChat}></Image>
+                {/* <ArrowRight /> */}
+                <br/>
+                <Button
+                  className="mb-2"
+                  onClick={handleBtnClick}
+                >
+                  Instant Interview
+                </Button>
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
@@ -164,6 +311,17 @@ function Home() {
                 </Button> */}
               </Modal.Footer>
             </Modal>
+
+            <LLModal show={showVideoChat} setShow={setShowVideoChat}>
+              <VideoChat
+                users={users}
+                UserVideo={UserVideo}
+                PartnerVideo={PartnerVideo}
+                incomingCall={incomingCall}
+                yourID={yourID}
+                callPeer={callPeer}
+              />
+            </LLModal>
           </p>
         </div>
       </Jumbotron>
