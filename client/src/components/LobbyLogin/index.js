@@ -160,6 +160,7 @@ function LobbyLogin() {
             <div>
                 <p>{caller} is calling you</p>
                 <Button onClick={acceptCall}>Accept</Button>
+                <br/>
             </div>
         )
     }

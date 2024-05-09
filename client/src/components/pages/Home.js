@@ -36,7 +36,7 @@ const Video = styled.video`
 function Home() {
   const [showVideoChat, setShowVideoChat] = useState(false);
   const [yourID, setYourID] = useState("1234");
-  const [users, setUsers] = useState([{ name: '' }]);
+  const [users, setUsers] = useState([{ name: "" }]);
   const [stream, setStream] = useState();
   const [receivingCall, setReceivingCall] = useState(false);
   const [caller, setCaller] = useState("");
@@ -236,6 +236,10 @@ function Home() {
             <Button variant="flat" size="xxl" onClick={handleShow}>
               Learn more
             </Button>
+            <ArrowRight style={{ visibility: "hidden" }} />
+            <Button variant="flat" size="xxl" onClick={handleBtnClick}>
+              Instant Interview
+            </Button>
 
             <Modal size="lg" show={show} onHide={handleClose}>
               <Modal.Header closeButton>
@@ -294,13 +298,10 @@ function Home() {
                 />
                 <Image src="./chat-logo.png" onClick={clickChat}></Image>
                 {/* <ArrowRight /> */}
-                <br/>
-                <Button
-                  className="mb-2"
-                  onClick={handleBtnClick}
-                >
+                {/* <br />
+                <Button className="mb-2" onClick={handleBtnClick}>
                   Instant Interview
-                </Button>
+                </Button> */}
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
