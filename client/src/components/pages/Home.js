@@ -161,8 +161,6 @@ function Home() {
 
   let incomingCall;
   if (receivingCall) {
-    const audio = new Audio("./telephone-ring-04.wav");
-    audio.play();
     incomingCall = (
       <div>
         <p>{caller} is calling you</p>
