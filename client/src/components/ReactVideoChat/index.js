@@ -19,7 +19,7 @@ function ReactVideoChat({ users, UserVideo, PartnerVideo, incomingCall, yourID, 
                 {incomingCall}
             </Row>
             <Row>
-                {users && [users[users.length - 1]].map(key => {
+                {users.map(key => {
                     if (key.id === yourID) {
                         return null;
                     }
