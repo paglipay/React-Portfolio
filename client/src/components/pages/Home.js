@@ -237,6 +237,10 @@ function Home() {
               Learn more
             </Button>
             <ArrowRight style={{ visibility: "hidden" }} />
+            <Button variant="flat" size="xxl" href="https://yoom.paglipay.info" target="_blank">
+              Schedule an Interview
+            </Button>
+            <ArrowRight style={{ visibility: "hidden" }} />
             <Button variant="flat" size="xxl" onClick={handleBtnClick}>
               Instant Interview
             </Button>
