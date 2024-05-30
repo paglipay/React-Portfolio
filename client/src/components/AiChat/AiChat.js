@@ -70,10 +70,10 @@ function AiChat(props) {
             speak({ text: `${debug ? e : e.split("/").pop()}.` });
           await axios
             .post(
-              // `https://automate.paglipay.info/start/${uuid}:${e
-              //   .split("/")
-              //   .pop()}`,
-              `http://192.168.2.213:5000/start/${uuid}:${e.split("/").pop()}`,
+              `https://automate.paglipay.info/start/${uuid}:${e
+                .split("/")
+                .pop()}`,
+              // `http://192.168.2.213:5000/start/${uuid}:${e.split("/").pop()}`,
               // `https://paglipay-dtree.herokuapp.com/start/${uuid}:${e.split("/").pop()}`,
               {
                 jobs: [
