@@ -24,7 +24,7 @@ function AiChat(props) {
         {/* <Card>
         <Card.Header>Header</Card.Header>
         <Card.Body> */}
-        <Image src="./logo192.png"></Image>
+        <Image src="./IMG_2885.JPG"></Image>
         {/* </Card.Body>
       </Card> */}
       </p>
@@ -214,11 +214,20 @@ function AiChat(props) {
                 <Card.Body> */}
               {res_data.map((e, i) =>
                 "content" in e.response ? (
-                  i === 0 ? <pre key={i} style={{ textAlign: "left" }}>
-                    {e.response.content}
-                  </pre>:<p key={i} style={{ textAlign: "left" }}>
-                    {e.response.content}
-                  </p>
+                  i === 0 ? (
+                    <pre key={i} style={{ textAlign: "left" }}>
+                      {e.response.content}
+                    </pre>
+                  ) : (
+                    <p key={i} style={{ textAlign: "left" }}>
+                      {e.response.content.split("\n").map((line, index) => (
+                        <React.Fragment key={index}>
+                          {line}
+                          <br />
+                        </React.Fragment>
+                      ))}
+                    </p>
+                  )
                 ) : (
                   <Card key={i} className={"mb-3"}>
                     <Image src={e.response["image"]}></Image>
@@ -240,7 +249,7 @@ function AiChat(props) {
   const sendToApi = async (prompt, uuid) => {
     await axios
       .post(`https://automate.paglipay.info/start/${appUuid}`, {
-      // .post(`http://192.168.2.203:5000/start/${appUuid}`, {
+        // .post(`http://192.168.2.203:5000/start/${appUuid}`, {
         // .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
         jobs: [
@@ -284,11 +293,20 @@ function AiChat(props) {
                 <Card.Body> */}
               {res_data.map((e, i) =>
                 "content" in e.response ? (
-                  i === 0 ? <pre key={i} style={{ textAlign: "left" }}>
-                    {e.response.content}
-                  </pre>:<p key={i} style={{ textAlign: "left" }}>
-                    {e.response.content}
-                  </p>
+                  i === 0 ? (
+                    <pre key={i} style={{ textAlign: "left" }}>
+                      {e.response.content}
+                    </pre>
+                  ) : (
+                    <p key={i} style={{ textAlign: "left" }}>
+                      {e.response.content.split("\n").map((line, index) => (
+                        <React.Fragment key={index}>
+                          {line}
+                          <br />
+                        </React.Fragment>
+                      ))}
+                    </p>
+                  )
                 ) : (
                   <Card key={i} className={"mb-3"}>
                     <Image src={e.response["image"]}></Image>
@@ -388,7 +406,9 @@ function AiChat(props) {
           >
             {/* <BsPersonFill size={50}/> */}
             {/* <Image src={`https://randomuser.me/api/portraits/med/men/${(() => Math.floor(Math.random() * 10))()}.jpg`} roundedCircle /> */}{" "}
-            {"Instant Interview - Ask me typical job interview questions. I am available typically during regular office hours, Monday through Friday, 9am. to 5pm. Pacific Standard Time."}
+            {
+              "Instant Interview - Ask me typical job interview questions. I am available typically during regular office hours, Monday through Friday, 9am. to 5pm. Pacific Standard Time."
+            }
             <Badge variant={"badgeStatus"} style={{ float: "right" }}>
               {"badgeStatus".charAt(0).toUpperCase() + "badgeStatus".slice(1)}
             </Badge>{" "}
