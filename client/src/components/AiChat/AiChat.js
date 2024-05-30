@@ -227,8 +227,8 @@ function AiChat(props) {
   };
   const sendToApi = async (prompt, uuid) => {
     await axios
-      // .post(`https://automate.paglipay.info/start/${appUuid}`, {
-      .post(`http://192.168.2.213:5000/start/${appUuid}`, {
+      .post(`https://automate.paglipay.info/start/${appUuid}`, {
+      // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
         // .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
         jobs: [
@@ -374,7 +374,7 @@ function AiChat(props) {
           >
             {/* <BsPersonFill size={50}/> */}
             {/* <Image src={`https://randomuser.me/api/portraits/med/men/${(() => Math.floor(Math.random() * 10))()}.jpg`} roundedCircle /> */}{" "}
-            {"header"}
+            {"Instant Interview - Ask me typical job interview questions."}
             <Badge variant={"badgeStatus"} style={{ float: "right" }}>
               {"badgeStatus".charAt(0).toUpperCase() + "badgeStatus".slice(1)}
             </Badge>{" "}
