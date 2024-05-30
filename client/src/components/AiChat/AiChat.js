@@ -273,14 +273,14 @@ function AiChat(props) {
           //   );
           // setShowSpinner(false);
 
-          const res_data = res.data["OpenAiObj"].slice(1);
+          const res_data = res.data["OpenAiObj"];
 
           setMessage(
             <Col lg={12}>
               {/* <Card>
                 <Card.Header>Header</Card.Header>
                 <Card.Body> */}
-              {res_data.map((e, i) =>
+              {res_data.slice(1).map((e, i) =>
                 "content" in e.response ? (
                   <p key={i} style={{ textAlign: "left" }}>
                     {e.response.content}
@@ -521,7 +521,7 @@ function AiChat(props) {
               </Button>
               {[
                 "Can you tell me a little about yourself?",
-                "Why do you want to work here?",
+                "Describe your work history.",
                 "What are your greatest strengths?",
                 "What are your weaknesses?",
                 "Can you describe a challenge you faced and how you dealt with it?",

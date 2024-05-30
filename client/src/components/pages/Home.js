@@ -20,6 +20,7 @@ import { ArrowRight } from "react-bootstrap-icons";
 // import Datatable from '../../components/MDB/Datatable/Datatable'
 // import FeaturesPage from '../../components/MDB/FeaturesPage/FeaturesPage'
 // import NavTabs from "../NavTabs";
+import { Link, useLocation } from "react-router-dom";
 import Todo from "../../components/Todo/App";
 import DTree from "../../components/DTree";
 // import ReactPlayer from 'react-player'
@@ -241,7 +242,13 @@ function Home() {
               Schedule an Interview
             </Button>
             <ArrowRight style={{ visibility: "hidden" }} />
-            <Button variant="flat" size="xxl" onClick={handleBtnClick}>
+            {/* <Button variant="flat" size="xxl" onClick={handleBtnClick}>
+              Instant Interview
+            </Button> */}
+            {/* <Button variant="flat" size="xxl" onClick={handleBtnClick}>
+              Instant Interview
+            </Button> */}
+            <Button variant="flat" size="xxl" as={Link} to={"/dynamicform"}>
               Instant Interview
             </Button>
 
@@ -254,9 +261,6 @@ function Home() {
                 <br />
                 <br />
                 A great place to start would be the "Docker Swarm" demos.
-                <br />
-                <br />
-                {/* <ReactPlayer url="https://youtu.be/bNxdUh4Ogwc?si=3-ZcpK6xD28E07IQ" controls={true} /> */}
                 <iframe
                   width="560"
                   height="315"

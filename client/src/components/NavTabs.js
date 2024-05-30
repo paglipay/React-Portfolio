@@ -65,7 +65,7 @@ function NavTabs({ authenticated, logout }) {
                         <NavDropdown.Item as={Link} to="/chat">Chat</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/users">Users</NavDropdown.Item> */}
             <NavDropdown.Item as={Link} to="/dynamicform">
-              Form
+              Instant Interview
             </NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/devices">
               Devices
