@@ -122,6 +122,7 @@ function AiChat(props) {
 
   useEffect(() => {
     setAppUuid(uuidv4());
+    setSpeakText({"text": "Hello! My name is Paul Aglipay, and I’m excited to be here for the job interview. How are you today? Please feel free to ask me any typical job interview questions using the Question Prompt field below. I’m looking forward to our conversation!"});
   }, []);
 
   useEffect(() => {

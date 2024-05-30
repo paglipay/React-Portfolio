@@ -234,23 +234,24 @@ function Home() {
           <br />
           <br />
           <p>
-            <Button variant="flat" size="xxl" onClick={handleShow}>
-              Learn more
+            <Button variant="flat" size="xxl" as={Link} to={"/dynamicform"}>
+              Instant Interview
             </Button>
             <ArrowRight style={{ visibility: "hidden" }} />
             <Button variant="flat" size="xxl" href="https://yoom.paglipay.info" target="_blank">
               Schedule an Interview
             </Button>
             <ArrowRight style={{ visibility: "hidden" }} />
-            {/* <Button variant="flat" size="xxl" onClick={handleBtnClick}>
-              Instant Interview
-            </Button> */}
-            {/* <Button variant="flat" size="xxl" onClick={handleBtnClick}>
-              Instant Interview
-            </Button> */}
-            <Button variant="flat" size="xxl" as={Link} to={"/dynamicform"}>
-              Instant Interview
+            <Button variant="flat" size="xxl" onClick={handleShow}>
+              Learn more
             </Button>
+            <ArrowRight style={{ visibility: "hidden" }} />
+            {/* <Button variant="flat" size="xxl" onClick={handleBtnClick}>
+              Instant Interview
+            </Button> */}
+            {/* <Button variant="flat" size="xxl" onClick={handleBtnClick}>
+              Instant Interview
+            </Button> */}
 
             <Modal size="lg" show={show} onHide={handleClose}>
               <Modal.Header closeButton>
