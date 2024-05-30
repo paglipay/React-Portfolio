@@ -336,7 +336,7 @@ export default class Signup extends Component {
 
                   <div className="col-sm-6">
                     <input type="checkbox" className="checkbox" />
-                    Sigh up for our newsletter
+                    Sign up for our newsletter
                   </div>
 
                   <div className="col-sm-6">
