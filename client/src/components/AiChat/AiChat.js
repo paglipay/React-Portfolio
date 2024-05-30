@@ -526,6 +526,9 @@ function AiChat(props) {
               {[
                 "Can you tell me a little about yourself?",
                 "Describe your work history.",
+                "What certifications do have?",
+                "Tell me about the front-end technologies you are familiar with.",
+                "Tell me about the back-end technologies you are familiar with.",
                 "What are your greatest strengths?",
                 "What are your weaknesses?",
                 "Can you describe a challenge you faced and how you dealt with it?",
@@ -533,6 +536,7 @@ function AiChat(props) {
                 "Why did you leave your last job?",
                 "What can you bring to this company?",
                 "How do you handle stress and pressure?",
+                "What are your salary expecations?",
                 "Do you have any questions for us?",
               ].map((i) => {
                 return (
