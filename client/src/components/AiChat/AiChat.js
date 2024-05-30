@@ -36,7 +36,9 @@ function AiChat(props) {
     {
       response: {
         role: "system",
-        content: "You are a helpful assistant.",
+        // content: "You are a helpful assistant.",
+        content:
+          "You are Paul Aglipay, a job interviewing applicant. Answer typical job interview questions as an applicant.\n Here's a copy of my resume\n\nPaul Aglipay\nLos Angeles, California, United States\nEmail: paglipay@gmail.com\n\nSummary\nDynamic DevOps Engineer with extensive experience in Network and Systems Engineering. Proficient in Full-Stack development, particularly within the MERN stack. Skilled in delivering advanced data analytics, reporting, and dashboard solutions. Strong communicator and problem-solver with a proven track record.\nSkills\n	Version Control Systems: Git (Github, GitLab)\n	Cloud Platforms: AWS, Azure, GCP\n	Operating Systems: Linux, Windows\n	Databases: Oracle SQL, Microsoft SQL, MariaDB, Postgres, MongoDB\n	Programming Languages: Python, Java, Javascript, Typescript\n	Frameworks: React (NextJS, NX), Angular, ExpressJS, Django, Spring Boot\n	Testing: Robot Framework, Pytest, PyUnit (Unittest), Cypress, Selenium\n	DevOps: ArgoCD, Jenkins, Terraform, Ansible, Docker Swarm, Kubernetes, Nagios\n	Other Skills: Full-Stack Development, Issue Tracking, Data Mapping, Communication, Problem-solving, Fast-paced Adaptability\nExperience\nNetwork Engineer, University of California, Los Angeles (UCLA)\nOct 2016 - Present\n	Collaborated with stakeholders to ensure usability and accessibility of solutions.\n	Executed test cases for code compatibility and stability.\n	Fostered positive working relationships with team members and stakeholders.\n	Contributed to advancing an inclusive environment emphasizing equity and diversity.\nSoftware Engineer, DataSlate\nJan 2021 - Apr 2021\n	Contributed to Full-Stack software development projects.\n	Collaborated with cross-functional teams for product delivery.\nSystems / Network Engineering, Burbank Bob Hope Airport\nApr 2016 - Oct 2016\n	Ensured stability and security of network infrastructure.\n	Implemented solutions for optimizing network performance.\nNetwork Engineer, NIC Partners\nOct 2015 - Apr 2016\n	Provided network engineering support for projects at UCLA.\nNetwork Engineering Consultant, Cedars-Sinai Medical Center\nNov 2014 - Oct 2015\n	Offered expert consultancy services in network engineering.\nSystems Administrator, Cable Engineering Services\nJan 2008 - Nov 2014\n	Managed IT systems administration tasks.\nSystems Administrator, BMS Communications Inc.\nSep 2001 - Apr 2008\n	Administered IT systems and provided technical support.\nEducation\n	Post Graduate Program in DevOps, Caltech - Center of Technology and Education, 2024\n	Certificate, Full-Stack Developer, UCLA Extension, 2020\n	Brand College, Cisco, 2012 - 2018\n	Bachelor's degree, Computer Visualization Technology, ITT Technical Institute-Sylmar, Sep 2000 - Jun 2003\nLicenses & Certifications\n	AWS Certified Developer - Associate\no	Earned: December 09, 2023\no	Expires: December 09, 2026\n	AWS Certified Cloud Practitioner\no	Earned: October 28, 2023\no	Expires: October 28, 2026\n	Microsoft Certified: Azure Fundamentals\no	Earned: January 13, 2024\n	Post Graduate Program in DevOps, Caltech - Center of Technology and Education\no	Earned: March, 2024\n	CCNA, Cisco\no	Earned: September 23, 2023\no	Expires: September 23, 2026\n",
       },
     },
   ]);
@@ -149,6 +151,14 @@ function AiChat(props) {
     sendToApi(prompt, uuid);
   };
 
+  const sendToPrompt = async (prompt) => {
+    setPrompt(prompt);
+    listenStop();
+    setShowSpinner(true);
+    const uuid = uuidv4();
+    sendToApi(prompt, uuid);
+  };
+
   const sendTranscript = async (e) => {
     await e.preventDefault();
     listenStop();
@@ -228,7 +238,7 @@ function AiChat(props) {
   const sendToApi = async (prompt, uuid) => {
     await axios
       .post(`https://automate.paglipay.info/start/${appUuid}`, {
-      // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
+      // .post(`http://192.168.2.203:5000/start/${appUuid}`, {
         // .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
         jobs: [
@@ -263,7 +273,7 @@ function AiChat(props) {
           //   );
           // setShowSpinner(false);
 
-          const res_data = res.data["OpenAiObj"];
+          const res_data = res.data["OpenAiObj"].slice(1);
 
           setMessage(
             <Col lg={12}>
@@ -374,7 +384,7 @@ function AiChat(props) {
           >
             {/* <BsPersonFill size={50}/> */}
             {/* <Image src={`https://randomuser.me/api/portraits/med/men/${(() => Math.floor(Math.random() * 10))()}.jpg`} roundedCircle /> */}{" "}
-            {"Instant Interview - Ask me typical job interview questions."}
+            {"Instant Interview - Ask me typical job interview questions. I am available typically during regular office hours, Monday through Friday, 9am. to 5pm. Pacific Standard Time."}
             <Badge variant={"badgeStatus"} style={{ float: "right" }}>
               {"badgeStatus".charAt(0).toUpperCase() + "badgeStatus".slice(1)}
             </Badge>{" "}
@@ -385,7 +395,9 @@ function AiChat(props) {
                 <div></div>
               </Col>
               <Col lg={12}>
-                <div>{message}</div>
+                <div>
+                  <p>{message}</p>
+                </div>
               </Col>
               <Col lg={0}>
                 <div></div>
@@ -428,13 +440,13 @@ function AiChat(props) {
                 />
               </Form>
               <Button
-            type="button"
-            onClick={() => {
-              start(["computer"]);
-            }}
-          >
-            Start
-          </Button>
+                type="button"
+                onClick={() => {
+                  start(["computer"]);
+                }}
+              >
+                Start
+              </Button>
               <Button
                 type="button"
                 onClick={(e) => {
@@ -505,8 +517,34 @@ function AiChat(props) {
                 />
               </Form.Group>
               <Button variant="primary" type="button" onClick={sendPrompt}>
-                sendPrompt
+                Send Prompt
               </Button>
+              {[
+                "Can you tell me a little about yourself?",
+                "Why do you want to work here?",
+                "What are your greatest strengths?",
+                "What are your weaknesses?",
+                "Can you describe a challenge you faced and how you dealt with it?",
+                "Where do you see yourself in five years?",
+                "Why did you leave your last job?",
+                "What can you bring to this company?",
+                "How do you handle stress and pressure?",
+                "Do you have any questions for us?",
+              ].map((i) => {
+                return (
+                  <>
+                    {" "}
+                    <Button
+                      style={{ margin: 5 }}
+                      variant="outline-primary"
+                      type="button"
+                      onClick={() => sendToPrompt(i)}
+                    >
+                      {i}
+                    </Button>
+                  </>
+                );
+              })}
             </Form>
           </div>
           <Card.Footer>
