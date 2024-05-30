@@ -33,6 +33,12 @@ function NavTabs({ authenticated, logout }) {
 
           <Nav.Link
             as="a"
+            href="https://services.paglipay.info/"
+          >
+            Services
+          </Nav.Link>
+          <Nav.Link
+            as="a"
             href="https://paglipay-portfolio-resume-f83d641338bb.herokuapp.com/"
           >
             Resume
