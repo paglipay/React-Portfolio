@@ -50,7 +50,7 @@ function AiChat(props) {
   const [debug, setDebug] = useState(true);
   const [showSpinner, setShowSpinner] = useState(false);
   const [showPromptBox, setShowPromptBox] = useState(true);
-  const [badgeStatus, setBadgeStatus] = useState("danger");
+  const [badgeStatus, setBadgeStatus] = useState("info");
   const [appUuid, setAppUuid] = useState("");
   const [speakText, setSpeakText] = useState({ text: "" });
   const start = async (e_ary) => {
@@ -215,7 +215,7 @@ function AiChat(props) {
               {res_data.map((e, i) =>
                 "content" in e.response ? (
                   i === 0 ? (
-                    <pre key={i} style={{ textAlign: "left" }}>
+                    <pre key={i} style={{ textAlign: "left", height: "300px", backgroundColor: "#f5f5f5" }}>
                       {e.response.content}
                     </pre>
                   ) : (
@@ -294,7 +294,7 @@ function AiChat(props) {
               {res_data.map((e, i) =>
                 "content" in e.response ? (
                   i === 0 ? (
-                    <pre key={i} style={{ textAlign: "left" }}>
+                    <pre key={i} style={{ textAlign: "left", height: "300px", backgroundColor: "#f5f5f5" }}>
                       {e.response.content}
                     </pre>
                   ) : (
@@ -409,8 +409,8 @@ function AiChat(props) {
             {
               "Instant Interview - Ask me typical job interview questions. I am available typically during regular office hours, Monday through Friday, 9am. to 5pm. Pacific Standard Time."
             }
-            <Badge variant={"badgeStatus"} style={{ float: "right" }}>
-              {"badgeStatus".charAt(0).toUpperCase() + "badgeStatus".slice(1)}
+            <Badge variant={badgeStatus} style={{ float: "right" }}>
+              Using ChatGPT
             </Badge>{" "}
           </Card.Header>
           <div>
@@ -433,7 +433,7 @@ function AiChat(props) {
                 style={{ display: showSpinner ? "block" : "none", margin: 10 }}
               />
             </Col>
-            <h1>
+            {/* <h1>
               {" "}
               {listening ? (
                 <Badge variant={"success"} style={{ float: "middle" }}>
@@ -444,9 +444,9 @@ function AiChat(props) {
                   {"Listening: Off"}
                 </Badge>
               )}
-            </h1>
+            </h1> */}
 
-            <div>
+            {/* <div>
               <Form>
                 <Form.Check
                   type="checkbox"
@@ -493,7 +493,7 @@ function AiChat(props) {
               <Button type="button" onClick={SpeechRecognition.stopListening}>
                 Stop
               </Button>
-            </div>
+            </div> */}
           </div>
           {debug && (
             <div>
@@ -501,9 +501,9 @@ function AiChat(props) {
               {commandButtons}
             </div>
           )}
-          <div>
+          {/* <div>
             <span>{acceptedCommand}</span>
-          </div>
+          </div> */}
 
           <div>
             <Form
