@@ -214,7 +214,9 @@ function AiChat(props) {
                 <Card.Body> */}
               {res_data.map((e, i) =>
                 "content" in e.response ? (
-                  <p key={i} style={{ textAlign: "left" }}>
+                  i === 0 ? <pre key={i} style={{ textAlign: "left" }}>
+                    {e.response.content}
+                  </pre>:<p key={i} style={{ textAlign: "left" }}>
                     {e.response.content}
                   </p>
                 ) : (
@@ -282,7 +284,9 @@ function AiChat(props) {
                 <Card.Body> */}
               {res_data.map((e, i) =>
                 "content" in e.response ? (
-                  <p key={i} style={{ textAlign: "left" }}>
+                  i === 0 ? <pre key={i} style={{ textAlign: "left" }}>
+                    {e.response.content}
+                  </pre>:<p key={i} style={{ textAlign: "left" }}>
                     {e.response.content}
                   </p>
                 ) : (
@@ -396,7 +400,7 @@ function AiChat(props) {
               </Col>
               <Col lg={12}>
                 <div>
-                  <pre>{message}</pre>
+                  <p>{message}</p>
                 </div>
               </Col>
               <Col lg={0}>
