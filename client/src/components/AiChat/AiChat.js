@@ -529,7 +529,7 @@ function AiChat(props) {
               style={{ display: showPromptBox ? "block" : "none", margin: 10 }}
             >
               <Form.Group controlId="trascript">
-                <Form.Label>Transcript</Form.Label>
+                <Form.Label>Question Prompt:</Form.Label>
                 <Form.Control
                   onFocus={cpTranscriptToPrompt}
                   as="textarea"
@@ -558,6 +558,57 @@ function AiChat(props) {
                 "How do you handle stress and pressure?",
                 "What are your salary expecations?",
                 "Do you have any questions for us?",
+                " Tell me about yourself?",
+" What are your strengths?",
+" What are your weaknesses?",
+" Why do you want to work for this company?",
+" Why should we hire you?",
+" Can you explain your resume and work history?",
+" What is your greatest professional achievement?",
+" Describe a challenge you've faced at work and how you handled it?",
+" Where do you see yourself in 5 years?",
+" What is your dream job?",
+" Why are you leaving your current job?",
+" What do you know about our company?",
+" How do you handle stress and pressure?",
+" How do you stay organized and prioritize tasks?",
+" What interests you about this role?",
+" Are you a team player or do you prefer working independently?",
+" Describe your communication skills?",
+" Tell me about a time you had to resolve a conflict with a colleague?",
+" How do you handle constructive criticism?",
+" What's your approach to problem-solving?",
+" Describe a time you demonstrated leadership?",
+" How do you stay updated with industry trends and developments?",
+" What technical skills do you possess?",
+" Tell me about a time you had to learn a new technology quickly?",
+" How do you stay motivated and engaged at work?",
+" What are your salary expectations?",
+" Describe your work style?",
+" How do you handle multitasking?",
+" How do you handle shifting priorities?",
+" What is your preferred management style?",
+" Are you comfortable working in a fast-paced environment?",
+" How would you explain a complex concept to a non-technical audience?",
+" Tell me about a time you failed at a task or project and what you learned from it?",
+" How did you hear about this position?",
+" Describe a time you had to meet a tight deadline?",
+" What do you do if you don't know the answer to a problem at work?",
+" Describe your experience with client or customer interactions?",
+" What do you do in your free time?",
+" Explain your approach to setting and achieving goals?",
+" How do you maintain work-life balance?",
+" What motivates you?",
+" Tell me about at time you had a conflict at work and how you resolved it?",
+" What is your preferred method of feedback and performance evaluation?",
+" What's the most innovative idea you've implemented at work?",
+" Tell me about a time you had a disagreement with your supervisor?",
+" How do you handle difficult conversations with colleagues or clients?",
+" Give an example of a time when you had to think outside the box?",
+" What's your approach to mentoring and coaching junior team members?",
+" Give an example of a time when you had to resolve a customer complaint?",
+" Do you have any questions for us?",
+
               ].map((i) => {
                 return (
                   <>
