@@ -221,7 +221,12 @@ function AiChat(props) {
                     <Col lg={12}>
                       <Row>
                         <Col lg={3}>
-                          <Image src="./StylizePhoto_2_20240531.jpeg" style={{marginBottom:"10px"}}></Image>
+                          <div>
+                            <Image
+                              src="./StylizePhoto_2_20240531.jpeg"
+                              style={{ marginBottom: "10px", width: "100%" }}
+                            ></Image>
+                          </div>
                         </Col>
                         <Col lg={9}>
                           <pre
@@ -329,7 +334,12 @@ function AiChat(props) {
                     <Col lg={12}>
                       <Row>
                         <Col lg={3}>
-                          <Image src="./StylizePhoto_2_20240531.jpeg" style={{marginBottom:"10px"}}></Image>
+                          <div>
+                            <Image
+                              src="./StylizePhoto_2_20240531.jpeg"
+                              style={{ marginBottom: "10px", width: "100%" }}
+                            ></Image>
+                          </div>
                         </Col>
                         <Col lg={9}>
                           <pre
