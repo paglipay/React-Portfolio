@@ -221,7 +221,7 @@ function AiChat(props) {
                     <Col lg={12}>
                       <Row>
                         <Col lg={3}>
-                          <Image src="./IMG_2885.JPG" style={{marginBottom:"10px"}}></Image>
+                          <Image src="./StylizePhoto_2_20240531.jpeg" style={{marginBottom:"10px"}}></Image>
                         </Col>
                         <Col lg={9}>
                           <pre
@@ -329,7 +329,7 @@ function AiChat(props) {
                     <Col lg={12}>
                       <Row>
                         <Col lg={3}>
-                          <Image src="./IMG_2885.JPG" style={{marginBottom:"10px"}}></Image>
+                          <Image src="./StylizePhoto_2_20240531.jpeg" style={{marginBottom:"10px"}}></Image>
                         </Col>
                         <Col lg={9}>
                           <pre
@@ -478,7 +478,7 @@ function AiChat(props) {
           <div>
             <Row>
               <Col lg={7}>
-                <h3>Paul Aglipay</h3>
+                <h4>Paul Aglipay</h4>
                 <div>
                   <p>{message}</p>
                 </div>
@@ -524,6 +524,7 @@ function AiChat(props) {
                       <Form.Control
                         onFocus={cpTranscriptToPrompt}
                         as="textarea"
+                        placeholder="Ask me anything..."
                         rows={6}
                         value={prompt}
                         onChange={(e) => {
