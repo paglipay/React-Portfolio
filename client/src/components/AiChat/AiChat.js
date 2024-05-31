@@ -232,14 +232,19 @@ function AiChat(props) {
                     </Col>
                   ) : (
                     <Col lg={12}>
-                      <p key={i} style={{ textAlign: "left" }}>
-                        {e.response.content.split("\n").map((line, index) => (
-                          <React.Fragment key={index}>
-                            {line}
-                            <br />
-                          </React.Fragment>
-                        ))}
-                      </p>
+                      <Card key={`p-card${i}`} className={"mb-3"}>
+                        <Card.Header>{e.prompt}</Card.Header>
+                        <Card.Body key={i}>
+                        <Card.Text>
+                          {e.response.content.split("\n").map((line, index) => (
+                            <React.Fragment key={index}>
+                              {line}
+                              <br />
+                            </React.Fragment>
+                          ))}
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
                     </Col>
                   )
                 ) : (
@@ -324,14 +329,19 @@ function AiChat(props) {
                     </Col>
                   ) : (
                     <Col lg={12}>
-                      <p key={i} style={{ textAlign: "left" }}>
-                        {e.response.content.split("\n").map((line, index) => (
-                          <React.Fragment key={index}>
-                            {line}
-                            <br />
-                          </React.Fragment>
-                        ))}
-                      </p>
+                      <Card key={`p-card${i}`} className={"mb-3"}>
+                        <Card.Header>{e.prompt}</Card.Header>
+                        <Card.Body key={i} >
+                        <Card.Text>
+                          {e.response.content.split("\n").map((line, index) => (
+                            <React.Fragment key={index}>
+                              {line}
+                              <br />
+                            </React.Fragment>
+                          ))}
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
                     </Col>
                   )
                 ) : (
