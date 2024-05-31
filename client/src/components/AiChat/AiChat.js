@@ -454,12 +454,12 @@ function AiChat(props) {
           </Card.Header>
           <div>
             <Row>
-              <Col lg={6}>
+              <Col lg={7}>
                 <div>
                   <p>{message}</p>
                 </div>
               </Col>
-              <Col lg={6}>
+              <Col lg={5}>
                 <div>
                   <Form
                     style={{
