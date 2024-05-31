@@ -219,21 +219,30 @@ function AiChat(props) {
                 "content" in e.response ? (
                   i === 0 ? (
                     <Col lg={12}>
-                      <pre
-                        key={i}
-                        style={{
-                          textAlign: "left",
-                          height: "300px",
-                          backgroundColor: "#f5f5f5",
-                        }}
-                      >
-                        {e.response.content}
-                      </pre>
+                      <Row>
+                        <Col lg={3}>
+                          <Image src="./IMG_2885.JPG" style={{marginBottom:"10px"}}></Image>
+                        </Col>
+                        <Col lg={9}>
+                          <pre
+                            key={i}
+                            style={{
+                              textAlign: "left",
+                              height: "300px",
+                              backgroundColor: "#f5f5f5",
+                            }}
+                          >
+                            {e.response.content}
+                          </pre>
+                        </Col>
+                      </Row>
                     </Col>
                   ) : (
                     <Col lg={12}>
                       <Card key={`p-card${i}`} className={"mb-3"}>
-                        <Card.Header>{e.prompt}</Card.Header>
+                        <Card.Header className="mb-3" as="h6">
+                          {e.prompt}
+                        </Card.Header>
                         <Card.Body key={i}>
                           <Card.Text>
                             {e.response.content
@@ -318,21 +327,30 @@ function AiChat(props) {
                 "content" in e.response ? (
                   i === 0 ? (
                     <Col lg={12}>
-                      <pre
-                        key={i}
-                        style={{
-                          textAlign: "left",
-                          height: "300px",
-                          backgroundColor: "#f5f5f5",
-                        }}
-                      >
-                        {e.response.content}
-                      </pre>
+                      <Row>
+                        <Col lg={3}>
+                          <Image src="./IMG_2885.JPG" style={{marginBottom:"10px"}}></Image>
+                        </Col>
+                        <Col lg={9}>
+                          <pre
+                            key={i}
+                            style={{
+                              textAlign: "left",
+                              height: "300px",
+                              backgroundColor: "#f5f5f5",
+                            }}
+                          >
+                            {e.response.content}
+                          </pre>
+                        </Col>
+                      </Row>
                     </Col>
                   ) : (
                     <Col lg={12}>
                       <Card key={`p-card${i}`} className={"mb-3"}>
-                        <Card.Header>{e.prompt}</Card.Header>
+                        <Card.Header className="mb-3" as="h6">
+                          {e.prompt}
+                        </Card.Header>
                         <Card.Body key={i}>
                           <Card.Text>
                             {e.response.content
@@ -460,6 +478,7 @@ function AiChat(props) {
           <div>
             <Row>
               <Col lg={7}>
+                <h3>Paul Aglipay</h3>
                 <div>
                   <p>{message}</p>
                 </div>
