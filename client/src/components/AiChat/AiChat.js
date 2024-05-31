@@ -122,7 +122,9 @@ function AiChat(props) {
 
   useEffect(() => {
     setAppUuid(uuidv4());
-    setSpeakText({"text": "Hello! My name is Paul Aglipay, and I’m excited to be here for the job interview. How are you today? Please feel free to ask me any typical job interview questions using the Question Prompt field below. I’m looking forward to our conversation!"});
+    setSpeakText({
+      text: "Hello! My name is Paul Aglipay, and I’m excited to be here for the job interview. How are you today? Please feel free to ask me any typical job interview questions using the Question Prompt field below. I’m looking forward to our conversation!",
+    });
   }, []);
 
   useEffect(() => {
@@ -171,9 +173,9 @@ function AiChat(props) {
   const getImage = async (prompt, uuid, convoHistory) => {
     console.log("convoHistory: ", convoHistory);
     await axios
-      // .post(`https://automate.paglipay.info/start/${appUuid}`, {
-      // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
-      .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
+      .post(`https://automate.paglipay.info/start/${appUuid}`, {
+        // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
+        // .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
         jobs: [
           {
@@ -209,36 +211,49 @@ function AiChat(props) {
           const res_data = res.data["OpenAiObj"];
 
           setMessage(
-            <Col lg={12}>
+            <>
               {/* <Card>
                 <Card.Header>Header</Card.Header>
                 <Card.Body> */}
               {res_data.map((e, i) =>
                 "content" in e.response ? (
                   i === 0 ? (
-                    <pre key={i} style={{ textAlign: "left", height: "300px", backgroundColor: "#f5f5f5" }}>
-                      {e.response.content}
-                    </pre>
+                    <Col lg={12}>
+                      <pre
+                        key={i}
+                        style={{
+                          textAlign: "left",
+                          height: "300px",
+                          backgroundColor: "#f5f5f5",
+                        }}
+                      >
+                        {e.response.content}
+                      </pre>
+                    </Col>
                   ) : (
-                    <p key={i} style={{ textAlign: "left" }}>
-                      {e.response.content.split("\n").map((line, index) => (
-                        <React.Fragment key={index}>
-                          {line}
-                          <br />
-                        </React.Fragment>
-                      ))}
-                    </p>
+                    <Col lg={12}>
+                      <p key={i} style={{ textAlign: "left" }}>
+                        {e.response.content.split("\n").map((line, index) => (
+                          <React.Fragment key={index}>
+                            {line}
+                            <br />
+                          </React.Fragment>
+                        ))}
+                      </p>
+                    </Col>
                   )
                 ) : (
-                  <Card key={i} className={"mb-3"}>
-                    <Image src={e.response["image"]}></Image>
-                    <Card.Footer></Card.Footer>
-                  </Card>
+                  <Col lg={6}>
+                    <Card key={i} className={"mb-3"}>
+                      <Image src={e.response["image"]}></Image>
+                      <Card.Footer></Card.Footer>
+                    </Card>
+                  </Col>
                 )
               )}
               {/* </Card.Body>
               </Card> */}
-            </Col>
+            </>
           );
         }
       })
@@ -288,36 +303,49 @@ function AiChat(props) {
           const res_data = res.data["OpenAiObj"];
 
           setMessage(
-            <Col lg={12}>
+            <>
               {/* <Card>
                 <Card.Header>Header</Card.Header>
                 <Card.Body> */}
               {res_data.map((e, i) =>
                 "content" in e.response ? (
                   i === 0 ? (
-                    <pre key={i} style={{ textAlign: "left", height: "300px", backgroundColor: "#f5f5f5" }}>
-                      {e.response.content}
-                    </pre>
+                    <Col lg={12}>
+                      <pre
+                        key={i}
+                        style={{
+                          textAlign: "left",
+                          height: "300px",
+                          backgroundColor: "#f5f5f5",
+                        }}
+                      >
+                        {e.response.content}
+                      </pre>
+                    </Col>
                   ) : (
-                    <p key={i} style={{ textAlign: "left" }}>
-                      {e.response.content.split("\n").map((line, index) => (
-                        <React.Fragment key={index}>
-                          {line}
-                          <br />
-                        </React.Fragment>
-                      ))}
-                    </p>
+                    <Col lg={12}>
+                      <p key={i} style={{ textAlign: "left" }}>
+                        {e.response.content.split("\n").map((line, index) => (
+                          <React.Fragment key={index}>
+                            {line}
+                            <br />
+                          </React.Fragment>
+                        ))}
+                      </p>
+                    </Col>
                   )
                 ) : (
-                  <Card key={i} className={"mb-3"}>
-                    <Image src={e.response["image"]}></Image>
-                    <Card.Footer></Card.Footer>
-                  </Card>
+                  <Col lg={6}>
+                    <Card key={i} className={"mb-3"}>
+                      <Image src={e.response["image"]}></Image>
+                      <Card.Footer></Card.Footer>
+                    </Card>
+                  </Col>
                 )
               )}
               {/* </Card.Body>
               </Card> */}
-            </Col>
+            </>
           );
           if (
             "content" in res_data[res_data.length - 1]["response"] &&
@@ -416,16 +444,148 @@ function AiChat(props) {
           </Card.Header>
           <div>
             <Row>
-              <Col lg={0}>
-                <div></div>
-              </Col>
-              <Col lg={12}>
+              <Col lg={6}>
                 <div>
                   <p>{message}</p>
                 </div>
               </Col>
-              <Col lg={0}>
-                <div></div>
+              <Col lg={6}>
+                <div>
+                  <Form
+                    style={{
+                      display: showPromptBox ? "none" : "block",
+                      margin: 10,
+                    }}
+                  >
+                    <Form.Group controlId="trascript">
+                      <h3
+                        onClick={(e) => {
+                          if (transcript != "") {
+                            cpTranscriptToPrompt(e);
+                            setShowPromptBox(true);
+                          }
+                        }}
+                      >
+                        {transcript}
+                      </h3>
+                    </Form.Group>
+                    <Button
+                      variant="primary"
+                      type="button"
+                      onClick={sendTranscript}
+                    >
+                      sendTranscript
+                    </Button>
+                  </Form>
+                  <Form
+                    style={{
+                      display: showPromptBox ? "block" : "none",
+                      margin: 10,
+                    }}
+                  >
+                    <Form.Group controlId="trascript">
+                      <Form.Label>
+                        <h6>Question Prompt:</h6>
+                      </Form.Label>
+                      <Form.Control
+                        onFocus={cpTranscriptToPrompt}
+                        as="textarea"
+                        rows={6}
+                        value={prompt}
+                        onChange={(e) => {
+                          setPrompt(e.target.value);
+                        }}
+                      />
+                    </Form.Group>
+                    <Button
+                      variant="primary"
+                      type="button"
+                      onClick={sendPrompt}
+                    >
+                      Send Prompt
+                    </Button>
+                    {[
+                      "Can you tell me a little about yourself?",
+                      "Describe your work history.",
+                      "What certifications do have?",
+                      "Tell me about the front-end technologies you are familiar with.",
+                      "Tell me about the back-end technologies you are familiar with.",
+                      "What are your greatest strengths?",
+                      "What are your weaknesses?",
+                      "Can you describe a challenge you faced and how you dealt with it?",
+                      "Where do you see yourself in five years?",
+                      "Why did you leave your last job?",
+                      "What can you bring to this company?",
+                      "How do you handle stress and pressure?",
+                      "What are your salary expecations?",
+                      "Do you have any questions for us?",
+                      " Tell me about yourself?",
+                      " What are your strengths?",
+                      " What are your weaknesses?",
+                      " Why do you want to work for this company?",
+                      " Why should we hire you?",
+                      " Can you explain your resume and work history?",
+                      " What is your greatest professional achievement?",
+                      " Describe a challenge you've faced at work and how you handled it?",
+                      " Where do you see yourself in 5 years?",
+                      " What is your dream job?",
+                      " Why are you leaving your current job?",
+                      " What do you know about our company?",
+                      " How do you handle stress and pressure?",
+                      " How do you stay organized and prioritize tasks?",
+                      " What interests you about this role?",
+                      " Are you a team player or do you prefer working independently?",
+                      " Describe your communication skills?",
+                      " Tell me about a time you had to resolve a conflict with a colleague?",
+                      " How do you handle constructive criticism?",
+                      " What's your approach to problem-solving?",
+                      " Describe a time you demonstrated leadership?",
+                      " How do you stay updated with industry trends and developments?",
+                      " What technical skills do you possess?",
+                      " Tell me about a time you had to learn a new technology quickly?",
+                      " How do you stay motivated and engaged at work?",
+                      " What are your salary expectations?",
+                      " Describe your work style?",
+                      " How do you handle multitasking?",
+                      " How do you handle shifting priorities?",
+                      " What is your preferred management style?",
+                      " Are you comfortable working in a fast-paced environment?",
+                      " How would you explain a complex concept to a non-technical audience?",
+                      " Tell me about a time you failed at a task or project and what you learned from it?",
+                      " How did you hear about this position?",
+                      " Describe a time you had to meet a tight deadline?",
+                      " What do you do if you don't know the answer to a problem at work?",
+                      " Describe your experience with client or customer interactions?",
+                      " What do you do in your free time?",
+                      " Explain your approach to setting and achieving goals?",
+                      " How do you maintain work-life balance?",
+                      " What motivates you?",
+                      " Tell me about at time you had a conflict at work and how you resolved it?",
+                      " What is your preferred method of feedback and performance evaluation?",
+                      " What's the most innovative idea you've implemented at work?",
+                      " Tell me about a time you had a disagreement with your supervisor?",
+                      " How do you handle difficult conversations with colleagues or clients?",
+                      " Give an example of a time when you had to think outside the box?",
+                      " What's your approach to mentoring and coaching junior team members?",
+                      " Give an example of a time when you had to resolve a customer complaint?",
+                      " Do you have any questions for us?",
+                    ].map((i) => {
+                      return (
+                        <>
+                          {" "}
+                          <Button
+                            style={{ margin: 5 }}
+                            variant="outline-primary"
+                            type="button"
+                            onClick={() => sendToPrompt(i)}
+                          >
+                            {i}
+                          </Button>
+                        </>
+                      );
+                    })}
+                  </Form>
+                </div>
               </Col>
             </Row>
             <Col lg={12} style={{ display: "flex", justifyContent: "center" }}>
@@ -506,127 +666,6 @@ function AiChat(props) {
             <span>{acceptedCommand}</span>
           </div> */}
 
-          <div>
-            <Form
-              style={{ display: showPromptBox ? "none" : "block", margin: 10 }}
-            >
-              <Form.Group controlId="trascript">
-                <h3
-                  onClick={(e) => {
-                    if (transcript != "") {
-                      cpTranscriptToPrompt(e);
-                      setShowPromptBox(true);
-                    }
-                  }}
-                >
-                  {transcript}
-                </h3>
-              </Form.Group>
-              <Button variant="primary" type="button" onClick={sendTranscript}>
-                sendTranscript
-              </Button>
-            </Form>
-            <Form
-              style={{ display: showPromptBox ? "block" : "none", margin: 10 }}
-            >
-              <Form.Group controlId="trascript">
-                <Form.Label>Question Prompt:</Form.Label>
-                <Form.Control
-                  onFocus={cpTranscriptToPrompt}
-                  as="textarea"
-                  rows={6}
-                  value={prompt}
-                  onChange={(e) => {
-                    setPrompt(e.target.value);
-                  }}
-                />
-              </Form.Group>
-              <Button variant="primary" type="button" onClick={sendPrompt}>
-                Send Prompt
-              </Button>
-              {[
-                "Can you tell me a little about yourself?",
-                "Describe your work history.",
-                "What certifications do have?",
-                "Tell me about the front-end technologies you are familiar with.",
-                "Tell me about the back-end technologies you are familiar with.",
-                "What are your greatest strengths?",
-                "What are your weaknesses?",
-                "Can you describe a challenge you faced and how you dealt with it?",
-                "Where do you see yourself in five years?",
-                "Why did you leave your last job?",
-                "What can you bring to this company?",
-                "How do you handle stress and pressure?",
-                "What are your salary expecations?",
-                "Do you have any questions for us?",
-                " Tell me about yourself?",
-" What are your strengths?",
-" What are your weaknesses?",
-" Why do you want to work for this company?",
-" Why should we hire you?",
-" Can you explain your resume and work history?",
-" What is your greatest professional achievement?",
-" Describe a challenge you've faced at work and how you handled it?",
-" Where do you see yourself in 5 years?",
-" What is your dream job?",
-" Why are you leaving your current job?",
-" What do you know about our company?",
-" How do you handle stress and pressure?",
-" How do you stay organized and prioritize tasks?",
-" What interests you about this role?",
-" Are you a team player or do you prefer working independently?",
-" Describe your communication skills?",
-" Tell me about a time you had to resolve a conflict with a colleague?",
-" How do you handle constructive criticism?",
-" What's your approach to problem-solving?",
-" Describe a time you demonstrated leadership?",
-" How do you stay updated with industry trends and developments?",
-" What technical skills do you possess?",
-" Tell me about a time you had to learn a new technology quickly?",
-" How do you stay motivated and engaged at work?",
-" What are your salary expectations?",
-" Describe your work style?",
-" How do you handle multitasking?",
-" How do you handle shifting priorities?",
-" What is your preferred management style?",
-" Are you comfortable working in a fast-paced environment?",
-" How would you explain a complex concept to a non-technical audience?",
-" Tell me about a time you failed at a task or project and what you learned from it?",
-" How did you hear about this position?",
-" Describe a time you had to meet a tight deadline?",
-" What do you do if you don't know the answer to a problem at work?",
-" Describe your experience with client or customer interactions?",
-" What do you do in your free time?",
-" Explain your approach to setting and achieving goals?",
-" How do you maintain work-life balance?",
-" What motivates you?",
-" Tell me about at time you had a conflict at work and how you resolved it?",
-" What is your preferred method of feedback and performance evaluation?",
-" What's the most innovative idea you've implemented at work?",
-" Tell me about a time you had a disagreement with your supervisor?",
-" How do you handle difficult conversations with colleagues or clients?",
-" Give an example of a time when you had to think outside the box?",
-" What's your approach to mentoring and coaching junior team members?",
-" Give an example of a time when you had to resolve a customer complaint?",
-" Do you have any questions for us?",
-
-              ].map((i) => {
-                return (
-                  <>
-                    {" "}
-                    <Button
-                      style={{ margin: 5 }}
-                      variant="outline-primary"
-                      type="button"
-                      onClick={() => sendToPrompt(i)}
-                    >
-                      {i}
-                    </Button>
-                  </>
-                );
-              })}
-            </Form>
-          </div>
           <Card.Footer>
             <h6>UUID: {appUuid}</h6>
           </Card.Footer>
