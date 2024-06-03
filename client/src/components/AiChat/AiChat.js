@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Typewriter from "typewriter-effect";
 import {
   Button,
   Form,
@@ -25,6 +26,16 @@ function AiChat(props) {
         <Card.Header>Header</Card.Header>
         <Card.Body> */}
         <Image src="./IMG_2885.JPG"></Image>
+        <h1><Typewriter
+                onInit={(typewriter) => {
+                    typewriter
+                        .typeString("Hello! My name is Paul Aglipay, and I’m excited to be here for the job interview. How are you today? Please feel free to ask me any job interview questions using the Question Prompt field. I’m looking forward to our conversation!")
+                        // .pauseFor(1000)
+                        // .deleteAll()
+                        // .typeString("Welcomes You")
+                        .start();
+                }}
+            /></h1>
         {/* </Card.Body>
       </Card> */}
       </p>
