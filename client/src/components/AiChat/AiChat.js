@@ -29,6 +29,7 @@ function AiChat(props) {
         <h1><Typewriter
                 onInit={(typewriter) => {
                     typewriter
+                        .pauseFor(1000)
                         .typeString("Hello! My name is Paul Aglipay, and I’m excited to be here for the job interview. How are you today? Please feel free to ask me any job interview questions using the Question Prompt field. I’m looking forward to our conversation!")
                         // .pauseFor(1000)
                         // .deleteAll()
