@@ -110,7 +110,7 @@ function AiChat(props) {
             .catch(async (res) => {
               console.log(res);
               await speak({
-                text: "Sorry, there appears to be an issue connecting to the server.",
+                text: "Sorry, there appears to be an issue connecting. I am available typically during regular office hours, Monday through Friday, 9am. to 5pm. Pacific Standard Time.",
               });
             });
         },
@@ -416,7 +416,7 @@ function AiChat(props) {
         console.log(res);
         setShowSpinner(false);
         setSpeakText({
-          text: "Sorry, there appears to be an issue connecting to the server.",
+          text: "Sorry, there appears to be an issue connecting. I am available typically during regular office hours, Monday through Friday, 9am. to 5pm. Pacific Standard Time.",
         });
       });
   };
