@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Typewriter from "typewriter-effect";
+import Markdown from "markdown-to-jsx";
 import {
   Button,
   Form,
@@ -18,6 +19,117 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 function AiChat(props) {
+  const str = `# Paul Aglipay
+
+  **Location:** Los Angeles, California, United States  
+  **Email:** [paglipay@gmail.com](mailto:paglipay@gmail.com)  
+  **LinkedIn:** [linkedin.com/in/paul-aglipay-11564046](https://www.linkedin.com/in/paul-aglipay-11564046/)
+  
+  ---
+  
+  ## Summary
+  
+  Dynamic Software Engineer with extensive experience in Network and Systems Engineering. Skilled in delivering advanced data analytics, reporting, and dashboard solutions. Strong communicator and problem-solver with a proven track record.
+  
+  ---
+  
+  ## Skills
+  
+  - **Version Control Systems:** Git (Github, GitLab)
+  - **Cloud Platforms:** AWS, Azure, GCP
+  - **Operating Systems:** Linux, Windows
+  - **Databases:** Oracle SQL, Microsoft SQL, MariaDB, Postgres, MongoDB
+  - **Programming Languages:** Python, Java, Javascript, Typescript
+  - **Frameworks:** React (NextJS, NX), Angular, ExpressJS, Django, Spring Boot
+  - **Testing:** Robot Framework, Pytest, PyUnit (Unittest), Cypress, Selenium
+  - **DevOps:** ArgoCD, Jenkins, Terraform, Ansible, Docker Swarm, Kubernetes, Nagios
+  - **Other Skills:** Full-Stack Development, Issue Tracking, Data Mapping, Communication, Problem-solving, Fast-paced Adaptability
+  
+  ---
+  
+  ## Experience
+  
+  ### Network Engineer, University of California, Los Angeles (UCLA)
+  **Oct 2016 – Present**
+  
+  - Oversee the Network Services Department's monitoring system, ensuring seamless integration of campus network devices.
+  - Track and proactively communicate to facilitate smooth transitions.
+  - Troubleshoot minor issues from bugs or misconfigurations using tools like NetDisco, Rancid (GitLab / Hound), Nagios (Thruk), PagerDuty, and Aruba Airwave VMs.
+  - Manage, configure, and optimize network infrastructure, providing technical support to ensure reliability and performance.
+  
+  ### Software Engineer, Walmart Global Tech (Revature)
+  **Jan 2022 - Aug 2022**
+  
+  - Developed Chrome extensions for optimizing internal tooling within the Advertisement department.
+  - Resolved intricate iframe integration challenges on business customer pages.
+  - Implemented minor CSS fixes to enhance the user experience on walmart.com.
+  
+  ### Software Engineer, DataSlate
+  **Jan 2021 - Apr 2021**
+  
+  - Contributed to Full-Stack software development projects.
+  - Collaborated with cross-functional teams for product delivery.
+  
+  ### Network Engineer, Optomi
+  **Apr 2016 - Oct 2016**
+  
+  - Provided comprehensive network engineering support for UCLA projects, including network infrastructure design, implementation, and optimization.
+  - Assessed network requirements and recommended appropriate Cisco solutions.
+  - Conducted testing and validation of network configurations.
+  - Developed documentation and training materials for Cisco infrastructure maintenance and administration.
+  
+  ### Network Engineer, NIC Partners
+  **Oct 2015 - Apr 2016**
+  
+  - Supported network engineering projects at Cedars-Sinai Medical Center.
+  - Assessed network requirements and recommended Cisco solutions.
+  - Conducted thorough testing and validation of network configurations.
+  
+  ### Systems / Network Engineer, Burbank Bob Hope Airport
+  **Nov 2014 - Oct 2015**
+  
+  - Managed IT systems administration tasks, including setup, configuration, and maintenance of Windows Active Directory environments.
+  - Oversaw user account management, group policy implementation, and security protocols.
+  
+  ### Systems Administrator, Cable Engineering Services
+  **Jan 2008 - Nov 2014**
+  
+  - Managed IT systems administration tasks.
+  
+  ### Systems Administrator, BMS Communications Inc.
+  **Sep 2001 - Apr 2008**
+  
+  - Administered IT systems and provided technical support.
+  
+  ---
+  
+  ## Education
+  
+  - **Bachelor's Degree**, Computer Visualization Technology, ITT Technical Institute-Sylmar, Sep 2000 - Jun 2003
+  - **Post Graduate Program in DevOps**, Caltech - Center of Technology and Education, 2024
+  - **Certificate**, Full-Stack Developer, UCLA Extension, 2020
+  - **Brand College**, Cisco, 2012 - 2018
+  
+  ---
+  
+  ## Licenses & Certifications
+  
+  - **AWS Certified Developer - Associate**
+    - Earned: December 09, 2023
+    - Expires: December 09, 2026
+  - **AWS Certified Cloud Practitioner**
+    - Earned: October 28, 2023
+    - Expires: October 28, 2026
+  - **Microsoft Certified: Azure Fundamentals**
+    - Earned: January 13, 2024
+  - **Post Graduate Program in DevOps**, Caltech - Center of Technology and Education
+    - Earned: March, 2024
+  - **CCNA, Cisco**
+    - Earned: September 23, 2023
+    - Expires: September 23, 2026
+  - **Kubernetes Certified Associate (KCA)**
+    - Target Date: June 2024
+  `;
   const [consolelog, setConsolelog] = useState("");
   const [message, setMessage] = useState([
     <Col lg={12}>
@@ -26,17 +138,22 @@ function AiChat(props) {
         <Card.Header>Header</Card.Header>
         <Card.Body> */}
         <Image src="./IMG_2885.JPG"></Image>
-        <h1><Typewriter
-                onInit={(typewriter) => {
-                    typewriter
-                        .pauseFor(1000)
-                        .typeString("Hello! My name is Paul Aglipay, and I’m excited to be here for the job interview. How are you today? Please feel free to ask me any job interview questions using the Question Prompt field. I’m looking forward to our conversation!")
-                        // .pauseFor(1000)
-                        // .deleteAll()
-                        // .typeString("Welcomes You")
-                        .start();
-                }}
-            /></h1>
+        <h1>
+          <Typewriter
+            onInit={(typewriter) => {
+              typewriter
+                .pauseFor(1000)
+                .typeString(
+                  "Hello! My name is Paul Aglipay, and I’m excited to be here for the job interview. How are you today? Please feel free to ask me any job interview questions using the Question Prompt field. I’m looking forward to our conversation!"
+                )
+                // .pauseFor(1000)
+                // .deleteAll()
+                // .typeString("Welcomes You")
+                .start();
+            }}
+          />
+        </h1>
+        <Markdown  style={{ textAlign: "left" }} options={{ wrapper: "article" }}>{str}</Markdown>;
         {/* </Card.Body>
       </Card> */}
       </p>
