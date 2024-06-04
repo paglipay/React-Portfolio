@@ -462,7 +462,7 @@ function AiChat(props) {
                       <Card
                         key={`img-4-${i}`}
                         className={"mb-3"}
-                        style={{ height: "100%" }}
+                        // style={{ height: "100%" }}
                       >
                         <Card.Body>
                           <Card.Text>
@@ -610,7 +610,7 @@ function AiChat(props) {
                       <Card
                         key={`img-4-${i}`}
                         className={"mb-3"}
-                        style={{ height: "100%" }}
+                        // style={{ height: "100%" }}
                       >
                         <Card.Body>
                           <Card.Text>
@@ -665,7 +665,7 @@ function AiChat(props) {
   };
   const saveConversation = async (prompt, uuid) => {
     await axios
-      .post(`https://automate.paglipay.info/start/${appUuid}`, {
+      .post(`https://automate.paglipay.info/start/${appUuid}-${uuidv4()}`, {
         // .post(`http://192.168.2.203:5000/start/${appUuid}`, {
         // .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
