@@ -451,12 +451,29 @@ function AiChat(props) {
                     </Col>
                   )
                 ) : (
+                  <>
                   <Col lg={8}>
-                    <Card key={i} className={"mb-3"}>
+                    <Card key={`img-8-${i}`} className={"mb-3"}>
                       <Image src={e.response["image"]}></Image>
                       <Card.Footer></Card.Footer>
                     </Card>
                   </Col>
+                  <Col lg={4}>
+                    <Card key={`img-4-${i}`} className={"mb-3"}>
+                      <Card.Body>
+                        <Card.Text>
+                          <Markdown
+                              style={{ textAlign: "left" }}
+                              options={{ wrapper: "article" }}
+                            >
+                            {e.response["image_prompt"]}
+                            </Markdown>
+                        </Card.Text>
+                      </Card.Body>
+                      <Card.Footer></Card.Footer>
+                    </Card>
+                  </Col>
+                  </>
                 )
               )}
               {/* </Card.Body>
@@ -578,12 +595,29 @@ function AiChat(props) {
                     </Col>
                   )
                 ) : (
+                <>
                   <Col lg={8}>
-                    <Card key={i} className={"mb-3"}>
+                    <Card key={`img-8-${i}`} className={"mb-3"}>
                       <Image src={e.response["image"]}></Image>
                       <Card.Footer></Card.Footer>
                     </Card>
                   </Col>
+                  <Col lg={4}>
+                    <Card key={`img-4-${i}`} className={"mb-3"}>
+                      <Card.Body>
+                        <Card.Text>
+                          <Markdown
+                              style={{ textAlign: "left" }}
+                              options={{ wrapper: "article" }}
+                            >
+                            {e.response["image_prompt"]}
+                            </Markdown>
+                        </Card.Text>
+                      </Card.Body>
+                      <Card.Footer></Card.Footer>
+                    </Card>
+                  </Col>
+                  </>
                 )
               )}
               {/* </Card.Body>
