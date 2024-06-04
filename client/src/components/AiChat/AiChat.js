@@ -321,45 +321,44 @@ function AiChat(props) {
               {
                 import: "OpenAiObj",
               },
-
-              {
-                functions_call_list: [
-                  {
-                    name: "create_markdown",
-                    dtree: "./json/openai/create_markdown/_create_list.json",
-                    arguments: "messages",
-                    arguments_target:
-                      "./json/openai/create_markdown/_list.json",
-                    return_obj: "OpenAiObj",
-                  },
-                ],
-              },
-              {
-                functions_call: {
-                  functions: [
-                    {
-                      name: "create_markdown",
-                      description:
-                        "You have the option to add a markdown formated response.",
-                      parameters: {
-                        type: "object",
-                        properties: {
-                          messages: {
-                            type: "array",
-                            items: {
-                              type: "string",
-                              description: "markdown formated response",
-                            },
-                            description: "List of markdown formated responses",
-                          },
-                        },
-                        required: ["messages"],
-                      },
-                    },
-                  ],
-                  function_call: "auto",
-                },
-              },
+              // {
+              //   functions_call_list: [
+              //     {
+              //       name: "create_markdown",
+              //       dtree: "./json/openai/create_markdown/_create_list.json",
+              //       arguments: "messages",
+              //       arguments_target:
+              //         "./json/openai/create_markdown/_list.json",
+              //       return_obj: "OpenAiObj",
+              //     },
+              //   ],
+              // },
+              // {
+              //   functions_call: {
+              //     functions: [
+              //       {
+              //         name: "create_markdown",
+              //         description:
+              //           "You have the option to add a markdown formated response.",
+              //         parameters: {
+              //           type: "object",
+              //           properties: {
+              //             messages: {
+              //               type: "array",
+              //               items: {
+              //                 type: "string",
+              //                 description: "markdown formated response",
+              //               },
+              //               description: "List of markdown formated responses",
+              //             },
+              //           },
+              //           required: ["messages"],
+              //         },
+              //       },
+              //     ],
+              //     function_call: "auto",
+              //   },
+              // },
               {
                 conversation_history: convoHistory,
               },
