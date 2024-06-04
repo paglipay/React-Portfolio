@@ -451,7 +451,7 @@ function AiChat(props) {
                     </Col>
                   )
                 ) : (
-                  <>
+                  <Row>
                   <Col lg={8}>
                     <Card key={`img-8-${i}`} className={"mb-3"}>
                       <Image src={e.response["image"]}></Image>
@@ -473,7 +473,7 @@ function AiChat(props) {
                       <Card.Footer></Card.Footer>
                     </Card>
                   </Col>
-                  </>
+                  </Row>
                 )
               )}
               {/* </Card.Body>
@@ -595,7 +595,7 @@ function AiChat(props) {
                     </Col>
                   )
                 ) : (
-                <>
+                <Row>
                   <Col lg={8}>
                     <Card key={`img-8-${i}`} className={"mb-3"}>
                       <Image src={e.response["image"]}></Image>
@@ -617,7 +617,7 @@ function AiChat(props) {
                       <Card.Footer></Card.Footer>
                     </Card>
                   </Col>
-                  </>
+                  </Row>
                 )
               )}
               {/* </Card.Body>
