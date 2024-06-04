@@ -153,7 +153,13 @@ function AiChat(props) {
             }}
           />
         </h1>
-        <Markdown  style={{ textAlign: "left" }} options={{ wrapper: "article" }}>{str}</Markdown>;
+        <Markdown
+          style={{ textAlign: "left" }}
+          options={{ wrapper: "article" }}
+        >
+          {str}
+        </Markdown>
+        ;
         {/* </Card.Body>
       </Card> */}
       </p>
@@ -315,6 +321,45 @@ function AiChat(props) {
               {
                 import: "OpenAiObj",
               },
+
+              {
+                functions_call_list: [
+                  {
+                    name: "create_markdown",
+                    dtree: "./json/openai/create_markdown/_create_list.json",
+                    arguments: "messages",
+                    arguments_target:
+                      "./json/openai/create_markdown/_list.json",
+                    return_obj: "OpenAiObj",
+                  },
+                ],
+              },
+              {
+                functions_call: {
+                  functions: [
+                    {
+                      name: "create_markdown",
+                      description:
+                        "You have the option to add a markdown formated response.",
+                      parameters: {
+                        type: "object",
+                        properties: {
+                          messages: {
+                            type: "array",
+                            items: {
+                              type: "string",
+                              description: "markdown formated response",
+                            },
+                            description: "List of markdown formated responses",
+                          },
+                        },
+                        required: ["messages"],
+                      },
+                    },
+                  ],
+                  function_call: "auto",
+                },
+              },
               {
                 conversation_history: convoHistory,
               },
@@ -379,14 +424,28 @@ function AiChat(props) {
                         </Card.Header>
                         <Card.Body key={i}>
                           <Card.Text>
-                            {e.response.content
+                            {e.functions.length > 0 && e.functions
+                              .map((line, index) => (
+                                <React.Fragment key={index}>
+                                  <pre>{line.content}</pre>
+                                  <br />
+                                </React.Fragment>
+                              ))}
+                            <Markdown
+                              style={{ textAlign: "left" }}
+                              options={{ wrapper: "article" }}
+                            >
+                              {e.response.content}
+                            </Markdown>
+                            ;
+                            {/* {e.response.content
                               .split("\n")
                               .map((line, index) => (
                                 <React.Fragment key={index}>
                                   {line}
                                   <br />
                                 </React.Fragment>
-                              ))}
+                              ))} */}
                           </Card.Text>
                         </Card.Body>
                       </Card>
@@ -492,14 +551,28 @@ function AiChat(props) {
                         </Card.Header>
                         <Card.Body key={i}>
                           <Card.Text>
-                            {e.response.content
+                            {e.functions.length > 0 && e.functions
+                              .map((line, index) => (
+                                <React.Fragment key={index}>
+                                  <pre>{line.content}</pre>
+                                  <br />
+                                </React.Fragment>
+                              ))}
+                            <Markdown
+                              style={{ textAlign: "left" }}
+                              options={{ wrapper: "article" }}
+                            >
+                              {e.response.content}
+                            </Markdown>
+                            ;
+                            {/* {e.response.content
                               .split("\n")
                               .map((line, index) => (
                                 <React.Fragment key={index}>
                                   {line}
                                   <br />
                                 </React.Fragment>
-                              ))}
+                              ))} */}
                           </Card.Text>
                         </Card.Body>
                       </Card>
@@ -681,7 +754,7 @@ function AiChat(props) {
                     {[
                       "Can you tell me a little about yourself?",
                       "Describe your work history.",
-                      "What certifications do have?",
+                      "What certifications do you have?",
                       "Tell me about the front-end technologies you are familiar with.",
                       "Tell me about the back-end technologies you are familiar with.",
                       "What are your greatest strengths?",
@@ -743,6 +816,7 @@ function AiChat(props) {
                       " What's your approach to mentoring and coaching junior team members?",
                       " Give an example of a time when you had to resolve a customer complaint?",
                       " Do you have any questions for us?",
+                      "Explain daily tasks and responsibilities at your current or most recent job.",
                     ].map((i) => {
                       return (
                         <>
