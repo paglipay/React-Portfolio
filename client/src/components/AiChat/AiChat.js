@@ -423,8 +423,8 @@ function AiChat(props) {
                         </Card.Header>
                         <Card.Body key={i}>
                           <Card.Text>
-                            {e.functions.length > 0 && e.functions
-                              .map((line, index) => (
+                            {e.functions.length > 0 &&
+                              e.functions.map((line, index) => (
                                 <React.Fragment key={index}>
                                   <pre>{line.content}</pre>
                                   <br />
@@ -452,27 +452,31 @@ function AiChat(props) {
                   )
                 ) : (
                   <Row>
-                  <Col lg={8}>
-                    <Card key={`img-8-${i}`} className={"mb-3"}>
-                      <Image src={e.response["image"]}></Image>
-                      <Card.Footer></Card.Footer>
-                    </Card>
-                  </Col>
-                  <Col lg={4}>
-                    <Card key={`img-4-${i}`} className={"mb-3"}>
-                      <Card.Body>
-                        <Card.Text>
-                          <Markdown
+                    <Col lg={8}>
+                      <Card key={`img-8-${i}`} className={"mb-3"}>
+                        <Image src={e.response["image"]}></Image>
+                        <Card.Footer></Card.Footer>
+                      </Card>
+                    </Col>
+                    <Col lg={4}>
+                      <Card
+                        key={`img-4-${i}`}
+                        className={"mb-3"}
+                        style={{ height: "100%" }}
+                      >
+                        <Card.Body>
+                          <Card.Text>
+                            <Markdown
                               style={{ textAlign: "left" }}
                               options={{ wrapper: "article" }}
                             >
-                            {e.response["image_prompt"]}
+                              {e.response["image_prompt"]}
                             </Markdown>
-                        </Card.Text>
-                      </Card.Body>
-                      <Card.Footer></Card.Footer>
-                    </Card>
-                  </Col>
+                          </Card.Text>
+                        </Card.Body>
+                        <Card.Footer></Card.Footer>
+                      </Card>
+                    </Col>
                   </Row>
                 )
               )}
@@ -567,8 +571,8 @@ function AiChat(props) {
                         </Card.Header>
                         <Card.Body key={i}>
                           <Card.Text>
-                            {e.functions.length > 0 && e.functions
-                              .map((line, index) => (
+                            {e.functions.length > 0 &&
+                              e.functions.map((line, index) => (
                                 <React.Fragment key={index}>
                                   <pre>{line.content}</pre>
                                   <br />
@@ -595,28 +599,32 @@ function AiChat(props) {
                     </Col>
                   )
                 ) : (
-                <Row>
-                  <Col lg={8}>
-                    <Card key={`img-8-${i}`} className={"mb-3"}>
-                      <Image src={e.response["image"]}></Image>
-                      <Card.Footer></Card.Footer>
-                    </Card>
-                  </Col>
-                  <Col lg={4}>
-                    <Card key={`img-4-${i}`} className={"mb-3"}>
-                      <Card.Body>
-                        <Card.Text>
-                          <Markdown
+                  <Row>
+                    <Col lg={8}>
+                      <Card key={`img-8-${i}`} className={"mb-3"}>
+                        <Image src={e.response["image"]}></Image>
+                        <Card.Footer></Card.Footer>
+                      </Card>
+                    </Col>
+                    <Col lg={4}>
+                      <Card
+                        key={`img-4-${i}`}
+                        className={"mb-3"}
+                        style={{ height: "100%" }}
+                      >
+                        <Card.Body>
+                          <Card.Text>
+                            <Markdown
                               style={{ textAlign: "left" }}
                               options={{ wrapper: "article" }}
                             >
-                            {e.response["image_prompt"]}
+                              {e.response["image_prompt"]}
                             </Markdown>
-                        </Card.Text>
-                      </Card.Body>
-                      <Card.Footer></Card.Footer>
-                    </Card>
-                  </Col>
+                          </Card.Text>
+                        </Card.Body>
+                        <Card.Footer></Card.Footer>
+                      </Card>
+                    </Col>
                   </Row>
                 )
               )}
@@ -650,6 +658,39 @@ function AiChat(props) {
       .catch(async (res) => {
         console.log(res);
         setShowSpinner(false);
+        setSpeakText({
+          text: "Sorry, there appears to be an issue connecting. I am available typically during regular office hours, Monday through Friday, 9am. to 5pm. Pacific Standard Time.",
+        });
+      });
+  };
+  const saveConversation = async (prompt, uuid) => {
+    await axios
+      .post(`https://automate.paglipay.info/start/${appUuid}`, {
+        // .post(`http://192.168.2.203:5000/start/${appUuid}`, {
+        // .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
+        // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
+        jobs: [
+          {
+            import: "Key",
+          },
+          {
+            True: [
+              {
+                True: "./json/mongodb/portfolio_collections/_create_list.json",
+              },
+              {
+                True: "./my_packages/MongoObj/MongoObj.json",
+              },
+            ],
+          },
+        ],
+      })
+      .then(async (res) => {
+        console.log(res);
+
+      })
+      .catch(async (res) => {
+        console.log(res);
         setSpeakText({
           text: "Sorry, there appears to be an issue connecting. I am available typically during regular office hours, Monday through Friday, 9am. to 5pm. Pacific Standard Time.",
         });
@@ -953,7 +994,7 @@ function AiChat(props) {
           {/* <div>
             <span>{acceptedCommand}</span>
           </div> */}
-
+          <Button onClick={() => saveConversation(prompt, appUuid)}>Save</Button>
           <Card.Footer>
             <h6>UUID: {appUuid}</h6>
           </Card.Footer>
