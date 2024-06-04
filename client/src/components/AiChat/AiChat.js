@@ -1006,11 +1006,9 @@ function AiChat(props) {
           {/* <div>
             <span>{acceptedCommand}</span>
           </div> */}
-          {conversationHistory.length < 2 ? (
             <Button onClick={() => saveConversation("save")}>Save</Button>
-          ) : (
+            <br/>
             <Button onClick={() => saveConversation("add")}>Add</Button>
-          )}
           {/* <Button onClick={() => saveConversation("update")}>Update</Button> */}
           <Card.Footer>
             <h6>UUID: {appUuid}</h6>
