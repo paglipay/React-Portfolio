@@ -676,6 +676,9 @@ function AiChat(props) {
           {
             True: [
               {
+                True: "./json/mongodb/portfolio_collections/prep/out.json",
+              },
+              {
                 True: "./json/mongodb/portfolio_collections/_create_list.json",
               },
               {
@@ -687,7 +690,6 @@ function AiChat(props) {
       })
       .then(async (res) => {
         console.log(res);
-
       })
       .catch(async (res) => {
         console.log(res);
@@ -994,7 +996,9 @@ function AiChat(props) {
           {/* <div>
             <span>{acceptedCommand}</span>
           </div> */}
-          <Button onClick={() => saveConversation(prompt, appUuid)}>Save</Button>
+          <Button onClick={() => saveConversation(prompt, appUuid)}>
+            Save
+          </Button>
           <Card.Footer>
             <h6>UUID: {appUuid}</h6>
           </Card.Footer>
