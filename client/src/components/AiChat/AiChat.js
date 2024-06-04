@@ -665,13 +665,23 @@ function AiChat(props) {
   };
   const saveConversation = async (prompt, uuid) => {
     await axios
-      .post(`https://automate.paglipay.info/start/${appUuid}`, {
+      .post(`https://automate.paglipay.info/start/${appUuid}-${uuidv4()}`, {
         // .post(`http://192.168.2.203:5000/start/${appUuid}`, {
         // .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
         jobs: [
           {
             import: "Key",
+          },
+          {
+            True: [
+              {
+                import: "OpenAiObj",
+              },
+              {
+                conversation_history: conversationHistory,
+              },
+            ],
           },
           {
             True: [
