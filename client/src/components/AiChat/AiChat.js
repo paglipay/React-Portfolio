@@ -663,7 +663,7 @@ function AiChat(props) {
         });
       });
   };
-  const saveConversation = async (prompt, uuid) => {
+  const saveConversation = async (mode = "save") => {
     await axios
       .post(`https://automate.paglipay.info/start/${appUuid}-${uuidv4()}`, {
         // .post(`http://192.168.2.203:5000/start/${appUuid}`, {
@@ -689,10 +689,10 @@ function AiChat(props) {
                 True: "./json/mongodb/portfolio_collections/prep/out.json",
               },
               {
-                True: "./json/mongodb/portfolio_collections/_create_list.json",
+                True: `./json/mongodb/portfolio_collections/_create_list-${mode}.json`,
               },
               {
-                True: "./my_packages/MongoObj/MongoObj.json",
+                True: `./my_packages/MongoObj/MongoObj-${mode}.json`,
               },
             ],
           },
@@ -1006,9 +1006,12 @@ function AiChat(props) {
           {/* <div>
             <span>{acceptedCommand}</span>
           </div> */}
-          <Button onClick={() => saveConversation(prompt, appUuid)}>
-            Save
-          </Button>
+          {conversationHistory.length < 2 ? (
+            <Button onClick={() => saveConversation("save")}>Save</Button>
+          ) : (
+            <Button onClick={() => saveConversation("add")}>Add</Button>
+          )}
+          {/* <Button onClick={() => saveConversation("update")}>Update</Button> */}
           <Card.Footer>
             <h6>UUID: {appUuid}</h6>
           </Card.Footer>
