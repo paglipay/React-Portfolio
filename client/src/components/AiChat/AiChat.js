@@ -669,6 +669,7 @@ function AiChat(props) {
         // .post(`http://192.168.2.203:5000/start/${appUuid}`, {
         // .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
+        "./json/mongodb/portfolio_collections/_accepts_list_new.txt":`{\n \"name\": \"${appUuid}\",\n \"projects\": [\n {\n \"name\": \"Top 10 TV Shows\",\n \"description\": \"Transcripts of my interview\",\n \"forms\": [ \n {% for result in results[1:] %}\n {\n \"id\": \"{{ i }} - id - prompt\",\n \"name\": \"{{ result.prompt }} - prompt\",\n \"form_items\": [\n {\n \"id\": \"{{ i }} - f00\",\n \"name\": \"{{ result.prompt }}\",\n \"value\": \"{{ result.response.content }}\",\n \"type\": \"message\"\n },\n {\n \"id\": \"{{ i }} - f02\",\n \"name\": \"Next\",\n \"value\": \"Next\",\n \"type\": \"button\",\n \"action\": {\n \"form_items_to_dic\": {\n \"form_items\": [\"ip\", \"username\", \"password\"],\n \"to_dic_name\": \"./json/paramiko/ubuntu/open/form_dic.json\"\n },\n \"jobs\": [\n { \"import\": \"Key\" },\n {\n \"True\": [\n {\n \"True\": \"./json/paramiko/ubuntu/open/_create_list.json\"\n },\n { \"True\": \"./json/docker/scp_build/_create_list.json\" },\n { \"False\": \"./json/docker/scp_build/do.json\" }\n ]\n }\n ]\n }\n }\n ]\n },\n {% endfor %}\n {\n \"id\": \"3\",\n \"name\": \"3\",\n \"form_items\": [\n {\n \"id\": \"Done\",\n \"name\": \"Done\",\n \"value\": \"This is completed.\",\n \"type\": \"message\"\n }\n ]\n }\n ]\n }\n ]\n}\n`,
         jobs: [
           {
             import: "Key",

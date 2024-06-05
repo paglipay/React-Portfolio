@@ -172,7 +172,33 @@ function App() {
               <Todos />
             </Route>
             <Route exact path="/dynamicform">
-              <AiChat />
+              <AiChat /><ChatWidget
+                // `accountId` is used instead of `token` in older versions
+                // of the @papercups-io/chat-widget package (before v1.2.x).
+                // You can delete this line if you are on the latest version.
+                // accountId="b5200b14-be9d-4915-aa64-f514fb2c6ad5"
+                token="b5200b14-be9d-4915-aa64-f514fb2c6ad5"
+                inbox="66180fcb-f6bf-49a6-934f-098ddc0a94c4"
+                title="Welcome to Paglipay"
+                subtitle="Ask us anything in the chat window below 😊"
+                primaryColor="#1890ff"
+                newMessagePlaceholder="Start typing..."
+                showAgentAvailability={false}
+                agentAvailableText="We're online right now!"
+                agentUnavailableText="We're away at the moment."
+                requireEmailUpfront={false}
+                iconVariant="outlined"
+                baseUrl="https://papercups.paglipay.info"
+                // Optionally include data about your customer here to identify them
+                // customer={{
+                //   name: __CUSTOMER__.name,
+                //   email: __CUSTOMER__.email,
+                //   external_id: __CUSTOMER__.id,
+                //   metadata: {
+                //     plan: "premium"
+                //   }
+                // }}
+              />
               
             </Route>
             <Route exact path="/employeedirectory">
