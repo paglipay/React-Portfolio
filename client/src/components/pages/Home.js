@@ -24,7 +24,7 @@ import { Link, useLocation } from "react-router-dom";
 import Todo from "../../components/Todo/App";
 import DTree from "../../components/DTree";
 // import ReactPlayer from 'react-player'
-import { ChatWidget } from "@papercups-io/chat-widget";
+// import { ChatWidget } from "@papercups-io/chat-widget";
 // import { Storytime } from "@papercups-io/storytime";
 import LLModal from "../LobbyLogin/components/LLModal";
 import VideoChat from "../ReactVideoChat";
@@ -276,35 +276,7 @@ function Home() {
                 <br />
                 Please feel free to use our chatbot to ask any questions you may
                 have about the developer or anything about life in general
-                <ChatWidget
-                  // `accountId` is used instead of `token` in older versions
-                  // of the @papercups-io/chat-widget package (before v1.2.x).
-                  // You can delete this line if you are on the latest version.
-                  // accountId="92f19e78-dace-4d8a-a700-2b089cda13e4"
-                  token="92f19e78-dace-4d8a-a700-2b089cda13e4"
-                  inbox="26103822-422c-46f4-b08a-fdec370ea791"
-                  title="Welcome to Paglipay"
-                  subtitle="Ask us anything in the chat window below 😊"
-                  primaryColor="#1890ff"
-                  newMessagePlaceholder="Start typing..."
-                  showAgentAvailability={false}
-                  agentAvailableText="We're online right now!"
-                  agentUnavailableText="We're away at the moment."
-                  requireEmailUpfront={false}
-                  iconVariant="outlined"
-                  baseUrl="https://app.papercups.io"
-
-                  // styles={{ padding: "10px 20px", textAlign: "center" }}
-                  // Optionally include data about your customer here to identify them
-                  // customer={{
-                  //   name: __CUSTOMER__.name,
-                  //   email: __CUSTOMER__.email,
-                  //   external_id: __CUSTOMER__.id,
-                  //   metadata: {
-                  //     plan: "premium"
-                  //   }
-                  // }}
-                />
+                
                 <Image src="./chat-logo.png" onClick={clickChat}></Image>
                 {/* <ArrowRight /> */}
                 {/* <br />

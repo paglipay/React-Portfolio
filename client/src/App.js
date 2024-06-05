@@ -30,7 +30,7 @@ import { ChatWidget } from "@papercups-io/chat-widget";
 import { Storytime } from "@papercups-io/storytime";
 
 const st = Storytime.init({
-  accountId: "92f19e78-dace-4d8a-a700-2b089cda13e4",
+  accountId: "b5200b14-be9d-4915-aa64-f514fb2c6ad5",
 
   // Optionally pass in metadata to identify the customer
   // customer: {
@@ -40,7 +40,7 @@ const st = Storytime.init({
   // },
 
   // Optionally specify the base URL
-  baseUrl: "https://app.papercups.io",
+  baseUrl: "https://papercups.paglipay.info",
 });
 
 function App() {
