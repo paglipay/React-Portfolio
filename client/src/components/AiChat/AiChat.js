@@ -257,9 +257,9 @@ function AiChat(props) {
 
   useEffect(() => {
     setAppUuid(uuidv4());
-    setSpeakText({
-      text: "Hello! My name is Paul Aglipay, and I’m excited to be here for the job interview. How are you today? Please feel free to ask me any job interview questions using the Question Prompt field. I’m looking forward to our conversation!",
-    });
+    // setSpeakText({
+    //   text: "Hello! My name is Paul Aglipay, and I’m excited to be here for the job interview. How are you today? Please feel free to ask me any job interview questions using the Question Prompt field. I’m looking forward to our conversation!",
+    // });
   }, []);
 
   useEffect(() => {
@@ -642,25 +642,25 @@ function AiChat(props) {
               uuid,
               res_data
             );
-            setSpeakText({
-              text: res_data[res_data.length - 1]["response"]["content"],
-            });
+            // setSpeakText({
+            //   text: res_data[res_data.length - 1]["response"]["content"],
+            // });
           } else if (
             "content" in res_data[res_data.length - 1]["response"] &&
             res_data.length > 100
           ) {
-            setSpeakText({
-              text: "This is a long response. I will display it on the screen.",
-            });
+            // setSpeakText({
+            //   text: "This is a long response. I will display it on the screen.",
+            // });
           }
         }
       })
       .catch(async (res) => {
         console.log(res);
         setShowSpinner(false);
-        setSpeakText({
-          text: "Sorry, there appears to be an issue connecting. I am available typically during regular office hours, Monday through Friday, 9am. to 5pm. Pacific Standard Time.",
-        });
+        // setSpeakText({
+        //   text: "Sorry, there appears to be an issue connecting. I am available typically during regular office hours, Monday through Friday, 9am. to 5pm. Pacific Standard Time.",
+        // });
       });
   };
   const saveConversation = async (mode = "save") => {
@@ -704,9 +704,9 @@ function AiChat(props) {
       })
       .catch(async (res) => {
         console.log(res);
-        setSpeakText({
-          text: "Sorry, there appears to be an issue connecting. I am available typically during regular office hours, Monday through Friday, 9am. to 5pm. Pacific Standard Time.",
-        });
+        // setSpeakText({
+        //   text: "Sorry, there appears to be an issue connecting. I am available typically during regular office hours, Monday through Friday, 9am. to 5pm. Pacific Standard Time.",
+        // });
       });
   };
 
