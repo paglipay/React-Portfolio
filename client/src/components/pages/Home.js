@@ -24,7 +24,7 @@ import { Link, useLocation } from "react-router-dom";
 import Todo from "../../components/Todo/App";
 import DTree from "../../components/DTree";
 // import ReactPlayer from 'react-player'
-// import { ChatWidget } from "@papercups-io/chat-widget";
+// import { ChatWidget } from "@paglipay/chat-widget";
 // import { Storytime } from "@papercups-io/storytime";
 import LLModal from "../LobbyLogin/components/LLModal";
 import VideoChat from "../ReactVideoChat";
