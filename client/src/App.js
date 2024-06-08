@@ -183,10 +183,10 @@ function App() {
                 subtitle="Ask us anything in the chat window below 😊"
                 primaryColor="#1890ff"
                 newMessagePlaceholder="Start typing..."
-                showAgentAvailability={false}
+                showAgentAvailability={true}
                 agentAvailableText="We're online right now!"
                 agentUnavailableText="We're away at the moment."
-                requireEmailUpfront={false}
+                requireEmailUpfront={true}
                 iconVariant="outlined"
                 baseUrl="https://papercups.paglipay.info"
                 // Optionally include data about your customer here to identify them
