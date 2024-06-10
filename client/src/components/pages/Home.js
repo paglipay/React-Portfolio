@@ -214,7 +214,8 @@ function Home() {
       </style>
       <Jumbotron
         style={{
-          backgroundImage: `url('https://source.unsplash.com/1600x300/?design')`,
+          // backgroundImage: `url('https://source.unsplash.com/1600x300/?design')`,
+          backgroundImage: `url('https://picsum.photos/1600/300?design=1')`,
           backgroundSize: "cover",
           height: 500,
         }}

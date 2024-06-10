@@ -8,7 +8,7 @@ function DynamicForm({
     setCards,
     cards,
     colSize,
-    src = `https://source.unsplash.com/1600x900/`,
+    src = `https://picsum.photos/1600/900`,
     id,
     toggleS,
     setSize,
