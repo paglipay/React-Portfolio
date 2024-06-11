@@ -28,6 +28,7 @@ import Navbar from "./components/SideNavBar/Navbar";
 // import ReactChatWindow from "./components/ReactChatWindow/ReactChatWindow";
 import { ChatWidget } from "@paglipay/chat-widget";
 import { Storytime } from "@papercups-io/storytime";
+import Footer from "./components/Footer/Footer";
 
 const st = Storytime.init({
   accountId: "b5200b14-be9d-4915-aa64-f514fb2c6ad5",
@@ -125,7 +126,7 @@ function App() {
             <Route
               exact
               path={["/members"]}
-              // authenticated={authenticated}
+              authenticated={authenticated}
               component={Members}
             />
 
@@ -172,7 +173,8 @@ function App() {
               <Todos />
             </Route>
             <Route exact path="/dynamicform">
-              <AiChat /><ChatWidget
+              <AiChat />
+              <ChatWidget
                 // `accountId` is used instead of `token` in older versions
                 // of the @paglipay/chat-widget package (before v1.2.x).
                 // You can delete this line if you are on the latest version.
@@ -208,6 +210,7 @@ function App() {
               <NoMatch />
             </Route>
           </Switch>
+          {/* <Footer /> */}
         </div>
       </Router>
     </Provider>

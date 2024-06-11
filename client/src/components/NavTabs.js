@@ -31,9 +31,21 @@ function NavTabs({ authenticated, logout }) {
             Home
           </Nav.Link> */}
           <NavDropdown title="Projects" id="collasible-nav-dropdown">
-            <NavDropdown.Item as={Link} to="/lobbylogin">
-              LobbyLogin
-            </NavDropdown.Item>
+
+          <NavDropdown.Item
+            as="a"
+            href="https://yoom.paglipay.info/"
+            target="_blank"
+          >
+            Yoom
+          </NavDropdown.Item>
+          <NavDropdown.Item
+            as="a"
+            href="https://plura.paglipay.info/"
+            target="_blank"
+          >
+            Plura
+          </NavDropdown.Item>
             {/* <NavDropdown.Item as={Link} to="/admin">Admin</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/employeeappointments">Appointments</NavDropdown.Item>
                         <NavDropdown.Item as={Link} to="/booksearch">Book Search</NavDropdown.Item>
@@ -45,6 +57,10 @@ function NavTabs({ authenticated, logout }) {
                         <NavDropdown.Item as={Link} to="/users">Users</NavDropdown.Item> */}
             <NavDropdown.Item as={Link} to="/dynamicform">
               Instant Interview
+            </NavDropdown.Item>
+            
+            <NavDropdown.Item as={Link} to="/lobbylogin">
+              LobbyLogin
             </NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/devices">
               Devices
