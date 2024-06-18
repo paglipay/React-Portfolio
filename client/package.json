@@ -26,6 +26,7 @@
     "react-speech-kit": "^3.0.1",
     "react-speech-recognition": "^3.10.0",
     "react-sticky-table": "^5.1.7",
+    "recharts": "^2.12.7",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",

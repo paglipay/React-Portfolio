@@ -29,6 +29,7 @@ import Navbar from "./components/SideNavBar/Navbar";
 import { ChatWidget } from "@paglipay/chat-widget";
 import { Storytime } from "@papercups-io/storytime";
 import Footer from "./components/Footer/Footer";
+import ChartComponent from "./components/ChartComponent/ChartComponent";
 
 const st = Storytime.init({
   accountId: "b5200b14-be9d-4915-aa64-f514fb2c6ad5",
@@ -109,6 +110,9 @@ function App() {
             <Route exact path={["/", "/contact"]}>
               <Contact />
               {/* <ReactChatWindow /> */}
+            </Route>
+            <Route exact path={["/", "/chart"]}>
+              <ChartComponent />
             </Route>
             <Route
               exact
