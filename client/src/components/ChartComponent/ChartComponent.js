@@ -314,7 +314,7 @@ wc01fp2.weyburn-olive.ucla.net`;
                                 passcodes["passcode2"],
                               ],
                               "json/paramiko/ap_inventory/ip.txt":
-                                ipTxt === ""
+                                ipTxt != ""
                                   ? ipTxt
                                   : "wc00f2s.luskin.ucla.net",
                               jobs: [
