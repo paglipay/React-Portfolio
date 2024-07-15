@@ -120,18 +120,25 @@ wc01fp2.weyburn-olive.ucla.net`;
     console.log("fetching data");
     axios
       .post("https://automate.paglipay.info/start/1", {
-        True: [
+        jobs: [
           {
-            import: "FileObj",
+            import: "Key",
           },
-          [
-            {
-              delete: "./dist/Desktop/ArubaParseObj_deref_multi.json",
-            },
-            {
-              open: "./dist/Desktop/ArubaParseObj_deref_multi.json",
-            },
-          ],
+          {
+            True: [
+              {
+                import: "FileObj",
+              },
+              [
+                {
+                  delete: "./dist/Desktop/ArubaParseObj_deref_multi.json",
+                },
+                {
+                  open: "./dist/Desktop/ArubaParseObj_deref_multi.json",
+                },
+              ],
+            ],
+          },
         ],
       })
       .then((res) => {
@@ -315,9 +322,7 @@ wc01fp2.weyburn-olive.ucla.net`;
                                 passcodes["passcode2"],
                               ],
                               "json/paramiko/ap_inventory/ip.txt":
-                                ipTxt != ""
-                                  ? ipTxt
-                                  : "wc00f2s.luskin.ucla.net",
+                                ipTxt != "" ? ipTxt : "wc00f2s.luskin.ucla.net",
                               jobs: [
                                 {
                                   import: "Key",
