@@ -13,9 +13,17 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import { Form, Table, Badge, Container, Row, Col, Button } from "react-bootstrap";
+import {
+  Form,
+  Table,
+  Badge,
+  Container,
+  Row,
+  Col,
+  Button,
+} from "react-bootstrap";
 import axios from "axios";
-import FileUpload from '../FileUpload/FileUpload';
+import FileUpload from "../FileUpload/FileUpload";
 
 function ChartComponent() {
   // const data = [
@@ -70,18 +78,79 @@ function ChartComponent() {
   const [uuid, setUuid] = useState(0); // for file upload
 
   const [down_aps, setDownAps] = useState(down_aps_dic);
+  const [passcodes, setPasscodes] = useState({ passcode: "", passcode2: "" });
+  const [ipTxt, setIptxt] = useState("");
+  const devices = `mc00f1.anderson.ucla.net
+wc00f1.anderson.ucla.net
+wc11f1.anderson.ucla.net
+wc12f1.anderson.ucla.net
+wc13f1.anderson.ucla.net
+wc14f1.anderson.ucla.net
+wc15f1.anderson.ucla.net
+wc16f1.anderson.ucla.net
+wc00f2.carnesalecommons.ucla.net
+wc01f2.covel.ucla.net
+wc02f2.covel.ucla.net
+wc11f2.covel.ucla.net
+wc12f2.covel.ucla.net
+wc13f2.covel.ucla.net
+wc14f2.covel.ucla.net
+mc00f2.csb1.ucla.net
+wc00f2.csb1.ucla.net
+wc11f2.csb1.ucla.net
+wc12f2.csb1.ucla.net
+wc13f2.csb1.ucla.net
+wc14f2.csb1.ucla.net
+wc15f2.csb1.ucla.net
+wc16f2.csb1.ucla.net
+wc00f2.deneve-holly.ucla.net
+wc11f2.deneve-holly.ucla.net
+wc12f2.deneve-holly.ucla.net
+wc00f2n.luskin.ucla.net
+wc00f2s.luskin.ucla.net
+wc12f2n.luskin.ucla.net
+wc12f2s.luskin.ucla.net
+wc11f1.rieber.ucla.net
+wc12f1.rieber.ucla.net
+wc00fp2.weyburn-olive.ucla.net
+wc01fp2.weyburn-olive.ucla.net`;
+  const [ipList, setIpList] = useState(devices.split("\n"));
 
   useEffect(() => {
     console.log("fetching data");
-      axios
-        .get("https://automate.paglipay.info/show/1")
-        .then((res) => {
-          console.log(res.data);
-          setData(res.data["./dist/Desktop/ArubaParseObj_deref_multi.json"]);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    axios
+      .post("https://automate.paglipay.info/start/1", {
+        True: [
+          {
+            import: "FileObj",
+          },
+          [
+            {
+              delete: "./dist/Desktop/ArubaParseObj_deref_multi.json",
+            },
+            {
+              open: "./dist/Desktop/ArubaParseObj_deref_multi.json",
+            },
+          ],
+        ],
+      })
+      .then((res) => {
+        console.log(res.data);
+        setData(res.data["./dist/Desktop/ArubaParseObj_deref_multi.json"]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // axios
+    //   .get("https://automate.paglipay.info/show/1")
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     setData(res.data["./dist/Desktop/ArubaParseObj_deref_multi.json"]);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
     setInterval(() => {
       console.log("fetching data");
@@ -101,8 +170,10 @@ function ChartComponent() {
     console.log(data);
     let ap_dict = {};
     const statuses = ["down_minus", "down_plus", "up_minus", "up_plus"];
-    const dataNew = dataSlice ? data.slice(parseInt(dataSlice), data.length) : data;
-    console.log('dataNew', dataNew);
+    const dataNew = dataSlice
+      ? data.slice(parseInt(dataSlice), data.length)
+      : data;
+    console.log("dataNew", dataNew);
     for (let i = 0; i < dataNew.length; i++) {
       statuses.forEach((status) => {
         dataNew[i][`ap_${status}`].forEach((ap) => {
@@ -142,17 +213,163 @@ function ChartComponent() {
       <h1> Campus AP Counts</h1>
       <Row>
         <Col>
-        <FileUpload uuid={uuid} />
-        <h3>Ap Associations Download</h3>
-        {/* href to download the file */}
-        <a href={`https://automate.paglipay.info/download?file=Desktop/ap_association/json/final.xlsx`} download>Download</a>
+          <FileUpload uuid={uuid} />
+          <h3>Ap Associations Download</h3>
+          {/* href to download the file */}
+          <a
+            href={`https://automate.paglipay.info/download?file=Desktop/ap_association/json/final.xlsx`}
+            download
+          >
+            Download
+          </a>
+          <h3>Ap Inventory Download</h3>
+          {/* href to download the file */}
+          <a
+            href={`https://automate.paglipay.info/download?file=Desktop/ap_inventory/json/final.xlsx`}
+            download
+          >
+            Download
+          </a>
+        </Col>
+        <Col>
+          <h4>Controller List</h4>
+          <div style={{ height: "500px", overflow: "auto" }}>
+            {ipList.map((ip) => (
+              <>
+                <br />
+                <a
+                  href={`https://automate.paglipay.info/download?file=Desktop/ap_inventory/${ip}.txt`}
+                >
+                  {ip}
+                </a>
+              </>
+            ))}
+          </div>
+        </Col>
+        <Col>
+          <h4>Run Report</h4>
+          Form to run the report
+          <Form>
+            {/* textarea for list of controllers */}
+            <Form.Group controlId="exampleForm.SelectCustom">
+              <Form.Label>IP List</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                placeholder="Enter IP List"
+                onChange={(e) => setIptxt(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.SelectCustom">
+              <Form.Label>PASSCODE</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter passcode"
+                onChange={(e) =>
+                  setPasscodes({ ...passcodes, passcode: e.target.value })
+                }
+              />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.SelectCustom">
+              <Form.Label>PASSCODE2</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter second passcode"
+                onChange={(e) =>
+                  setPasscodes({ ...passcodes, passcode2: e.target.value })
+                }
+              />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.SelectCustom">
+              <Form.Label>Custom select</Form.Label>
+              <Form.Control
+                as="select"
+                custom
+                onChange={(e) => setUuid(e.target.value)}
+              >
+                <option value="0">Select a report</option>
+                <option value="1">AP Associations</option>
+                <option value="2">AP Counts</option>
+                <option value="3">AP Associations and Counts</option>
+              </Form.Control>
+            </Form.Group>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={() => {
+                axios
+                  .post("https://automate.paglipay.info/start/" + uuid, {
+                    jobs: [
+                      { import: "Key" },
+                      {
+                        True: [
+                          {
+                            import: "RequestsObj",
+                          },
+                          {
+                            open: {
+                              ip: "http://192.168.0.12:5004/start/1",
+                              PASSCODE: [
+                                passcodes["passcode"],
+                                passcodes["passcode2"],
+                              ],
+                              "json/paramiko/ap_inventory/ip.txt":
+                                ipTxt === ""
+                                  ? ipTxt
+                                  : "wc00f2s.luskin.ucla.net",
+                              jobs: [
+                                {
+                                  import: "Key",
+                                },
+                                {
+                                  True: [
+                                    {
+                                      True: "./my_packages/FileObj/FileObjTest_open_save_as.json",
+                                    },
+                                    {
+                                      True: "./json/paramiko/ap_inventory/_create_list.json",
+                                    },
+                                  ],
+                                },
+                              ],
+                            },
+                          },
+                          {
+                            True: "end",
+                          },
+                        ],
+                      },
+                    ],
+                  })
+                  .then((res) => {
+                    console.log(res.data);
+                    setData(
+                      res.data["./dist/Desktop/ArubaParseObj_deref_multi.json"]
+                    );
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              }}
+            >
+              Submit
+            </Button>
+          </Form>
+        </Col>
+        <Col>
           <h2> UP / Down AP Count</h2>
           <h3> Down AP Count Offset {ap_count_down}</h3>
           <Form>
             <Form.Group controlId="exampleForm.SelectCustom">
               <Form.Label>Custom select</Form.Label>
-              <Form.Control as="select" custom onChange={(e) => setApCountDown(parseInt(e.target.value))}>
-                {[...Array(10).keys()].map((i) => (<option>{i}</option>))}
+              <Form.Control
+                as="select"
+                custom
+                onChange={(e) => setApCountDown(parseInt(e.target.value))}
+              >
+                {[...Array(10).keys()].map((i) => (
+                  <option>{i}</option>
+                ))}
               </Form.Control>
             </Form.Group>
           </Form>
@@ -160,8 +377,14 @@ function ChartComponent() {
           <Form>
             <Form.Group controlId="exampleForm.SelectCustom">
               <Form.Label>Custom select</Form.Label>
-              <Form.Control as="select" custom onChange={(e) => setApCountUp(parseInt(e.target.value))}>
-                {[...Array(10).keys()].map((i) => (<option>{i}</option>))}
+              <Form.Control
+                as="select"
+                custom
+                onChange={(e) => setApCountUp(parseInt(e.target.value))}
+              >
+                {[...Array(10).keys()].map((i) => (
+                  <option>{i}</option>
+                ))}
               </Form.Control>
             </Form.Group>
           </Form>
@@ -169,11 +392,23 @@ function ChartComponent() {
           <Form>
             <Form.Group controlId="exampleForm.SelectCustom">
               <Form.Label>Custom select</Form.Label>
-              <Form.Control as="select" custom onChange={(e) => setDataSlice(e.target.value)}>
-                {data.map((i, idx) => (<option value={idx}>{idx} - {i.timestamp}</option>))}
+              <Form.Control
+                as="select"
+                custom
+                onChange={(e) => setDataSlice(e.target.value)}
+              >
+                {data.map((i, idx) => (
+                  <option value={idx}>
+                    {idx} - {i.timestamp}
+                  </option>
+                ))}
               </Form.Control>
             </Form.Group>
           </Form>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
           {/* <ResponsiveContainer width="100%" 
           // height="100%"
           > */}
