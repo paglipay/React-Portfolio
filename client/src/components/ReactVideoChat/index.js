@@ -24,7 +24,7 @@ function ReactVideoChat({ users, UserVideo, PartnerVideo, incomingCall, yourID, 
                         return null;
                     }
                     return (
-                        <Button className="mb-2" onClick={() => callPeer(key.id)}>Call</Button>
+                        <><Button className="mb-2" onClick={() => callPeer(key.id)}>Call</Button><br/></>
                     );
                 })}
             </Row>
