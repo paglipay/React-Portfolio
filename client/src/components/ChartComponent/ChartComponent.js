@@ -24,6 +24,7 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import FileUpload from "../FileUpload/FileUpload";
+import { v4 as uuidv4 } from "uuid";
 
 function ChartComponent() {
   // const data = [
@@ -75,7 +76,7 @@ function ChartComponent() {
   const [ap_dict, setApDict] = useState({});
   const [data, setData] = useState([]);
   const [dataSlice, setDataSlice] = useState(0);
-  const [uuid, setUuid] = useState(0); // for file upload
+  const [uuid, setUuid] = useState(uuidv4()); // for file upload
 
   const [down_aps, setDownAps] = useState(down_aps_dic);
   const [passcodes, setPasscodes] = useState({ passcode: "", passcode2: "" });
