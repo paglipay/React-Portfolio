@@ -96,6 +96,9 @@ function NavTabs({ authenticated, logout }) {
               <Nav.Link as={Link} to="/members">
                 Members
               </Nav.Link>
+              <Nav.Link as={Link} to="/chart">
+                Client Dashboard
+              </Nav.Link>
             </>
           ) : null}
           {/* <Alert variant="danger" dismissible className="mt-3">                
