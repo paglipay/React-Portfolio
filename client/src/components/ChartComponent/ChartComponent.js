@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { down_aps_dic } from "./down_aps";
 import {
+  AreaChart,
+  Area,
   LineChart,
   Line,
   XAxis,
@@ -11,8 +13,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import { Table, Badge, Container, Row, Col } from "react-bootstrap";
+import { Form, Table, Badge, Container, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
+import FileUpload from '../FileUpload/FileUpload';
 
 function ChartComponent() {
   // const data = [
@@ -59,174 +62,54 @@ function ChartComponent() {
   //     amt: 2100,
   //   },
   // ];
-
+  const [ap_count_down, setApCountDown] = useState(0);
+  const [ap_count_up, setApCountUp] = useState(0);
   const [ap_dict, setApDict] = useState({});
-  const [data, setData] = useState([
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:41:41",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:42:25",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:43:07",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:44:25",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:45:41",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:46:57",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:47:37",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:48:18",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:50:35",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:51:27",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:52:08",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:52:48",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:53:28",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:54:29",
-    },
-    {
-      ap_count_down: 1525,
-      ap_count_up: 10196,
-      ap_down_minus: [],
-      ap_down_plus: [],
-      ap_up_minus: [],
-      ap_up_plus: [],
-      timestamp: "2024-06-18 09:55:31",
-    },
-  ]);
+  const [data, setData] = useState([]);
+  const [dataSlice, setDataSlice] = useState(0);
+  const [uuid, setUuid] = useState(0); // for file upload
 
   const [down_aps, setDownAps] = useState(down_aps_dic);
 
   useEffect(() => {
-    setInterval(() => {
-      console.log("fetching data");
+    console.log("fetching data");
       axios
-        .get("http://192.168.2.213:5000/show/1")
+        .get("https://automate.paglipay.info/show/1")
         .then((res) => {
           console.log(res.data);
-          setData(res.data["ArubaParseObj"]);
+          setData(res.data["./dist/Desktop/ArubaParseObj_deref_multi.json"]);
         })
         .catch((err) => {
           console.log(err);
         });
-    }, 3000);
+
+    setInterval(() => {
+      console.log("fetching data");
+      axios
+        .get("https://automate.paglipay.info/show/1")
+        .then((res) => {
+          console.log(res.data);
+          setData(res.data["./dist/Desktop/ArubaParseObj_deref_multi.json"]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 60000);
   }, []);
 
   useEffect(() => {
     console.log(data);
     let ap_dict = {};
     const statuses = ["down_minus", "down_plus", "up_minus", "up_plus"];
-    for (let i = 0; i < data.length; i++) {
+    const dataNew = dataSlice ? data.slice(parseInt(dataSlice), data.length) : data;
+    console.log('dataNew', dataNew);
+    for (let i = 0; i < dataNew.length; i++) {
       statuses.forEach((status) => {
-        data[i][`ap_${status}`].forEach((ap) => {
+        dataNew[i][`ap_${status}`].forEach((ap) => {
           if (ap_dict[ap]) {
-            ap_dict[ap].push({ status, timestamp: data[i]["timestamp"] });
+            ap_dict[ap].push({ status, timestamp: dataNew[i]["timestamp"] });
           } else {
-            ap_dict[ap] = [{ status, timestamp: data[i]["timestamp"] }];
+            ap_dict[ap] = [{ status, timestamp: dataNew[i]["timestamp"] }];
           }
         });
       });
@@ -242,12 +125,12 @@ function ChartComponent() {
 
   const get_down_aps = () => {
     axios
-      .post("http://192.168.2.213:5000/start/2", {
+      .post("https://automate.paglipay.info/start/2", {
         jobs: [{ import: "Key" }, "HI"],
       })
       .then((res) => {
         console.log(res.data);
-        setData(res.data["ArubaParseObj"]);
+        setData(res.data["./dist/Desktop/ArubaParseObj_deref_multi.json"]);
       })
       .catch((err) => {
         console.log(err);
@@ -255,11 +138,138 @@ function ChartComponent() {
   };
 
   return (
-    <Container>
+    <Container fluid>
       <h1> Campus AP Counts</h1>
       <Row>
-          <Col>
-            <LineChart
+        <Col>
+        <FileUpload uuid={uuid} />
+        <h3>Ap Associations Download</h3>
+        {/* href to download the file */}
+        <a href={`https://automate.paglipay.info/download?file=Desktop/ap_association/json/final.xlsx`} download>Download</a>
+          <h2> UP / Down AP Count</h2>
+          <h3> Down AP Count Offset {ap_count_down}</h3>
+          <Form>
+            <Form.Group controlId="exampleForm.SelectCustom">
+              <Form.Label>Custom select</Form.Label>
+              <Form.Control as="select" custom onChange={(e) => setApCountDown(parseInt(e.target.value))}>
+                {[...Array(10).keys()].map((i) => (<option>{i}</option>))}
+              </Form.Control>
+            </Form.Group>
+          </Form>
+          <h3> Up AP Count Offset {ap_count_down}</h3>
+          <Form>
+            <Form.Group controlId="exampleForm.SelectCustom">
+              <Form.Label>Custom select</Form.Label>
+              <Form.Control as="select" custom onChange={(e) => setApCountUp(parseInt(e.target.value))}>
+                {[...Array(10).keys()].map((i) => (<option>{i}</option>))}
+              </Form.Control>
+            </Form.Group>
+          </Form>
+          <h3> History Offset {dataSlice}</h3>
+          <Form>
+            <Form.Group controlId="exampleForm.SelectCustom">
+              <Form.Label>Custom select</Form.Label>
+              <Form.Control as="select" custom onChange={(e) => setDataSlice(e.target.value)}>
+                {data.map((i, idx) => (<option value={idx}>{idx} - {i.timestamp}</option>))}
+              </Form.Control>
+            </Form.Group>
+          </Form>
+          {/* <ResponsiveContainer width="100%" 
+          // height="100%"
+          > */}
+          <LineChart
+            width={1600}
+            height={600}
+            data={data.slice(dataSlice, data.length).map((item) => ({
+              ...item,
+              ap_count_down: (item.ap_count_down - 1526 + ap_count_down) * -1,
+              ap_count_up: item.ap_count_up - 10184 + ap_count_up,
+            }))}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="timestamp" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="ap_count_down"
+              stroke="#8884d8"
+              activeDot={{ r: 8 }}
+            />
+            <Line type="monotone" dataKey="ap_count_up" stroke="#82ca9d" />
+
+            {/* <Area
+                type="monotone"
+                dataKey="ap_count_up"
+                stackId="1"
+                stroke="#8884d8"
+                fill="#8884d8"
+              />
+              <Area
+                type="monotone"
+                dataKey="ap_count_down"
+                stackId="1"
+                stroke="#82ca9d"
+                fill="#82ca9d"
+              />
+              <Area type="monotone" dataKey="c" stackId="1" stroke="#ffc658" fill="#ffc658" /> */}
+          </LineChart>
+          {/* </ResponsiveContainer> */}
+        </Col>
+      </Row>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>x</th>
+            <th>Status</th>
+            <th>AP ID</th>
+            <th>Logs</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            // ap_dict is a dictionary with key as AP name and value as the type of change (up/down, plus/minus)
+            Object.keys(ap_dict).map((key) => {
+              return (
+                <tr>
+                  <td>x</td>
+                  <td>
+                    <Badge
+                      variant={
+                        ap_dict[key][ap_dict[key].length - 1].status ===
+                        "up_plus"
+                          ? "success"
+                          : "danger"
+                      }
+                    >
+                      {ap_dict[key][ap_dict[key].length - 1].status}
+                    </Badge>
+                  </td>
+                  <td>{key}</td>
+                  <td>
+                    <pre>
+                      {ap_dict[key].map((i) => (
+                        <>{`\n(${i.timestamp}) - ${i.status}`}</>
+                      ))}
+                    </pre>
+                  </td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </Table>
+      <Row>
+        <Col>
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart
               width={800}
               height={600}
               data={data}
@@ -275,75 +285,56 @@ function ChartComponent() {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line
+              {/* <Line
                 type="monotone"
                 dataKey="ap_count_down"
                 stroke="#8884d8"
                 activeDot={{ r: 8 }}
               />
-              <Line type="monotone" dataKey="ap_count_up" stroke="#82ca9d" />
-            </LineChart>
-          </Col>
-          <Col>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Timestamp</th>
-                  <th>AP Count Down</th>
-                  <th>AP Count Up</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item) => (
+              <Line type="monotone" dataKey="ap_count_up" stroke="#82ca9d" /> */}
+
+              <Area
+                type="monotone"
+                dataKey="ap_count_up"
+                stackId="1"
+                stroke="#8884d8"
+                fill="#8884d8"
+              />
+              <Area
+                type="monotone"
+                dataKey="ap_count_down"
+                stackId="1"
+                stroke="#82ca9d"
+                fill="#82ca9d"
+              />
+              {/* <Area type="monotone" dataKey="c" stackId="1" stroke="#ffc658" fill="#ffc658" /> */}
+            </AreaChart>
+          </ResponsiveContainer>
+        </Col>
+        <Col>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>AP Count Down</th>
+                <th>AP Count Up</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data
+                .slice()
+                .reverse()
+                .map((item) => (
                   <tr>
                     <td>{item.timestamp}</td>
                     <td>{item.ap_count_down}</td>
                     <td>{item.ap_count_up}</td>
                   </tr>
                 ))}
-              </tbody>
-            </Table>
-          </Col>
+            </tbody>
+          </Table>
+        </Col>
       </Row>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>AP ID</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            // ap_dict is a dictionary with key as AP name and value as the type of change (up/down, plus/minus)
-            Object.keys(ap_dict).map((key) => {
-              return (
-                <tr>
-                  <td>
-                    <Badge
-                      variant={
-                        ap_dict[key][ap_dict[key].length - 1].status ===
-                        "up_plus"
-                          ? "success"
-                          : "danger"
-                      }
-                    >
-                      {ap_dict[key][ap_dict[key].length - 1].status}
-                    </Badge>{" "}
-                    {key}
-                  </td>
-                  <td>
-                    <pre>
-                      {ap_dict[key].map((i) => (
-                        <>{`\n(${i.timestamp}) - ${i.status}`}</>
-                      ))}
-                    </pre>
-                  </td>
-                </tr>
-              );
-            })
-          }
-        </tbody>
-      </Table>
     </Container>
   );
 }
