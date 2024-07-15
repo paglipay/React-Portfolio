@@ -107,11 +107,11 @@ function App() {
                 // }}
               />
             </Route>
-            <Route exact path={["/", "/contact"]}>
+            <Route exact path={["/contact"]}>
               <Contact />
               {/* <ReactChatWindow /> */}
             </Route>
-            <Route exact path={["/", "/chart"]}>
+            <Route exact path={["/chart"]}>
               <ChartComponent />
             </Route>
             <Route
