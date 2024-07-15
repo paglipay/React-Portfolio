@@ -296,7 +296,8 @@ wc01fp2.weyburn-olive.ucla.net`;
             <Button
               variant="primary"
               type="submit"
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 axios
                   .post("https://automate.paglipay.info/start/" + uuid, {
                     jobs: [
