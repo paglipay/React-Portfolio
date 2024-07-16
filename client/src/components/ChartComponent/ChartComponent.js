@@ -21,6 +21,7 @@ import {
   Row,
   Col,
   Button,
+  Modal,
 } from "react-bootstrap";
 import axios from "axios";
 import FileUpload from "../FileUpload/FileUpload";
@@ -75,6 +76,7 @@ function ChartComponent() {
   const [ap_count_up, setApCountUp] = useState(0);
   const [ap_dict, setApDict] = useState({});
   const [data, setData] = useState([]);
+  const [output, setOutput] = useState([]);
   const [dataSlice, setDataSlice] = useState(0);
   const [uuid, setUuid] = useState(uuidv4()); // for file upload
 
@@ -116,6 +118,10 @@ wc12f1.rieber.ucla.net
 wc00fp2.weyburn-olive.ucla.net
 wc01fp2.weyburn-olive.ucla.net`;
   const [ipList, setIpList] = useState(devices.split("\n"));
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     console.log("fetching data");
@@ -150,18 +156,45 @@ wc01fp2.weyburn-olive.ucla.net`;
         console.log(err);
       });
 
-    // axios
-    //   .get("https://automate.paglipay.info/show/1")
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     setData(res.data["./dist/Desktop/ArubaParseObj_deref_multi.json"]);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
     setInterval(() => {
       console.log("fetching data");
+
+      axios
+        .post("https://automate.paglipay.info/start/2", {
+          jobs: [
+            {
+              import: "Key",
+            },
+            {
+              True: [
+                {
+                  import: "RequestsObj",
+                },
+                {
+                  open: {
+                    ip: "http://192.168.0.12:5004/show/1",
+                    jobs: [
+                      {
+                        import: "Key",
+                      },
+                    ],
+                  },
+                },
+                {
+                  True: "end",
+                },
+              ],
+            },
+          ],
+        })
+        .then((res) => {
+          console.log(res.data);
+          setOutput(res.data["ParamikoObj"]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
       axios
         .get("https://automate.paglipay.info/show/1")
         .then((res) => {
@@ -171,7 +204,7 @@ wc01fp2.weyburn-olive.ucla.net`;
         .catch((err) => {
           console.log(err);
         });
-    }, 60000);
+    }, 6000);
   }, []);
 
   useEffect(() => {
@@ -234,6 +267,14 @@ wc01fp2.weyburn-olive.ucla.net`;
           {/* href to download the file */}
           <a
             href={`https://automate.paglipay.info/download?file=Desktop/ap_inventory/json/final.xlsx`}
+            download
+          >
+            Download
+          </a>
+          <h3>Users Download</h3>
+          {/* href to download the file */}
+          <a
+            href={`https://automate.paglipay.info/download?file=Desktop/ap_user_table/json/final.xlsx`}
             download
           >
             Download
@@ -306,6 +347,7 @@ wc01fp2.weyburn-olive.ucla.net`;
               type="submit"
               onClick={(e) => {
                 e.preventDefault();
+                setShow(true);
                 axios
                   .post("https://automate.paglipay.info/start/" + uuid, {
                     jobs: [
@@ -360,6 +402,10 @@ wc01fp2.weyburn-olive.ucla.net`;
               }}
             >
               Submit
+            </Button>
+
+            <Button variant="primary" onClick={handleShow}>
+              Launch demo modal
             </Button>
           </Form>
         </Col>
@@ -575,6 +621,25 @@ wc01fp2.weyburn-olive.ucla.net`;
                 ))}
             </tbody>
           </Table>
+          <Modal show={show} onHide={handleClose} size="lg">
+            <Modal.Header closeButton>
+              <Modal.Title>Activity Output</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Output:
+              <pre style={{height:"500px", overflow:"auto"}}>{/* map output array and split each \r\n and join with <br/> */
+              output.map((line) => line.split("\r\n").join("\n"))}</pre>
+              {/* <pre>{JSON.stringify(output, null, 2)}</pre> */}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={handleClose}>
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </Col>
       </Row>
     </Container>
