@@ -189,7 +189,9 @@ wc01fp2.weyburn-olive.ucla.net`;
         })
         .then((res) => {
           console.log(res.data);
-          setOutput(res.data["ParamikoObj"]);
+          if ("ParamikoObj" in res.data) {
+            setOutput(res.data["ParamikoObj"]);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -627,8 +629,12 @@ wc01fp2.weyburn-olive.ucla.net`;
             </Modal.Header>
             <Modal.Body>
               Output:
-              <pre style={{height:"500px", overflow:"auto"}}>{/* map output array and split each \r\n and join with <br/> */
-              output.map((line) => line.split("\r\n").join("\n"))}</pre>
+              <pre style={{ height: "500px", overflow: "auto" }}>
+                {
+                  /* map output array and split each \r\n and join with <br/> */
+                  output.map((line) => line.split("\r\n").join("\n"))
+                }
+              </pre>
               {/* <pre>{JSON.stringify(output, null, 2)}</pre> */}
             </Modal.Body>
             <Modal.Footer>
