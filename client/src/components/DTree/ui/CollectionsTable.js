@@ -49,7 +49,8 @@ export default function CollectionsTable({
         <tbody>
           {collectionData &&
             collectionData.collections &&
-            collectionData.collections.slice().reverse().map((collection) => (
+            // collectionData.collections.slice().reverse().map((collection) => (
+              collectionData.collections.map((collection) => (
               <tr key={collection._id}>
                 <td>
                   {/* <InputGroup className="mb-3"> */}
