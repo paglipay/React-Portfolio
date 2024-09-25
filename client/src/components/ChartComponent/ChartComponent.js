@@ -281,6 +281,14 @@ wc01fp2.weyburn-olive.ucla.net`;
           >
             Download
           </a>
+          <h3>VBA Download</h3>
+          {/* href to download the file */}
+          <a
+            href={`https://automate.paglipay.info/download?file=uploads/d2021a33-db70-453e-be4c-0cd945f5c50b/final_20240710-2.xlsm`}
+            download
+          >
+            Download
+          </a>
         </Col>
         <Col>
           <h4>Controller List</h4>
