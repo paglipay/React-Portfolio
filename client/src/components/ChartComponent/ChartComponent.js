@@ -86,8 +86,6 @@ function ChartComponent() {
   const devices = `mc00f1.anderson.ucla.net
 wc00f1.anderson.ucla.net
 wc11f1.anderson.ucla.net
-wc12f1.anderson.ucla.net
-wc13f1.anderson.ucla.net
 wc14f1.anderson.ucla.net
 wc15f1.anderson.ucla.net
 wc16f1.anderson.ucla.net
@@ -101,8 +99,6 @@ wc14f2.covel.ucla.net
 mc00f2.csb1.ucla.net
 wc00f2.csb1.ucla.net
 wc11f2.csb1.ucla.net
-wc12f2.csb1.ucla.net
-wc13f2.csb1.ucla.net
 wc14f2.csb1.ucla.net
 wc15f2.csb1.ucla.net
 wc16f2.csb1.ucla.net
@@ -172,7 +168,7 @@ wc01fp2.weyburn-olive.ucla.net`;
                 },
                 {
                   open: {
-                    ip: "http://192.168.0.12:5004/show/1",
+                    ip: "https://192.168.0.12:5004/show/1",
                     jobs: [
                       {
                         import: "Key",
