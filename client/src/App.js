@@ -17,6 +17,7 @@ import EmployeeDirectory from "./components/EmployeeDirectory/components/Main";
 import Home from "./components/pages/Home";
 import Contact from "./components/pages/Contact";
 import Devices from "./components/Devices";
+import Members from "./components/pages/Members";
 import PrivateRoute from "./components/PrivateRoute";
 import TouchlessLogin from "./components/TouchlessLogin/TouchlessLoginUrl";
 import EmployeeAppointments from "./components/EmployeeAppointments/AppointmentsContainer";
@@ -119,6 +120,13 @@ function App() {
               path={["/devices"]}
               authenticated={authenticated}
               component={Devices}
+            />
+
+            <Route
+              exact
+              path={["/members"]}
+              // authenticated={authenticated}
+              component={Members}
             />
 
             <Route exact path={["/dtree"]} component={DTree} />
