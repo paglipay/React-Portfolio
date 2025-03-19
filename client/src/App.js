@@ -26,11 +26,13 @@ import DTree from "./components/DTree";
 import AiChat from "./components/AiChat/AiChat";
 import Navbar from "./components/SideNavBar/Navbar";
 // import ReactChatWindow from "./components/ReactChatWindow/ReactChatWindow";
-import { ChatWidget } from "@papercups-io/chat-widget";
+import { ChatWidget } from "@paglipay/chat-widget";
 import { Storytime } from "@papercups-io/storytime";
+import Footer from "./components/Footer/Footer";
+import ChartComponent from "./components/ChartComponent/ChartComponent";
 
 const st = Storytime.init({
-  accountId: '92f19e78-dace-4d8a-a700-2b089cda13e4',
+  accountId: "b5200b14-be9d-4915-aa64-f514fb2c6ad5",
 
   // Optionally pass in metadata to identify the customer
   // customer: {
@@ -40,7 +42,7 @@ const st = Storytime.init({
   // },
 
   // Optionally specify the base URL
-  baseUrl: 'https://app.papercups.io',
+  baseUrl: "https://papercups.paglipay.info",
 });
 
 function App() {
@@ -79,11 +81,11 @@ function App() {
               {/* <ReactChatWindow /> */}
               <ChatWidget
                 // `accountId` is used instead of `token` in older versions
-                // of the @papercups-io/chat-widget package (before v1.2.x).
+                // of the @paglipay/chat-widget package (before v1.2.x).
                 // You can delete this line if you are on the latest version.
-                // accountId="92f19e78-dace-4d8a-a700-2b089cda13e4"
-                token="92f19e78-dace-4d8a-a700-2b089cda13e4"
-                inbox="26103822-422c-46f4-b08a-fdec370ea791"
+                // accountId="b5200b14-be9d-4915-aa64-f514fb2c6ad5"
+                token="b5200b14-be9d-4915-aa64-f514fb2c6ad5"
+                inbox="66180fcb-f6bf-49a6-934f-098ddc0a94c4"
                 title="Welcome to Paglipay"
                 subtitle="Ask us anything in the chat window below 😊"
                 primaryColor="#1890ff"
@@ -93,7 +95,7 @@ function App() {
                 agentUnavailableText="We're away at the moment."
                 requireEmailUpfront={false}
                 iconVariant="outlined"
-                baseUrl="https://app.papercups.io"
+                baseUrl="https://papercups.paglipay.info"
                 // Optionally include data about your customer here to identify them
                 // customer={{
                 //   name: __CUSTOMER__.name,
@@ -105,9 +107,12 @@ function App() {
                 // }}
               />
             </Route>
-            <Route exact path={["/", "/contact"]}>
+            <Route exact path={["/contact"]}>
               <Contact />
               {/* <ReactChatWindow /> */}
+            </Route>
+            <Route exact path={["/chart"]}>
+              <ChartComponent />
             </Route>
             <Route
               exact
@@ -125,7 +130,7 @@ function App() {
             <Route
               exact
               path={["/members"]}
-              // authenticated={authenticated}
+              authenticated={authenticated}
               component={Members}
             />
 
@@ -173,6 +178,34 @@ function App() {
             </Route>
             <Route exact path="/dynamicform">
               <AiChat />
+              <ChatWidget
+                // `accountId` is used instead of `token` in older versions
+                // of the @paglipay/chat-widget package (before v1.2.x).
+                // You can delete this line if you are on the latest version.
+                // accountId="b5200b14-be9d-4915-aa64-f514fb2c6ad5"
+                token="b5200b14-be9d-4915-aa64-f514fb2c6ad5"
+                inbox="66180fcb-f6bf-49a6-934f-098ddc0a94c4"
+                title="Welcome to Paglipay"
+                subtitle="Ask us anything in the chat window below 😊"
+                primaryColor="#1890ff"
+                newMessagePlaceholder="Start typing..."
+                showAgentAvailability={true}
+                agentAvailableText="We're online right now!"
+                agentUnavailableText="We're away at the moment."
+                requireEmailUpfront={true}
+                iconVariant="outlined"
+                baseUrl="https://papercups.paglipay.info"
+                // Optionally include data about your customer here to identify them
+                // customer={{
+                //   name: __CUSTOMER__.name,
+                //   email: __CUSTOMER__.email,
+                //   external_id: __CUSTOMER__.id,
+                //   metadata: {
+                //     plan: "premium"
+                //   }
+                // }}
+              />
+              
             </Route>
             <Route exact path="/employeedirectory">
               <EmployeeDirectory />
@@ -181,6 +214,7 @@ function App() {
               <NoMatch />
             </Route>
           </Switch>
+          {/* <Footer /> */}
         </div>
       </Router>
     </Provider>

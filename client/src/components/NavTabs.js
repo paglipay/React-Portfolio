@@ -27,12 +27,60 @@ function NavTabs({ authenticated, logout }) {
         <Nav className="mr-auto">
           {/* <Nav.Link as={Link} to="/about">About</Nav.Link>
                     <Nav.Link as={Link} to="/blog">Blog</Nav.Link> */}
-          <Nav.Link as={Link} to="/">
+          {/* <Nav.Link as={Link} to="/">
             Home
+          </Nav.Link> */}
+          <NavDropdown title="Projects" id="collasible-nav-dropdown">
+
+          <NavDropdown.Item
+            as="a"
+            href="https://yoom.paglipay.info/"
+            target="_blank"
+          >
+            Yoom
+          </NavDropdown.Item>
+          <NavDropdown.Item
+            as="a"
+            href="https://plura.paglipay.info/"
+            target="_blank"
+          >
+            Plura
+          </NavDropdown.Item>
+            {/* <NavDropdown.Item as={Link} to="/admin">Admin</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/employeeappointments">Appointments</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/booksearch">Book Search</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/todo">Todo</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item as={Link} to="/employeedirectory">Directory</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/videochat">Video Chat</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/chat">Chat</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/users">Users</NavDropdown.Item> */}
+            <NavDropdown.Item as={Link} to="/dynamicform">
+              Instant Interview
+            </NavDropdown.Item>
+            
+            <NavDropdown.Item as={Link} to="/lobbylogin">
+              LobbyLogin
+            </NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/devices">
+              Devices
+            </NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/dtree">
+              DTree
+            </NavDropdown.Item>
+          </NavDropdown>
+
+          <Nav.Link
+            as="a"
+            href="https://services.paglipay.info/checkout"
+            target="_blank"
+          >
+            Services
           </Nav.Link>
           <Nav.Link
             as="a"
             href="https://paglipay-portfolio-resume-f83d641338bb.herokuapp.com/"
+            target="_blank"
           >
             Resume
           </Nav.Link>
@@ -48,31 +96,11 @@ function NavTabs({ authenticated, logout }) {
               <Nav.Link as={Link} to="/members">
                 Members
               </Nav.Link>
+              <Nav.Link as={Link} to="/chart">
+                Client Dashboard
+              </Nav.Link>
             </>
           ) : null}
-          <NavDropdown title="Projects" id="collasible-nav-dropdown">
-            <NavDropdown.Item as={Link} to="/lobbylogin">
-              LobbyLogin
-            </NavDropdown.Item>
-            {/* <NavDropdown.Item as={Link} to="/admin">Admin</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/employeeappointments">Appointments</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/booksearch">Book Search</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/todo">Todo</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item as={Link} to="/employeedirectory">Directory</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/videochat">Video Chat</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/chat">Chat</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/users">Users</NavDropdown.Item> */}
-            <NavDropdown.Item as={Link} to="/dynamicform">
-              Form
-            </NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/devices">
-              Devices
-            </NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/dtree">
-              DTree
-            </NavDropdown.Item>
-          </NavDropdown>
           {/* <Alert variant="danger" dismissible className="mt-3">                
                         <Alert.Heading>Work in Progress</Alert.Heading>
                             <p>
@@ -80,15 +108,29 @@ function NavTabs({ authenticated, logout }) {
                             </p>
                     </Alert> */}
         </Nav>
-        <Form inline>
+        {/* <Nav>
+          <Nav.Link as={Link} to="/signup">
+            Sign In
+          </Nav.Link>
+        </Nav> */}
+        {/* <Form inline> */}
+
+        <Nav>
           {authenticated ? (
             <Button onClick={logout}>Logout</Button>
           ) : (
-            <Link to={`/login`}>
-              <Button>Login</Button>
-            </Link>
+            // <Link to={`/login`}>
+            //   <Button>Login</Button>
+            // </Link>
+            <Nav.Link as={Link} to="/login">
+              Sign In
+            </Nav.Link>
           )}
-        </Form>
+        </Nav>
+        {/* <Link to={`/signup`}>
+          <Button>Get Started</Button>
+        </Link> */}
+        {/* </Form> */}
         {/* <Form inline>
                     {authenticated ? (
                         <Button onClick={logout} >LOGOUT</Button>
