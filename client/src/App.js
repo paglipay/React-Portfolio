@@ -30,6 +30,7 @@ import { ChatWidget } from "@paglipay/chat-widget";
 import { Storytime } from "@papercups-io/storytime";
 import Footer from "./components/Footer/Footer";
 import ChartComponent from "./components/ChartComponent/ChartComponent";
+import CameraCapture from "./components/CameraCapture/CameraCapture";
 
 const st = Storytime.init({
   accountId: "b5200b14-be9d-4915-aa64-f514fb2c6ad5",
@@ -106,6 +107,9 @@ function App() {
                 //   }
                 // }}
               />
+            </Route>
+            <Route exact path={["/camera"]}>
+              <CameraCapture />
             </Route>
             <Route exact path={["/contact"]}>
               <Contact />
