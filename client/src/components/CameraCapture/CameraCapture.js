@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Row, Col, Alert, Button, Modal } from "react-bootstrap";
+import { Row, Col, Alert, Button, Modal, Image } from "react-bootstrap";
 import "./CameraCapture.css";
 
 const CameraBooth = () => {
@@ -103,7 +103,19 @@ const CameraBooth = () => {
   return (
     <Row className="camera-booth-container" style={{ margin: "20px" }}>
       {/* Left Column */}
-      <Col xs={12} md={3} className="camera-booth-left">
+      <Col xs={12} md={4} className="camera-booth-left">
+        <Image
+          src="/sb_logo.jpg"
+          alt="Camera Icon"
+          style={{
+            width: "100%",
+            height: "auto",
+            maxWidth: "200px",
+            margin: "0 auto",
+          }}
+        />
+        <br/>
+        <br/>
         <div
           style={{
             display: "flex",
@@ -117,7 +129,7 @@ const CameraBooth = () => {
               style={{
                 position: "relative",
                 width: "100%",
-                aspectRatio: "4 / 3",
+                aspectRatio: "16 / 9",
                 border: "2px solid gray",
               }}
             >
@@ -140,7 +152,7 @@ const CameraBooth = () => {
                 alt={`snap-${idx}`}
                 style={{
                   width: "100%",
-                  aspectRatio: "4 / 3",
+                  aspectRatio: "16 / 9",
                   border: "2px solid #ccc",
                 }}
               />
@@ -150,7 +162,7 @@ const CameraBooth = () => {
       </Col>
 
       {/* Right Column */}
-      <Col xs={12} md={9} className="camera-booth-right">
+      <Col xs={12} md={8} className="camera-booth-right">
         <div
           style={{
             position: "relative",
@@ -224,10 +236,14 @@ const CameraBooth = () => {
         >
           <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-lg">
-              Large Modal
+              Great Job! It looks Amazing!
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>... Picture Here!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary">Close</Button>
+            <Button variant="primary">AI Generate</Button>
+          </Modal.Footer>
         </Modal>
         {/* Hidden canvas for image capture */}
         <canvas
