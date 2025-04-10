@@ -128,11 +128,9 @@ const CameraBooth = () => {
           scale: "6",
           // color: "#007bff", // Bootstrap primary color
         }}
-      >
-      </Spinner>
+      ></Spinner>
       {/* Left Column */}
-      <Col xs={12} md={4} className="camera-booth-left">
-        
+      <Col xs={12} md={3} className="camera-booth-left">
         <div
           style={{
             display: "flex",
@@ -179,14 +177,14 @@ const CameraBooth = () => {
       </Col>
 
       {/* Right Column */}
-      <Col xs={12} md={8} className="camera-booth-right">
-      <Image
-          src="/sb_logo.jpg"
+      <Col xs={12} md={9} className="camera-booth-right">
+        <Image
+          src="/1000008934.jpg"
           alt="Camera Icon"
           style={{
             width: "100%",
             height: "auto",
-            maxWidth: "200px",
+            // maxWidth: "100px",
             margin: "0 auto",
           }}
         />
@@ -234,8 +232,10 @@ const CameraBooth = () => {
         >
           Large modal
         </Button>
+        <br />
+        <br />
         Disclaimer: Shutter Box is a fun way to capture your memories. Please
-          ensure you have permission to take and share photos.
+        ensure you have permission to take and share photos.
         <br />
         <br />
         {alerts
@@ -245,7 +245,12 @@ const CameraBooth = () => {
             // <Alert key={`alert-${i}`} variant="danger">
             //   {item.caption}
             // </Alert>
-            <Alert variant="success">
+            <Alert
+              variant="success"
+              style={{ position: "absolute", top: "25%", left: "25%" }}
+              key={`alert-${i}`}
+              className="alert-position"
+            >
               <Alert.Heading>{item.caption}</Alert.Heading>
               <p>
                 Aww yeah, you successfully read this important alert message.
@@ -272,7 +277,7 @@ const CameraBooth = () => {
           </Modal.Header>
           <Modal.Body>
             <Image
-              src="/sb_logo.jpg"
+              src="/1000008934.jpg"
               alt="Camera Icon"
               style={{
                 width: "100%",
@@ -300,9 +305,7 @@ const CameraBooth = () => {
             fontSize: "0.9rem",
             color: "#888",
           }}
-        >
-          
-        </p>
+        ></p>
         {/* Hidden canvas for image capture */}
         <canvas
           ref={canvasRef}
