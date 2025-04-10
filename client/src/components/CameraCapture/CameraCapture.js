@@ -129,7 +129,7 @@ const CameraBooth = () => {
               style={{
                 position: "relative",
                 width: "100%",
-                aspectRatio: "16 / 9",
+                aspectRatio: "4 / 3",
                 border: "2px solid gray",
               }}
             >
@@ -152,7 +152,7 @@ const CameraBooth = () => {
                 alt={`snap-${idx}`}
                 style={{
                   width: "100%",
-                  aspectRatio: "16 / 9",
+                  aspectRatio: "4 / 3",
                   border: "2px solid #ccc",
                 }}
               />
