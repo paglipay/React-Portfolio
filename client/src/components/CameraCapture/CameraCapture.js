@@ -1,20 +1,28 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Alert, Button, Modal } from "react-bootstrap";
 import "./CameraCapture.css";
 
 const CameraBooth = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [images, setImages] = useState([]);
+  const [alerts, setAlerts] = useState([]);
+  const [lgShow, setLgShow] = useState(false);
+
   const timedEvents = [
-    { time: 3, caption: "Get ready, start in 3 seconds", takeshot: false },
-    { time: 3, caption: "Great Shot! again in 3 seconds", takeshot: true },
+    { time: 3, caption: "Get ready, starts in 3 seconds!", takeshot: false },
+    { time: 3, caption: "Great Shot! Again in 3 seconds", takeshot: true },
     {
       time: 3,
       caption: "Another great Shot! 2 more in 3 seconds",
       takeshot: true,
     },
-    { time: 3, caption: "One more shot!", takeshot: true },
+    {
+      time: 3,
+      caption: "Another great Shot! 1 more in 3 seconds",
+      takeshot: true,
+    },
+    { time: 3, caption: "All Done!", takeshot: true },
     {
       time: 0,
       caption: "That was great! Don't forget to pick up your photos",
@@ -29,11 +37,16 @@ const CameraBooth = () => {
       if (index < timedEvents.length) {
         const event = timedEvents[index];
         console.log(event.caption); // Display caption (can be replaced with UI updates)
-
+        setAlerts((prevAlerts) => [
+          ...prevAlerts,
+          { time: event.time, caption: event.caption },
+        ]);
         if (index < timedEvents.length - 1 && event.takeshot === true) {
           handleCapture(); // Trigger a shot
         }
-
+        if (index === timedEvents.length - 1) {
+          setLgShow(true);
+        }
         index++;
         if (event.time > 0) {
           setTimeout(executeEvent, event.time * 1000);
@@ -161,12 +174,61 @@ const CameraBooth = () => {
         </div>
         <Button
           size="lg"
-          onClick={handleCapture}
+          onClick={startTimedShots}
           style={{ marginTop: "20px", padding: "10px 20px" }}
         >
           Start Snap Photos
+        </Button>{" "}
+        <Button
+          size="lg"
+          onClick={handleCapture}
+          style={{ marginTop: "20px", padding: "10px 20px" }}
+        >
+          Snap Photo
+        </Button>{" "}
+        <Button
+          size="lg"
+          onClick={() => setLgShow(true)}
+          style={{ marginTop: "20px", padding: "10px 20px" }}
+        >
+          Large modal
         </Button>
-
+        <br />
+        <br />
+        {alerts
+          .slice()
+          .reverse()
+          .map((item, i) => (
+            // <Alert key={`alert-${i}`} variant="danger">
+            //   {item.caption}
+            // </Alert>
+            <Alert variant="success">
+              <Alert.Heading>{item.caption}</Alert.Heading>
+              <p>
+                Aww yeah, you successfully read this important alert message.
+                This example text is going to run a bit longer so that you can
+                see how spacing within an alert works with this kind of content.
+              </p>
+              <hr />
+              <p className="mb-0">
+                Whenever you need to, be sure to use margin utilities to keep
+                things nice and tidy.
+              </p>
+            </Alert>
+          ))}
+        <Modal
+          size="lg"
+          show={lgShow}
+          onHide={() => setLgShow(false)}
+          aria-labelledby="example-modal-sizes-title-lg"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="example-modal-sizes-title-lg">
+              Large Modal
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>... Picture Here!</Modal.Body>
+        </Modal>
         {/* Hidden canvas for image capture */}
         <canvas
           ref={canvasRef}
