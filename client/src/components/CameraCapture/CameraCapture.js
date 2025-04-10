@@ -69,7 +69,9 @@ const CameraBooth = () => {
             flexDirection: "column",
             alignItems: "flex-end", // Align items to the right
           }}
-          xs={6}
+          xs={4}
+          md={4}
+          lg={4}
         >
           {showLiveInLeft ? (
             <div
@@ -102,7 +104,12 @@ const CameraBooth = () => {
             ))
           )}
         </Col>
-        <Col style={{ display: "flex", flexDirection: "column" }} xs={6}>
+        <Col
+          style={{ display: "flex", flexDirection: "column" }}
+          xs={8}
+          md={8}
+          lg={8}
+        >
           {/* Right Column */}
 
           {!showLiveInLeft && (
