@@ -9,7 +9,7 @@ import {
   Button,
   Modal,
 } from "react-bootstrap";
-import './CameraCapture.css';
+import "./CameraCapture.css";
 
 const CameraBooth = () => {
   const videoRef = useRef(null);
@@ -59,100 +59,89 @@ const CameraBooth = () => {
     }
   };
 
-return (
+  return (
     <Row className="camera-booth-container">
-        <div style={{ display: "flex", gap: "20px", padding: "20px" }}>
-            {/* Left Column */}
-            <Col style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }} xs={6}>
-                <div
-                    style={{
-                        flex: 1,
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "flex-start", // Align items to the top
-                        gap: "10px",
-                    }}
-                >
-                    {showLiveInLeft ? (
-                        <div
-                            style={{
-                                position: "relative",
-                                width: 320,
-                                height: 240,
-                                border: "2px solid gray",
-                            }}
-                        >
-                            <video
-                                ref={videoRef}
-                                width="320"
-                                height="240"
-                                autoPlay
-                                muted
-                                style={{ objectFit: "cover" }}
-                            />
-                        </div>
-                    ) : (
-                        images.map((img, idx) => (
-                            <img
-                                key={idx}
-                                src={img}
-                                width="320"
-                                height="240"
-                                alt={`snap-${idx}`}
-                                style={{ border: "2px solid #ccc" }}
-                            />
-                        ))
-                    )}
-                </div>
-            </Col>
-            <Col style={{ display: "flex", flexDirection: "column" }} xs={6}>
-                {/* Right Column */}
-                <div
-                    style={{
-                        flex: 1,
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                    }}
-                >
-                    {!showLiveInLeft && (
-                        <div
-                            style={{
-                                position: "relative",
-                                width: 960,
-                                height: 720,
-                                border: "2px solid gray",
-                            }}
-                        >
-                            <video
-                                ref={videoRef}
-                                width="960"
-                                height="720"
-                                autoPlay
-                                muted
-                                style={{ objectFit: "cover" }}
-                            />
-                        </div>
-                    )}
-                    <Button
-                        onClick={handleCapture}
-                        style={{ marginTop: "20px", padding: "10px 20px" }}
-                    >
-                        Snap Photo
-                    </Button>
-                </div>
+      <div style={{ display: "flex", gap: "20px", padding: "20px" }}>
+        {/* Left Column */}
+        <Col
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end", // Align items to the right
+          }}
+          xs={6}
+        >
+          {showLiveInLeft ? (
+            <div
+              style={{
+                position: "relative",
+                width: 320,
+                height: 240,
+                border: "2px solid gray",
+              }}
+            >
+              <video
+                ref={videoRef}
+                width="320"
+                height="240"
+                autoPlay
+                muted
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          ) : (
+            images.map((img, idx) => (
+              <img
+                key={idx}
+                src={img}
+                width="320"
+                height="240"
+                alt={`snap-${idx}`}
+                style={{ border: "2px solid #ccc" }}
+              />
+            ))
+          )}
+        </Col>
+        <Col style={{ display: "flex", flexDirection: "column" }} xs={6}>
+          {/* Right Column */}
 
-                {/* Hidden canvas for image capture */}
-                <canvas
-                    ref={canvasRef}
-                    width="320"
-                    height="240"
-                    style={{ display: "none" }}
-                />
-            </Col>
-        </div>
+          {!showLiveInLeft && (
+            <div
+              style={{
+                position: "relative",
+                width: 960,
+                height: 720,
+                border: "2px solid gray",
+              }}
+            >
+              <video
+                ref={videoRef}
+                width="960"
+                height="720"
+                autoPlay
+                muted
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          )}
+          <Button
+            onClick={handleCapture}
+            style={{ marginTop: "20px", padding: "10px 20px" }}
+          >
+            Snap Photo
+          </Button>
+
+          {/* Hidden canvas for image capture */}
+          <canvas
+            ref={canvasRef}
+            width="320"
+            height="240"
+            style={{ display: "none" }}
+          />
+        </Col>
+      </div>
     </Row>
-);
+  );
 };
 
 export default CameraBooth;
