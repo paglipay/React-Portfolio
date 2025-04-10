@@ -160,10 +160,11 @@ const CameraBooth = () => {
           )}
         </div>
         <Button
+          size="lg"
           onClick={startTimedShots}
           style={{ marginTop: "20px", padding: "10px 20px" }}
         >
-          Snap Photo
+          Start Snap Photos
         </Button>
 
         {/* Hidden canvas for image capture */}
