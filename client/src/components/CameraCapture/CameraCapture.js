@@ -88,7 +88,7 @@ const CameraBooth = () => {
   };
 
   return (
-    <Row className="camera-booth-container">
+    <Row className="camera-booth-container" style={{ margin: "20px" }}>
       {/* Left Column */}
       <Col xs={12} md={3} className="camera-booth-left">
         <div
@@ -161,7 +161,7 @@ const CameraBooth = () => {
         </div>
         <Button
           size="lg"
-          onClick={startTimedShots}
+          onClick={handleCapture}
           style={{ marginTop: "20px", padding: "10px 20px" }}
         >
           Start Snap Photos
