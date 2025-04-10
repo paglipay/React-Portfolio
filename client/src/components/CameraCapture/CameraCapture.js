@@ -132,18 +132,7 @@ const CameraBooth = () => {
       </Spinner>
       {/* Left Column */}
       <Col xs={12} md={4} className="camera-booth-left">
-        <Image
-          src="/sb_logo.jpg"
-          alt="Camera Icon"
-          style={{
-            width: "100%",
-            height: "auto",
-            maxWidth: "200px",
-            margin: "0 auto",
-          }}
-        />
-        <br />
-        <br />
+        
         <div
           style={{
             display: "flex",
@@ -191,6 +180,18 @@ const CameraBooth = () => {
 
       {/* Right Column */}
       <Col xs={12} md={8} className="camera-booth-right">
+      <Image
+          src="/sb_logo.jpg"
+          alt="Camera Icon"
+          style={{
+            width: "100%",
+            height: "auto",
+            maxWidth: "200px",
+            margin: "0 auto",
+          }}
+        />
+        <br />
+        <br />
         <div
           style={{
             position: "relative",
@@ -233,6 +234,8 @@ const CameraBooth = () => {
         >
           Large modal
         </Button>
+        Disclaimer: Shutter Box is a fun way to capture your memories. Please
+          ensure you have permission to take and share photos.
         <br />
         <br />
         {alerts
@@ -298,8 +301,7 @@ const CameraBooth = () => {
             color: "#888",
           }}
         >
-          Disclaimer: Shutter Box is a fun way to capture your memories. Please
-          ensure you have permission to take and share photos.
+          
         </p>
         {/* Hidden canvas for image capture */}
         <canvas
