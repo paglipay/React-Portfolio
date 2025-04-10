@@ -1,76 +1,156 @@
-import React, { useRef, useEffect } from 'react';
-
-const CameraCapture = () => {
+import React, { useRef, useEffect, useState } from "react";
+import {
+  Form,
+  Table,
+  Badge,
+  Container,
+  Row,
+  Col,
+  Button,
+  Modal,
+} from "react-bootstrap";
+const CameraBooth = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const [images, setImages] = useState([]);
+  const [showLiveInLeft, setShowLiveInLeft] = useState(false);
 
   useEffect(() => {
-    const getCameraStream = async () => {
+    const initCamera = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
         }
       } catch (err) {
-        console.error('Error accessing camera:', err);
+        console.error("Camera access error:", err);
       }
     };
-
-    getCameraStream();
+    initCamera();
   }, []);
 
   const handleCapture = () => {
-    const video = videoRef.current;
     const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
+    const video = videoRef.current;
+    const ctx = canvas.getContext("2d");
 
-    if (video && canvas && context) {
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    if (video && canvas && ctx) {
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      // Draw overlay image on top of canvas
-      const overlay = new Image();
-      overlay.src = '/logo512.png'; // <-- place your overlay image in /public or use an import
-      overlay.onload = () => {
-        context.drawImage(overlay, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob((blob) => {
+        const url = URL.createObjectURL(blob);
 
-        // Save final image with overlay
-        canvas.toBlob((blob) => {
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = 'photo_with_logo512.png';
-          link.click();
-          URL.revokeObjectURL(url);
-        }, 'image/png');
-      };
+        setImages((prevImages) => {
+          const updatedImages = [...prevImages, url];
+
+          // Once we reach 4 images, replace left cam with 4th image
+          if (updatedImages.length > 3) {
+            setShowLiveInLeft(true);
+            return updatedImages.slice(-3); // keep only last 3
+          }
+
+          return updatedImages;
+        });
+      }, "image/png");
     }
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <div style={{ position: 'relative', width: 640, height: 480, margin: '0 auto' }}>
-        <video
-          ref={videoRef}
-          width="640"
-          height="480"
-          autoPlay
-          style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}
-        />
-        <img
-          src="/logo512.png"
-          alt="Overlay"
-          style={{ position: 'absolute', top: 0, left: 0, zIndex: 2, width: 640, height: 480 }}
-        />
+    <Row>
+      <div style={{ display: "flex", gap: "20px", padding: "20px" }}>
+        {/* Left Column */}
+        <Col style={{ display: "flex", flexDirection: "column" }} xs={6}>
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              gap: "10px",
+            }}
+          >
+            {showLiveInLeft ? (
+              <div
+                style={{
+                  position: "relative",
+                  width: 320,
+                  height: 240,
+                  border: "2px solid gray",
+                }}
+              >
+                <video
+                  ref={videoRef}
+                  width="320"
+                  height="240"
+                  autoPlay
+                  muted
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            ) : (
+              images.map((img, idx) => (
+                <img
+                  key={idx}
+                  src={img}
+                  width="320"
+                  height="240"
+                  alt={`snap-${idx}`}
+                  style={{ border: "2px solid #ccc" }}
+                />
+              ))
+            )}
+          </div>
+        </Col>
+        <Col style={{ display: "flex", flexDirection: "column" }} xs={6}>
+          {/* Right Column */}
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            {!showLiveInLeft && (
+              <div
+                style={{
+                  position: "relative",
+                  width: 320,
+                  height: 240,
+                  border: "2px solid gray",
+                }}
+              >
+                <video
+                  ref={videoRef}
+                  width="320"
+                  height="240"
+                  autoPlay
+                  muted
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            )}
+            <button
+              onClick={handleCapture}
+              style={{ marginTop: "20px", padding: "10px 20px" }}
+            >
+              Snap Photo
+            </button>
+          </div>
+
+          {/* Hidden canvas for image capture */}
+          <canvas
+            ref={canvasRef}
+            width="320"
+            height="240"
+            style={{ display: "none" }}
+          />
+        </Col>
       </div>
-      <button onClick={handleCapture} style={{ marginTop: '10px' }}>Snap Photo</button>
-      <canvas
-        ref={canvasRef}
-        width="640"
-        height="480"
-        style={{ display: 'none' }}
-      />
-    </div>
+    </Row>
   );
 };
 
-export default CameraCapture;
+export default CameraBooth;
