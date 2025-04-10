@@ -123,24 +123,12 @@ const CameraBooth = () => {
           position: "absolute",
           top: "50%",
           left: "50%",
-          transform: "translate(-50%, -50%)",
+          // transform: "translate(-50%, -50%)",
           zIndex: 1000,
+          scale: "6",
+          // color: "#007bff", // Bootstrap primary color
         }}
       >
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-      <Spinner
-        animation="border"
-        role="status"
-        style={{
-          display: true ? "block" : "none",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          zIndex: 1000,
-        }}
-      >
-        <span className="visually-hidden">Loading...</span>
       </Spinner>
       {/* Left Column */}
       <Col xs={12} md={4} className="camera-booth-left">
