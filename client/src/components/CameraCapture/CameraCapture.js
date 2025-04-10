@@ -1,10 +1,19 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Row, Col, Alert, Button, Modal, Image } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Alert,
+  Button,
+  Modal,
+  Image,
+  Spinner,
+} from "react-bootstrap";
 import "./CameraCapture.css";
 
 const CameraBooth = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const [showSpinner, setShowSpinner] = useState(false);
   const [images, setImages] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [lgShow, setLgShow] = useState(false);
@@ -45,7 +54,11 @@ const CameraBooth = () => {
           handleCapture(); // Trigger a shot
         }
         if (index === timedEvents.length - 1) {
-          setLgShow(true);
+          setShowSpinner(true);
+          setTimeout(() => {
+            setShowSpinner(false);
+            setLgShow(true);
+          }, 4000);
         }
         index++;
         if (event.time > 0) {
@@ -90,7 +103,7 @@ const CameraBooth = () => {
 
           // Once we reach 4 images, replace left cam with 4th image
           if (updatedImages.length > 3) {
-            setShowLiveInLeft(true);
+            // setShowLiveInLeft(true);
             return updatedImages.slice(-3); // keep only last 3
           }
 
@@ -102,6 +115,33 @@ const CameraBooth = () => {
 
   return (
     <Row className="camera-booth-container" style={{ margin: "20px" }}>
+      <Spinner
+        animation="border"
+        role="status"
+        style={{
+          display: showSpinner ? "block" : "none",
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 1000,
+        }}
+      >
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+      <Spinner
+        animation="border"
+        role="status"
+        style={{
+          display: true ? "block" : "none",
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          zIndex: 1000,
+        }}
+      >
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
       {/* Left Column */}
       <Col xs={12} md={4} className="camera-booth-left">
         <Image
@@ -236,7 +276,7 @@ const CameraBooth = () => {
         >
           <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-lg">
-              Great Job! It looks Amazing!
+              Great Job! You Look Amazing!
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
