@@ -6,6 +6,43 @@ const CameraBooth = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [images, setImages] = useState([]);
+  const timedEvents = [
+    { time: 3, caption: "Get ready, start in 3 seconds", takeshot: false },
+    { time: 3, caption: "Great Shot! again in 3 seconds", takeshot: true },
+    {
+      time: 3,
+      caption: "Another great Shot! 2 more in 3 seconds",
+      takeshot: true,
+    },
+    { time: 3, caption: "One more shot!", takeshot: true },
+    {
+      time: 0,
+      caption: "That was great! Don't forget to pick up your photos",
+      takeshot: false,
+    },
+  ];
+
+  const startTimedShots = () => {
+    let index = 0;
+
+    const executeEvent = () => {
+      if (index < timedEvents.length) {
+        const event = timedEvents[index];
+        console.log(event.caption); // Display caption (can be replaced with UI updates)
+
+        if (index < timedEvents.length - 1 && event.takeshot === true) {
+          handleCapture(); // Trigger a shot
+        }
+
+        index++;
+        if (event.time > 0) {
+          setTimeout(executeEvent, event.time * 1000);
+        }
+      }
+    };
+
+    executeEvent();
+  };
   const [showLiveInLeft, setShowLiveInLeft] = useState(false);
 
   useEffect(() => {
@@ -123,7 +160,7 @@ const CameraBooth = () => {
           )}
         </div>
         <Button
-          onClick={handleCapture}
+          onClick={startTimedShots}
           style={{ marginTop: "20px", padding: "10px 20px" }}
         >
           Snap Photo
