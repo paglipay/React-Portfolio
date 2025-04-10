@@ -1,0 +1,8 @@
+.camera-booth-background {
+/* This is the background image for the camera booth located in public folder*/
+  background-image: url('/Paul Aglipay-Certificate.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+}

@@ -9,6 +9,8 @@ import {
   Button,
   Modal,
 } from "react-bootstrap";
+import './CameraCapture.css';
+
 const CameraBooth = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -58,7 +60,7 @@ const CameraBooth = () => {
   };
 
   return (
-    <Row>
+    <Row className="camera-booth-background">
       <div style={{ display: "flex", gap: "20px", padding: "20px" }}>
         {/* Left Column */}
         <Col style={{ display: "flex", flexDirection: "column" }} xs={6}>
@@ -117,15 +119,15 @@ const CameraBooth = () => {
               <div
                 style={{
                   position: "relative",
-                  width: 320,
-                  height: 240,
+                  width: 960,
+                  height: 720,
                   border: "2px solid gray",
                 }}
               >
                 <video
                   ref={videoRef}
-                  width="320"
-                  height="240"
+                  width="960"
+                  height="720"
                   autoPlay
                   muted
                   style={{ objectFit: "cover" }}
