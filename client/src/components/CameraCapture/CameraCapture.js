@@ -114,8 +114,8 @@ const CameraBooth = () => {
             margin: "0 auto",
           }}
         />
-        <br/>
-        <br/>
+        <br />
+        <br />
         <div
           style={{
             display: "flex",
@@ -239,12 +239,40 @@ const CameraBooth = () => {
               Great Job! It looks Amazing!
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>... Picture Here!</Modal.Body>
+          <Modal.Body>
+            <Image
+              src="/sb_logo.jpg"
+              alt="Camera Icon"
+              style={{
+                width: "100%",
+                height: "auto",
+                // maxWidth: "200px",
+                margin: "0 auto",
+              }}
+            />
+          </Modal.Body>
           <Modal.Footer>
+            <Button
+              variant="info"
+              onClick={() => alert("Shutter Box - Capture your memories!")}
+            >
+              About Shutter Box
+            </Button>
             <Button variant="secondary">Close</Button>
             <Button variant="primary">AI Generate</Button>
           </Modal.Footer>
         </Modal>
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "20px",
+            fontSize: "0.9rem",
+            color: "#888",
+          }}
+        >
+          Disclaimer: Shutter Box is a fun way to capture your memories. Please
+          ensure you have permission to take and share photos.
+        </p>
         {/* Hidden canvas for image capture */}
         <canvas
           ref={canvasRef}
