@@ -59,6 +59,10 @@ function NavTabs({ authenticated, logout }) {
               Instant Interview
             </NavDropdown.Item>
             
+            <NavDropdown.Item as={Link} to="/camera">
+              Shutterbox
+            </NavDropdown.Item>
+            
             <NavDropdown.Item as={Link} to="/lobbylogin">
               LobbyLogin
             </NavDropdown.Item>
