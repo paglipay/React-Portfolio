@@ -247,7 +247,7 @@ const CameraBooth = () => {
             // </Alert>
             <Alert
               variant="success"
-              style={{ position: "absolute", top: "25%", left: "25%" }}
+              style={{ position: "absolute", top: "25%", left: "25%", width: "50%" }}
               key={`alert-${i}`}
               className="alert-position"
             >
