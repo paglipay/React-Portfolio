@@ -157,7 +157,9 @@ const CameraBooth = () => {
           padding: "10px 20px",
           position: "absolute",
           top: "50%",
-          left: "50%",
+          left: "33%",
+          width: "33%",
+          height: "auto",
           zIndex: 10000,
         }}
         className="start-button"
@@ -186,9 +188,9 @@ const CameraBooth = () => {
             variant="success"
             style={{
               position: "absolute",
-              top: "25%",
-              left: "25%",
-              width: "50%",
+              top: "33%",
+              left: "33%",
+              width: "33%",
               zIndex: `100${i}`,
             }}
             key={`alert-${i}`}
