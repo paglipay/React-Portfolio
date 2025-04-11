@@ -51,7 +51,7 @@ const CameraBooth = () => {
   }, [colSizes]);
 
   const timedEvents = [
-    { time: 3, caption: "Get ready, starts in 3 seconds!", takeshot: false },
+    { time: 3, caption: "Get ready, it starts in 3 seconds!", takeshot: false },
     { time: 1, caption: "3", takeshot: false },
     { time: 1, caption: "2", takeshot: false },
     { time: 1, caption: "1", takeshot: false },
@@ -61,7 +61,7 @@ const CameraBooth = () => {
     { time: 1, caption: "1", takeshot: false },
     {
       time: 3,
-      caption: "Another great Shot! 2 more in 3 seconds",
+      caption: "Another great Shot! Let's do 2 more...",
       takeshot: true,
     },
     { time: 1, caption: "3", takeshot: false },
@@ -69,7 +69,7 @@ const CameraBooth = () => {
     { time: 1, caption: "1", takeshot: false },
     {
       time: 3,
-      caption: "Another great Shot! 1 more in 3 seconds",
+      caption: "Another great Shot! Last one...",
       takeshot: true,
     },
     { time: 1, caption: "3", takeshot: false },
@@ -77,8 +77,14 @@ const CameraBooth = () => {
     { time: 1, caption: "1", takeshot: false },
     { time: 3, caption: "All Done!", takeshot: true },
     {
-      time: 0,
+      time: 6,
       caption: "That was great! Don't forget to pick up your photos",
+      comments:"Brought to you by Shutterbox",
+      takeshot: false,
+    },
+    {
+      time: 0,
+      caption: "Processing...",
       takeshot: false,
     },
   ];
@@ -93,7 +99,7 @@ const CameraBooth = () => {
         console.log(event.caption); // Display caption (can be replaced with UI updates)
         setAlerts((prevAlerts) => [
           ...prevAlerts,
-          { time: event.time, caption: event.caption },
+          { time: event.time, caption: event.caption, comments: event.comments },
         ]);
         if (index < timedEvents.length - 1 && event.takeshot === true) {
           handleCapture(); // Trigger a shot
@@ -226,8 +232,8 @@ const CameraBooth = () => {
         role="status"
         style={{
           position: "absolute",
-          top: "40%",
-          left: "40%",
+          top: "33%",
+          left: "33%",
           width: "350px",
           height: "350px",
           borderWidth: "50px",
@@ -244,6 +250,7 @@ const CameraBooth = () => {
             style={{
               display: i === 0 ? "block" : "none",
               position: "absolute",
+              textAlign: "center",
               top: "33%",
               left: "33%",
               width: "33%",
@@ -253,6 +260,7 @@ const CameraBooth = () => {
             className="alert-position"
           >
             <Alert.Heading>{item.caption}</Alert.Heading>
+            {item.comments ? <p>{item.comments}</p>:null}
           </Alert>
         ))}
 
