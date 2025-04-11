@@ -39,7 +39,11 @@ const CameraBooth = () => {
     setTimeout(() => {
       setColSizes([1, 11]);
       // setShowButton(true);
-    }, 3000); // Set initial column sizes after 1 second
+    }, 1); // Set initial column sizes after 1 second
+    setTimeout(() => {
+      setColSizes([0, 12]);
+      // setShowButton(true);
+    }, 2); // Set initial column sizes after 1 second
     setTimeout(() => {
       // setColSizes([1, 11]);
       setShowButton(true);
@@ -90,9 +94,14 @@ const CameraBooth = () => {
     },
   ];
 
-  const startTimedShots = () => {
-    setColSizes([3, 9]);    
+  const startTimedShots = () => {    
     setShowLogo(true);
+    setColSizes([1, 11]); 
+    setTimeout(() => {
+      setColSizes([3, 9]);
+      // setShowButton(true);
+    }, 1); // Set initial column sizes after 1 second
+    // setColSizes([3, 9]);
     let index = 0;
 
     const executeEvent = () => {
@@ -239,7 +248,7 @@ const CameraBooth = () => {
           width: "350px",
           height: "350px",
           borderWidth: "50px",
-          zIndex: "10000",
+          zIndex: "50",
           display: showSpinner ? "block" : "none",
         }}
       ></Spinner>
