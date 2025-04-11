@@ -103,8 +103,7 @@ const CameraBooth = () => {
           setTimeout(() => {
             setShowSpinner(false);
             // setLgShow(true);
-            captureRowAsImage()
-            
+            captureRowAsImage();
           }, 4000);
         }
         index++;
@@ -165,8 +164,10 @@ const CameraBooth = () => {
       // Temporarily set the background color to black
       rowRef.current.style.backgroundColor = "black";
 
-      //top margin
-      rowRef.current.style.marginTop = "5px";
+      // //top margin
+      // rowRef.current.style.marginTop = "5px";
+      // margin
+      rowRef.current.style.margin = "5px";
 
       // Capture the Row as a canvas
       const canvas = await html2canvas(rowRef.current, {
@@ -227,9 +228,9 @@ const CameraBooth = () => {
           position: "absolute",
           top: "40%",
           left: "40%",
-          width: "350px", // Set width to 3x larger
-          height: "350px", // Set height to 3x larger
-          borderWidth: "50px", // Thicken the spinner line
+          width: "350px",
+          height: "350px",
+          borderWidth: "50px",
           zIndex: "10000",
           display: showSpinner ? "block" : "none",
         }}
@@ -240,72 +241,117 @@ const CameraBooth = () => {
         .map((item, i) => (
           <Alert
             variant="success"
-            
             style={{
               display: i === 0 ? "block" : "none",
               position: "absolute",
               top: "33%",
               left: "33%",
               width: "33%",
-              zIndex: 100-i,
+              zIndex: 100 - i,
             }}
             key={`alert-${i}`}
             className="alert-position"
           >
             <Alert.Heading>{item.caption}</Alert.Heading>
-            
           </Alert>
         ))}
 
       <Row
         className="camera-booth-container"
         style={{ margin: "20px" }}
-        ref={rowRef} // Attach the ref to the Row
+        ref={rowRef}
       >
-        {/* Left Column */}
-        <Col
-          xs={12}
-          md={colSizes[0]}
-          className="camera-booth-left"
-          style={{
-            transition: "flex-basis 0.5s ease", // Smooth transition for resizing
-          }}
-        >
-        <Image
-          src="/sb_logo.jpg"
-          alt="Camera Icon"
-          style={{
-            width: "50%",
-            height: "auto",
-            margin: "0 auto",
-          }}
-        />
-        <Image
-          src="/sb_logo.jpg"
-          alt="Camera Icon"
-          style={{
-            width: "50%",
-            height: "auto",
-            margin: "0 auto",
-          }}
-        />
-          <div
+        <Row>
+          <Col
+            xs={12}
+            md={colSizes[0]}
+            className="camera-booth-left"
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end", // Align items to the right
-              gap: "10px",
+              transition: "flex-basis 0.5s ease",
             }}
           >
-            {showLiveInLeft ? (
-              <div
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                gap: "10px",
+              }}
+            >
+              <Image
+                src="/sb_logo.jpg"
+                alt="Camera Icon"
                 style={{
-                  position: "relative",
-                  width: "100%",
-                  aspectRatio: "4 / 3",
-                  border: "2px solid gray",
+                  width: "50%",
+                  height: "auto",
+                  margin: "0 auto",
                 }}
-              >
+              />
+              {showLiveInLeft ? (
+                <div
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    aspectRatio: "4 / 3",
+                    border: "2px solid gray",
+                  }}
+                >
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    muted
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              ) : (
+                images.map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    alt={`snap-${idx}`}
+                    style={{
+                      width: "100%",
+                      aspectRatio: "4 / 3",
+                      border: "2px solid #ccc",
+                    }}
+                  />
+                ))
+              )}
+            </div>
+          </Col>
+
+          <Col
+            xs={12}
+            md={colSizes[1]}
+            className="camera-booth-right"
+            style={{
+              transition: "flex-basis 0.5s ease",
+            }}
+          >
+            <Image
+              src="/1000008934.jpg"
+              alt="Camera Icon"
+              style={{
+                width: "100%",
+                height: "auto",
+                margin: "0 auto",
+              }}
+            />
+            <br />
+            <br />
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                aspectRatio: "4 / 3",
+                border: "2px solid gray",
+              }}
+            >
+              {!showLiveInLeft && (
                 <video
                   ref={videoRef}
                   autoPlay
@@ -316,120 +362,90 @@ const CameraBooth = () => {
                     objectFit: "cover",
                   }}
                 />
-              </div>
-            ) : (
-              images.map((img, idx) => (
-                <img
-                  key={idx}
-                  src={img}
-                  alt={`snap-${idx}`}
-                  style={{
-                    width: "100%",
-                    aspectRatio: "4 / 3",
-                    border: "2px solid #ccc",
-                  }}
-                />
-              ))
-            )}
-          </div>
-        </Col>
-
-        {/* Right Column */}
-        <Col
-          xs={12}
-          md={colSizes[1]}
-          className="camera-booth-right"
-          style={{
-            transition: "flex-basis 0.5s ease", // Smooth transition for resizing
-          }}
-        >
-          <Image
-            src="/1000008934.jpg"
-            alt="Camera Icon"
+              )}
+            </div>
+            <Modal
+              size="lg"
+              show={lgShow}
+              onHide={() => setLgShow(false)}
+              aria-labelledby="example-modal-sizes-title-lg"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="example-modal-sizes-title-lg">
+                  Great Job! You Look Amazing!
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                {capturedImage && (
+                  <Image
+                    src={capturedImage}
+                    alt="Captured"
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                    }}
+                  />
+                )}
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={() => setLgShow(false)}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={downloadImage}>
+                  Download Image
+                </Button>
+              </Modal.Footer>
+            </Modal>
+            <canvas
+              ref={canvasRef}
+              width="320"
+              height="240"
+              style={{ display: "none" }}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col
+            xs={12}
+            md={colSizes[0]}
+            className="camera-booth-left"
             style={{
-              width: "100%",
-              height: "auto",
-              margin: "0 auto",
-            }}
-          />
-          <br />
-          <br />
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              aspectRatio: "4 / 3",
-              border: "2px solid gray",
+              transition: "flex-basis 0.5s ease",
             }}
           >
-            {!showLiveInLeft && (
-              <video
-                ref={videoRef}
-                autoPlay
-                muted
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                gap: "10px",
+              }}
+            >
+              <Image
+                src="/sb_logo.jpg"
+                alt="Camera Icon"
                 style={{
                   width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
+                  height: "auto",
+                  margin: "0 auto",
                 }}
               />
-            )}
-          </div>
-          {/* <Button
-            variant="primary"
-            onClick={captureRowAsImage}
-            style={{ marginTop: "20px" }}
-          >
-            Capture and Show in Modal
-          </Button> */}
-          <Modal
-            size="lg"
-            show={lgShow}
-            onHide={() => setLgShow(false)}
-            aria-labelledby="example-modal-sizes-title-lg"
-          >
-            <Modal.Header closeButton>
-              <Modal.Title id="example-modal-sizes-title-lg">
-                Great Job! You Look Amazing!
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {capturedImage && (
-                <Image
-                  src={capturedImage}
-                  alt="Captured"
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                  }}
-                />
-              )}
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setLgShow(false)}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={downloadImage}>
-                Download Image
-              </Button>
-            </Modal.Footer>
-          </Modal>
-          <p
-            style={{
-              textAlign: "center",
-              marginTop: "20px",
-              fontSize: "0.9rem",
-              color: "#888",
-            }}
-          ></p>
-          {/* Hidden canvas for image capture */}
-          <canvas
-            ref={canvasRef}
-            width="320"
-            height="240"
-            style={{ display: "none" }}
-          />
-        </Col>
+            </div>
+          </Col>
+          <Col xs={12} md={colSizes[1]} className="camera-booth-right">
+            <footer
+              className="bg-dark text-white text-center py-3"
+              style={{ marginTop: "20px" }}
+            >
+              <Container>
+                <p className="mb-1">Shutterbox</p>
+                <p className="mb-1">Email: contact@shutterbox.com</p>
+                <p className="mb-1">Phone: +64 123 456 789</p>
+                <p className="mb-0">Wellington, New Zealand</p>
+              </Container>
+            </footer>
+          </Col>
+        </Row>
       </Row>
     </>
   );
