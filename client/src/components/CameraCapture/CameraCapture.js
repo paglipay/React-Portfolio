@@ -269,6 +269,7 @@ const CameraBooth = () => {
           borderWidth: "50px",
           zIndex: "50",
           display: showSpinner ? "block" : "none",
+          opacity: 0.75, // 75% transparent
         }}
       ></Spinner>
       {alerts
@@ -285,6 +286,7 @@ const CameraBooth = () => {
               left: "33%",
               width: "33%",
               zIndex: 100 - i,
+              opacity: 0.75, // 75% transparent
             }}
             key={`alert-${i}`}
             className="alert-position"
