@@ -305,7 +305,7 @@ const CameraBooth = () => {
             md={colSizes[0]}
             className="camera-booth-left"
             style={{
-              transition: "flex-basis 0.5s ease",
+              transition: "flex-basis 1.5s ease",
             }}
           >
             <div
@@ -368,7 +368,7 @@ const CameraBooth = () => {
             md={colSizes[1]}
             className="camera-booth-right"
             style={{
-              transition: "flex-basis 0.5s ease",
+              transition: "flex-basis 1.5s ease",
             }}
           >
             <Image
@@ -378,7 +378,7 @@ const CameraBooth = () => {
                 width: "100%",
                 height: "auto",
                 margin: "0 auto",
-                transition: "flex-basis 0.5s ease",
+                transition: "flex-basis 1.5s ease",
                 display: "block",
               }}
             />
@@ -451,7 +451,7 @@ const CameraBooth = () => {
             md={colSizes[0]}
             className="camera-booth-left"
             style={{
-              transition: "flex-basis 0.5s ease",
+              transition: "flex-basis 1.5s ease",
             }}
           >
             <div
