@@ -17,6 +17,27 @@ const CameraBooth = () => {
   const [images, setImages] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [lgShow, setLgShow] = useState(false);
+  const [colSizes, setColSizes] = useState([3, 9]); // Initial column sizes
+  const [toggle, setToggle] = useState(false); // State to track toggle status
+
+  const toggleSizes = () => {
+    if (toggle === true) {
+      setColSizes([1, 11]); // Set to 12 and 0
+    } else {
+      setColSizes([3, 9]);
+    }
+    setToggle(!toggle);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setColSizes([1, 11]);
+    }, 3000); // Set initial column sizes after 1 second
+  }, []); // Set initial column sizes on mount
+
+  useEffect(() => {
+    console.log("colSizes", colSizes);
+  }, [colSizes]);
 
   const timedEvents = [
     { time: 3, caption: "Get ready, starts in 3 seconds!", takeshot: false },
@@ -40,6 +61,7 @@ const CameraBooth = () => {
   ];
 
   const startTimedShots = () => {
+    setColSizes([3, 9]);
     let index = 0;
 
     const executeEvent = () => {
@@ -114,40 +136,93 @@ const CameraBooth = () => {
   };
 
   return (
-    <Row className="camera-booth-container" style={{ margin: "20px" }}>
-      <Spinner
-        animation="border"
-        role="status"
-        style={{
-          display: showSpinner ? "block" : "none",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          // transform: "translate(-50%, -50%)",
-          zIndex: 1000,
-          scale: "6",
-          // color: "#007bff", // Bootstrap primary color
-        }}
-      ></Spinner>
-      {/* Left Column */}
-      <Col xs={12} md={3} className="camera-booth-left">
-        <div
+    <>
+      <Button onClick={toggleSizes}>Toggle Columns Size</Button>
+
+      <Row className="camera-booth-container" style={{ margin: "20px" }}>
+        {/* Left Column */}
+        <Col
+          xs={12}
+          md={colSizes[0]}
+          className="camera-booth-left"
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-end", // Align items to the right
-            gap: "10px",
+            transition: "flex-basis 0.5s ease", // Smooth transition for resizing
           }}
         >
-          {showLiveInLeft ? (
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                aspectRatio: "4 / 3",
-                border: "2px solid gray",
-              }}
-            >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end", // Align items to the right
+              gap: "10px",
+            }}
+          >
+            {showLiveInLeft ? (
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  aspectRatio: "4 / 3",
+                  border: "2px solid gray",
+                }}
+              >
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  muted
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            ) : (
+              images.map((img, idx) => (
+                <img
+                  key={idx}
+                  src={img}
+                  alt={`snap-${idx}`}
+                  style={{
+                    width: "100%",
+                    aspectRatio: "4 / 3",
+                    border: "2px solid #ccc",
+                  }}
+                />
+              ))
+            )}
+          </div>
+        </Col>
+
+        {/* Right Column */}
+        <Col
+          xs={12}
+          md={colSizes[1]}
+          className="camera-booth-right"
+          style={{
+            transition: "flex-basis 0.5s ease", // Smooth transition for resizing
+          }}
+        >
+          <Image
+            src="/1000008934.jpg"
+            alt="Camera Icon"
+            style={{
+              width: "100%",
+              height: "auto",
+              margin: "0 auto",
+            }}
+          />
+          <br />
+          <br />
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              aspectRatio: "16 / 9",
+              border: "2px solid gray",
+            }}
+          >
+            {!showLiveInLeft && (
               <video
                 ref={videoRef}
                 autoPlay
@@ -158,163 +233,115 @@ const CameraBooth = () => {
                   objectFit: "cover",
                 }}
               />
-            </div>
-          ) : (
-            images.map((img, idx) => (
-              <img
-                key={idx}
-                src={img}
-                alt={`snap-${idx}`}
+            )}
+          </div>
+          <Button
+            size="lg"
+            onClick={startTimedShots}
+            style={{ marginTop: "20px", padding: "10px 20px" }}
+          >
+            Start Snap Photos
+          </Button>
+          <Button
+            size="lg"
+            onClick={handleCapture}
+            style={{ marginTop: "20px", padding: "10px 20px" }}
+          >
+            Snap Photo
+          </Button>
+          <Button
+            size="lg"
+            onClick={() => setLgShow(true)}
+            style={{ marginTop: "20px", padding: "10px 20px" }}
+          >
+            Large modal
+          </Button>
+          <br />
+          <br />
+          Disclaimer: Shutter Box is a fun way to capture your memories. Please
+          ensure you have permission to take and share photos.
+          <br />
+          <br />
+          {alerts
+            .slice()
+            .reverse()
+            .map((item, i) => (
+              <Alert
+                variant="success"
+                style={{
+                  position: "absolute",
+                  top: "25%",
+                  left: "25%",
+                  width: "50%",
+                }}
+                key={`alert-${i}`}
+                className="alert-position"
+              >
+                <Alert.Heading>{item.caption}</Alert.Heading>
+                <p>
+                  Aww yeah, you successfully read this important alert message.
+                  This example text is going to run a bit longer so that you can
+                  see how spacing within an alert works with this kind of
+                  content.
+                </p>
+                <hr />
+                <p className="mb-0">
+                  Whenever you need to, be sure to use margin utilities to keep
+                  things nice and tidy.
+                </p>
+              </Alert>
+            ))}
+          <Modal
+            size="lg"
+            show={lgShow}
+            onHide={() => setLgShow(false)}
+            aria-labelledby="example-modal-sizes-title-lg"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="example-modal-sizes-title-lg">
+                Great Job! You Look Amazing!
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Image
+                src="/1000008934.jpg"
+                alt="Camera Icon"
                 style={{
                   width: "100%",
-                  aspectRatio: "4 / 3",
-                  border: "2px solid #ccc",
+                  height: "auto",
+                  margin: "0 auto",
                 }}
               />
-            ))
-          )}
-        </div>
-      </Col>
-
-      {/* Right Column */}
-      <Col xs={12} md={9} className="camera-booth-right">
-        <Image
-          src="/1000008934.jpg"
-          alt="Camera Icon"
-          style={{
-            width: "100%",
-            height: "auto",
-            // maxWidth: "100px",
-            margin: "0 auto",
-          }}
-        />
-        <br />
-        <br />
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            aspectRatio: "16 / 9",
-            border: "2px solid gray",
-          }}
-        >
-          {!showLiveInLeft && (
-            <video
-              ref={videoRef}
-              autoPlay
-              muted
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-            />
-          )}
-        </div>
-        <Button
-          size="lg"
-          onClick={startTimedShots}
-          style={{ marginTop: "20px", padding: "10px 20px" }}
-        >
-          Start Snap Photos
-        </Button>{" "}
-        <Button
-          size="lg"
-          onClick={handleCapture}
-          style={{ marginTop: "20px", padding: "10px 20px" }}
-        >
-          Snap Photo
-        </Button>{" "}
-        <Button
-          size="lg"
-          onClick={() => setLgShow(true)}
-          style={{ marginTop: "20px", padding: "10px 20px" }}
-        >
-          Large modal
-        </Button>
-        <br />
-        <br />
-        Disclaimer: Shutter Box is a fun way to capture your memories. Please
-        ensure you have permission to take and share photos.
-        <br />
-        <br />
-        {alerts
-          .slice()
-          .reverse()
-          .map((item, i) => (
-            // <Alert key={`alert-${i}`} variant="danger">
-            //   {item.caption}
-            // </Alert>
-            <Alert
-              variant="success"
-              style={{ position: "absolute", top: "25%", left: "25%", width: "50%" }}
-              key={`alert-${i}`}
-              className="alert-position"
-            >
-              <Alert.Heading>{item.caption}</Alert.Heading>
-              <p>
-                Aww yeah, you successfully read this important alert message.
-                This example text is going to run a bit longer so that you can
-                see how spacing within an alert works with this kind of content.
-              </p>
-              <hr />
-              <p className="mb-0">
-                Whenever you need to, be sure to use margin utilities to keep
-                things nice and tidy.
-              </p>
-            </Alert>
-          ))}
-        <Modal
-          size="lg"
-          show={lgShow}
-          onHide={() => setLgShow(false)}
-          aria-labelledby="example-modal-sizes-title-lg"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="example-modal-sizes-title-lg">
-              Great Job! You Look Amazing!
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Image
-              src="/1000008934.jpg"
-              alt="Camera Icon"
-              style={{
-                width: "100%",
-                height: "auto",
-                // maxWidth: "200px",
-                margin: "0 auto",
-              }}
-            />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="info"
-              onClick={() => alert("Shutter Box - Capture your memories!")}
-            >
-              About Shutter Box
-            </Button>
-            <Button variant="secondary">Close</Button>
-            <Button variant="primary">AI Generate</Button>
-          </Modal.Footer>
-        </Modal>
-        <p
-          style={{
-            textAlign: "center",
-            marginTop: "20px",
-            fontSize: "0.9rem",
-            color: "#888",
-          }}
-        ></p>
-        {/* Hidden canvas for image capture */}
-        <canvas
-          ref={canvasRef}
-          width="320"
-          height="240"
-          style={{ display: "none" }}
-        />
-      </Col>
-    </Row>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="info"
+                onClick={() => alert("Shutter Box - Capture your memories!")}
+              >
+                About Shutter Box
+              </Button>
+              <Button variant="secondary">Close</Button>
+              <Button variant="primary">AI Generate</Button>
+            </Modal.Footer>
+          </Modal>
+          <p
+            style={{
+              textAlign: "center",
+              marginTop: "20px",
+              fontSize: "0.9rem",
+              color: "#888",
+            }}
+          ></p>
+          {/* Hidden canvas for image capture */}
+          <canvas
+            ref={canvasRef}
+            width="320"
+            height="240"
+            style={{ display: "none" }}
+          />
+        </Col>
+      </Row>
+    </>
   );
 };
 
