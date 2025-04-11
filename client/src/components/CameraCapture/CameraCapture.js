@@ -11,6 +11,7 @@ import {
 import "./CameraCapture.css";
 
 const CameraBooth = () => {
+  const [showButton, setShowButton] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [showSpinner, setShowSpinner] = useState(false);
@@ -32,7 +33,12 @@ const CameraBooth = () => {
   useEffect(() => {
     setTimeout(() => {
       setColSizes([1, 11]);
+      // setShowButton(true);
     }, 3000); // Set initial column sizes after 1 second
+    setTimeout(() => {
+      // setColSizes([1, 11]);
+      setShowButton(true);
+    }, 6000); // Set initial column sizes after 1 second
   }, []); // Set initial column sizes on mount
 
   useEffect(() => {
@@ -137,7 +143,67 @@ const CameraBooth = () => {
 
   return (
     <>
-      <Button onClick={toggleSizes}>Toggle Columns Size</Button>
+      <Button
+        size="lg"
+        onClick={() => {
+          setShowButton(false);
+          startTimedShots();
+        }}
+        style={{
+          display: showButton ? "block" : "none",
+          marginTop: "20px",
+          padding: "10px 20px",
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          zIndex: 10000,
+        }}
+        className="start-button"
+      >
+        Start Snap Photos
+      </Button>
+      <Spinner
+        animation="border"
+        role="status"
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          size: "300%",
+          zIndex: "10000",
+          display: showSpinner ? "block" : "none",
+        }}
+      ></Spinner>
+      {alerts
+        .slice()
+        .reverse()
+        .map((item, i) => (
+          <Alert
+            variant="success"
+            style={{
+              position: "absolute",
+              top: "25%",
+              left: "25%",
+              width: "50%",
+              zIndex: `100${i}`,
+            }}
+            key={`alert-${i}`}
+            className="alert-position"
+          >
+            <Alert.Heading>{item.caption}</Alert.Heading>
+            <p>
+              Aww yeah, you successfully read this important alert message. This
+              example text is going to run a bit longer so that you can see how
+              spacing within an alert works with this kind of content.
+            </p>
+            <hr />
+            <p className="mb-0">
+              Whenever you need to, be sure to use margin utilities to keep
+              things nice and tidy.
+            </p>
+          </Alert>
+        ))}
+      {/* <Button onClick={toggleSizes}>Toggle Columns Size</Button> */}
 
       <Row className="camera-booth-container" style={{ margin: "20px" }}>
         {/* Left Column */}
@@ -235,14 +301,7 @@ const CameraBooth = () => {
               />
             )}
           </div>
-          <Button
-            size="lg"
-            onClick={startTimedShots}
-            style={{ marginTop: "20px", padding: "10px 20px" }}
-          >
-            Start Snap Photos
-          </Button>
-          <Button
+          {/* <Button
             size="lg"
             onClick={handleCapture}
             style={{ marginTop: "20px", padding: "10px 20px" }}
@@ -255,42 +314,7 @@ const CameraBooth = () => {
             style={{ marginTop: "20px", padding: "10px 20px" }}
           >
             Large modal
-          </Button>
-          <br />
-          <br />
-          Disclaimer: Shutter Box is a fun way to capture your memories. Please
-          ensure you have permission to take and share photos.
-          <br />
-          <br />
-          {alerts
-            .slice()
-            .reverse()
-            .map((item, i) => (
-              <Alert
-                variant="success"
-                style={{
-                  position: "absolute",
-                  top: "25%",
-                  left: "25%",
-                  width: "50%",
-                }}
-                key={`alert-${i}`}
-                className="alert-position"
-              >
-                <Alert.Heading>{item.caption}</Alert.Heading>
-                <p>
-                  Aww yeah, you successfully read this important alert message.
-                  This example text is going to run a bit longer so that you can
-                  see how spacing within an alert works with this kind of
-                  content.
-                </p>
-                <hr />
-                <p className="mb-0">
-                  Whenever you need to, be sure to use margin utilities to keep
-                  things nice and tidy.
-                </p>
-              </Alert>
-            ))}
+          </Button> */}
           <Modal
             size="lg"
             show={lgShow}
