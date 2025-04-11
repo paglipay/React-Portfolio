@@ -200,6 +200,10 @@ const CameraBooth = () => {
       // rowRef.current.style.marginTop = "5px";
       // margin
       rowRef.current.style.margin = "5px";
+      // border
+      rowRef.current.style.borderWidth = "5px";
+      rowRef.current.style.borderColor = "black";
+      rowRef.current.style.borderStyle = "solid";
 
       // Capture the Row as a canvas
       const canvas = await html2canvas(rowRef.current, {
@@ -327,7 +331,7 @@ const CameraBooth = () => {
                   style={{
                     position: "relative",
                     width: "100%",
-                    aspectRatio: "4 / 3",
+                    aspectRatio: "3 / 4",
                     border: "2px solid gray",
                   }}
                 >
@@ -350,7 +354,7 @@ const CameraBooth = () => {
                     alt={`snap-${idx}`}
                     style={{
                       width: "100%",
-                      aspectRatio: "4 / 3",
+                      aspectRatio: "3 / 4",
                       border: "2px solid #ccc",
                     }}
                   />
@@ -384,7 +388,7 @@ const CameraBooth = () => {
               style={{
                 position: "relative",
                 width: "100%",
-                aspectRatio: "4 / 3",
+                aspectRatio: "3 / 4",
                 border: "2px solid gray",
               }}
             >
