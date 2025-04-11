@@ -56,7 +56,11 @@ const CameraBooth = () => {
   }, [colSizes]);
 
   const timedEvents = [
-    { time: 6, caption: "Get ready, it starts in 10 seconds!", takeshot: false },
+    {
+      time: 6,
+      caption: "Get ready, it starts in 10 seconds!",
+      takeshot: false,
+    },
     { time: 1, caption: "10", takeshot: false },
     { time: 1, caption: "9", takeshot: false },
     { time: 1, caption: "8", takeshot: false },
@@ -455,7 +459,7 @@ const CameraBooth = () => {
               }}
             >
               <Image
-                src="/sb_logo.jpg"
+                src="/sb_qrcode.png"
                 alt="Camera Icon"
                 style={{
                   display: showLogo ? "block" : "none",
@@ -486,7 +490,17 @@ const CameraBooth = () => {
                   </Col>
                   <Col xs={12} md={6}>
                     <p className="mb-1">Shutterbox</p>
-                    <p className="mb-1">Hours: M-F 8am - 5pm</p>
+                    <p className="mb-1">
+                      <a
+                        href="https://www.shutterbox.co.nz/book-us.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "white", textDecoration: "underline" }}
+                      >
+                        Book Us!
+                      </a>
+                    </p>
+                    <p className="mb-1">https://www.shutterbox.co.nz</p>
                     <p className="mb-1">Email: shutterboxnz@gmail.com</p>
                     <p className="mb-1">Phone: 021-1249006</p>
                     <p className="mb-0">Wellington, New Zealand</p>
