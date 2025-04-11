@@ -52,17 +52,29 @@ const CameraBooth = () => {
 
   const timedEvents = [
     { time: 3, caption: "Get ready, starts in 3 seconds!", takeshot: false },
+    { time: 1, caption: "3", takeshot: false },
+    { time: 1, caption: "2", takeshot: false },
+    { time: 1, caption: "1", takeshot: false },
     { time: 3, caption: "Great Shot! Again in 3 seconds", takeshot: true },
+    { time: 1, caption: "3", takeshot: false },
+    { time: 1, caption: "2", takeshot: false },
+    { time: 1, caption: "1", takeshot: false },
     {
       time: 3,
       caption: "Another great Shot! 2 more in 3 seconds",
       takeshot: true,
     },
+    { time: 1, caption: "3", takeshot: false },
+    { time: 1, caption: "2", takeshot: false },
+    { time: 1, caption: "1", takeshot: false },
     {
       time: 3,
       caption: "Another great Shot! 1 more in 3 seconds",
       takeshot: true,
     },
+    { time: 1, caption: "3", takeshot: false },
+    { time: 1, caption: "2", takeshot: false },
+    { time: 1, caption: "1", takeshot: false },
     { time: 3, caption: "All Done!", takeshot: true },
     {
       time: 0,
@@ -150,10 +162,28 @@ const CameraBooth = () => {
 
   const captureRowAsImage = async () => {
     if (rowRef.current) {
-      const canvas = await html2canvas(rowRef.current); // Capture the Row as a canvas
-      const dataUrl = canvas.toDataURL("image/png"); // Convert the canvas to a data URL
-      setCapturedImage(dataUrl); // Store the captured image in state
-      setLgShow(true); // Show the modal
+      // Temporarily set the background color to black
+      rowRef.current.style.backgroundColor = "black";
+
+      //top margin
+      rowRef.current.style.marginTop = "5px";
+
+      // Capture the Row as a canvas
+      const canvas = await html2canvas(rowRef.current, {
+        backgroundColor: null, // Ensure transparency is handled correctly
+      });
+
+      // Reset the background color to its original state
+      rowRef.current.style.backgroundColor = "";
+
+      // Convert the canvas to a data URL
+      const dataUrl = canvas.toDataURL("image/png");
+
+      // Store the captured image in state
+      setCapturedImage(dataUrl);
+
+      // Show the modal
+      setLgShow(true);
     }
   };
 
@@ -210,27 +240,20 @@ const CameraBooth = () => {
         .map((item, i) => (
           <Alert
             variant="success"
+            
             style={{
+              display: i === 0 ? "block" : "none",
               position: "absolute",
               top: "33%",
               left: "33%",
               width: "33%",
-              zIndex: `100${i}`,
+              zIndex: 100-i,
             }}
             key={`alert-${i}`}
             className="alert-position"
           >
             <Alert.Heading>{item.caption}</Alert.Heading>
-            <p>
-              Aww yeah, you successfully read this important alert message. This
-              example text is going to run a bit longer so that you can see how
-              spacing within an alert works with this kind of content.
-            </p>
-            <hr />
-            <p className="mb-0">
-              Whenever you need to, be sure to use margin utilities to keep
-              things nice and tidy.
-            </p>
+            
           </Alert>
         ))}
 
@@ -349,7 +372,7 @@ const CameraBooth = () => {
           >
             <Modal.Header closeButton>
               <Modal.Title id="example-modal-sizes-title-lg">
-                Captured Image
+                Great Job! You Look Amazing!
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
