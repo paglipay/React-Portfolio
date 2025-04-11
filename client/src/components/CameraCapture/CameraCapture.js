@@ -271,6 +271,24 @@ const CameraBooth = () => {
             transition: "flex-basis 0.5s ease", // Smooth transition for resizing
           }}
         >
+        <Image
+          src="/sb_logo.jpg"
+          alt="Camera Icon"
+          style={{
+            width: "50%",
+            height: "auto",
+            margin: "0 auto",
+          }}
+        />
+        <Image
+          src="/sb_logo.jpg"
+          alt="Camera Icon"
+          style={{
+            width: "50%",
+            height: "auto",
+            margin: "0 auto",
+          }}
+        />
           <div
             style={{
               display: "flex",
