@@ -56,7 +56,14 @@ const CameraBooth = () => {
   }, [colSizes]);
 
   const timedEvents = [
-    { time: 3, caption: "Get ready, it starts in 3 seconds!", takeshot: false },
+    { time: 6, caption: "Get ready, it starts in 10 seconds!", takeshot: false },
+    { time: 1, caption: "10", takeshot: false },
+    { time: 1, caption: "9", takeshot: false },
+    { time: 1, caption: "8", takeshot: false },
+    { time: 1, caption: "7", takeshot: false },
+    { time: 1, caption: "6", takeshot: false },
+    { time: 1, caption: "5", takeshot: false },
+    { time: 1, caption: "4", takeshot: false },
     { time: 1, caption: "3", takeshot: false },
     { time: 1, caption: "2", takeshot: false },
     { time: 1, caption: "1", takeshot: false },
@@ -84,7 +91,7 @@ const CameraBooth = () => {
     {
       time: 6,
       caption: "That was great! Don't forget to pick up your photos",
-      comments:"Brought to you by Shutterbox",
+      comments: "Brought to you by Shutterbox",
       takeshot: false,
     },
     {
@@ -94,9 +101,9 @@ const CameraBooth = () => {
     },
   ];
 
-  const startTimedShots = () => {    
+  const startTimedShots = () => {
     setShowLogo(true);
-    setColSizes([1, 11]); 
+    setColSizes([1, 11]);
     setTimeout(() => {
       setColSizes([3, 9]);
       // setShowButton(true);
@@ -110,7 +117,11 @@ const CameraBooth = () => {
         console.log(event.caption); // Display caption (can be replaced with UI updates)
         setAlerts((prevAlerts) => [
           ...prevAlerts,
-          { time: event.time, caption: event.caption, comments: event.comments },
+          {
+            time: event.time,
+            caption: event.caption,
+            comments: event.comments,
+          },
         ]);
         if (index < timedEvents.length - 1 && event.takeshot === true) {
           handleCapture(); // Trigger a shot
@@ -217,7 +228,7 @@ const CameraBooth = () => {
   return (
     <>
       <Button
-        variant="success"
+        variant="danger"
         size="lg"
         onClick={() => {
           setShowButton(false);
@@ -271,7 +282,7 @@ const CameraBooth = () => {
             className="alert-position"
           >
             <Alert.Heading>{item.caption}</Alert.Heading>
-            {item.comments ? <p>{item.comments}</p>:null}
+            {item.comments ? <p>{item.comments}</p> : null}
           </Alert>
         ))}
 
@@ -461,10 +472,26 @@ const CameraBooth = () => {
               style={{ marginTop: "20px" }}
             >
               <Container>
-                <p className="mb-1">Shutterbox</p>
-                <p className="mb-1">Email: contact@shutterbox.com</p>
-                <p className="mb-1">Phone: +64 123 456 789</p>
-                <p className="mb-0">Wellington, New Zealand</p>
+                <Row className="justify-content-center">
+                  <Col xs={12} md={6}>
+                    <Image
+                      src="/sb_logo.jpg"
+                      alt="Camera Icon"
+                      style={{
+                        width: "50%",
+                        height: "auto",
+                        margin: "0 auto",
+                      }}
+                    />
+                  </Col>
+                  <Col xs={12} md={6}>
+                    <p className="mb-1">Shutterbox</p>
+                    <p className="mb-1">Hours: M-F 8am - 5pm</p>
+                    <p className="mb-1">Email: shutterboxnz@gmail.com</p>
+                    <p className="mb-1">Phone: 021-1249006</p>
+                    <p className="mb-0">Wellington, New Zealand</p>
+                  </Col>
+                </Row>
               </Container>
             </footer>
           </Col>
