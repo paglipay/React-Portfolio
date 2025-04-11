@@ -9,6 +9,7 @@ import {
   Spinner,
   Container,
 } from "react-bootstrap";
+import html2canvas from "html2canvas"; // Import html2canvas
 import "./CameraCapture.css";
 
 const CameraBooth = () => {
@@ -19,8 +20,10 @@ const CameraBooth = () => {
   const [images, setImages] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [lgShow, setLgShow] = useState(false);
+  const [capturedImage, setCapturedImage] = useState(null); // State to store the captured image
   const [colSizes, setColSizes] = useState([3, 9]); // Initial column sizes
   const [toggle, setToggle] = useState(false); // State to track toggle status
+  const rowRef = useRef(null); // Ref for the Row element
 
   const toggleSizes = () => {
     if (toggle === true) {
@@ -87,7 +90,9 @@ const CameraBooth = () => {
           setShowSpinner(true);
           setTimeout(() => {
             setShowSpinner(false);
-            setLgShow(true);
+            // setLgShow(true);
+            captureRowAsImage()
+            
           }, 4000);
         }
         index++;
@@ -143,9 +148,28 @@ const CameraBooth = () => {
     }
   };
 
+  const captureRowAsImage = async () => {
+    if (rowRef.current) {
+      const canvas = await html2canvas(rowRef.current); // Capture the Row as a canvas
+      const dataUrl = canvas.toDataURL("image/png"); // Convert the canvas to a data URL
+      setCapturedImage(dataUrl); // Store the captured image in state
+      setLgShow(true); // Show the modal
+    }
+  };
+
+  const downloadImage = () => {
+    if (capturedImage) {
+      const link = document.createElement("a");
+      link.href = capturedImage;
+      link.download = "captured-image.png";
+      link.click();
+    }
+  };
+
   return (
     <>
       <Button
+        variant="success"
         size="lg"
         onClick={() => {
           setShowButton(false);
@@ -209,9 +233,12 @@ const CameraBooth = () => {
             </p>
           </Alert>
         ))}
-      {/* <Button onClick={toggleSizes}>Toggle Columns Size</Button> */}
 
-      <Row className="camera-booth-container" style={{ margin: "20px" }}>
+      <Row
+        className="camera-booth-container"
+        style={{ margin: "20px" }}
+        ref={rowRef} // Attach the ref to the Row
+      >
         {/* Left Column */}
         <Col
           xs={12}
@@ -308,18 +335,11 @@ const CameraBooth = () => {
             )}
           </div>
           {/* <Button
-            size="lg"
-            onClick={handleCapture}
-            style={{ marginTop: "20px", padding: "10px 20px" }}
+            variant="primary"
+            onClick={captureRowAsImage}
+            style={{ marginTop: "20px" }}
           >
-            Snap Photo
-          </Button>
-          <Button
-            size="lg"
-            onClick={() => setLgShow(true)}
-            style={{ marginTop: "20px", padding: "10px 20px" }}
-          >
-            Large modal
+            Capture and Show in Modal
           </Button> */}
           <Modal
             size="lg"
@@ -329,29 +349,28 @@ const CameraBooth = () => {
           >
             <Modal.Header closeButton>
               <Modal.Title id="example-modal-sizes-title-lg">
-                Great Job! You Look Amazing!
+                Captured Image
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Image
-                src="/1000008934.jpg"
-                alt="Camera Icon"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  margin: "0 auto",
-                }}
-              />
+              {capturedImage && (
+                <Image
+                  src={capturedImage}
+                  alt="Captured"
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                  }}
+                />
+              )}
             </Modal.Body>
             <Modal.Footer>
-              <Button
-                variant="info"
-                onClick={() => alert("Shutter Box - Capture your memories!")}
-              >
-                About Shutter Box
+              <Button variant="secondary" onClick={() => setLgShow(false)}>
+                Close
               </Button>
-              <Button variant="secondary">Close</Button>
-              <Button variant="primary">AI Generate</Button>
+              <Button variant="primary" onClick={downloadImage}>
+                Download Image
+              </Button>
             </Modal.Footer>
           </Modal>
           <p
