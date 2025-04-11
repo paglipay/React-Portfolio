@@ -7,6 +7,7 @@ import {
   Modal,
   Image,
   Spinner,
+  Container,
 } from "react-bootstrap";
 import "./CameraCapture.css";
 
@@ -14,7 +15,7 @@ const CameraBooth = () => {
   const [showButton, setShowButton] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const [showSpinner, setShowSpinner] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(true);
   const [images, setImages] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [lgShow, setLgShow] = useState(false);
@@ -38,6 +39,7 @@ const CameraBooth = () => {
     setTimeout(() => {
       // setColSizes([1, 11]);
       setShowButton(true);
+      setShowSpinner(false);
     }, 6000); // Set initial column sizes after 1 second
   }, []); // Set initial column sizes on mount
 
@@ -167,9 +169,11 @@ const CameraBooth = () => {
         role="status"
         style={{
           position: "absolute",
-          top: "50%",
-          left: "50%",
-          size: "300%",
+          top: "40%",
+          left: "40%",
+          width: "350px", // Set width to 3x larger
+          height: "350px", // Set height to 3x larger
+          borderWidth: "50px", // Thicken the spinner line
           zIndex: "10000",
           display: showSpinner ? "block" : "none",
         }}
