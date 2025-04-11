@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import html2canvas from "html2canvas"; // Import html2canvas
 import "./CameraCapture.css";
+import { useSpeechSynthesis } from "react-speech-kit";
 
 const CameraBooth = () => {
   const [showButton, setShowButton] = useState(false);
@@ -25,6 +26,7 @@ const CameraBooth = () => {
   const [colSizes, setColSizes] = useState([3, 9]); // Initial column sizes
   const [toggle, setToggle] = useState(false); // State to track toggle status
   const rowRef = useRef(null); // Ref for the Row element
+  const { speak } = useSpeechSynthesis();
 
   const toggleSizes = () => {
     if (toggle === true) {
@@ -58,42 +60,42 @@ const CameraBooth = () => {
   const timedEvents = [
     {
       time: 6,
-      caption: "Get ready, it starts in 10 seconds!",
+      caption: "Get ready, I will do a countdown from 3!",
       takeshot: false,
     },
-    { time: 1, caption: "10", takeshot: false },
-    { time: 1, caption: "9", takeshot: false },
-    { time: 1, caption: "8", takeshot: false },
-    { time: 1, caption: "7", takeshot: false },
-    { time: 1, caption: "6", takeshot: false },
-    { time: 1, caption: "5", takeshot: false },
-    { time: 1, caption: "4", takeshot: false },
-    { time: 1, caption: "3", takeshot: false },
-    { time: 1, caption: "2", takeshot: false },
-    { time: 1, caption: "1", takeshot: false },
-    { time: 3, caption: "Great Shot! Again in 3 seconds", takeshot: true },
-    { time: 1, caption: "3", takeshot: false },
-    { time: 1, caption: "2", takeshot: false },
-    { time: 1, caption: "1", takeshot: false },
+    // { time: 2, caption: "10", takeshot: false },
+    // { time: 2, caption: "9", takeshot: false },
+    // { time: 2, caption: "8", takeshot: false },
+    // { time: 2, caption: "7", takeshot: false },
+    // { time: 2, caption: "6", takeshot: false },
+    // { time: 2, caption: "5", takeshot: false },
+    // { time: 2, caption: "4", takeshot: false },
+    { time: 2, caption: "3", takeshot: false },
+    { time: 2, caption: "2", takeshot: false },
+    { time: 2, caption: "1", takeshot: false },
+    { time: 6, caption: "Great Shot! Again in 3 seconds", takeshot: true },
+    { time: 2, caption: "3", takeshot: false },
+    { time: 2, caption: "2", takeshot: false },
+    { time: 2, caption: "1", takeshot: false },
     {
-      time: 3,
+      time: 6,
       caption: "Another great Shot! Let's do 2 more...",
       takeshot: true,
     },
-    { time: 1, caption: "3", takeshot: false },
-    { time: 1, caption: "2", takeshot: false },
-    { time: 1, caption: "1", takeshot: false },
+    { time: 2, caption: "3", takeshot: false },
+    { time: 2, caption: "2", takeshot: false },
+    { time: 2, caption: "1", takeshot: false },
     {
-      time: 3,
+      time: 6,
       caption: "Another great Shot! Last one...",
       takeshot: true,
     },
-    { time: 1, caption: "3", takeshot: false },
-    { time: 1, caption: "2", takeshot: false },
-    { time: 1, caption: "1", takeshot: false },
-    { time: 3, caption: "All Done!", takeshot: true },
+    { time: 2, caption: "3", takeshot: false },
+    { time: 2, caption: "2", takeshot: false },
+    { time: 2, caption: "1", takeshot: false },
+    { time: 6, caption: "All Done!", takeshot: true },
     {
-      time: 6,
+      time: 7,
       caption: "That was great! Don't forget to pick up your photos",
       comments: "Brought to you by Shutterbox",
       takeshot: false,
@@ -119,6 +121,8 @@ const CameraBooth = () => {
       if (index < timedEvents.length) {
         const event = timedEvents[index];
         console.log(event.caption); // Display caption (can be replaced with UI updates)
+        
+        speak({ text: event.caption });
         setAlerts((prevAlerts) => [
           ...prevAlerts,
           {
