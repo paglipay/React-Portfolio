@@ -17,6 +17,7 @@ const CameraBooth = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [showSpinner, setShowSpinner] = useState(true);
+  const [showLogo, setShowLogo] = useState(false);
   const [images, setImages] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [lgShow, setLgShow] = useState(false);
@@ -90,7 +91,8 @@ const CameraBooth = () => {
   ];
 
   const startTimedShots = () => {
-    setColSizes([3, 9]);
+    setColSizes([3, 9]);    
+    setShowLogo(true);
     let index = 0;
 
     const executeEvent = () => {
@@ -290,6 +292,7 @@ const CameraBooth = () => {
                 src="/sb_logo.jpg"
                 alt="Camera Icon"
                 style={{
+                  display: showLogo ? "block" : "none",
                   width: "50%",
                   height: "auto",
                   margin: "0 auto",
@@ -347,6 +350,8 @@ const CameraBooth = () => {
                 width: "100%",
                 height: "auto",
                 margin: "0 auto",
+                transition: "flex-basis 0.5s ease",
+                display: "block",
               }}
             />
             <br />
@@ -433,6 +438,7 @@ const CameraBooth = () => {
                 src="/sb_logo.jpg"
                 alt="Camera Icon"
                 style={{
+                  display: showLogo ? "block" : "none",
                   width: "100%",
                   height: "auto",
                   margin: "0 auto",
