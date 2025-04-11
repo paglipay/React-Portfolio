@@ -289,7 +289,7 @@ const CameraBooth = () => {
             key={`alert-${i}`}
             className="alert-position"
           >
-            <Alert.Heading>{item.caption}</Alert.Heading>
+            <Alert.Heading><h1>{item.caption}</h1></Alert.Heading>
             {item.comments ? <p>{item.comments}</p> : null}
           </Alert>
         ))}
@@ -301,7 +301,7 @@ const CameraBooth = () => {
       >
         <Row>
           <Col
-            xs={12}
+            xs={colSizes[0]}
             md={colSizes[0]}
             className="camera-booth-left"
             style={{
@@ -364,7 +364,7 @@ const CameraBooth = () => {
           </Col>
 
           <Col
-            xs={12}
+            xs={colSizes[1]}
             md={colSizes[1]}
             className="camera-booth-right"
             style={{
