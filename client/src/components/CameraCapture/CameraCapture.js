@@ -230,7 +230,7 @@ const CameraBooth = () => {
       // Show the modal
       setLgShow(true);
       
-      speak({ text: `Great Job! You look amazing! Thank you for using our photo booth. Brought to you by Shutterbox. Remember, if you got an upcoming event celebration, book us. Book Shutterbox! Bye for now.` });
+      speak({ text: `Great Job! You look amazing! Thank you for using our photo booth. Brought to you by Shutterbox. Remember, if you got an upcoming event, book us. Book Shutterbox! Bye for now.` });
     }
   };
 
