@@ -82,7 +82,7 @@ const CameraBooth = () => {
     { time: 2, caption: "2", takeshot: false },
     { time: 2, caption: "1", takeshot: false },
     {
-      time: 6,
+      time: 5,
       caption: "You are great at this! Let's do 2 more...",
       takeshot: true,
     },
@@ -90,7 +90,7 @@ const CameraBooth = () => {
     { time: 2, caption: "2", takeshot: false },
     { time: 2, caption: "1", takeshot: false },
     {
-      time: 6,
+      time: 4,
       caption: "Another great Shot! Last one...",
       takeshot: true,
     },
@@ -230,7 +230,7 @@ const CameraBooth = () => {
       // Show the modal
       setLgShow(true);
       
-      speak({ text: `Great Job! You look amazing! Thank you for using our photo booth. Brought to you by Shutterbox. Remeber, if you got an upcoming event celebration, book us. Book Shutterbox! Bye for now.` });
+      // speak({ text: `Great Job! You look amazing! Thank you for using our photo booth. Brought to you by Shutterbox. Remeber, if you got an upcoming event celebration, book us. Book Shutterbox! Bye for now.` });
     }
   };
 
