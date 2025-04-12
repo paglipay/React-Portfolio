@@ -50,8 +50,8 @@ const CameraBooth = () => {
       // setColSizes([1, 11]);
       setShowButton(true);
       setShowSpinner(false);
-      console.log("speaking now");
-      speak({ text: `Welcome! Thank you for using our photo booth. Brought to you by Shutterbox. Remeber, if you got an upcoming event celebration, book us. Book Shutterbox! Whenever you are ready, just press the button to begin.` });
+      // console.log("speaking now");
+      // speak({ text: `Welcome! Thank you for using our photo booth. Brought to you by Shutterbox. Remeber, if you got an upcoming event celebration, book us. Book Shutterbox! Whenever you are ready, just press the button to begin.` });
       
       
     }, 6000); // Set initial column sizes after 1 second
@@ -91,7 +91,7 @@ const CameraBooth = () => {
     { time: 2, caption: "1", takeshot: false },
     {
       time: 4,
-      caption: "Another great Shot! Last one...",
+      caption: "You have obviously modeled before! Last one...",
       takeshot: true,
     },
     { time: 2, caption: "3", takeshot: false },
@@ -230,7 +230,7 @@ const CameraBooth = () => {
       // Show the modal
       setLgShow(true);
       
-      // speak({ text: `Great Job! You look amazing! Thank you for using our photo booth. Brought to you by Shutterbox. Remeber, if you got an upcoming event celebration, book us. Book Shutterbox! Bye for now.` });
+      speak({ text: `Great Job! You look amazing! Thank you for using our photo booth. Brought to you by Shutterbox. Remeber, if you got an upcoming event celebration, book us. Book Shutterbox! Bye for now.` });
     }
   };
 
