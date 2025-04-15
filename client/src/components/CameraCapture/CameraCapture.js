@@ -23,7 +23,7 @@ const CameraBooth = () => {
   const [alerts, setAlerts] = useState([]);
   const [lgShow, setLgShow] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null); // State to store the captured image
-  const [colSizes, setColSizes] = useState([3, 9]); // Initial column sizes
+  const [colSizes, setColSizes] = useState([0,12]); // Initial column sizes
   const [toggle, setToggle] = useState(false); // State to track toggle status
   const rowRef = useRef(null); // Ref for the Row element
   const { speak } = useSpeechSynthesis();
@@ -38,14 +38,14 @@ const CameraBooth = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setColSizes([1, 11]);
-      // setShowButton(true);
-    }, 1); // Set initial column sizes after 1 second
-    setTimeout(() => {
-      setColSizes([0, 12]);
-      // setShowButton(true);
-    }, 2); // Set initial column sizes after 1 second
+    // setTimeout(() => {
+    //   setColSizes([1, 11]);
+    //   // setShowButton(true);
+    // }, 1); // Set initial column sizes after 1 second
+    // setTimeout(() => {
+    //   setColSizes([0, 12]);
+    //   // setShowButton(true);
+    // }, 2); // Set initial column sizes after 1 second
     setTimeout(() => {
       // setColSizes([1, 11]);
       setShowButton(true);
