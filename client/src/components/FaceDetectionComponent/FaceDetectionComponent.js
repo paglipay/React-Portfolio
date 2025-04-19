@@ -61,7 +61,7 @@ const FaceDetectionComponent = () => {
     <>
       <Carousel style={{ marginTop: "20px" }}>
         {['1','2','3', '4','5','6','7','8','9','0'].map((image, i) => (
-          <Carousel.Item interval={6000}>
+          <Carousel.Item interval={9000}>
             <img
               className="d-block w-100"
               src={`https://picsum.photos/600/700?advertisement=1${i}`}

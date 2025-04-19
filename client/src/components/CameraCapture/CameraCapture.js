@@ -28,6 +28,8 @@ const CameraBooth = () => {
   const rowRef = useRef(null); // Ref for the Row element
   const { speak } = useSpeechSynthesis();
   const countdownTimer = useRef(null); // Use useRef to persist the timer reference
+  const [showFlash, setShowFlash] = useState(false);
+  const cameraSound = new Audio('camera-shutter-199580.mp3'); // Replace with the actual path to your sound file
 
   const toggleSizes = () => {
     if (toggle === true) {
@@ -112,7 +114,7 @@ const CameraBooth = () => {
 
   useEffect(() => {
     countdownTimer.current = setTimeout(() => {
-      window.location.href = '/facedetection';
+      window.location.href = "/facedetection";
     }, 30000); // Redirect after 10 seconds
 
     return () => clearTimeout(countdownTimer.current); // Cleanup on unmount or if button is pressed
@@ -123,6 +125,13 @@ const CameraBooth = () => {
     startTimedShots();
     // Stop the countdown when the button is pressed
     clearTimeout(countdownTimer.current);
+  };
+
+  const flash = () => {
+    setShowFlash(true); // Show the flash
+    setTimeout(() => {
+      setShowFlash(false); // Hide the flash after the animation
+    }, 600); // Total duration of the animation (300ms for opacity + 300ms for fadeOut)
   };
 
   const startTimedShots = () => {
@@ -151,6 +160,8 @@ const CameraBooth = () => {
         ]);
         if (index < timedEvents.length - 1 && event.takeshot === true) {
           handleCapture(); // Trigger a shot
+          flash(); // Trigger flash
+          cameraSound.play();
         }
         if (index === timedEvents.length - 1) {
           setShowSpinner(true);
@@ -261,6 +272,23 @@ const CameraBooth = () => {
 
   return (
     <>
+    {showFlash && (
+        <div
+          className="flash"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "white",
+            opacity: 0.5,
+            zIndex: 9999,
+            pointerEvents: "none", // Prevent interaction with the flash
+            animation: "fadeOut 0.6s forwards", // CSS animation for fade-out
+          }}
+        ></div>
+      )}
       <Button
         variant="danger"
         size="lg"
