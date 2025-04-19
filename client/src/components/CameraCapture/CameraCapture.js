@@ -27,6 +27,7 @@ const CameraBooth = () => {
   const [toggle, setToggle] = useState(false); // State to track toggle status
   const rowRef = useRef(null); // Ref for the Row element
   const { speak } = useSpeechSynthesis();
+  const countdownTimer = useRef(null); // Use useRef to persist the timer reference
 
   const toggleSizes = () => {
     if (toggle === true) {
@@ -110,19 +111,20 @@ const CameraBooth = () => {
   ];
 
   useEffect(() => {
-    let countdownTimer = setTimeout(() => {
+    countdownTimer.current = setTimeout(() => {
       window.location.href = '/facedetection';
     }, 10000); // Redirect after 10 seconds
 
-    return () => clearTimeout(countdownTimer); // Cleanup on unmount or if button is pressed
+    return () => clearTimeout(countdownTimer.current); // Cleanup on unmount or if button is pressed
   }, []);
 
   const handleStartButtonClick = () => {
     setShowButton(false);
     startTimedShots();
     // Stop the countdown when the button is pressed
-    clearTimeout(countdownTimer);
+    clearTimeout(countdownTimer.current);
   };
+
   const startTimedShots = () => {
     setShowLogo(true);
     setColSizes([1, 11]);
