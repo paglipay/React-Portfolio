@@ -63,6 +63,10 @@ function NavTabs({ authenticated, logout }) {
               Shutterbox
             </NavDropdown.Item>
             
+            <NavDropdown.Item as={Link} to="/facedetection">
+              Face Detection
+            </NavDropdown.Item>
+            
             <NavDropdown.Item as={Link} to="/lobbylogin">
               LobbyLogin
             </NavDropdown.Item>

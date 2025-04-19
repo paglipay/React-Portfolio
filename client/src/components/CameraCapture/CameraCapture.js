@@ -9,18 +9,25 @@ import {
   Spinner,
   Container,
 } from "react-bootstrap";
+import html2canvas from "html2canvas"; // Import html2canvas
 import "./CameraCapture.css";
+import { useSpeechSynthesis } from "react-speech-kit";
 
 const CameraBooth = () => {
   const [showButton, setShowButton] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [showSpinner, setShowSpinner] = useState(true);
+  const [showLogo, setShowLogo] = useState(false);
   const [images, setImages] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [lgShow, setLgShow] = useState(false);
-  const [colSizes, setColSizes] = useState([3, 9]); // Initial column sizes
+  const [capturedImage, setCapturedImage] = useState(null); // State to store the captured image
+  const [colSizes, setColSizes] = useState([0, 12]); // Initial column sizes
   const [toggle, setToggle] = useState(false); // State to track toggle status
+  const rowRef = useRef(null); // Ref for the Row element
+  const { speak } = useSpeechSynthesis();
+  const countdownTimer = useRef(null); // Use useRef to persist the timer reference
 
   const toggleSizes = () => {
     if (toggle === true) {
@@ -32,14 +39,20 @@ const CameraBooth = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setColSizes([1, 11]);
-      // setShowButton(true);
-    }, 3000); // Set initial column sizes after 1 second
+    // setTimeout(() => {
+    //   setColSizes([1, 11]);
+    //   // setShowButton(true);
+    // }, 1); // Set initial column sizes after 1 second
+    // setTimeout(() => {
+    //   setColSizes([0, 12]);
+    //   // setShowButton(true);
+    // }, 2); // Set initial column sizes after 1 second
     setTimeout(() => {
       // setColSizes([1, 11]);
       setShowButton(true);
       setShowSpinner(false);
+      // console.log("speaking now");
+      // speak({ text: `Welcome! Thank you for using our photo booth. Brought to you by Shutterbox. Remeber, if you got an upcoming event celebration, book us. Book Shutterbox! Whenever you are ready, just press the button to begin.` });
     }, 6000); // Set initial column sizes after 1 second
   }, []); // Set initial column sizes on mount
 
@@ -48,37 +61,93 @@ const CameraBooth = () => {
   }, [colSizes]);
 
   const timedEvents = [
-    { time: 3, caption: "Get ready, starts in 3 seconds!", takeshot: false },
-    { time: 3, caption: "Great Shot! Again in 3 seconds", takeshot: true },
     {
-      time: 3,
-      caption: "Another great Shot! 2 more in 3 seconds",
+      time: 6,
+      caption: "Get ready, I will do a countdown from 3!",
+      takeshot: false,
+    },
+    // { time: 2, caption: "10", takeshot: false },
+    // { time: 2, caption: "9", takeshot: false },
+    // { time: 2, caption: "8", takeshot: false },
+    // { time: 2, caption: "7", takeshot: false },
+    // { time: 2, caption: "6", takeshot: false },
+    // { time: 2, caption: "5", takeshot: false },
+    // { time: 2, caption: "4", takeshot: false },
+    { time: 2, caption: "3", takeshot: false },
+    { time: 2, caption: "2", takeshot: false },
+    { time: 2, caption: "1", takeshot: false },
+    { time: 6, caption: "Great Shot! Again in 3 seconds", takeshot: true },
+    { time: 2, caption: "3", takeshot: false },
+    { time: 2, caption: "2", takeshot: false },
+    { time: 2, caption: "1", takeshot: false },
+    {
+      time: 5,
+      caption: "You are great at this! Let's do 2 more...",
       takeshot: true,
     },
+    { time: 2, caption: "3", takeshot: false },
+    { time: 2, caption: "2", takeshot: false },
+    { time: 2, caption: "1", takeshot: false },
     {
-      time: 3,
-      caption: "Another great Shot! 1 more in 3 seconds",
+      time: 4,
+      caption: "You have obviously modeled before! Last one...",
       takeshot: true,
     },
-    { time: 3, caption: "All Done!", takeshot: true },
+    { time: 2, caption: "3", takeshot: false },
+    { time: 2, caption: "2", takeshot: false },
+    { time: 2, caption: "1", takeshot: false },
+    { time: 6, caption: "All Done!", takeshot: true },
+    {
+      time: 7,
+      caption: "That was great! Don't forget to pick up your photos",
+      comments: "Brought to you by Shutterbox",
+      takeshot: false,
+    },
     {
       time: 0,
-      caption: "That was great! Don't forget to pick up your photos",
+      caption: "Processing...",
       takeshot: false,
     },
   ];
 
+  useEffect(() => {
+    countdownTimer.current = setTimeout(() => {
+      window.location.href = '/facedetection';
+    }, 10000); // Redirect after 10 seconds
+
+    return () => clearTimeout(countdownTimer.current); // Cleanup on unmount or if button is pressed
+  }, []);
+
+  const handleStartButtonClick = () => {
+    setShowButton(false);
+    startTimedShots();
+    // Stop the countdown when the button is pressed
+    clearTimeout(countdownTimer.current);
+  };
+
   const startTimedShots = () => {
-    setColSizes([3, 9]);
+    setShowLogo(true);
+    setColSizes([1, 11]);
+    setTimeout(() => {
+      setColSizes([3, 9]);
+      // setShowButton(true);
+    }, 1); // Set initial column sizes after 1 second
+    // setColSizes([3, 9]);
     let index = 0;
 
     const executeEvent = () => {
       if (index < timedEvents.length) {
         const event = timedEvents[index];
         console.log(event.caption); // Display caption (can be replaced with UI updates)
+
+        speak({ text: event.caption });
         setAlerts((prevAlerts) => [
           ...prevAlerts,
-          { time: event.time, caption: event.caption },
+          {
+            time: event.time,
+            caption: event.caption,
+            comments: event.comments,
+          },
         ]);
         if (index < timedEvents.length - 1 && event.takeshot === true) {
           handleCapture(); // Trigger a shot
@@ -87,7 +156,8 @@ const CameraBooth = () => {
           setShowSpinner(true);
           setTimeout(() => {
             setShowSpinner(false);
-            setLgShow(true);
+            // setLgShow(true);
+            captureRowAsImage();
           }, 4000);
         }
         index++;
@@ -143,13 +213,59 @@ const CameraBooth = () => {
     }
   };
 
+  const captureRowAsImage = async () => {
+    if (rowRef.current) {
+      // Temporarily set the background color to black
+      rowRef.current.style.backgroundColor = "black";
+
+      // //top margin
+      // rowRef.current.style.marginTop = "5px";
+      // margin
+      rowRef.current.style.margin = "5px";
+      // border
+      rowRef.current.style.borderWidth = "5px";
+      rowRef.current.style.borderColor = "black";
+      rowRef.current.style.borderStyle = "solid";
+
+      // Capture the Row as a canvas
+      const canvas = await html2canvas(rowRef.current, {
+        backgroundColor: null, // Ensure transparency is handled correctly
+      });
+
+      // Reset the background color to its original state
+      rowRef.current.style.backgroundColor = "";
+
+      // Convert the canvas to a data URL
+      const dataUrl = canvas.toDataURL("image/png");
+
+      // Store the captured image in state
+      setCapturedImage(dataUrl);
+
+      // Show the modal
+      setLgShow(true);
+
+      speak({
+        text: `Great Job! You look amazing! Thank you for using our photo booth. Brought to you by Shutterbox. Remember, if you got an upcoming event, book us. Book Shutterbox! Bye for now.`,
+      });
+    }
+  };
+
+  const downloadImage = () => {
+    if (capturedImage) {
+      const link = document.createElement("a");
+      link.href = capturedImage;
+      link.download = "captured-image.png";
+      link.click();
+    }
+  };
+
   return (
     <>
       <Button
+        variant="danger"
         size="lg"
         onClick={() => {
-          setShowButton(false);
-          startTimedShots();
+          handleStartButtonClick();
         }}
         style={{
           display: showButton ? "block" : "none",
@@ -157,7 +273,9 @@ const CameraBooth = () => {
           padding: "10px 20px",
           position: "absolute",
           top: "50%",
-          left: "50%",
+          left: "33%",
+          width: "33%",
+          height: "auto",
           zIndex: 10000,
         }}
         className="start-button"
@@ -169,13 +287,14 @@ const CameraBooth = () => {
         role="status"
         style={{
           position: "absolute",
-          top: "40%",
-          left: "40%",
-          width: "350px", // Set width to 3x larger
-          height: "350px", // Set height to 3x larger
-          borderWidth: "50px", // Thicken the spinner line
-          zIndex: "10000",
+          top: "33%",
+          left: "33%",
+          width: "350px",
+          height: "350px",
+          borderWidth: "50px",
+          zIndex: "50",
           display: showSpinner ? "block" : "none",
+          opacity: 0.75, // 75% transparent
         }}
       ></Spinner>
       {alerts
@@ -185,57 +304,124 @@ const CameraBooth = () => {
           <Alert
             variant="success"
             style={{
+              display: i === 0 ? "block" : "none",
               position: "absolute",
-              top: "25%",
-              left: "25%",
-              width: "50%",
-              zIndex: `100${i}`,
+              textAlign: "center",
+              top: "33%",
+              left: "33%",
+              width: "33%",
+              zIndex: 100 - i,
+              opacity: 0.75, // 75% transparent
             }}
             key={`alert-${i}`}
             className="alert-position"
           >
-            <Alert.Heading>{item.caption}</Alert.Heading>
-            <p>
-              Aww yeah, you successfully read this important alert message. This
-              example text is going to run a bit longer so that you can see how
-              spacing within an alert works with this kind of content.
-            </p>
-            <hr />
-            <p className="mb-0">
-              Whenever you need to, be sure to use margin utilities to keep
-              things nice and tidy.
-            </p>
+            <Alert.Heading>
+              <h1>{item.caption}</h1>
+            </Alert.Heading>
+            {item.comments ? <p>{item.comments}</p> : null}
           </Alert>
         ))}
-      {/* <Button onClick={toggleSizes}>Toggle Columns Size</Button> */}
 
-      <Row className="camera-booth-container" style={{ margin: "20px" }}>
-        {/* Left Column */}
-        <Col
-          xs={12}
-          md={colSizes[0]}
-          className="camera-booth-left"
-          style={{
-            transition: "flex-basis 0.5s ease", // Smooth transition for resizing
-          }}
-        >
-          <div
+      <Row
+        className="camera-booth-container"
+        style={{ margin: "20px" }}
+        ref={rowRef}
+      >
+        <Row>
+          <Col
+            xs={colSizes[0]}
+            md={colSizes[0]}
+            className="camera-booth-left"
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end", // Align items to the right
-              gap: "10px",
+              transition: "flex-basis 1.5s ease",
             }}
           >
-            {showLiveInLeft ? (
-              <div
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                gap: "10px",
+              }}
+            >
+              <Image
+                src="/sb_logo.jpg"
+                alt="Camera Icon"
                 style={{
-                  position: "relative",
-                  width: "100%",
-                  aspectRatio: "4 / 3",
-                  border: "2px solid gray",
+                  display: showLogo ? "block" : "none",
+                  width: "50%",
+                  height: "auto",
+                  margin: "0 auto",
                 }}
-              >
+              />
+              {showLiveInLeft ? (
+                <div
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    aspectRatio: "3 / 4",
+                    border: "2px solid gray",
+                  }}
+                >
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    muted
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              ) : (
+                images.map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    alt={`snap-${idx}`}
+                    style={{
+                      width: "100%",
+                      aspectRatio: "3 / 4",
+                      border: "2px solid #ccc",
+                    }}
+                  />
+                ))
+              )}
+            </div>
+          </Col>
+
+          <Col
+            xs={colSizes[1]}
+            md={colSizes[1]}
+            className="camera-booth-right"
+            style={{
+              transition: "flex-basis 1.5s ease",
+            }}
+          >
+            <Image
+              src="/1000008934.jpg"
+              alt="Camera Icon"
+              style={{
+                width: "100%",
+                height: "auto",
+                margin: "0 auto",
+                transition: "flex-basis 1.5s ease",
+                display: "block",
+              }}
+            />
+            <br />
+            <br />
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                aspectRatio: "3 / 4",
+                border: "2px solid gray",
+              }}
+            >
+              {!showLiveInLeft && (
                 <video
                   ref={videoRef}
                   autoPlay
@@ -246,128 +432,124 @@ const CameraBooth = () => {
                     objectFit: "cover",
                   }}
                 />
-              </div>
-            ) : (
-              images.map((img, idx) => (
-                <img
-                  key={idx}
-                  src={img}
-                  alt={`snap-${idx}`}
-                  style={{
-                    width: "100%",
-                    aspectRatio: "4 / 3",
-                    border: "2px solid #ccc",
+              )}
+            </div>
+            <Modal
+              size="lg"
+              show={lgShow}
+              onHide={() => setLgShow(false)}
+              aria-labelledby="example-modal-sizes-title-lg"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="example-modal-sizes-title-lg">
+                  Great Job! You Look Amazing!
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                {capturedImage && (
+                  <Image
+                    src={capturedImage}
+                    alt="Captured"
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                    }}
+                  />
+                )}
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setLgShow(false);
+                    window.location.reload(true);
                   }}
-                />
-              ))
-            )}
-          </div>
-        </Col>
-
-        {/* Right Column */}
-        <Col
-          xs={12}
-          md={colSizes[1]}
-          className="camera-booth-right"
-          style={{
-            transition: "flex-basis 0.5s ease", // Smooth transition for resizing
-          }}
-        >
-          <Image
-            src="/1000008934.jpg"
-            alt="Camera Icon"
+                >
+                  Close
+                </Button>
+                <Button variant="primary" onClick={downloadImage}>
+                  Download Image
+                </Button>
+              </Modal.Footer>
+            </Modal>
+            <canvas
+              ref={canvasRef}
+              width="320"
+              height="240"
+              style={{ display: "none" }}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col
+            xs={12}
+            md={colSizes[0]}
+            className="camera-booth-left"
             style={{
-              width: "100%",
-              height: "auto",
-              margin: "0 auto",
-            }}
-          />
-          <br />
-          <br />
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              aspectRatio: "16 / 9",
-              border: "2px solid gray",
+              transition: "flex-basis 1.5s ease",
             }}
           >
-            {!showLiveInLeft && (
-              <video
-                ref={videoRef}
-                autoPlay
-                muted
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-              />
-            )}
-          </div>
-          {/* <Button
-            size="lg"
-            onClick={handleCapture}
-            style={{ marginTop: "20px", padding: "10px 20px" }}
-          >
-            Snap Photo
-          </Button>
-          <Button
-            size="lg"
-            onClick={() => setLgShow(true)}
-            style={{ marginTop: "20px", padding: "10px 20px" }}
-          >
-            Large modal
-          </Button> */}
-          <Modal
-            size="lg"
-            show={lgShow}
-            onHide={() => setLgShow(false)}
-            aria-labelledby="example-modal-sizes-title-lg"
-          >
-            <Modal.Header closeButton>
-              <Modal.Title id="example-modal-sizes-title-lg">
-                Great Job! You Look Amazing!
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                gap: "10px",
+              }}
+            >
               <Image
-                src="/1000008934.jpg"
+                src="/sb_qrcode.png"
                 alt="Camera Icon"
                 style={{
+                  display: showLogo ? "block" : "none",
                   width: "100%",
                   height: "auto",
                   margin: "0 auto",
                 }}
               />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                variant="info"
-                onClick={() => alert("Shutter Box - Capture your memories!")}
-              >
-                About Shutter Box
-              </Button>
-              <Button variant="secondary">Close</Button>
-              <Button variant="primary">AI Generate</Button>
-            </Modal.Footer>
-          </Modal>
-          <p
-            style={{
-              textAlign: "center",
-              marginTop: "20px",
-              fontSize: "0.9rem",
-              color: "#888",
-            }}
-          ></p>
-          {/* Hidden canvas for image capture */}
-          <canvas
-            ref={canvasRef}
-            width="320"
-            height="240"
-            style={{ display: "none" }}
-          />
-        </Col>
+            </div>
+          </Col>
+          <Col xs={12} md={colSizes[1]} className="camera-booth-right">
+            <footer
+              className="bg-dark text-white text-center py-3"
+              style={{ marginTop: "20px" }}
+            >
+              <Container>
+                <Row className="justify-content-center">
+                  <Col xs={12} md={6}>
+                    <Image
+                      src="/sb_logo.jpg"
+                      alt="Camera Icon"
+                      style={{
+                        width: "50%",
+                        height: "auto",
+                        margin: "0 auto",
+                      }}
+                    />
+                  </Col>
+                  <Col xs={12} md={6}>
+                    <p className="mb-1">Shutterbox</p>
+                    <p className="mb-1">
+                      Got an Event?
+                      <a
+                        href="https://www.shutterbox.co.nz/book-us.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "white", textDecoration: "underline" }}
+                      >
+                        Book Us!
+                      </a>
+                    </p>
+                    <p className="mb-1">https://www.shutterbox.co.nz</p>
+                    <p className="mb-1">Email: shutterboxnz@gmail.com</p>
+                    <p className="mb-1">Phone: 021-1249006</p>
+                    <p className="mb-0">Wellington, New Zealand</p>
+                  </Col>
+                </Row>
+              </Container>
+            </footer>
+          </Col>
+        </Row>
       </Row>
     </>
   );
