@@ -64,7 +64,7 @@ const FaceDetectionComponent = () => {
           <Carousel.Item interval={6000}>
             <img
               className="d-block w-100"
-              src={`https://picsum.photos/600/300?party=1${i}`}
+              src={`https://picsum.photos/600/700?advertisement=1${i}`}
               alt="First slide"
             />
             <Carousel.Caption>
