@@ -23,7 +23,7 @@ const CameraBooth = () => {
   const [alerts, setAlerts] = useState([]);
   const [lgShow, setLgShow] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null); // State to store the captured image
-  const [colSizes, setColSizes] = useState([0,12]); // Initial column sizes
+  const [colSizes, setColSizes] = useState([0, 12]); // Initial column sizes
   const [toggle, setToggle] = useState(false); // State to track toggle status
   const rowRef = useRef(null); // Ref for the Row element
   const { speak } = useSpeechSynthesis();
@@ -52,8 +52,6 @@ const CameraBooth = () => {
       setShowSpinner(false);
       // console.log("speaking now");
       // speak({ text: `Welcome! Thank you for using our photo booth. Brought to you by Shutterbox. Remeber, if you got an upcoming event celebration, book us. Book Shutterbox! Whenever you are ready, just press the button to begin.` });
-      
-      
     }, 6000); // Set initial column sizes after 1 second
   }, []); // Set initial column sizes on mount
 
@@ -125,7 +123,7 @@ const CameraBooth = () => {
       if (index < timedEvents.length) {
         const event = timedEvents[index];
         console.log(event.caption); // Display caption (can be replaced with UI updates)
-        
+
         speak({ text: event.caption });
         setAlerts((prevAlerts) => [
           ...prevAlerts,
@@ -229,8 +227,10 @@ const CameraBooth = () => {
 
       // Show the modal
       setLgShow(true);
-      
-      speak({ text: `Great Job! You look amazing! Thank you for using our photo booth. Brought to you by Shutterbox. Remember, if you got an upcoming event, book us. Book Shutterbox! Bye for now.` });
+
+      speak({
+        text: `Great Job! You look amazing! Thank you for using our photo booth. Brought to you by Shutterbox. Remember, if you got an upcoming event, book us. Book Shutterbox! Bye for now.`,
+      });
     }
   };
 
@@ -301,7 +301,9 @@ const CameraBooth = () => {
             key={`alert-${i}`}
             className="alert-position"
           >
-            <Alert.Heading><h1>{item.caption}</h1></Alert.Heading>
+            <Alert.Heading>
+              <h1>{item.caption}</h1>
+            </Alert.Heading>
             {item.comments ? <p>{item.comments}</p> : null}
           </Alert>
         ))}
@@ -441,7 +443,13 @@ const CameraBooth = () => {
                 )}
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={() => setLgShow(false)}>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setLgShow(false);
+                    window.location.reload(true);
+                  }}
+                >
                   Close
                 </Button>
                 <Button variant="primary" onClick={downloadImage}>
