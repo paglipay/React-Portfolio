@@ -50,7 +50,10 @@ const FaceDetectionComponent = () => {
   }, []);
 
   const triggerFunctionOnFaceDetected = () => {
-    alert('Face detected! You can trigger any custom function here.');
+    // alert('Face detected! You can trigger any custom function here.');
+    console.log('Face detected! You can trigger any custom function here.');
+    window.location.href = '/camera'; // Redirect to another page
+
   };
 
   return (

@@ -109,6 +109,20 @@ const CameraBooth = () => {
     },
   ];
 
+  useEffect(() => {
+    let countdownTimer = setTimeout(() => {
+      window.location.href = '/facedetection';
+    }, 10000); // Redirect after 10 seconds
+
+    return () => clearTimeout(countdownTimer); // Cleanup on unmount or if button is pressed
+  }, []);
+
+  const handleStartButtonClick = () => {
+    setShowButton(false);
+    startTimedShots();
+    // Stop the countdown when the button is pressed
+    clearTimeout(countdownTimer);
+  };
   const startTimedShots = () => {
     setShowLogo(true);
     setColSizes([1, 11]);
@@ -251,6 +265,7 @@ const CameraBooth = () => {
         onClick={() => {
           setShowButton(false);
           startTimedShots();
+          handleStartButtonClick();
         }}
         style={{
           display: showButton ? "block" : "none",
