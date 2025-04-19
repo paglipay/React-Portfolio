@@ -265,8 +265,6 @@ const CameraBooth = () => {
         variant="danger"
         size="lg"
         onClick={() => {
-          setShowButton(false);
-          startTimedShots();
           handleStartButtonClick();
         }}
         style={{
