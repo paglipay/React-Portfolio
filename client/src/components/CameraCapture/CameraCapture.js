@@ -113,7 +113,7 @@ const CameraBooth = () => {
   useEffect(() => {
     countdownTimer.current = setTimeout(() => {
       window.location.href = '/facedetection';
-    }, 10000); // Redirect after 10 seconds
+    }, 30000); // Redirect after 10 seconds
 
     return () => clearTimeout(countdownTimer.current); // Cleanup on unmount or if button is pressed
   }, []);
