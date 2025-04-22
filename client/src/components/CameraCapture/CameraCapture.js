@@ -254,13 +254,13 @@ const CameraBooth = () => {
 
       // Show the modal
       setLgShow(true);
+      speak({
+        text: `Great Job! You look amazing! Thank you for using our photo booth. Brought to you by Shutterbox. Remember, if you got an upcoming event, book us. Book Shutterbox! Bye for now.`,
+      });
 
       // Save the captured image to localStorage
       localStorage.setItem("capturedImage", dataUrl);
 
-      speak({
-        text: `Great Job! You look amazing! Thank you for using our photo booth. Brought to you by Shutterbox. Remember, if you got an upcoming event, book us. Book Shutterbox! Bye for now.`,
-      });
     }
   };
 
