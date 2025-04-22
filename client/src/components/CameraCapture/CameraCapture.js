@@ -58,9 +58,9 @@ const CameraBooth = () => {
     }, 6000); // Set initial column sizes after 1 second
   }, []); // Set initial column sizes on mount
 
-  useEffect(() => {
-    console.log("colSizes", colSizes);
-  }, [colSizes]);
+  // useEffect(() => {
+  //   console.log("colSizes", colSizes);
+  // }, [colSizes]);
 
   const timedEvents = [
     {
@@ -147,7 +147,7 @@ const CameraBooth = () => {
     const executeEvent = () => {
       if (index < timedEvents.length) {
         const event = timedEvents[index];
-        console.log(event.caption); // Display caption (can be replaced with UI updates)
+        // console.log(event.caption); // Display caption (can be replaced with UI updates)
 
         speak({ text: event.caption });
         setAlerts((prevAlerts) => [
@@ -311,7 +311,7 @@ const CameraBooth = () => {
         }}
         className="start-button"
       >
-        Start Snap Photos
+        Start
       </Button>
       <Spinner
         animation="border"

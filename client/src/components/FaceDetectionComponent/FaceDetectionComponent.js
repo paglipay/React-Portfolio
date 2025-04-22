@@ -51,7 +51,20 @@ const FaceDetectionComponent = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const imgData = localStorage.getItem("capturedImage");
+  const [imgData, setImgData] = useState(localStorage.getItem("capturedImage"));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // console.log("Checking for updated image data in localStorage...");
+      const updatedImgData = localStorage.getItem("capturedImage");
+      if (updatedImgData !== imgData) {
+        setImgData(updatedImgData);
+        // console.log("Image data updated:", updatedImgData);
+      }
+    }, 10000); // Check every minute
+
+    return () => clearInterval(interval);
+  }, [imgData]);
 
   const triggerFunctionOnFaceDetected = () => {
     // alert('Face detected! You can trigger any custom function here.');
