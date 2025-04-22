@@ -51,6 +51,8 @@ const FaceDetectionComponent = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const imgData = localStorage.getItem("capturedImage");
+
   const triggerFunctionOnFaceDetected = () => {
     // alert('Face detected! You can trigger any custom function here.');
     console.log("Face detected! You can trigger any custom function here.");
@@ -60,8 +62,26 @@ const FaceDetectionComponent = () => {
   return (
     <>
       <Carousel style={{ marginTop: "20px" }}>
-        {['1','2','3', '4','5','6','7','8','9','0'].map((image, i) => (
-          <Carousel.Item interval={9000}>
+        <Carousel.Item interval={9000} key={11}>
+          <img
+            className="d-block w-100"
+            src={
+              imgData
+                ? imgData
+                : "https://picsum.photos/600/700?advertisement=11"
+            }
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h3>Face Detection Carousel 11</h3>
+            <p>Some description for the first slide.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        {[
+          "1",
+          // , "2", "3", "4", "5", "6", "7", "8", "9", "0"
+        ].map((image, i) => (
+          <Carousel.Item interval={9000} key={i}>
             <img
               className="d-block w-100"
               src={`https://picsum.photos/600/700?advertisement=1${i}`}
