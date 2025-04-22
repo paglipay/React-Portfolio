@@ -90,6 +90,17 @@ const FaceDetectionComponent = () => {
             <p>Some description for the first slide.</p>
           </Carousel.Caption>
         </Carousel.Item>
+        <Carousel.Item interval={9000} key={12}>
+          <img
+            className="d-block w-100"
+            src="/pb1(1).jpg"
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h3>Face Detection Carousel 11</h3>
+            <p>Some description for the first slide.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
         {[
           "1",
           // , "2", "3", "4", "5", "6", "7", "8", "9", "0"
@@ -106,6 +117,17 @@ const FaceDetectionComponent = () => {
             </Carousel.Caption>
           </Carousel.Item>
         ))}
+        <Carousel.Item interval={9000} key={13}>
+          <img
+            className="d-block w-100"
+            src="/pb1(2).jpg"
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h3>Face Detection Carousel 11</h3>
+            <p>Some description for the first slide.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
       </Carousel>
       <div style={{ textAlign: "center" }}>
         <h1>🎥 Face Detection (Offline)</h1>

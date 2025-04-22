@@ -249,14 +249,14 @@ const CameraBooth = () => {
       // Convert the canvas to a data URL
       const dataUrl = canvas.toDataURL("image/png");
 
-      // Save the captured image to localStorage
-      localStorage.setItem("capturedImage", dataUrl);
-
       // Store the captured image in state
       setCapturedImage(dataUrl);
 
       // Show the modal
       setLgShow(true);
+
+      // Save the captured image to localStorage
+      localStorage.setItem("capturedImage", dataUrl);
 
       speak({
         text: `Great Job! You look amazing! Thank you for using our photo booth. Brought to you by Shutterbox. Remember, if you got an upcoming event, book us. Book Shutterbox! Bye for now.`,
