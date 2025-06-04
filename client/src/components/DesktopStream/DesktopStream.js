@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useSpeechSynthesis } from "react-speech-kit";
 
 function DesktopStream() {
   const [show, setShow] = useState(false);
-
+  const { speak } = useSpeechSynthesis();
   return (
     <>
       <Button
@@ -27,6 +28,15 @@ function DesktopStream() {
           <img src="https://plura.paglipay.info/video_feed" width="100%" />
         </div>
         <Modal.Footer>
+          <Button
+            onClick={() => {
+              speak({
+                text: "This is a live desktop stream showcasing the developer's work and projects. You can view the stream to see the latest updates and activities.",
+              });
+            }}
+          >
+            Speak Description
+          </Button>
           <Button
             variant="secondary"
             onClick={() => {

@@ -41,7 +41,7 @@ function Dictaphone() {
             .post(
               `https://automate.paglipay.info/start/${uuid}:${e.split("/").pop()}`,
               // `http://192.168.2.213:5000/start/${uuid}:${e.split("/").pop()}`,
-              // `https://paglipay-dtree.herokuapp.com/start/${uuid}:${e.split("/").pop()}`,
+              // `https://automate.paglipay.info/start/${uuid}:${e.split("/").pop()}`,
               {
                 jobs: [
                   {
@@ -108,7 +108,7 @@ function Dictaphone() {
     await axios
       // .post(`https://automate.paglipay.info/start/${appUuid}`, {
       // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
-      .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
+      .post(`https://automate.paglipay.info/start/${appUuid}`, {
         jobs: [
           {
             import: "Key",
@@ -177,7 +177,7 @@ function Dictaphone() {
     await axios
       // .post(`https://automate.paglipay.info/start/${appUuid}`, {
       // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
-      .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
+      .post(`https://automate.paglipay.info/start/${appUuid}`, {
         jobs: [
           {
             import: "Key",

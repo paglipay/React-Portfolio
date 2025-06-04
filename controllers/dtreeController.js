@@ -4,9 +4,9 @@ const axios = require('axios')
 module.exports = {
     show: function (req, res) {
         // console.log('axios')
-        let server_url = 'http://localhost:5000/show/'
+        let server_url = 'https://automate.paglipay.info//show/'
         if (process.env.NODE_ENV === "production") {
-            server_url = 'https://paglipay-dtree.herokuapp.com/show/';
+            server_url = 'https://automate.paglipay.info/show/';
         }
         axios.get(server_url + req.params.id).then(resp => {
             // console.log(resp.data);
@@ -25,9 +25,9 @@ module.exports = {
     },
     send: function (req, res) {
         // console.log('req.body: ', req.body)
-        let server_url = 'http://localhost:5000/send/'
+        let server_url = 'https://automate.paglipay.info//send/'
         if (process.env.NODE_ENV === "production") {
-            server_url = 'https://paglipay-dtree.herokuapp.com/send/';
+            server_url = 'https://automate.paglipay.info/send/';
         }
         axios.post(server_url + req.params.id, req.body)
             .then(resp => {
@@ -47,9 +47,9 @@ module.exports = {
     },
     start: function (req, res) {
         // console.log('req.body: ', req.body)
-        let server_url = 'http://localhost:5000/start/'
+        let server_url = 'https://automate.paglipay.info//start/'
         if (process.env.NODE_ENV === "production") {
-            server_url = 'https://paglipay-dtree.herokuapp.com/start/';
+            server_url = 'https://automate.paglipay.info/start/';
         }
         axios.post(server_url + req.params.id, req.body)
             .then(resp => {
