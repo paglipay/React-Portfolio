@@ -81,6 +81,8 @@ const ASSETS_TO_CACHE = [
   '/manifest.json',
   '/sb_logo.jpg', // Example of an image in the public folder
   '/sb_qrcode.png', // Example of another image
+  '/pb1(1).jpg', // Example of an image in the public folder
+  '/pb1(2).jpg'
   // Add other assets in the public folder here
 ];
 
