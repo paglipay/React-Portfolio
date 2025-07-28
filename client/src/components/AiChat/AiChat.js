@@ -127,8 +127,6 @@ function AiChat(props) {
   - **CCNA, Cisco**
     - Earned: September 23, 2023
     - Expires: September 23, 2026
-  - **Kubernetes Certified Associate (KCA)**
-    - Target Date: June 2024
   `;
   // const str = ``
 
