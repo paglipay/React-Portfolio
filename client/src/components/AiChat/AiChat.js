@@ -19,7 +19,7 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 function AiChat(props) {
-  const strx = `# Paul Aglipay
+  const str = `# Paul Aglipay
 
   **Location:** Los Angeles, California, United States  
   **Email:** [paglipay@gmail.com](mailto:paglipay@gmail.com)  
@@ -127,10 +127,8 @@ function AiChat(props) {
   - **CCNA, Cisco**
     - Earned: September 23, 2023
     - Expires: September 23, 2026
-  - **Kubernetes Certified Associate (KCA)**
-    - Target Date: June 2024
   `;
-  const str = ``
+  // const str = ``
 
   const [consolelog, setConsolelog] = useState("");
   const [message, setMessage] = useState([
