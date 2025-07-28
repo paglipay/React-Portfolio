@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Carousel } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useSpeechSynthesis } from "react-speech-kit";
 
 function DesktopStream() {
   const [show, setShow] = useState(false);
-  const [imgSrc, setImgSrc] = useState("https://plura.paglipay.info/video_feed");
+  const [imgSrc, setImgSrc] = useState(
+    "https://plura.paglipay.info/video_feed"
+  );
   const intervalRef = useRef(null);
   const { speak } = useSpeechSynthesis();
 
@@ -26,11 +28,7 @@ function DesktopStream() {
 
   return (
     <>
-      <Button
-        variant="flat"
-        size="xxl"
-        onClick={() => setShow(true)}
-      >
+      <Button variant="flat" size="xxl" onClick={() => setShow(true)}>
         Open Desktop Stream
       </Button>
       <br />
@@ -41,7 +39,22 @@ function DesktopStream() {
           </Modal.Title>
         </Modal.Header>
         <div>
-          <img src={imgSrc} width="100%" alt="Desktop Stream" />
+          <Carousel
+            // interval={null}
+            controls={true}
+            indicators={true}
+            slide={true}
+            
+            // fade={true}
+            // className="mb-3"
+          >
+            <Carousel.Item interval={9000} key={1}>
+              <img src={imgSrc} width="100%" alt="Desktop Stream" />
+            </Carousel.Item>
+            <Carousel.Item interval={9000} key={2}>
+              <img src={imgSrc} width="100%" alt="Desktop Stream" />
+            </Carousel.Item>
+          </Carousel>
         </div>
         <Modal.Footer>
           <Button
@@ -53,10 +66,7 @@ function DesktopStream() {
           >
             Speak Description
           </Button>
-          <Button
-            variant="secondary"
-            onClick={() => setShow(false)}
-          >
+          <Button variant="secondary" onClick={() => setShow(false)}>
             Close
           </Button>
         </Modal.Footer>

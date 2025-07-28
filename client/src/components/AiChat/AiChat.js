@@ -309,8 +309,8 @@ function AiChat(props) {
   const getImage = async (prompt, uuid, convoHistory) => {
     console.log("convoHistory: ", convoHistory);
     await axios
-      // .post(`https://automate.paglipay.info/start/${appUuid}`, {
-        .post(`http://192.168.2.213:5000/start/${appUuid}`, {
+      .post(`https://automate.paglipay.info/start/${appUuid}`, {
+        // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
         // .post(`https://automate.paglipay.info/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
         jobs: [
@@ -494,8 +494,8 @@ function AiChat(props) {
   };
   const sendToApi = async (prompt, uuid) => {
     await axios
-      // .post(`https://automate.paglipay.info/start/${appUuid}`, {
-        .post(`http://192.168.2.213:5000/start/${appUuid}`, {
+      .post(`https://automate.paglipay.info/start/${appUuid}`, {
+        // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
         // .post(`https://automate.paglipay.info/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
         jobs: [
@@ -713,8 +713,8 @@ function AiChat(props) {
 
   const produceMovie = async (mode = "save") => {
     await axios
-      // .post(`https://automate.paglipay.info/start/${appUuid}-${uuidv4()}`, {
-        .post(`http://192.168.2.213:5000/start/${appUuid}`, {
+      .post(`https://automate.paglipay.info/start/${appUuid}-${uuidv4()}`, {
+        // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
         // .post(`https://automate.paglipay.info/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
         jobs: [
