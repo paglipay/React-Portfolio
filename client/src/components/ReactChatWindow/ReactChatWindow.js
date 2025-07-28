@@ -61,7 +61,7 @@ export default function ReactChatWindow() {
     await axios
       .post(`https://automate.paglipay.info/start/${appUuid}`, {
       // .post(`http://192.168.2.203:5000/start/${appUuid}`, {
-        // .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
+        // .post(`https://automate.paglipay.info/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
         jobs: [
           {

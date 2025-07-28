@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 import styled from "styled-components";
+import DesktopStream from "../DesktopStream/DesktopStream";
 import {
   Jumbotron,
   Button,
@@ -246,6 +247,8 @@ function Home() {
             <Button variant="flat" size="xxl" onClick={handleShow}>
               Learn more
             </Button>
+            <ArrowRight style={{ visibility: "hidden" }} />
+            <DesktopStream />
             <ArrowRight style={{ visibility: "hidden" }} />
             {/* <Button variant="flat" size="xxl" onClick={handleBtnClick}>
               Instant Interview

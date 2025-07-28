@@ -19,7 +19,7 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 function AiChat(props) {
-  const str = `# Paul Aglipay
+  const strx = `# Paul Aglipay
 
   **Location:** Los Angeles, California, United States  
   **Email:** [paglipay@gmail.com](mailto:paglipay@gmail.com)  
@@ -130,6 +130,8 @@ function AiChat(props) {
   - **Kubernetes Certified Associate (KCA)**
     - Target Date: June 2024
   `;
+  const str = ``
+
   const [consolelog, setConsolelog] = useState("");
   const [message, setMessage] = useState([
     <Col lg={12}>
@@ -171,9 +173,8 @@ function AiChat(props) {
     {
       response: {
         role: "system",
-        // content: "You are a helpful assistant.",
-        content:
-          "You are Paul Aglipay's avatar, a job interviewing applicant. Answer job interview questions as the applicant.\n Here's a copy of the applicant's resume\n\nPaul Aglipay\nLos Angeles, California, United States\nEmail: paglipay@gmail.com\nLinkedIn: https://www.linkedin.com/in/paul-aglipay-11564046/\nSummary\nDynamic Software Engineer with extensive experience in Network and Systems Engineering. Skilled in delivering advanced data analytics, reporting, and dashboard solutions. Strong communicator and problem-solver with a proven track record.\nSkills\n•	Version Control Systems: Git (Github, GitLab)\n•	Cloud Platforms: AWS, Azure, GCP\n•	Operating Systems: Linux, Windows\n•	Databases: Oracle SQL, Microsoft SQL, MariaDB, Postgres, MongoDB\n•	Programming Languages: Python, Java, Javascript, Typescript\n•	Frameworks: React (NextJS, NX), Angular, ExpressJS, Django, Spring Boot\n•	Testing: Robot Framework, Pytest, PyUnit (Unittest), Cypress, Selenium\n•	DevOps: ArgoCD, Jenkins, Terraform, Ansible, Docker Swarm, Kubernetes, Nagios\n•	Other Skills: Full-Stack Development, Issue Tracking, Data Mapping, Communication, Problem-solving, Fast-paced Adaptability\nExperience\nNetwork Engineer, University of California, Los Angeles (UCLA)\nOct 2016 – Present \nI oversee the Network Services Department's monitoring system, ensuring seamless integration of campus network devices in a timely manner. This involves meticulous tracking and proactive communication to facilitate smooth transitions. I excel in troubleshooting minor issues stemming from bugs or misconfigurations, leveraging my expertise in monitoring tools such as NetDisco, Rancid (GitLab / Hound), Nagios (Thruk), PagerDuty, and Aruba Airwave VMs. Additionally, I'm responsible for network infrastructure management, configuration, and optimization, as well as providing technical support to ensure network reliability and performance.\nSoftware Engineer, Walmart Global Tech (Revature)\nJan 2022 - Aug 2022\n•	Spearheaded the development of Chrome extensions aimed at optimizing internal tooling within the Advertisement department.\n•	Resolved intricate iframe integration challenges on business customer pages, ensuring uninterrupted and seamless functionality\n•	. Played a pivotal role in implementing minor CSS fixes to enhance the user experience on walmart.com.\nSoftware Engineer, DataSlate\nJan 2021 - Apr 2021\n•	Contributed to Full-Stack software development projects.\n•	Collaborated with cross-functional teams for product delivery.\nNetwork Engineering, Optomi\nApr 2016 - Oct 2016\n•	Provided comprehensive network engineering support for projects at UCLA, including the design, implementation, and optimization of network infrastructure.\n•	Collaborated closely with stakeholders to assess network requirements and recommend appropriate Cisco solutions to meet organizational needs.\n•	Conducted thorough testing and validation of network configurations to ensure seamless integration and compatibility with existing systems.\n•	Assisted in the development of documentation and training materials to support the ongoing maintenance and administration of the upgraded Cisco infrastructure.\n•	Contributed to the overall success of network engineering projects by delivering high-quality solutions on time and within budget constraints.\nNetwork Engineer, NIC Partners\nOct 2015 - Apr 2016\n•	Provided network engineering support for projects at Network Engineering Consultant at Cedars-Sinai Medical Center.\n•	Collaborated closely with stakeholders to assess network requirements and recommend appropriate Cisco solutions to meet organizational needs.\n•	Conducted thorough testing and validation of network configurations to ensure seamless integration and compatibility with existing systems.\n•	Contributed to the overall success of network engineering projects by delivering high-quality solutions on time and within budget constraints\nSystems / Network Engineering, Burbank Bob Hope Airport\nNov 2014 - Oct 2015\n•	Managed IT systems administration tasks, including the setup, configuration, and maintenance of Windows Active Directory environments.\n•	Oversaw user account management, group policy implementation, and security protocols within the Active Directory infrastructure.\nSystems Administrator, Cable Engineering Services\nJan 2008 - Nov 2014\n•	Managed IT systems administration tasks.\nSystems Administrator, BMS Communications Inc.\nSep 2001 - Apr 2008\n•	Administered IT systems and provided technical support.\n\nEducation\n•	Bachelor's degree, Computer Visualization Technology, ITT Technical Institute-Sylmar, Sep 2000 - Jun 2003\n•	Post Graduate Program in DevOps, Caltech - Center of Technology and Education, 2024\n•	Certificate, Full-Stack Developer, UCLA Extension, 2020\n•	Brand College, Cisco, 2012 - 2018\nLicenses & Certifications\n•	AWS Certified Developer - Associate\no	Earned: December 09, 2023\no	Expires: December 09, 2026\n•	AWS Certified Cloud Practitioner\no	Earned: October 28, 2023\no	Expires: October 28, 2026\n•	Microsoft Certified: Azure Fundamentals\no	Earned: January 13, 2024\n•	Post Graduate Program in DevOps, Caltech - Center of Technology and Education\no	Earned: March, 2024\n•	CCNA, Cisco\no	Earned: September 23, 2023\no	Expires: September 23, 2026\n•	Kubernetes Certified Associate (KCA)\no	Target Date: June 2024\n\n",
+        content: "You are a helpful assistant."
+        // content:"You are Paul Aglipay's avatar, a job interviewing applicant. Answer job interview questions as the applicant.\n Here's a copy of the applicant's resume\n\nPaul Aglipay\nLos Angeles, California, United States\nEmail: paglipay@gmail.com\nLinkedIn: https://www.linkedin.com/in/paul-aglipay-11564046/\nSummary\nDynamic Software Engineer with extensive experience in Network and Systems Engineering. Skilled in delivering advanced data analytics, reporting, and dashboard solutions. Strong communicator and problem-solver with a proven track record.\nSkills\n•	Version Control Systems: Git (Github, GitLab)\n•	Cloud Platforms: AWS, Azure, GCP\n•	Operating Systems: Linux, Windows\n•	Databases: Oracle SQL, Microsoft SQL, MariaDB, Postgres, MongoDB\n•	Programming Languages: Python, Java, Javascript, Typescript\n•	Frameworks: React (NextJS, NX), Angular, ExpressJS, Django, Spring Boot\n•	Testing: Robot Framework, Pytest, PyUnit (Unittest), Cypress, Selenium\n•	DevOps: ArgoCD, Jenkins, Terraform, Ansible, Docker Swarm, Kubernetes, Nagios\n•	Other Skills: Full-Stack Development, Issue Tracking, Data Mapping, Communication, Problem-solving, Fast-paced Adaptability\nExperience\nNetwork Engineer, University of California, Los Angeles (UCLA)\nOct 2016 – Present \nI oversee the Network Services Department's monitoring system, ensuring seamless integration of campus network devices in a timely manner. This involves meticulous tracking and proactive communication to facilitate smooth transitions. I excel in troubleshooting minor issues stemming from bugs or misconfigurations, leveraging my expertise in monitoring tools such as NetDisco, Rancid (GitLab / Hound), Nagios (Thruk), PagerDuty, and Aruba Airwave VMs. Additionally, I'm responsible for network infrastructure management, configuration, and optimization, as well as providing technical support to ensure network reliability and performance.\nSoftware Engineer, Walmart Global Tech (Revature)\nJan 2022 - Aug 2022\n•	Spearheaded the development of Chrome extensions aimed at optimizing internal tooling within the Advertisement department.\n•	Resolved intricate iframe integration challenges on business customer pages, ensuring uninterrupted and seamless functionality\n•	. Played a pivotal role in implementing minor CSS fixes to enhance the user experience on walmart.com.\nSoftware Engineer, DataSlate\nJan 2021 - Apr 2021\n•	Contributed to Full-Stack software development projects.\n•	Collaborated with cross-functional teams for product delivery.\nNetwork Engineering, Optomi\nApr 2016 - Oct 2016\n•	Provided comprehensive network engineering support for projects at UCLA, including the design, implementation, and optimization of network infrastructure.\n•	Collaborated closely with stakeholders to assess network requirements and recommend appropriate Cisco solutions to meet organizational needs.\n•	Conducted thorough testing and validation of network configurations to ensure seamless integration and compatibility with existing systems.\n•	Assisted in the development of documentation and training materials to support the ongoing maintenance and administration of the upgraded Cisco infrastructure.\n•	Contributed to the overall success of network engineering projects by delivering high-quality solutions on time and within budget constraints.\nNetwork Engineer, NIC Partners\nOct 2015 - Apr 2016\n•	Provided network engineering support for projects at Network Engineering Consultant at Cedars-Sinai Medical Center.\n•	Collaborated closely with stakeholders to assess network requirements and recommend appropriate Cisco solutions to meet organizational needs.\n•	Conducted thorough testing and validation of network configurations to ensure seamless integration and compatibility with existing systems.\n•	Contributed to the overall success of network engineering projects by delivering high-quality solutions on time and within budget constraints\nSystems / Network Engineering, Burbank Bob Hope Airport\nNov 2014 - Oct 2015\n•	Managed IT systems administration tasks, including the setup, configuration, and maintenance of Windows Active Directory environments.\n•	Oversaw user account management, group policy implementation, and security protocols within the Active Directory infrastructure.\nSystems Administrator, Cable Engineering Services\nJan 2008 - Nov 2014\n•	Managed IT systems administration tasks.\nSystems Administrator, BMS Communications Inc.\nSep 2001 - Apr 2008\n•	Administered IT systems and provided technical support.\n\nEducation\n•	Bachelor's degree, Computer Visualization Technology, ITT Technical Institute-Sylmar, Sep 2000 - Jun 2003\n•	Post Graduate Program in DevOps, Caltech - Center of Technology and Education, 2024\n•	Certificate, Full-Stack Developer, UCLA Extension, 2020\n•	Brand College, Cisco, 2012 - 2018\nLicenses & Certifications\n•	AWS Certified Developer - Associate\no	Earned: December 09, 2023\no	Expires: December 09, 2026\n•	AWS Certified Cloud Practitioner\no	Earned: October 28, 2023\no	Expires: October 28, 2026\n•	Microsoft Certified: Azure Fundamentals\no	Earned: January 13, 2024\n•	Post Graduate Program in DevOps, Caltech - Center of Technology and Education\no	Earned: March, 2024\n•	CCNA, Cisco\no	Earned: September 23, 2023\no	Expires: September 23, 2026\n•	Kubernetes Certified Associate (KCA)\no	Target Date: June 2024\n\n",
       },
     },
   ]);
@@ -209,7 +210,7 @@ function AiChat(props) {
                 .split("/")
                 .pop()}`,
               // `http://192.168.2.213:5000/start/${uuid}:${e.split("/").pop()}`,
-              // `https://paglipay-dtree.herokuapp.com/start/${uuid}:${e.split("/").pop()}`,
+              // `https://automate.paglipay.info/start/${uuid}:${e.split("/").pop()}`,
               {
                 jobs: [
                   {
@@ -310,7 +311,7 @@ function AiChat(props) {
     await axios
       .post(`https://automate.paglipay.info/start/${appUuid}`, {
         // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
-        // .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
+        // .post(`https://automate.paglipay.info/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
         jobs: [
           {
@@ -494,8 +495,8 @@ function AiChat(props) {
   const sendToApi = async (prompt, uuid) => {
     await axios
       .post(`https://automate.paglipay.info/start/${appUuid}`, {
-        // .post(`http://192.168.2.203:5000/start/${appUuid}`, {
-        // .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
+        // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
+        // .post(`https://automate.paglipay.info/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
         jobs: [
           {
@@ -667,7 +668,7 @@ function AiChat(props) {
     await axios
       .post(`https://automate.paglipay.info/start/${appUuid}-${uuidv4()}`, {
         // .post(`http://192.168.2.203:5000/start/${appUuid}`, {
-        // .post(`https://paglipay-dtree.herokuapp.com/start/${appUuid}`, {
+        // .post(`https://automate.paglipay.info/start/${appUuid}`, {
         // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
         "./json/mongodb/portfolio_collections/_accepts_list_new.txt":`{\n \"name\": \"${appUuid}\",\n \"projects\": [\n {\n \"name\": \"Top 10 TV Shows\",\n \"description\": \"Transcripts of my interview\",\n \"forms\": [ \n {% for result in results[1:] %}\n {\n \"id\": \"{{ i }} - id - prompt\",\n \"name\": \"{{ result.prompt }} - prompt\",\n \"form_items\": [\n {\n \"id\": \"{{ i }} - f00\",\n \"name\": \"{{ result.prompt }}\",\n \"value\": \"{{ result.response.content }}\",\n \"type\": \"message\"\n },\n {\n \"id\": \"{{ i }} - f02\",\n \"name\": \"Next\",\n \"value\": \"Next\",\n \"type\": \"button\",\n \"action\": {\n \"form_items_to_dic\": {\n \"form_items\": [\"ip\", \"username\", \"password\"],\n \"to_dic_name\": \"./json/paramiko/ubuntu/open/form_dic.json\"\n },\n \"jobs\": [\n { \"import\": \"Key\" },\n {\n \"True\": [\n {\n \"True\": \"./json/paramiko/ubuntu/open/_create_list.json\"\n },\n { \"True\": \"./json/docker/scp_build/_create_list.json\" },\n { \"False\": \"./json/docker/scp_build/do.json\" }\n ]\n }\n ]\n }\n }\n ]\n },\n {% endfor %}\n {\n \"id\": \"3\",\n \"name\": \"3\",\n \"form_items\": [\n {\n \"id\": \"Done\",\n \"name\": \"Done\",\n \"value\": \"This is completed.\",\n \"type\": \"message\"\n }\n ]\n }\n ]\n }\n ]\n}\n`,
         jobs: [
@@ -695,6 +696,49 @@ function AiChat(props) {
               {
                 True: `./my_packages/MongoObj/MongoObj-${mode}.json`,
               },
+            ],
+          },
+        ],
+      })
+      .then(async (res) => {
+        console.log(res);
+      })
+      .catch(async (res) => {
+        console.log(res);
+        // setSpeakText({
+        //   text: "Sorry, there appears to be an issue connecting. I am available typically during regular office hours, Monday through Friday, 9am. to 5pm. Pacific Standard Time.",
+        // });
+      });
+  };
+
+  const produceMovie = async (mode = "save") => {
+    await axios
+      .post(`https://automate.paglipay.info/start/${appUuid}-${uuidv4()}`, {
+        // .post(`http://192.168.2.213:5000/start/${appUuid}`, {
+        // .post(`https://automate.paglipay.info/start/${appUuid}`, {
+        // .post(`https://paglipay-fastapi.herokuapp.com/start/${appUuid}`, {
+        jobs: [
+          {
+            import: "Key",
+          },
+          {
+            True: [
+              {
+                import: "OpenAiObj",
+              },
+              {
+                conversation_history: conversationHistory,
+              },
+            ],
+          },
+          {
+            True: [
+              {
+                True: "./json/moviepy2/scene/prep/out.json",
+              },
+              {
+                False: `./json/moviepy2/scene/_create_list.json`,
+              }
             ],
           },
         ],
@@ -1010,6 +1054,8 @@ function AiChat(props) {
             <Button onClick={() => saveConversation("save")}>Save</Button>
             <br/>
             <Button onClick={() => saveConversation("add")}>Add</Button>
+            <br/>
+            <Button onClick={() => produceMovie("add")}>Produce Movie</Button>
           {/* <Button onClick={() => saveConversation("update")}>Update</Button> */}
           <Card.Footer>
             <h6>UUID: {appUuid}</h6>

@@ -32,6 +32,8 @@ import Footer from "./components/Footer/Footer";
 import ChartComponent from "./components/ChartComponent/ChartComponent";
 import CameraCapture from "./components/CameraCapture/CameraCapture";
 import FaceDetectionComponent from "./components/FaceDetectionComponent/FaceDetectionComponent";  
+import XTermTerminal from "./components/XTermTerminal/XTermTerminal";
+import TerminalJS from "./components/TerminalJS/TerminalJS";
 
 const st = Storytime.init({
   accountId: "b5200b14-be9d-4915-aa64-f514fb2c6ad5",
@@ -108,6 +110,12 @@ function App() {
                 //   }
                 // }}
               />
+            </Route>
+            <Route exact path={["/terminaljs"]}>
+              <TerminalJS  />
+            </Route>
+            <Route exact path={["/xterm"]}>
+              <XTermTerminal  />
             </Route>
             <Route exact path={["/camera"]}>
               <CameraCapture />
