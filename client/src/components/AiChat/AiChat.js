@@ -137,7 +137,7 @@ function AiChat(props) {
         {/* <Card>
         <Card.Header>Header</Card.Header>
         <Card.Body> */}
-        <Image src="./IMG_2885.JPG"></Image>
+        <Image src="./avatar.png"></Image>
         <h1>
           <Typewriter
             onInit={(typewriter) => {
@@ -395,7 +395,7 @@ function AiChat(props) {
                         <Col lg={3}>
                           <div>
                             <Image
-                              src="./StylizePhoto_2_20240531.jpeg"
+                              src="./avatar.png"
                               style={{ marginBottom: "10px", width: "100%" }}
                             ></Image>
                           </div>
@@ -543,7 +543,7 @@ function AiChat(props) {
                         <Col lg={3}>
                           <div>
                             <Image
-                              src="./StylizePhoto_2_20240531.jpeg"
+                              src="./avatar.png"
                               style={{ marginBottom: "10px", width: "100%" }}
                             ></Image>
                           </div>
