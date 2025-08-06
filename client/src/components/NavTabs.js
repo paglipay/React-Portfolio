@@ -34,6 +34,14 @@ function NavTabs({ authenticated, logout }) {
 
           <NavDropdown.Item
             as="a"
+            href="https://heimdall.paglipay.info/"
+            target="_blank"
+          >
+            Heimdall
+          </NavDropdown.Item>
+
+          <NavDropdown.Item
+            as="a"
             href="https://yoom.paglipay.info/"
             target="_blank"
           >

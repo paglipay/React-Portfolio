@@ -7,6 +7,7 @@ import {
   Jumbotron,
   Button,
   Card,
+  Carousel,
   Container,
   Row,
   Col,
@@ -186,10 +187,16 @@ function Home() {
 
   const clickChat = () => {
     console.log("clickChat");
-    const element = document.querySelector(
+    const element = document.querySelector(      
       'button[class~="Papercups-toggleButton"]'
+      // 'svg[id~="b-col-5fee6d792eb62bbb8c734a9d"]'
     );
     simulateMouseClick(element);
+    
+    // const element2 = document.querySelector(
+    //   '#root > div > div > section > div > div > div > div > div.col-lg-9 > div:nth-child(1) > div:nth-child(1) > div > div.card-body > div > div.col > form > div > button'
+    // );
+    // simulateMouseClick(element2);
   };
   return (
     <div>
@@ -287,6 +294,59 @@ function Home() {
                 <Button className="mb-2" onClick={handleBtnClick}>
                   Instant Interview
                 </Button> */}
+                
+                      <Carousel style={{ marginTop: "20px" }}>
+                        <Carousel.Item interval={9000} key={11}>
+                          <img
+                            className="d-block w-100"
+                            src={"https://picsum.photos/600/700?advertisement=11"
+                            }
+                            alt="First slide"
+                          />
+                          <Carousel.Caption>
+                            <h3>Face Detection Carousel 11</h3>
+                            <p>Some description for the first slide.</p>
+                          </Carousel.Caption>
+                        </Carousel.Item>
+                        <Carousel.Item interval={9000} key={12}>
+                          <img
+                            className="d-block w-100"
+                            src="/pb1(1).jpg"
+                            alt="First slide"
+                          />
+                          <Carousel.Caption>
+                            <h3>Face Detection Carousel 11</h3>
+                            <p>Some description for the first slide.</p>
+                          </Carousel.Caption>
+                        </Carousel.Item>
+                        {[
+                          "1",
+                          // , "2", "3", "4", "5", "6", "7", "8", "9", "0"
+                        ].map((image, i) => (
+                          <Carousel.Item interval={9000} key={i}>
+                            <img
+                              className="d-block w-100"
+                              src={`https://picsum.photos/600/700?advertisement=1${i}`}
+                              alt="First slide"
+                            />
+                            <Carousel.Caption>
+                              <h3>Face Detection Carousel {`${i}`}</h3>
+                              <p>Some description for the first slide.</p>
+                            </Carousel.Caption>
+                          </Carousel.Item>
+                        ))}
+                        <Carousel.Item interval={9000} key={13}>
+                          <img
+                            className="d-block w-100"
+                            src="/pb1(2).jpg"
+                            alt="First slide"
+                          />
+                          <Carousel.Caption>
+                            <h3>Face Detection Carousel 11</h3>
+                            <p>Some description for the first slide.</p>
+                          </Carousel.Caption>
+                        </Carousel.Item>
+                      </Carousel>
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
