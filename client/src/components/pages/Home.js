@@ -266,7 +266,7 @@ function Home() {
 
             <Modal size="lg" show={show} onHide={handleClose}>
               <Modal.Header closeButton>
-                <Modal.Title>Now with AI Assistance! How to use...</Modal.Title>
+                <Modal.Title>Now with AI Virtual Assistance! How to use...</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 Select Showcase Categories to view Featured Projects.
